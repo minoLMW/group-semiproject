@@ -5,7 +5,10 @@ group-semiproject/
 │   │   ├── ico/       # 아이콘 이미지
 │   │   ├── img/       # 일반 이미지
 │   │   └── temp/      # 임시 이미지
-│   └── js/            # 공통 UI 동작을 위한 JavaScript 파일
+│   ├── js/            # 공통 UI 동작을 위한 JavaScript 파일
+│   └── libs/          # 사용 플러그인 파일
+│       ├── anime/     # 에니메JS
+│       └── jquery/    # 제이쿼리JS (사용 후 삭제예정)
 │
 ├── html/
 │   ├── common/        # 공통 HTML 파일 (헤더, 푸터 등)
