@@ -182,7 +182,7 @@
 				<div class="p">상시 운영시에 신규를 제외한 기존 페이지에서 수정은 다음과 같이 표시한다.<br>같은 날짜에 변경된 다른 수정사항들을 명확히 구분 할 수 있고 같은 곳이 수정 되더라도 어느 요건에서 수정사항이 발생했는지 알 수 있다.</div>
 				<div class="code">
 					<script type="text/template">
-<!-- [수정 YYMMDD 요건번호] 설명 -->
+<!-- [수정 YYMMDD] 설명 -->
 					</script>
 				</div>
 			</div>
@@ -383,7 +383,7 @@ backgrounurl("image.svg") no-repeat;
 						<tbody>
 							<tr>
 								<th scope="row">1. 레이아웃</th>
-								<td class="-consolas">content, display, flex, visibility, opacity, overflow, float, clear, position, top, right, bottom, left, z-index</td>
+								<td class="-consolas">content, flex, display, visibility, overflow, float, clear, position, top, right, bottom, left, z-index</td>
 							</tr>
 							<tr>
 								<th scope="row">2. 박스모델</th>
@@ -391,7 +391,7 @@ backgrounurl("image.svg") no-repeat;
 							</tr>
 							<tr>
 								<th scope="row">3. 글꼴</th>
-								<td class="-consolas">color, font-style, font-variant, font-weight, font-size, line-height, font-family, letter-spacing, text-transform, text-align, vertical-align, text-shadow</td>
+								<td class="-consolas">font-style, font-variant, font-size, font-weight, color, line-height, font-family, letter-spacing, text-transform, text-align, vertical-align, text-shadow</td>
 							</tr>
 							<tr>
 								<th scope="row">4. 기타</th>
@@ -482,8 +482,8 @@ backgrounurl("image.svg") no-repeat;
 				<div class="compare -expand">
 					<div class="code">
 						<script type="text/template">
-url(../imgs/logo/bank/ci_nh.svg);} /* 농협 */
-url(../imgs/logo/bank/ci_nh.svg);} /* NH투자증권 */
+url(../imgs/logo/bank/ci_img.svg);} /* 배경이미지 */
+url(../imgs/logo/bank/ci_img2.svg);} /* Logo 이미 */
 						</script>
 					</div>
 
@@ -513,12 +513,6 @@ url(../imgs/logo/bank/ci_nh.svg);} /* NH투자증권 */
 						</script>
 					</div>
 				</div>
-
-				<div class="h2">컬러 파렛트</div>
-				<div class="p">베스킨미누쓰에서 사용되는 컬러는 다음 이미지와 같다. 다른 컬러의 경우 협의한다 <br> 추후 공지</div>
-				<!-- <div class="compare -expand">
-					<img src="worklist/assets/imgs/GENERRAL_COLOR_PALETTE.png" width="100%" alt="">
-				</div> -->
 			</div>
 		</div>
 
@@ -543,55 +537,20 @@ url(../imgs/logo/bank/ci_nh.svg);} /* NH투자증권 */
 						</thead>
 						<tbody class="center">
 							<tr>
+								<td class="bold -consolas letter-wide"><span class="emphasize">c</span>ommon</td>
+								<td>공통</td>
 								<td class="bold -consolas letter-wide"><span class="emphasize">h</span>ome</td>
 								<td>메인</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">f</span>inance</td>
-								<td>금융</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">p</span>ayment</td>
-								<td>결제</td>
-							</tr>
-							<tr>
-								<td class="bold -consolas letter-wide"><span class="emphasize">e</span>xchange</td>
-								<td>외환</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">t</span>ax</td>
-								<td>공과금</td>
-								<td class="bold -consolas letter-wide">my<span class="emphasize">a</span>llone</td>
-								<td>마이올원</td>
-							</tr>
-							<tr>
-								<td class="bold -consolas letter-wide">account <span class="emphasize">i</span></td>
-								<td>계좌관리</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">n</span>avigation</td>
-								<td>전체메뉴</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">u</span>tility</td>
-								<td>공통</td>
-							</tr>
-							<tr>
-								<td class="bold -consolas letter-wide"><span class="emphasize">b</span>ig</td>
-								<td>큰글모드</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">c</span>ommodity</td>
+								<td class="bold -consolas letter-wide"><span class="emphasize">p</span>roduct</td>
 								<td>상품</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">g</span>roup</td>
-								<td>NH금융그룹</td>
 							</tr>
 							<tr>
-								<td class="bold -consolas letter-wide"><span class="emphasize">l</span>ife</td>
-								<td>생활+</td>
+								<td class="bold -consolas letter-wide"><span class="emphasize">e</span>vent</td>
+								<td>이벤트트</td>
 								<td class="bold -consolas letter-wide"></td>
 								<td></td>
 								<td class="bold -consolas letter-wide"></td>
 								<td></td>
-							</tr>
-							<tr>
-								<td colspan="6" class="center">23년 차세대 이후 카테고리의 변경 이후 폴더 추가</td>
-							</tr>
-							<tr>
-								<td class="bold -consolas letter-wide">auth</td>
-								<td>인증/보안</td>
-								<td class="bold -consolas letter-wide">event</td>
-								<td>이벤트</td>
-								<td class="bold -consolas letter-wide">minor</td>
-								<td>14세미만</td>
 							</tr>
 						</tbody>
 					</table>
@@ -603,10 +562,6 @@ url(../imgs/logo/bank/ci_nh.svg);} /* NH투자증권 */
 						<div><span class="emphasize">H</span></div>
 						<div>대 메뉴</div>
 					</div>
-					<div class="word">
-						<div>A</div>
-						<div>2 DEPTH</div>
-					</div>
 
 					<div class="word" style="margin:0 .8rem">
 						<div>-</div>
@@ -615,41 +570,8 @@ url(../imgs/logo/bank/ci_nh.svg);} /* NH투자증권 */
 					<div class="two-word">
 						<div>0</div>
 						<div>1</div>
-						<div>3 DEPTH</div>
-					</div>
-					<div class="two-word">
 						<div>0</div>
-						<div>1</div>
-						<div>4 DEPTH</div>
-					</div>
-					<div class="two-word">
-						<div>0</div>
-						<div>1</div>
-						<div>5 DEPTH</div>
-					</div>
-					<div class="two-word">
-						<div>0</div>
-						<div>1</div>
-						<div>6 DEPTH</div>
-					</div>
-					<div class="one-word">
-						<div>F</div>
-						<div>문서형식</div>
-					</div>
-					<div class="two-word">
-						<div>0</div>
-						<div>1</div>
-						<div>VERSION 정보</div>
-					</div>
-
-					<div class="word" style="margin:0 .8rem">
-						<div>-</div>
-					</div>
-
-					<div class="two-word">
-						<div>P</div>
-						<div style="display:none">T</div>
-						<div>페이지형태</div>
+						<div>순번 메뉴</div>
 					</div>
 				</div>
 
@@ -658,132 +580,8 @@ url(../imgs/logo/bank/ci_nh.svg);} /* NH투자증권 */
 
 				<div class="code">
 					<script type="text/template">
-HA-01000000V01 -> home / HA / HA-01000000V01.html
+P-010 -> product 첫번째 페이지 / P-020 -> product 두번째 페이지
 					</script>
-				</div>
-
-				<div class="h2">신규 아이디 코드명</div>
-				<div class="p">23년 차세대 이후 카테고리의 변경 이후 신규 화면 아이디를 생성 규칙중 'code 1' 즉 Level 1 메뉴를 알아야 하며 'code 1'은 다음과 같다.</div>
-				
-				<div class="table -x">
-					<table>
-						<caption><span class="hide">서비스명</span></caption>
-						<thead>
-							<tr>
-								<th scope="col">서비스명</th>
-								<th scope="col">폴더명</th>
-								<th scope="col">서비스명</th>
-								<th scope="col">폴더명</th>
-								<th scope="col">서비스명</th>
-								<th scope="col">폴더명</th>
-							</tr>
-						</thead>
-						<tbody class="center">
-							<tr>
-								<td class="bold -consolas letter-wide">m<span class="emphasize">A</span>in</td>
-								<td>메인</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">R</span>emittence</td>
-								<td>금융</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">M</span>anage</td>
-								<td>계좌관리</td>
-							</tr>
-							<tr>
-								<td class="bold -consolas letter-wide"><span class="emphasize">G</span>roup</td>
-								<td>금융그룹</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">P</span>ay</td>
-								<td>결제</td>
-								<td class="bold -consolas letter-wide">my<span class="emphasize">E</span>xchange</td>
-								<td>외환</td>
-							</tr>
-							<tr>
-								<td class="bold -consolas letter-wide"><span class="emphasize">B</span>ill</td>
-								<td>공과금/<br>스마트고지</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">L</span>ife</td>
-								<td>생활+</td>
-								<td class="bold -consolas letter-wide">m<span class="emphasize">Y</span>allone</td>
-								<td>마이올원</td>
-							</tr>
-							<tr>
-								<td class="bold -consolas letter-wide">e<span class="emphasize">V</span>ent</td>
-								<td>이벤트</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">S</span>ecurity</td>
-								<td>인증/보안</td>
-								<td class="bold -consolas letter-wide"><span class="emphasize">C</span>ustomer</td>
-								<td>고객센터</td>
-							</tr>
-							<tr>
-								<td class="bold -consolas letter-wide">se<span class="emphasize">T</span>ting</td>
-								<td>설정</td>
-								<td class="bold -consolas letter-wide">
-									allone<span class="emphasize">B</span>ank <span class="emphasize">I</span>ntroduction
-								</td>
-								<td>베스킨미누쓰 소개</td>
-								<td class="bold -consolas letter-wide">
-									<span class="emphasize">B</span>i<span class="emphasize">G</span>gle banking
-								</td>
-								<td>큰글뱅킹</td>
-							</tr>
-							<tr>
-								<td class="bold -consolas letter-wide">k<span class="emphasize">I</span>ds</td>
-								<td>만14세미만</td>
-								<td class="bold -consolas letter-wide">c<span class="emphasize">O</span>mmon</td>
-								<td>기타</td>
-								<td></td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-				
-
-				<div class="h2">신규 화면ID 명명규칙</div>
-				<p class="p">예시 : B-AA020_01-B2308</p>
-				<div class="words">
-					<div class="word">
-						<div><span class="emphasize">B</span></div>
-						<div>Lv 1</div>
-					</div>
-
-					<div class="word" style="margin:0 .8rem">
-						<div>-</div>
-					</div>
-
-					<div class="word">
-						<div>A</div>
-						<div>Lv 2</div>
-					</div>
-					<div class="word">
-						<div>A</div>
-						<div>Lv 3</div>
-					</div>
-					<div class="three-word">
-						<div>0</div>
-						<div>2</div>
-						<div>0</div>
-						<div>연번 10단위 증가</div>
-					</div>
-
-					<div class="word" style="margin:0 .8rem">
-						<div>_</div>
-					</div>
-
-					<div class="two-word">
-						<div>0</div>
-						<div>1</div>
-						<div>1단위 증가</div>
-					</div>
-					<div class="word">
-						<div>B</div>
-						<div>화면유형</div>
-					</div>
-					<div class="four-word">
-						<div>2</div>
-						<div>4</div>
-						<div>0</div>
-						<div>3</div>
-						<div>최초생성 년월</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -829,10 +627,10 @@ HA-01000000V01 -> home / HA / HA-01000000V01.html
 								<td>서브페이지 아이콘</td>
 								<td class="left">
 									<div class="naming-guide">
-										<div class="file">ico-HA-01000000V01-1.svg</div>
+										<div class="file">ico-P-010-1.svg</div>
 										<div class="mark">
 											<div class="-single" style="width:3.8rem;">접두사</div>
-											<div class="-double -id" style="width:15rem;">화면ID</div>
+											<div class="-double -id" style="width:5rem;">화면ID</div>
 											<div class="-single" style="width:2.5rem;">숫자</div>
 											<div class="-single" style="width:3.2rem;">확장자</div>
 										</div>
@@ -843,10 +641,10 @@ HA-01000000V01 -> home / HA / HA-01000000V01.html
 								<td>비주얼 이미지</td>
 								<td class="left">
 									<div class="naming-guide">
-										<div class="file">img-HA-01000000V01-1.png</div>
+										<div class="file">img-P-010-1.png</div>
 										<div class="mark">
 											<div class="-single" style="width:3.8rem;">접두사</div>
-											<div class="-double -id" style="width:15rem;">화면ID</div>
+											<div class="-double -id" style="width:5rem;">화면ID</div>
 											<div class="-single" style="width:2.5rem;">숫자</div>
 											<div class="-single" style="width:3.2rem;">확장자</div>
 										</div>
@@ -857,10 +655,10 @@ HA-01000000V01 -> home / HA / HA-01000000V01.html
 								<td>배너</td>
 								<td class="left">
 									<div class="naming-guide">
-										<div class="file">bn-HA-01000000V01-1.png</div>
+										<div class="file">bn-P-010-1.png</div>
 										<div class="mark">
 											<div class="-single" style="width:3.2rem;">접두사</div>
-											<div class="-double -id" style="width:14.8rem;">화면ID</div>
+											<div class="-double -id" style="width:5rem;">화면ID</div>
 											<div class="-single" style="width:2.2rem;">숫자</div>
 											<div class="-single" style="width:3.2rem;">확장자</div>
 										</div>
@@ -901,37 +699,27 @@ HA-01000000V01 -> home / HA / HA-01000000V01.html
 								<th scope="col">경로1</th>
 								<th scope="col">경로2</th>
 								<th scope="col">경로3</th>
-								<th scope="col">경로4</th>
 								<th scope="col">종류</th>
+								<th scope="col">확장자</th>
 							</tr>
 						</thead>
 						<tbody class="center">
 							<tr>
-								<td rowspan="6">assets</td>
-								<td rowspan="6">imgs</td>
-								<td rowspan="4">ico</td>
-								<td>common</td>
-								<td>공통UI 아이콘</td>
+								<td rowspan="3">assets</td>
+								<td rowspan="3">imgs</td>
+								<td>ico</td>
+								<td>아이콘</td>
+								<td>png, svg</td>
 							</tr>
 							<tr>
-								<td>ci</td>
-								<td>은행/증권 아이콘</td>
+								<td>img</td>
+								<td>이미지</td>
+								<td>jpg, png</td>
 							</tr>
 							<tr>
-								<td>flag</td>
-								<td>국기 아이콘</td>
-							</tr>
-							<tr>
-								<td>Service별 폴더</td>
-								<td>서브페이지 아이콘</td>
-							</tr>
-							<tr>
-								<td rowspan="2">img</td>
-								<td rowspan="2">Service별 폴더</td>
-								<td>비주얼</td>
-							</tr>
-							<tr>
-								<td>배너</td>
+								<td>temp</td>
+								<td>test 이미지</td>
+								<td>jpg</td>
 							</tr>
 						</tbody>
 					</table>
@@ -943,7 +731,38 @@ HA-01000000V01 -> home / HA / HA-01000000V01.html
 			<div class="paper">
 				<div class="h1">클래스 작명 규칙</div>
 
-				<div class="h2">옵션 클래스</div>
+				<div class="h2">BEM이란?</div>
+				<ul class="ul">
+					<li>BEM은 CSS 제작 방법론으로 일종의 네이밍 컨벤션이다.<br>Block(블록), Element(요소), Modifier(수정자)의 약자로, 목적에 따라 네이밍 하는 것이 특징이다.</li>
+					<li>UI를 독립된 블록으로 분리함으로써 복잡한 페이지에서도 간단하고 신속하게 개발을 수행하는 것이 목적이다.</li>
+				</ul>
+
+				<div class="h2">BEM의 특징</div>
+				<ul class="ul">
+					<li>명시도를 균일하게 유지하기 위해 class 선택자만 사용한다.</li>
+					<li>목적에 따라 네이밍한다.</li>
+					<li>해당 BEM은 더욱 단순하게 '베스킨미누쓰' 전용 규칙을 다시 만듦. 진짜 BEM 방식과는 다르게 정의한다.</li>
+					<li>HTML 요소들을 각각 <span class="keyword">Block__Element -Modifer</span>세가지로 분류한다.</li>
+				</ul>
+
+				<div class="h2">베스킨 미누스 전용 구분</div>
+				<ul class="ul">
+					<li>block : 독립적인 페이지 구성요소로, 재사용이 가능한 부분 (다른 말로 '컴포넌트' 로 명칭)</li>
+					<li>Element : 엘리먼트는 블록에 의존적, 자식이 속한 블럭 내에서만 사용될 수 있고 다른 곳에서는 사용이 불가능</li>
+					<li>Modifer : Block이나 Element의 상태 또는 동작을 정의</li>
+				</ul>
+				
+				<div class="code">
+					<script type="text/template">
+<ul class="tab"><!-- Block -->
+	<li class="tab__item -active">탭 01</li><!-- Element & Modifer -->
+	<li class="tab__item">탭 02</li><!-- Element -->
+	<li class="tab__item">탭 03</li><!-- Element -->
+</ul>
+					</script>
+				</div>
+
+				<div class="h2">Modifer 클래스 & 옵션 클래스</div>
 				<ul class="ul">
 					<li>컴포넌트 클래스와 옵션 클래스를 구분없이 사용할 경우 급속히 클래스가 고갈되는 문제가 있고 비슷한 이름의 클래스가 양산되는 문제가 있다.</li>
 					<li>상태나 성격을 바꾸기 위해 사용되는 클래스에는 <span class="">prefix</span>로 대시(-)를 붙인다.</li>
@@ -951,7 +770,7 @@ HA-01000000V01 -> home / HA / HA-01000000V01.html
 
 				<div class="code">
 					<script type="text/template">
-	<button type="button" class="button -lg -primary">버튼</button>
+	<button type="button" class="button -lg -primary">버튼</button><!-- Block -Modifer1,2 -->
 					</script>
 				</div>
 
@@ -1002,36 +821,25 @@ round button -> .round-button
 
 				<div class="h2">사용 금지</div>
 				<ul class="ul">
-					<li>태그명과 동일한 클래스명은 공툥UI외에는 사용할 수 없습니다.</li>
+					<li>태그명과 동일한 클래스명은 공통UI외에는 사용할 수 없습니다.</li>
 					<li>레이아웃에 사용된 이름은 사용할 수 없습니다.</li>
 				</ul>
 				<div class="class-list">
 					<div>page</div>
-					<div>popup</div>
-					<div>layer</div>
-					<div>alert</div>
 					<div>container</div>
 					<div>header</div>
-					<div>nav</div>
-					<div>gnb</div>
-					<div>lnb</div>
-					<div>snb</div>
+					<div>inner</div>
 					<div>contents</div>
 					<div>content</div>
-					<div>sticker</div>
-					<div>fixer</div>
-					<div>buffer</div>
-					<div>loading</div>
-					<div>section</div>
-					<div>field</div>
-					<div>field</div>
+					<div>footer</div>
 				</div>
 
 				<div class="h2">제한된 사용</div>
 				<ul class="ul">
-					<li>컴포넌트명으로 사용할 수 없다.</li>
-					<li>컴포넌트 내부에서 부품의 역활로는 사용할 수 있다.</li>
-					<li>같은 이름이 서로 다른 컴포넌트 에서 범용으로 자주 사용될 수 있으므로 서로 영향이 가지 않도록 주의가 필요하다.</li>
+					<li>컴포넌트(블럭)명으로 사용할 수 없다.</li>
+					<li>컴포넌트(블럭) 내부에서 부품의 역활로는 사용할 수 있다.</li>
+					<li>같은 이름이 서로 다른 컴포넌트(블럭) 에서 범용으로 자주 사용될 수 있으므로 서로 영향이 가지 않도록 주의가 필요하다.</li>
+					<li>엘리먼트 사용으로는 사용해도 무방하나 <span class="keyword">Block__Element</span> 형식으로 사용하기 때문에 단독으로 사용을 하지 않으니 제한한다.</li>
 				</ul>
 
 				<div class="h3">UI 관련 키워드</div>
@@ -1070,26 +878,6 @@ round button -> .round-button
 					<div>number</div>
 					<div>unit</div>
 					<div>card</div>
-				</div>
-
-				<div class="h3">은행 관련 키워드</div>
-				<div class="class-list">
-					<div>home</div>
-					<div>finance</div>
-					<div>payment</div>
-					<div>exchange</div>
-					<div>tax</div>
-					<div>myallone</div>
-					<div>account</div>
-					<div>navigation</div>
-					<div>utility</div>
-					<div>admin</div>
-					<div>commodity</div>
-					<div>group</div>
-					<div>mydata</div>
-					<div>smart</div>
-					<div>life</div>
-					<div>big</div>
 				</div>
 			</div>
 		</div>

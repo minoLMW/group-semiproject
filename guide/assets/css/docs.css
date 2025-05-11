@@ -193,10 +193,10 @@ a {color:inherit; text-decoration:none;}
 
 .one-word div:nth-child(1) {display:inline-flex; flex-direction:column; justify-content:center; align-items:center; width:3.4rem; height:4.5rem; font-weight:bold; font-size:2.4rem; border:.3rem solid #ccc;}
 .one-word div:nth-child(2) {margin-top:.5rem; width:100%;font-size:1.2rem; text-align:center; white-space:nowrap;}
-
 .two-word div:nth-child(1) {display:inline-flex; flex-direction:column; justify-content:center; align-items:center; width:3.4rem; height:4.5rem; font-weight:bold; font-size:2.4rem; border:.3rem solid #ccc;}
 .two-word div:nth-child(2) {display:inline-flex; flex-direction:column; justify-content:center; align-items:center; width:3.4rem; height:4.5rem; margin-left:.3rem; font-weight:bold; font-size:2.4rem; border:.3rem solid #ccc;}
-.two-word div:nth-child(3) {margin-top:.5rem; width:100%;font-size:1.2rem; text-align:center; white-space:nowrap;}
+.two-word div:nth-child(3) {display:inline-flex; flex-direction:column; justify-content:center; align-items:center; width:3.4rem; height:4.5rem; margin-left:.3rem; font-weight:bold; font-size:2.4rem; border:.3rem solid #ccc;}
+.two-word div:nth-child(4) {margin-top:.5rem; width:100%;font-size:1.2rem; text-align:center; white-space:nowrap;}
 .three-word div:nth-child(1) {display:inline-flex; flex-direction:column; justify-content:center; align-items:center; width:3.4rem; height:4.5rem; font-weight:bold; font-size:2.4rem; border:.3rem solid #ccc;}
 .three-word div:nth-child(2) {display:inline-flex; flex-direction:column; justify-content:center; align-items:center; width:3.4rem; height:4.5rem; margin-left:.3rem; font-weight:bold; font-size:2.4rem; border:.3rem solid #ccc;}
 .three-word div:nth-child(3) {display:inline-flex; flex-direction:column; justify-content:center; align-items:center; width:3.4rem; height:4.5rem; margin-left:.3rem; font-weight:bold; font-size:2.4rem; border:.3rem solid #ccc;}
