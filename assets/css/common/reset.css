@@ -10,10 +10,6 @@
     padding: 0;
     border: none;
     outline: none;
-    /* user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent; */
 }
 
 ul,
@@ -40,3 +36,26 @@ textarea {
     user-select: auto;
    -webkit-user-select: auto;
 }
+
+@font-face {
+    font-weight: normal;
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-weight: bold;
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+}
+
+html {
+    font-size: 62.5%;
+    -webkit-overflow-scrolling: auto;
+}
+
+@media (max-width: 320px) { html { font-size: 56.5%; } }
+@media (max-width: 280px) { html { font-size: 50%; } }
+
+
+body {color: var(--color-root); font-size: 1.5rem; line-height: 1.5; font-family: var(--word); letter-spacing: -0.025em; overflow-wrap: break-word; -webkit-text-size-adjust: none; overflow-x:hidden; overflow-y:scroll; background-color:var(--bg-root);}
