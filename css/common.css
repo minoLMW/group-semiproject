@@ -1,0 +1,55 @@
+:root{
+    --text-color-1: #37271f;
+    --pink-color-1: #ffb3c3;
+    --pink-color-2: #ff4d72;
+    --pink-color-3: #ff7c98;
+    --point-color: var(--pink-color-2);
+    --brown-color-1: #41332c;
+    --brown-color-2: #2f231c;
+    --brown-color-3: #948780;
+    --gray-color-1: #d4d4d4;
+    --font-family-ko: "Noto Sans KR", sans-serif;
+    --font-family-en: 'font-scoop', sans-serif;
+    --size-pc: 1500px;
+    --font-weight-sd-regular: 400;
+    --font-weight-sd-medium: 500;
+    --font-weight-sd-semibold: 600;
+    --font-weight-sd-bold: 600;
+    --font-weight-sd-extrabold: 700;
+    --font-weight-sd-heavy: 900;
+}
+
+html, body{
+    height: 100%;;
+    background-image: url(../img/bg);
+    color: var(--text-color-1);
+    background-color: #fff0f3;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+a, a:visited, a:active, a:hover, a:focus{
+    text-decoration: none;
+    color: var(--text-color-1);
+    cursor: pointer;
+}
+
+ul, li{
+    list-style: none;
+    padding: 0;
+}
+
+button{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
