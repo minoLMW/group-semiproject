@@ -13,3 +13,7 @@ export async function connectDB() {
 export function getUsers() {
   return db.collection("users");
 }
+
+export function getPosts() {
+  return db.collection("posts");
+}
