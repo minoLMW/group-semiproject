@@ -54,8 +54,14 @@ html {
     -webkit-overflow-scrolling: auto;
 }
 
+@media (max-width: 360px) { 
+    body {
+        overflow-x:hidden;
+        overflow-y:scroll;
+    } 
+}
 @media (max-width: 320px) { html { font-size: 56.5%; } }
 @media (max-width: 280px) { html { font-size: 50%; } }
 
 
-body {color: var(--color-root); font-size: 1.5rem; line-height: 1.5; font-family: var(--word); letter-spacing: -0.025em; overflow-wrap: break-word; -webkit-text-size-adjust: none; overflow-x:hidden; overflow-y:scroll; background-color:var(--bg-root);}
+body {color: var(--color-root); font-size: 1.5rem; line-height: 1.5; font-family: var(--word); letter-spacing: -0.025em; overflow-wrap: break-word; -webkit-text-size-adjust: none; background-color:var(--bg-root);}

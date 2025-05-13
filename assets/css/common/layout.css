@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+.content {
+    height:calc(100vh - 57.4rem);
+    padding-top:9rem;
+}
+.inner {
+    min-width:var(--size-pc);
+}

@@ -15,6 +15,7 @@
     --deeppink: #ff008a;
     /* text */
     --point: var(--pink-color-2);
+    --color-root: var(--font1);
     --font1: #121212;
     --font3: #666;
     --font5: #f1f1f1;

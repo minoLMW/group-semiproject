@@ -1,13 +1,3 @@
-body, ul, li, h3, p {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  color: var(--font5);
-}
-
-body {
-  background-color:#111;
-}
 
 /*푸터 전체*/
 .footer {
@@ -18,7 +8,6 @@ body {
 }
 
 .inner {
-  max-width: var(--size-pc);
   margin: auto;
 }
 
