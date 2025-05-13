@@ -44,9 +44,17 @@ textarea {
 }
 
 @font-face {
+    font-family: Scoop;
+    font-weight: normal;
+    font-display: swap;
+    src: url(/assets/fonts/Scoopbeta-Regular.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: Scoop;
     font-weight: bold;
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-display: swap;
+    src: url(/assets/fonts/Scoop-Extrabold.ttf) format("truetype")
 }
 
 html {

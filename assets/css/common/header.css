@@ -29,7 +29,7 @@ body {
 .main-logo {
   width: 52px;
   height: 60px;
-  background-image: url(../img/h_logo.png);
+  background-image: url(../../imgs/img/h_logo.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -92,7 +92,7 @@ body {
 .search-btn {
   width: 22px;
   height: 24px;
-  background-image: url(../img/btn_search.png);
+  background-image: url(../../imgs/img/btn_search.png);
   background-repeat: no-repeat;
   background-size: contain;
   float: right;
@@ -102,7 +102,7 @@ body {
   width: 32px;
   height: 32px;
   margin: 0 20px;
-  background-image: url(../img/btn_user_menu.png);
+  background-image: url(../../imgs/img/btn_user_menu.png);
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -114,7 +114,7 @@ body {
 }
 
 .main-header-bg.active .main-logo {
-  background-image: url(../img/h_logo_white.png);
+  background-image: url(../../imgs/img/h_logo_white.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -131,7 +131,7 @@ body {
 }
 
 .main-header-bg.active .search-btn {
-  background-image: url(../img/btn_search_white.png);
+  background-image: url(../../imgs/img/btn_search_white.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -140,7 +140,7 @@ body {
   width: 32px;
   height: 32px;
   margin: 0 20px;
-  background-image: url(../img/btn_user_menu_white.png);
+  background-image: url(../../imgs/img/btn_user_menu_white.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
