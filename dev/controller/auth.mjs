@@ -12,7 +12,7 @@ async function createJwtToken(id) {
 }
 
 export async function signup(req, res, next) {
-  const { userid, password, name, email, url } = req.body;
+  const { userid, password, name, email, ph,birth,url } = req.body;
 
   // 회원 중복 체크
   const found = await authRepository.findByUserid(userid);
@@ -28,6 +28,8 @@ export async function signup(req, res, next) {
     password: hashed,
     name,
     email,
+    ph,
+    birth,
     url,
   });
   const token = await createJwtToken(users.id);
@@ -36,7 +38,6 @@ export async function signup(req, res, next) {
     res.status(201).json({ message: "회원가입 완료!", token, userid });
   }
 }
-
 export async function login(req, res, next) {
   const { userid, password } = req.body;
   const user = await authRepository.findByUserid(userid);
