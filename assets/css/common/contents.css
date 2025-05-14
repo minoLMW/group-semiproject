@@ -1,0 +1,285 @@
+@charset "utf-8";
+
+/* main-hero */
+
+.baskinrobbins-main .main-hero {
+    overflow: hidden;
+    position: relative;
+    padding-top: 30px;
+    background: url(/assets/images/main/bg_hero.jpg) repeat
+}
+
+.baskinrobbins-main .main-hero__container {
+    display: flex;
+    justify-content: center
+}
+
+.baskinrobbins-main .main-hero__content {
+    position: relative;
+    width: 1500px;
+    height: 880px;
+    padding-top: 95px;
+    box-sizing: border-box
+}
+
+.baskinrobbins-main .main-hero__content:before {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1500px;
+    height: 840px;
+    margin-left: -750px;
+    background: url(/assets/images/main/bg_hero_frame.png) no-repeat left top/contain;
+    content: ""
+}
+
+.baskinrobbins-main .main-hero__box {
+    overflow: hidden;
+    width: 1455px;
+    height: 729px;
+    margin: 0 auto;
+    border-radius: 174px
+}
+
+.baskinrobbins-main .main-hero__video {
+    width: 100%;
+    height: 100%
+}
+
+.baskinrobbins-main .main-hero__link {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%
+}
+
+.baskinrobbins-main .main-hero__text {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+    clip: rect(0,0,0,0);
+    -webkit-clip-path: inset(0 0 99.9% 99.9%);
+    clip-path: inset(0 0 99.9% 99.9%)
+}
+
+.baskinrobbins-main .main-hero-list {
+    position: absolute;
+    top: 120px;
+    right: 50px;
+    z-index: 20
+}
+
+.baskinrobbins-main .main-hero-list--start .main-hero-list__button {
+    opacity: 1
+}
+
+.baskinrobbins-main .main-hero-list--active .main-hero-list__item {
+    transform: translate(0);
+    opacity: 1
+}
+
+.baskinrobbins-main .main-hero-list--active .main-hero-list__button {
+    left: -28px;
+    transform: rotate(0)
+}
+
+.baskinrobbins-main .main-hero-list__content {
+    overflow: hidden;
+    border-radius: 0 0 170px
+}
+
+.baskinrobbins-main .main-hero-list__list {
+    width: 308px
+}
+
+.baskinrobbins-main .main-hero-list__item {
+    transform: translate(100%);
+    opacity: 0;
+    transition: transform .8s ease,opacity .8s ease
+}
+
+.baskinrobbins-main .main-hero-list__item:nth-child(1) {
+    transition-delay: 0s
+}
+
+.baskinrobbins-main .main-hero-list__item:nth-child(2) {
+    transition-delay: .2s
+}
+
+.baskinrobbins-main .main-hero-list__item:nth-child(3) {
+    transition-delay: .4s
+}
+
+.baskinrobbins-main .main-hero-list__item+.main-hero-list__item {
+    margin-top: 18px
+}
+
+.baskinrobbins-main .main-hero-list__link {
+    display: block;
+    overflow: hidden;
+    border-radius: 16px
+}
+
+.baskinrobbins-main .main-hero-list__button {
+    position: absolute;
+    bottom: 28px;
+    left: 200px;
+    width: 56px;
+    height: 56px;
+    background: url(/assets/images/main/btn_hero_banner.png) no-repeat;
+    transform: rotate(-45deg);
+    opacity: 0;
+    transition: transform .3s ease,opacity .3s ease,left .8s ease;
+    transition-delay: .4s
+}
+
+.baskinrobbins-main .main-hero-list__button-text {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+    clip: rect(0,0,0,0);
+    -webkit-clip-path: inset(0 0 99.9% 99.9%);
+    clip-path: inset(0 0 99.9% 99.9%)
+}
+
+/* main-play */
+
+.baskinrobbins-main .main-play {
+    overflow: hidden;
+    position: relative;
+    height: 900px;
+    padding-top: 150px;
+    background: url(/assets/images/main/bg_play.jpg) repeat-x;
+    box-sizing: border-box
+}
+
+.baskinrobbins-main .main-play:before {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    width: 1689px;
+    height: 869px;
+    margin-left: -845px;
+    background: url(/assets/images/main/bg_play_light.png) no-repeat;
+    content: ""
+}
+
+.baskinrobbins-main .main-play .main__container {
+    z-index: 10
+}
+
+.baskinrobbins-main .main-play .main-header__text,.baskinrobbins-main .main-play .main-header__description {
+    color: #37110e
+}
+
+.baskinrobbins-main .main-play__container {
+    margin-top: 16px
+}
+
+.baskinrobbins-main .main-play__list {
+    display: flex;
+    justify-content: center
+}
+
+.baskinrobbins-main .main-play__item {
+    margin: 0 8px
+}
+
+.baskinrobbins-main .main-play__link {
+    display: block
+}
+
+.baskinrobbins-main .main-play__image {
+    filter: drop-shadow(0px 20px 20px rgba(81,30,1,.2)) drop-shadow(0px 1px 2.85px rgba(81,30,1,.8));
+    transform: translateZ(0)
+}
+
+/* main-be-better */
+
+.baskinrobbins-main .main-be-better {
+    overflow: hidden;
+    padding: 146px 0;
+    background: #f4e8df
+}
+
+.baskinrobbins-main .main-be-better__container {
+    position: relative;
+    text-align: center;
+    margin-top: 40px
+}
+
+.baskinrobbins-main .main-be-better__list {
+    display: inline-block;
+    margin: -5px
+}
+
+.baskinrobbins-main .main-be-better__list:after {
+    display: block;
+    clear: both;
+    content: ""
+}
+
+.baskinrobbins-main .main-be-better__item {
+    float: left;
+    width: 546px;
+    margin: 5px;
+    border-radius: 10px;
+    background: #fff
+}
+
+.baskinrobbins-main .main-be-better__item--circle .main-be-better__title {
+    color: #ed5c61
+}
+
+.baskinrobbins-main .main-be-better__item--link .main-be-better__title {
+    color: #00a000
+}
+
+.baskinrobbins-main .main-be-better__item--farm .main-be-better__title {
+    color: #947244
+}
+
+.baskinrobbins-main .main-be-better__item--dream .main-be-better__title {
+    color: #fd565a
+}
+
+.baskinrobbins-main .main-be-better__item:nth-child(2n+1) {
+    clear: both
+}
+
+.baskinrobbins-main .main-be-better__link {
+    display: flex
+}
+
+.baskinrobbins-main .main-be-better__frame {
+    overflow: hidden;
+    border-radius: 10px
+}
+
+.baskinrobbins-main .main-be-better__content {
+    padding: 36px 20px
+}
+
+.baskinrobbins-main .main-be-better__title {
+    font-weight: var(--font-weight-sd-semibold);
+    font-size: 22px;
+    text-align: left
+}
+
+.baskinrobbins-main .main-be-better__text {
+    margin-top: 10px;
+    color: #464646;
+    font-weight: var(--font-weight-sd-semibold);
+    font-size: 15px
+}
