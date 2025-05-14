@@ -295,15 +295,24 @@
 	color:var(--font2);
 	background-color:#fff;
 }
+.product-function__cart:hover {
+	border:1px solid var(--point);
+	background-color:var(--point);
+	color:#fff;
+}
 .product-function__buy {
 	flex:1;
 	height:4.2rem;
-	border:1px solid var(--point);
+	border:1px solid var(--pink-color-3);
 	border-radius:0.8rem;
-	background-color:var(--point);
+	background-color:var(--pink-color-3);
 	font-size:1.6rem;
 	font-weight:bold;
 	color:#fff
+}
+.product-function__buy:hover {
+	background-color:var(--point);
+	border:1px solid var(--point);
 }
 .product-view-hero {
 	overflow:hidden;
