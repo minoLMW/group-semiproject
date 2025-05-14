@@ -73,3 +73,5 @@ html {
 
 
 body {color: var(--color-root); font-size: 1.5rem; line-height: 1.5; font-family: var(--word); letter-spacing: -0.025em; overflow-wrap: break-word; -webkit-text-size-adjust: none; background-color:var(--bg-root);}
+
+legend {overflow:hidden !important; position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; white-space:nowrap !important; clip:rect(1px, 1px, 1px, 1px) !important; clip-path:inset(50%) !important;}
