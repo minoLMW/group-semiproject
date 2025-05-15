@@ -3,12 +3,14 @@ import authRouter from "./router/auth.mjs";
 import postsRouter from "./router/post.mjs";
 import { config } from "./config.mjs";
 import { connectDB } from "./db/database.mjs";
+import icecreamsRouter from "./router/icecream.mjs";
 
 const app = express();
 
 app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
+app.use("/icecreams", icecreamsRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

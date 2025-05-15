@@ -8,11 +8,6 @@ export async function getAll() {
   return getPosts().find().sort({ createAt: -1 }).toArray();
 }
 
-// 사용자 아이디(userid)에 대한 포스트를 리턴
-export async function getAllByUserid(userid) {
-  return getPosts().find({ userid }).sort({ createAt: -1 }).toArray();
-}
-
 // 글 번호(id)에 대한 포스트를 리턴
 export async function getById(id) {
   return getPosts()
