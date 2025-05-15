@@ -8,7 +8,7 @@ const router = express.Router();
 
 const validatePost = [
   body("text").trim().isLength({ min: 5 }).withMessage("최소 5자 이상 입력"),
-  body("menu").trim().isLength({min:3}).withMessage("메뉴이름을 적어주세요"),
+  body("title").trim().isLength({min:1}).withMessage("제목을 적어주세요"),
   validate,
 ];
 

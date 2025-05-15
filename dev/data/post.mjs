@@ -22,7 +22,7 @@ export async function getById(id) {
 }
 
 // 포스트 작성
-export async function create(text,menu, id) {
+export async function create(text,title, id) {
   console.log("id:", id);
   return UserRepository.findByid(id).then((user) =>
     getPosts()
@@ -30,10 +30,9 @@ export async function create(text,menu, id) {
         userid: user.userid,
         name: user.name,
         text,
-        menu,
+        title,
         createAt: new Date(),
         useridx: user.id,
-        url: user.url,
       })
       .then((result) => {
         return getPosts().findOne({ _id: result.insertedId });
@@ -42,7 +41,7 @@ export async function create(text,menu, id) {
 }
 
 // post 변경
-export async function update(id, text,menu) {
+export async function update(id, text,title) {
   return getPosts()
     .findOneAndUpdate(
       { _id: new ObjectID(id) },

@@ -17,3 +17,7 @@ export function getUsers() {
 export function getPosts() {
   return db.collection("posts");
 }
+
+export function getIcecream(){
+  return db.collection("icecreams")
+}
