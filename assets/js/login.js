@@ -40,7 +40,7 @@ async function sendit(event) {
         localStorage.setItem("userid", userid);
 
         alert("로그인 성공!");
-        window.location.href = "/html/main/index.html"; 
+        window.location.href = "/html/main/index.html";
       } else {
         alert("아이디 혹은 비번이 틀렸습니다");
       }

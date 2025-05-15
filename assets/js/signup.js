@@ -7,7 +7,7 @@ async function sendit(event) {
   const email = document.getElementById("email");
   const name = document.getElementById("name");
   const hp = document.getElementById("hp");
-  const birth = document.getElementById("birth")
+  const birth = document.getElementById("birth");
 
   const expIdText = /^[A-Za-z0-9]{4,20}$/;
   const expPwText =
@@ -15,7 +15,7 @@ async function sendit(event) {
   const expEmailText = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
   const expuserNameText = /^[가-힣]+$/;
   const expHpText = /^\d{3}-\d{3,4}-\d{4}$/;
-  const expBirthText = /^\d{4}-\d{2}-\d{2}$/
+  const expBirthText = /^\d{4}-\d{2}-\d{2}$/;
 
   if (userid.value === "") {
     alert("아이디를 입력해주세요.");
@@ -80,8 +80,8 @@ async function sendit(event) {
     hp.focus();
     return false;
   }
-  if(!birth.value === ""){
-    alert("생년월일을 입력해주세요요")
+  if (!birth.value === "") {
+    alert("생년월일을 입력해주세요요");
   }
   if (!expBirthText.test(birth.value)) {
     alert("생년월일 형식이 일치하지 않습니다. \n-하이픈을 꼭 입력하세요!");
@@ -95,7 +95,7 @@ async function sendit(event) {
     email: email.value,
     name: name.value,
     hp: hp.value,
-    birth : birth.value
+    birth: birth.value,
   };
 
   console.log("회원가입 데이터:", signupData);

@@ -6,9 +6,8 @@
     <title>Login</title>
     <link rel="stylesheet" href="/assets/css/common-ui.css" />
   </head>
-  <link rel="stylesheet" href="/assets/css/common/login-signup.css" />
+  <link rel="stylesheet" href="/assets/css/common/login-signup.css">
   <body id="baskinrobbins-login" class="baskinrobbins-login">
-    <script src="/"></script>
     <header>헤더넣기</header>
 
     <section class="site-container">
@@ -31,37 +30,30 @@
             <div class="login__inner">
               <form action="" class="login__form" method="post">
                 <fieldset class="login__block">
-                  <form
-                    action="/auth/login"
-                    method="post"
-                    onsubmit="return sendit(event)"
+                  <!-- <legend>계정 입력 폼</legend> -->
+                  <input type="hidden" name="redirectUrl" value="/" /><label
+                    class="login__label"
+                    ><input
+                      type="text"
+                      name="uname"
+                      placeholder="아이디"
+                      class="login__input"
+                    />
+                  </label>
+                  <label class="login__label">
+                    <input
+                      type="password"
+                      name="password"
+                      placeholder="비밀번호"
+                      class="login__input"
+                    />
+                  </label>
+                  <button
+                    type="submit"
+                    class="login__button login__button--login"
                   >
-                    <input type="hidden" name="redirectUrl" value="/" /><label
-                      class="login__label"
-                      ><input
-                        type="text"
-                        name="userid"
-                        placeholder="아이디"
-                        class="login__input"
-                        id="userid"
-                      />
-                    </label>
-                    <label class="login__label">
-                      <input
-                        type="password"
-                        name="password"
-                        placeholder="비밀번호"
-                        class="login__input"
-                        id="password"
-                      />
-                    </label>
-                    <button
-                      type="submit"
-                      class="login__button login__button--login"
-                    >
-                      제출하기
-                    </button>
-                  </form>
+                    제출하기
+                  </button>
                 </fieldset>
               </form>
               <div class="login__buttons">
@@ -88,6 +80,7 @@
       </div>
     </section>
 
-    <footer>푸터넣기</footer>
+    <footer class="footer">
+			</footer>
   </body>
 </html>
