@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+    <link rel="stylesheet" href="/assets/css/common-ui.css" />
+  </head>
+  <link rel="stylesheet" href="/assets/css/common/login-signup.css">
+  <body id="baskinrobbins-signup" class="baskinrobbins-signup">
+    <header></header>
+
+    <section class="site-container">
+      <div id="content" class="signup">
+        <header class="page-header">
+          <div class="page-header__container">
+            <div class="page-header__content">
+              <h3 class="page-header__title">회원가입</h3>
+            </div>
+            <div class="page-header__content">
+              <p class="page-header__text">
+            실명 인증된 아이디로 가입해주세요!
+              </p>
+            </div>
+          </div>
+        </header>
+
+        <!--content-->
+        <hr class="divider">
+        <div class="Signup">
+          <div class="Signup">
+            <div class="signup__inner">
+              <form action="" class="signup_form" method="post">
+                <fieldset class="login__block">
+
+                  <!-- <legend>계정 입력 폼</legend> -->
+                  <input type="hidden" name="redirectUrl" value="/"/>
+                  <label class="signup__label">
+                    <input
+                      type="id"
+                      name="userid"
+                      placeholder="아이디"
+                      class="login__input"/>
+                  </label>
+
+                  <label class="signup__label">
+                    <input
+                      type="password"
+                      name="userpw"
+                      placeholder="비밀번호"
+                      class="login__input"/>
+                  </label>
+
+                   <label class="signup-label"></label>
+                  <input
+                    type="email"
+                    name="useremail"
+                    maxlength="100"
+                    placeholder="[선택]이메일주소(비밀번호 찾기등 본인확인용)"
+                 class="login__input"/>
+
+              <label class="signup-label"></label>
+                <input
+                    type="name"
+                    name="username"
+                    maxlength="10"
+                   placeholder="이름"
+                  class="login__input"/>
+
+             <label class="signup-label"></label>
+                <input
+                    type="date"
+                    name="userbirth"
+                    maxlength="10"
+                   placeholder="생년월일  "
+                  class="login__input"/>
+
+                   <label class="signup-label"></label>
+                <input
+                    type="tel"
+                    name="userhp"
+                    maxlength="10"
+                   placeholder="휴대폰 번호"
+                  class="login__input"/>
+
+                <button
+                    type="submit"
+                    class="login__button login__button--login"
+                  >
+                  인증요청
+                  </button>
+
+                   <button
+                    type="submit"
+                    class="login__button login__button--login"
+                  >제출하기</button>
+                </fieldset>
+              </form>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer></footer>
+  </body>
+</html>
