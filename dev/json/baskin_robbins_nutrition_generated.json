@@ -8,7 +8,7 @@
             "items": {
                 "item": [
                     {
-                        "_idx": "1",
+                        "_idx": "0",
                         "ice_name": "봄날의 곰을 좋아하세요?",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/df8edecf77ec6f9869758e40cdced484.png",
                         "English_Name": "ICE STRAWBERRY BANANA AND BEAR JELLY",
@@ -40,7 +40,7 @@
                         "bg_color":"#e37070"
                     },
                     {
-                        "_idx": "2",
+                        "_idx": "1",
                         "ice_name": "아이 원-츄!",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/ce2877eeb77d7ab5abaf74c62968a6d3.png",
                         "English_Name": "I WANT CHU!",
@@ -72,7 +72,7 @@
                         "bg_color":"#92564a"
                     },
                     {
-                        "_idx": "3",
+                        "_idx": "2",
                         "ice_name": "아이스 칸탈로프 멜론",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/5544365d5b0674ec59211e48a1014472.png",
                         "English_Name": "CANTALOUPE MELON ICE CREAM",
@@ -96,7 +96,7 @@
                         "bg_color":"#ffe681"
                     },
                     {
-                        "_idx": "4",
+                        "_idx": "3",
                         "ice_name": "피치 요거트",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/fd1b61565b616ae04864840360b7cd9d.png",
                         "English_Name": "Peach Yogurt",
@@ -128,7 +128,7 @@
                         "bg_color":"#ffb700"
                     },
                     {
-                        "_idx": "5",
+                        "_idx": "4",
                         "ice_name": "망고 탱고",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/86b27ac5d1c957f087fedf5b85112ec6.png",
                         "English_Name": "Mango Tango",
@@ -152,7 +152,7 @@
                         "bg_color":"#fca311"
                     },
                     {
-                        "_idx": "6",
+                        "_idx": "5",
                         "ice_name": "치토스 밀크쉐이크 아이스크림",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/6b7de3ba55a71e3e99dc341d5cb908a9.png",
                         "English_Name": "Cheetos Milkshake Ice cream",
@@ -188,7 +188,7 @@
                         "bg_color":"#a97157"
                     },
                     {
-                        "_idx": "7",
+                        "_idx": "6",
                         "ice_name": "허니 크런치",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/bce95152aa2cdef66dd35f8bd232c859.png",
                         "English_Name": "Honey Crunch",
@@ -216,7 +216,7 @@
                         "bg_color":"#ebc349"
                     },
                     {
-                        "_idx": "8",
+                        "_idx": "7",
                         "ice_name": "블랙 소르베",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/62f1f363048e043f75a6ee14cb38e2e7.png",
                         "English_Name": "Black Sorbet",
@@ -240,7 +240,7 @@
                         "bg_color":"#eed2ff"
                     },
                     {
-                        "_idx": "9",
+                        "_idx": "8",
                         "ice_name": "블루베리 요거트",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/a8ab3cb918353a71c352281b4500109e.png",
                         "English_Name": "Blueberry Yogurt",
@@ -272,7 +272,7 @@
                         "bg_color":"#8e7dbe"
                     },
                     {
-                        "_idx": "10",
+                        "_idx": "9",
                         "ice_name": "아이스 메론빵",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/aa02f4ff308947b372036aceec15d00d.png",
                         "English_Name": "Ice Melon Bread",
@@ -308,7 +308,7 @@
                         "bg_color":"#ecf39e"
                     },
                     {
-                        "_idx": "11",
+                        "_idx": "10",
                         "ice_name": "블루베리 파나코타",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/7f981fc6e7a526daee600f4cee803b43.png",
                         "English_Name": "Blueberry Pannacota",
@@ -336,7 +336,7 @@
                         "bg_color":"#e0b1cb"
                     },
                     {
-                        "_idx": "12",
+                        "_idx": "11",
                         "ice_name": "디노 젤리",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/5a245ce198acfaaff602d6e2eab84341.png",
                         "English_Name": "Dino Jelly",
@@ -368,7 +368,7 @@
                         "bg_color":"#a7c957"
                     },
                     {
-                        "_idx": "13",
+                        "_idx": "12",
                         "ice_name": "소금 우유 아이스크림",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/719e8584fd50151284b5ace3589f7a34.png",
                         "English_Name": "Salted Milk Ice Cream",
@@ -392,7 +392,7 @@
                         "bg_color":"#004e98"
                     },
                     {
-                        "_idx": "14",
+                        "_idx": "13",
                         "ice_name": "애플 민트",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/eec8cef386cf6697768a89b384c07bf7.png",
                         "English_Name": "APPLE MINT",
@@ -420,7 +420,7 @@
                         "bg_color":"#9bb053"
                     },
                     {
-                        "_idx": "15",
+                        "_idx": "14",
                         "ice_name": "청포도 샤베트",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/e72e22d7c61114e415411c311ee052bd.png",
                         "English_Name": "GREEN GRAPE SHERBET",
@@ -448,7 +448,7 @@
                         "bg_color":"#3c713b"
                     },
                     {
-                        "_idx": "16",
+                        "_idx": "15",
                         "ice_name": "엄마는 외계인",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/91c8668227bcf556c43a968b97e342e6.png",
                         "English_Name": "Puss In Boots",
@@ -488,7 +488,7 @@
                         "bg_color":"#f8cb5c"
                     },
                     {
-                        "_idx": "17",
+                        "_idx": "16",
                         "ice_name": "민트 초콜릿 칩",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/fb92d70dee836652115c4f3b13175541.png",
                         "English_Name": "Mint Chocolate Chip",
@@ -516,7 +516,7 @@
                         "bg_color":"#836468"
                     },
                     {
-                        "_idx": "18",
+                        "_idx": "17",
                         "ice_name": "뉴욕 치즈케이크",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/60a04a3a5d1b0119f065d12ee7797b2c.png",
                         "English_Name": "New York CheeseCake",
@@ -544,7 +544,7 @@
                         "bg_color":"#7f5a4d"
                     },
                     {
-                        "_idx": "19",
+                        "_idx": "18",
                         "ice_name": "레인보우 샤베트",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/5ad63f3af7244a666d981a1497a39fe7.png",
                         "English_Name": "Rainbow Sherbet",
@@ -576,7 +576,7 @@
                         "bg_color":"#ffeb8e"
                     },
                     {
-                        "_idx": "20",
+                        "_idx": "19",
                         "ice_name": "체리쥬빌레",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/f6609e3e3431d54beceeb1d3787403af.png",
                         "English_Name": "Cherries Jubilee",
@@ -604,7 +604,7 @@
                         "bg_color":"#b45a93"
                     },
                     {
-                        "_idx": "21",
+                        "_idx": "20",
                         "ice_name": "슈팅스타",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/a4b71e8b99743c93a7824331850b0a3d.png",
                         "English_Name": "Shooting Star",
@@ -644,7 +644,7 @@
                         "bg_color":"#324b79"
                     },
                     {
-                        "_idx": "22",
+                        "_idx": "21",
                         "ice_name": "오레오 쿠키 앤 크림",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/414246bd9041530d6ad4d30d97aac87c.png",
                         "English_Name": "Oreo Cookie´s n Cream",
@@ -672,7 +672,7 @@
                         "bg_color":"#35221f"
                     },
                     {
-                        "_idx": "23",
+                        "_idx": "22",
                         "ice_name": "베리베리 스트로베리",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/ea6608b4f72563b360da5c44c946ddc7.png",
                         "English_Name": "Very Berry Strawberry",
@@ -700,7 +700,7 @@
                         "bg_color":"#126f4a"
                     },
                     {
-                        "_idx": "24",
+                        "_idx": "23",
                         "ice_name": "31요거트",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/d56328637eaf86e3273ebc39c57aada7.png",
                         "English_Name": "31 Yogurt",
@@ -724,7 +724,7 @@
                         "bg_color":"#396b8e"
                     },
                     {
-                        "_idx": "25",
+                        "_idx": "24",
                         "ice_name": "바람과 함께 사라지다",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/01ecc320f5d3a6f32e5188eda373842d.png",
                         "English_Name": "Twinberry CheeseCake",
@@ -760,7 +760,7 @@
                         "bg_color":"#c32550"
                     },
                     {
-                        "_idx": "26",
+                        "_idx": "25",
                         "ice_name": "이상한 나라의 솜사탕",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/4db4f9967ad6f603837a40eede965ef0.png",
                         "English_Name": "Cotton Candy Wonderland",
@@ -800,7 +800,7 @@
                         "bg_color":"#ffaeb8"
                     },
                     {
-                        "_idx": "27",
+                        "_idx": "26",
                         "ice_name": "피스타치오 아몬드",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/868364b0ed6038d0c9aee0a10e50d4a9.png",
                         "English_Name": "Pistachio Almond",
@@ -828,7 +828,7 @@
                         "bg_color":"#836233"
                     },
                     {
-                        "_idx": "28",
+                        "_idx": "27",
                         "ice_name": "초콜릿 무스",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/0d67607c2ca4dde4ec24ac8109a343c2.png",
                         "English_Name": "Chocolate Mousse",
@@ -852,7 +852,7 @@
                         "bg_color":"#c4a788"
                     },
                     {
-                        "_idx": "29",
+                        "_idx": "28",
                         "ice_name": "그린티",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/a6bd7bcdd6bdb56f28df7e98f051abda.png",
                         "English_Name": "Green Tea",
@@ -876,7 +876,7 @@
                         "bg_color":"#fcef84"
                     },
                     {
-                        "_idx": "30",
+                        "_idx": "29",
                         "ice_name": "초콜릿",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/aff1c39b1653ddb7701abd9b4c8394ee.png",
                         "English_Name": "Chocolate",
@@ -900,7 +900,7 @@
                         "bg_color":"#fff99d"
                     },
                     {
-                        "_idx": "31",
+                        "_idx": "30",
                         "ice_name": "자모카 아몬드 훠지",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/f31388da0371388c2086a7c90990a097.png",
                         "English_Name": "Jamoca\nAlmond Fudge",
@@ -932,7 +932,7 @@
                         "bg_color":"#6f6b69"
                     },
                     {
-                        "_idx": "32",
+                        "_idx": "31",
                         "ice_name": "아몬드 봉봉",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/e7cb5667c3147ddb0b31e28d1f365980.png",
                         "English_Name": "Almond Bon Bon",
@@ -964,7 +964,7 @@
                         "bg_color":"#f8cb5c"
                     },
                     {
-                        "_idx": "33",
+                        "_idx": "32",
                         "ice_name": "바닐라",
                         "Image_URL": "https://www.baskinrobbins.co.kr/upload/product/main/901f131644310c0eb356cbab7ecc4738.png",
                         "English_Name": "Vanilla",

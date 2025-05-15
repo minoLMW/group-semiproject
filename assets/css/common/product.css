@@ -367,18 +367,14 @@
 	gap:2rem
 }
 .product-view-nutrition__item {
-	flex-shrink:0;
-	animation:showEffect 0.5s linear forwards;
-}
-@keyframes showEffect {
-	0% {opacity:0.1;}
-	100% {opacity:1;}
+	flex-shrink:0
 }
 .product-view-nutrition__item:last-child {
 	flex-shrink:1
 }
 
-.product-view-nutrition__name,.product-view-nutrition__text {
+.product-view-nutrition__name,
+.product-view-nutrition__text {
 	text-align:center
 }
 .product-view-nutrition__name {
@@ -386,7 +382,12 @@
 }
 .product-view-nutrition__text {
 	margin-top:1rem;
-	color:#ff3f67
+	color:#ff3f67;
+	animation:showEffect 0.5s linear forwards;
+}
+@keyframes showEffect {
+	0% {opacity:0.1;}
+	100% {opacity:1;}
 }
 .product-view-nutrition__description {
 	color:var(--brown-color-1);

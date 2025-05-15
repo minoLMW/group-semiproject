@@ -24,36 +24,7 @@
 							<article class="product-view-nutrition">
 								<div class="product-view-nutrition__container">
 									<h3 class="product-view-nutrition__title">영양정보</h3>
-									<dl class="product-view-nutrition__content">
-										<div class="product-view-nutrition__item">
-											<dt class="product-view-nutrition__name">1회 제공량</dt>
-											<dd class="product-view-nutrition__text">115</dd>
-										</div>
-										<div class="product-view-nutrition__item">
-											<dt class="product-view-nutrition__name">열량(kcal)</dt>
-											<dd class="product-view-nutrition__text">221</dd>
-										</div>
-										<div class="product-view-nutrition__item">
-											<dt class="product-view-nutrition__name">당류(g)</dt>
-											<dd class="product-view-nutrition__text">36</dd>
-										</div>
-										<div class="product-view-nutrition__item">
-											<dt class="product-view-nutrition__name">단백질(g)</dt>
-											<dd class="product-view-nutrition__text">2</dd>
-										</div>
-										<div class="product-view-nutrition__item">
-											<dt class="product-view-nutrition__name">포화지방(g)</dt>
-											<dd class="product-view-nutrition__text">2.7</dd>
-										</div>
-										<div class="product-view-nutrition__item">
-											<dt class="product-view-nutrition__name">나트륨(mg)</dt>
-											<dd class="product-view-nutrition__text">32</dd>
-										</div>
-										<div class="product-view-nutrition__item">
-											<dt class="product-view-nutrition__name">알레르기 성분</dt>
-											<dd class="product-view-nutrition__text">우유, 대두, 복숭아</dd>
-										</div>
-									</dl>
+									<dl class="product-view-nutrition__content"></dl>
 								</div>
 							</article>
 							<article class="product-view-content">
@@ -76,23 +47,24 @@
 	<script src="../../assets/js/common-ui.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
+			const urlParams = new URLSearchParams(window.location.search);
+			const idxParam = Number(urlParams.get("_idx"));
 			const swiperContainer = document.querySelector(".product-view-top__container");
 			const contentImage = document.querySelector("img.product-view-content__image");
 			const nutritionContainer = document.querySelector(".product-view-nutrition__content");
 
 			let jsonData = [];
 
-			// JSON 파일 로드
 			fetch("../../dev/json/baskin_robbins_nutrition_generated.json")
 				.then((response) => response.json())
 				.then((data) => {
 					jsonData = data.response.body.items.item;
 					swiperContainer.innerHTML = "";
 
-					jsonData.forEach((item, index) => {
+					jsonData.forEach((item, idx) => {
 						const slide = document.createElement("div");
 						slide.classList.add("product-view-top__content", "product-view-top__content--center", "swiper-slide");
-						slide.dataset.index = index;
+						slide.dataset.idx = idx;
 
 						slide.innerHTML = `
 							<div class="product-view-top__box">
@@ -139,10 +111,15 @@
 						swiperContainer.appendChild(slide);
 					});
 
-					// Swiper 초기화
-					icecreamSwiper();
-					updateContentImage(0); // 첫 번째 이미지로 초기화
-					updateNutritionInfo(0);
+					const swiper = icecreamSwiper();
+					if (!isNaN(idxParam) && idxParam >= 0 && idxParam < jsonData.length) {
+						swiper.slideTo(idxParam, 0);
+						updateContentImage(jsonData[idxParam]._idx);
+						updateNutritionInfo(jsonData[idxParam]._idx);
+					} else {
+						updateContentImage(jsonData[0]._idx);
+						updateNutritionInfo(jsonData[0]._idx);
+					}
 				})
 				.catch(() => {
 					alert("아이스크림 정보를 불러오는 데 실패했습니다.");
@@ -150,7 +127,7 @@
 
 			// Swiper 설정 함수
 			function icecreamSwiper() {
-				const swiper = new Swiper('.swiper', {
+				return new Swiper('.swiper', {
 					observer: true,
 					observeParents: true,
 					observeSlideChildren: true,
@@ -172,61 +149,45 @@
 					},
 					on: {
 						slideChange: function(swiper) {
-							const currentIndex = swiper.activeIndex;
-							console.log("현재 인덱스:", currentIndex);
-							updateContentImage(currentIndex);
-							updateNutritionInfo(currentIndex);
+							const currentIdx = swiper.realIndex; // Swiper에서 현재 인덱스
+							if (jsonData[currentIdx]) {
+								updateContentImage(jsonData[currentIdx]._idx);
+								updateNutritionInfo(jsonData[currentIdx]._idx);
+							}
 						}
 					}
 				});
 			}
 
-			function updateContentImage(index) {
-				const matchedItem = jsonData[index];
-				if (matchedItem) {
-					contentImage.src = matchedItem.Content_Images ? matchedItem.Content_Images[0] : matchedItem.Image_URL;
-					console.log("현재 이미지 변경:", matchedItem.ice_name);
-				} else {
-					console.error("해당 인덱스를 가진 아이템을 찾을 수 없습니다:", index);
-				}
+			function updateContentImage(idx) {
+				const matchedItem = jsonData.find(item => Number(item._idx) === Number(idx));
+				if (!jsonData || jsonData.length === 0) return;
+				if (matchedItem) contentImage.src = matchedItem.Content_Images ? matchedItem.Content_Images[0] : matchedItem.Image_URL;
 			}
 
-			function updateNutritionInfo(index) {
-				const matchedItem = jsonData[index];
+			function updateNutritionInfo(idx) {
+				const matchedItem = jsonData.find(item => Number(item._idx) === Number(idx));
 				if (matchedItem) {
-					nutritionContainer.innerHTML = `
-						<div class="product-view-nutrition__item">
-							<dt class="product-view-nutrition__name">1회 제공량</dt>
-							<dd class="product-view-nutrition__text">${matchedItem.Serving_Size || "N/A"}</dd>
-						</div>
-						<div class="product-view-nutrition__item">
-							<dt class="product-view-nutrition__name">열량(kcal)</dt>
-							<dd class="product-view-nutrition__text">${matchedItem.Calories || "N/A"}</dd>
-						</div>
-						<div class="product-view-nutrition__item">
-							<dt class="product-view-nutrition__name">당류(g)</dt>
-							<dd class="product-view-nutrition__text">${matchedItem.Sugars || "N/A"}</dd>
-						</div>
-						<div class="product-view-nutrition__item">
-							<dt class="product-view-nutrition__name">단백질(g)</dt>
-							<dd class="product-view-nutrition__text">${matchedItem.Protein || "N/A"}</dd>
-						</div>
-						<div class="product-view-nutrition__item">
-							<dt class="product-view-nutrition__name">포화지방(g)</dt>
-							<dd class="product-view-nutrition__text">${matchedItem.Saturated_Fat || "N/A"}</dd>
-						</div>
-						<div class="product-view-nutrition__item">
-							<dt class="product-view-nutrition__name">나트륨(mg)</dt>
-							<dd class="product-view-nutrition__text">${matchedItem.Sodium || "N/A"}</dd>
-						</div>
-						<div class="product-view-nutrition__item">
-							<dt class="product-view-nutrition__name">알레르기 성분</dt>
-							<dd class="product-view-nutrition__text">${matchedItem.Allergens || "N/A"}</dd>
-						</div>
-					`;
-					console.log("현재 영양정보 변경:", matchedItem.ice_name);
-				} else {
-					console.error("해당 인덱스를 가진 아이템을 찾을 수 없습니다:", index);
+					const nutritionData = [
+						{ name: "1회 제공량", value: matchedItem.Serving_Size || "N/A" },
+						{ name: "열량(kcal)", value: matchedItem.Calories || "N/A" },
+						{ name: "당류(g)", value: matchedItem.Sugars || "N/A" },
+						{ name: "단백질(g)", value: matchedItem.Protein || "N/A" },
+						{ name: "포화지방(g)", value: matchedItem.Saturated_Fat || "N/A" },
+						{ name: "나트륨(mg)", value: matchedItem.Sodium || "N/A" },
+						{ name: "알레르기 성분", value: matchedItem.Allergens || "N/A" }
+					];
+
+					nutritionContainer.innerHTML = "";
+					nutritionData.forEach(item => {
+						const nutritionItem = document.createElement("div");
+						nutritionItem.classList.add("product-view-nutrition__item");
+						nutritionItem.innerHTML = `
+							<dt class="product-view-nutrition__name">${item.name}</dt>
+							<dd class="product-view-nutrition__text">${item.value}</dd>
+						`;
+						nutritionContainer.appendChild(nutritionItem);
+					});
 				}
 			}
 		});
