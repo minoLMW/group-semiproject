@@ -213,29 +213,100 @@
 	<script src="../../assets/js/common-ui.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
-			new Swiper('.swiper', {
-				observer:true,
-				observeParents: true,
-				observeSlideChildren: true,
-				slidesPerView: 2,
-      			spaceBetween: 30,
-				centeredSlides: true,
-				navigation: {
-					nextEl: '.swiper-button-next',
-					prevEl: '.swiper-button-prev',
-				},
-				breakpoints: {
-					768: {
-						slidesPerView: 1,
-						navigation: false,
-					},
-					1500: {
-						slidesPerView: 2
-					}
-				}
-			});
-		});
+			// URL 파라미터에서 _idx 값 가져오기
+			const urlParams = new URLSearchParams(window.location.search);
+			// JSON 파일 로드
+			fetch("../../dev/json/baskin_robbins_nutrition_generated.json")
+				.then((response) => response.json())
+				.then((data) => {
+					const items = data.response.body.items.item;
+					const swiperContainer = document.querySelector(".product-view-top__container");
+					swiperContainer.innerHTML = "";
 
+					items.forEach((item) => {
+						const slide = document.createElement("div");
+						slide.classList.add("product-view-top__content", "product-view-top__content--center", "swiper-slide");
+
+						slide.innerHTML = `
+							<div class="product-view-top__box">
+								<div class="product-view-header">
+									<div class="product-view-header__container">
+										<div class="product-view-header__content">
+											<p class="product-view-header__category">ICECREAM</p>
+											<h2 class="product-view-header__title">
+												<span class="product-view-header__title--en">${item.English_Name}</span>
+												<span class="product-view-header__title--ko">${item.ice_name}</span>
+											</h2>
+											<p class="product-view-header__text">${item.Description}</p>
+										</div>
+									</div>
+								</div>
+								<div class="product-view-ingredients">
+									<ul class="product-view-ingredients__list">
+										${item.Ingredients.slice(0, 2).map(ingredient => `
+											<li class="product-view-ingredients__item">
+												<img src="${ingredient.Image}" alt="${ingredient.Name}" class="product-view-ingredients__image">
+												<span class="product-view-ingredients__name">${ingredient.Name}</span>
+											</li>
+										`).join("")}
+									</ul>
+								</div>
+								<div class="product-function">
+									<div class="product-function__number">
+										<input type="text" class="product-function__input" maxlength="2" title="수량">
+										<div class="product-function__counts">
+											<button type="button" class="product-function__up" aria-label="숫자 올리기"></button>
+											<button type="button" class="product-function__down" aria-label="숫자 내리기"></button>
+										</div>
+									</div>
+									<button type="button" class="product-function__cart">장바구니 담기</button>
+									<button type="button" class="product-function__buy">바로구매</button>
+								</div>
+							</div>
+							<div class="product-main-image">
+								<div class="product-view-hero product-view-hero--icecream product-view-hero--current">
+									<img src="${item.Image_URL}" alt="${item.ice_name}" class="product-view-hero__image">
+								</div>
+							</div>
+						`;
+
+						swiperContainer.appendChild(slide);
+					});
+				})
+				.catch(() => {
+					alert("아이스크림 정보를 불러오는 데 실패했습니다.");
+				});
+
+
+				
+			function icecreamSwiper() {
+				new Swiper('.swiper', {
+					observer:true,
+					observeParents: true,
+					observeSlideChildren: true,
+					slidesPerView: 2,
+					spaceBetween: 30,
+					centeredSlides: true,
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					},
+					breakpoints: {
+						768: {
+							slidesPerView: 1,
+							navigation: false,
+						},
+						1500: {
+							slidesPerView: 2
+						}
+					}
+				});
+			}
+			setTimeout(() => {
+				icecreamSwiper()
+			}, 200);
+		});
 	</script>
+	
 </body>
 </html>
