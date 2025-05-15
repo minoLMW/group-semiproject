@@ -106,7 +106,7 @@
 }
 .product-view-top__container {
 	position:relative;
-	min-width:var(--size-pc)
+	min-width:var(--size-pc);
 }
 .product-view-top__content--center {
 	display:flex;
@@ -399,6 +399,13 @@
 .product-view-event,.product-view-content__container {
 	width:98.5rem;
 	margin:9rem auto 0
+}
+.product-view-content__content {
+	text-align:center;
+}
+.product-view-content__image {
+	display:block;
+	margin:0 auto;
 }
 @media (max-width: 1500px) { 
     .swiper-button-next,
