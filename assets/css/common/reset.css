@@ -44,9 +44,17 @@ textarea {
 }
 
 @font-face {
+    font-family: Scoop;
+    font-weight: normal;
+    font-display: swap;
+    src: url(/assets/fonts/Scoopbeta-Regular.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: Scoop;
     font-weight: bold;
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-display: swap;
+    src: url(/assets/fonts/Scoop-Extrabold.ttf) format("truetype")
 }
 
 html {
@@ -54,8 +62,16 @@ html {
     -webkit-overflow-scrolling: auto;
 }
 
+@media (max-width: 360px) { 
+    body {
+        overflow-x:hidden;
+        overflow-y:scroll;
+    } 
+}
 @media (max-width: 320px) { html { font-size: 56.5%; } }
 @media (max-width: 280px) { html { font-size: 50%; } }
 
 
-body {color: var(--color-root); font-size: 1.5rem; line-height: 1.5; font-family: var(--word); letter-spacing: -0.025em; overflow-wrap: break-word; -webkit-text-size-adjust: none; overflow-x:hidden; overflow-y:scroll; background-color:var(--bg-root);}
+body {color: var(--color-root); font-size: 1.5rem; line-height: 1.5; font-family: var(--word); letter-spacing: -0.025em; overflow-wrap: break-word; -webkit-text-size-adjust: none; background-color:var(--bg-root);}
+
+legend {overflow:hidden !important; position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; white-space:nowrap !important; clip:rect(1px, 1px, 1px, 1px) !important; clip-path:inset(50%) !important;}
