@@ -1,0 +1,408 @@
+@charset "utf-8";
+
+.product-list {
+	width:var(--size-pc);
+	margin:9rem auto 0;
+}
+.product-list__list {
+	display:flex;
+	flex-wrap:wrap;
+	gap:2.5rem;
+}
+.product-list__item {
+	position:relative;
+	width:calc(20% - 2.5rem);
+}
+.product-list__item.-new {
+
+}
+.product-list__item.-new .product-list__link:before {
+	content:'';
+	position:absolute;
+	top:5rem;
+	left:4rem;
+	z-index:10;
+	width:6.7rem;
+	height:8.1rem;
+	background:url(https://www.baskinrobbins.co.kr/assets/images/common/icon_fom.png) no-repeat
+}
+.product-list__item.-icecream {
+
+}
+.product-list__link {
+	display:block;
+	overflow:hidden;
+	position:relative;
+	width:100%;
+	height:21rem;
+	border:1px solid #f3eee4;
+	border-radius:4.5rem;
+	box-sizing:border-box
+}
+.product-list__image {
+	position:absolute;
+	bottom:-100%;
+	left:50%;
+	max-width:80%
+}
+.product-list__hash {
+	position:absolute;
+	top:6rem;
+	left:0;
+	z-index:10;
+	width:100%;
+	padding:0 2rem;
+	color:#000;
+	font-weight:bold;
+	font-size:1.7rem;
+	text-align:center;
+	opacity:0;
+	transform:translateY(5rem);
+	box-sizing:border-box;
+	word-break:keep-all;
+}
+.product-list__hashitem {
+	display:inline-block;
+}
+.product-list__title {
+	display:block;
+	margin-top:2rem;
+	padding:0 2rem;
+	color:var(--font2);
+	font-weight:bold;
+	font-size:1.7rem;
+	text-align:center
+}
+.product-list__item.-icecream .product-list__image {
+	max-width:90%;
+	transform:translate(-50%,-78%);
+}
+.product-list__item:hover .product-list__link {
+	background:var(--product-list-color);
+	transition:background .3s ease
+}
+.product-list__item:hover .product-list__image {
+	transition:transform .4s ease
+}
+.product-list__item:hover .product-list__title,
+.product-list__item:hover .product-list__desc {
+	color:var(--product-list-color);
+	transition:color .4s ease
+}
+.product-list__item:hover .product-list__hash {
+	color:#fff;
+	transform:translateY(0);
+	transition:transform .4s ease,opacity .3s ease;
+	opacity:1
+}
+.product-list__item:hover .product-list__link:before {
+	opacity:0
+}
+.product-list__item.-icecream:hover .product-list__image {
+	transform:translate(-50%,-10rem)
+}
+.product-view-top {
+	padding-top:6rem
+}
+.product-view-top__container {
+	position:relative;
+	min-width:var(--size-pc)
+}
+.product-view-top__content--center {
+	display:flex;
+	flex-direction:row-reverse;
+	justify-content:center;
+	align-items:flex-end;
+}
+.product-view-top .swiper-button-prev {
+	left:calc(50% - 60rem);
+	width:6rem;
+	height:12rem;
+	color:var(--font1)
+}
+.product-view-top .swiper-button-next {
+	right:calc(50% - 60rem);
+	width:6rem;
+	height:12rem;
+	color:var(--font1)
+}
+.product-view-top__content--left {
+	left:-39rem
+}
+.product-view-top__content--right {
+	right:-39rem
+}
+.product-view-top__box {
+	padding-left:9.2rem
+}
+.product-view-top__link {
+	display:flex;
+	align-items:center;
+	position:absolute;
+	top:50%;
+	z-index:10;
+	height:3rem;
+	background-repeat:no-repeat;
+	color:#745e52;
+	font-weight:bold;
+	line-height:1
+}
+.product-view-top__content.swiper-slide .product-view-top__box {
+	display:none;
+}
+.product-view-top__content.swiper-slide-active .product-view-top__box {
+	display:block;
+}
+/* .product-view-top__content.swiper-slide-prev,
+.product-view-top__content.swiper-slide-next {
+	width:48.2rem !important
+} */
+.product-view-top__link--prev {
+	left:calc(50% - 75rem);
+	padding-left:2.4rem;
+	background:url(https://www.baskinrobbins.co.kr/assets/images/menu/btn_prev.png) no-repeat 0 50%;
+}
+.product-view-top__link--next {
+	right:calc(50% - 75rem);
+	padding-right:2.4rem;
+	background:url(https://www.baskinrobbins.co.kr/assets/images/menu/btn_next.png) no-repeat 100% 50%;
+}
+.product-view-header {
+	width:40rem;
+	padding-right:5rem;
+	box-sizing:border-box
+}
+.product-view-header__category {
+	color:#ff87a0;
+	font-family:var(--font-family-en);
+	font-weight:bold;
+	font-size:1.3rem;
+	line-height:1
+}
+.product-view-header__title {
+	margin-top:2rem
+}
+.product-view-header__title--en,
+.product-view-header__title--ko {
+	display:block;
+	font-weight:bold;
+	line-height:1.2
+}
+.product-view-header__title--en {
+	font-weight:var(--font-weight-sd-semibold);
+	font-family:var(--font-family-en);
+	font-size:2.2rem
+}
+.product-view-header__title--ko {
+	margin-top:1.6rem;
+	font-size:4.2rem
+}
+.product-view-header__text {
+	margin-top:1.6rem;
+	font-size:1.7rem;
+	line-height:1.3
+}
+.product-view-ingredients {
+	margin-top:3rem
+}
+.product-view-ingredients__list {
+	display:flex;
+}
+.product-view-ingredients__item {
+	width:5.6rem;
+	padding:1rem 0;
+	text-align:center
+}
+.product-view-ingredients__item + .product-view-ingredients__item {
+	margin-left:3.8rem
+}
+.product-view-ingredients__name {
+	display:block;
+	margin-top:1rem;
+	color:var(--font2);
+	font-weight:bold;
+	font-size:1.2rem;
+	text-align:center
+}
+.product-function {
+	display:flex;
+	gap:0 0.8rem;
+	margin-top:3rem
+}
+.product-function__number {
+	display:flex;
+	overflow:hidden;
+	width:7.4rem;
+	height:4.2rem;
+	border:1px solid #d3d3d3;
+	border-radius:0.8rem;
+}
+.product-function__input {
+	width:5rem;
+	font-size:1.6rem;
+	font-weight:bold;
+	text-align:center;
+}
+.product-function__counts {
+	display:flex;
+	flex-direction:column;
+	width:2.3rem;
+}
+.product-function__up {
+	position:relative;
+	width:2.3rem;
+	height:2rem;
+	border-bottom:1px solid #e6e6e6;
+	border-left:1px solid #e6e6e6;
+	background-color:#fff;
+}
+.product-function__down {
+	position:relative;
+	width:2.3rem;
+	height:2rem;
+	border-left:1px solid #e6e6e6;
+	background-color:#fff;
+}
+.product-function__up::after {
+	content:'';
+	position:absolute;
+	left:0.6rem;
+	top:0.8rem;
+	transform:rotate(45deg);
+	width:0.8rem;
+	height:0.8rem;
+	border-top:1px solid var(--font3);
+	border-left:1px solid var(--font3)
+}
+.product-function__down::after {
+	content:'';
+	position:absolute;
+	left:0.6rem;
+	top:0.4rem;
+	transform:rotate(-135deg);
+	width:0.8rem;
+	height:0.8rem;
+	border-top:1px solid var(--font3);
+	border-left:1px solid var(--font3)
+}
+.product-function__cart {
+	flex:1;
+	height:4.2rem;
+	border:1px solid var(--pink-color-1);
+	border-radius:0.8rem;
+	font-size:1.6rem;
+	font-weight:bold;
+	color:var(--font2);
+	background-color:#fff;
+}
+.product-function__cart:hover {
+	border:1px solid var(--point);
+	background-color:var(--point);
+	color:#fff;
+}
+.product-function__buy {
+	flex:1;
+	height:4.2rem;
+	border:1px solid var(--pink-color-3);
+	border-radius:0.8rem;
+	background-color:var(--pink-color-3);
+	font-size:1.6rem;
+	font-weight:bold;
+	color:#fff
+}
+.product-function__buy:hover {
+	background-color:var(--point);
+	border:1px solid var(--point);
+}
+.product-view-hero {
+	overflow:hidden;
+	position:relative;
+	width:48.2rem;
+	height:53.4rem;
+	border-radius:50% 50% 0 0;
+	background:url(https://www.baskinrobbins.co.kr/assets/images/menu/img_cone.png) no-repeat center bottom -6rem / 13rem auto
+}
+.product-view-hero--current .product-view-hero__image {
+	position:absolute;
+	bottom:-1.5rem;
+	left:50%;
+	transform:translate(-50%)
+}
+.product-view-hero--left .product-view-hero__image,
+.product-view-hero--right .product-view-hero__image {
+	width:16rem;
+	top:50%;
+	transform:translateY(-50%)
+}
+.product-view-hero--left .product-view-hero__image {
+	right:1rem
+}
+.product-view-hero--right .product-view-hero__image {
+	left:1rem
+}
+.product-view-hero__image {
+	position:absolute
+}
+.product-view__container {
+	max-width:var(--size-pc);
+	margin:0 auto;
+}
+.product-view-nutrition {
+	width:98.5rem;
+	margin:7.2rem auto 0;
+	padding-top:5.2rem;
+	border-top:1px solid #c6c1bf
+}
+.product-view-nutrition__title {
+	width:12rem;
+	color:var(--brown-color-1);
+	font-weight:bold;
+	font-size:2.3rem
+}
+.product-view-nutrition__container {
+	display:flex;
+	align-items:center
+}
+.product-view-nutrition__content {
+	width:calc(100% - 12rem);
+	display:flex;
+	justify-content:space-between;
+	gap:2rem
+}
+.product-view-nutrition__item {
+	flex-shrink:0
+}
+.product-view-nutrition__item:last-child {
+	flex-shrink:1
+}
+.product-view-nutrition__name,.product-view-nutrition__text {
+	text-align:center
+}
+.product-view-nutrition__name {
+	color:var(--brown-color-1)
+}
+.product-view-nutrition__text {
+	margin-top:1rem;
+	color:#ff3f67
+}
+.product-view-nutrition__description {
+	color:var(--brown-color-1);
+	font-weight:bold;
+	font-size:1.4rem;
+	text-decoration:underline;
+	padding-left:1.5rem;
+	text-indent:-1.5rem
+}
+.product-view-nutrition__description:first-of-type {
+	margin-top:2rem
+}
+.product-view-event,.product-view-content__container {
+	width:98.5rem;
+	margin:9rem auto 0
+}
+@media (max-width: 1500px) { 
+    .swiper-button-next,
+	.swiper-button-prev {
+        display:none;
+    } 
+}
