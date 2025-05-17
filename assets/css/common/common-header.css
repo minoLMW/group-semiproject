@@ -3,11 +3,6 @@ body {
   height: 100%;
   color: var(--text-color-1);
 }
-body.baskinrobbins-main {
-  background-image: url(https://www.baskinrobbins.co.kr/assets/images/main/bg_hero.jpg);
-  background-color: #fff0f3;
-}
-
 * {
   margin: 0;
   padding: 0;
