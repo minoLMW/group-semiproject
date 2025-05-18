@@ -55,7 +55,7 @@
 
 			let jsonData = [];
 
-			fetch("../../dev/json/baskin_robbins_nutrition_generated.json")
+			fetch("../../src/json/baskin_robbins_nutrition_generated.json")
 				.then((response) => response.json())
 				.then((data) => {
 					jsonData = data.response.body.items.item;
