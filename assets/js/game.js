@@ -57,6 +57,7 @@ function shuffle(array) {
 }
 
 function createBoard() {
+    // 게임 보드를 초기화하고, 현재 스테이지에 맞는 카드 쌍을 생성합니다.
     gameBoard.innerHTML = "";
     const pairs = stageSettings[currentStage].pairs;
     const stageSymbols = symbols.slice(0, pairs);
@@ -78,6 +79,7 @@ function createBoard() {
     gameBoard.style.justifyContent = "center";
 
     cards.forEach((symbol, index) => {
+        // 각 카드 요소를 생성하고, 앞면(아이스크림+로고)과 뒷면(로고) div를 추가합니다.
         const card = document.createElement("div");
         card.classList.add("card");
         card.dataset.symbol = symbol;
@@ -106,6 +108,7 @@ function createBoard() {
 }
 
 function startGame() {
+    // 게임을 시작할 때 초기화 작업을 수행하고, 3초 동안 모든 카드를 공개합니다.
     startScreen.style.display = "none";
     gameScreen.style.display = "block";
     currentStage = 1;
@@ -125,6 +128,7 @@ function startGame() {
 }
 
 function startTimer() {
+    // 남은 시간을 1초마다 갱신하며, 시간이 다 되면 게임을 종료합니다.
     timeLeft = stageSettings[currentStage].time;
     timerDisplay.textContent = `남은 시간: ${timeLeft}초`;
     
@@ -141,6 +145,7 @@ function startTimer() {
 }
 
 function nextStage() {
+    // 다음 스테이지로 넘어갈 때 보드와 상태를 초기화하고, 3초 동안 카드를 공개합니다.
     currentStage++;
     if (currentStage > totalStages) {
         endGame(true);
@@ -162,6 +167,7 @@ function nextStage() {
 }
 
 function giveUp() {
+    // 사용자가 게임을 포기할 때 점수를 잃고 게임을 초기화합니다.
     if (confirm("게임을 포기하시겠습니까?\n현재까지 획득한 점수를 잃게 됩니다.")) {
         clearInterval(timer);
         messageDisplay.textContent = `게임 포기! 현재 점수 ${score}점을 잃었습니다.`;
@@ -172,6 +178,7 @@ function giveUp() {
 }
 
 function updateHighScore() {
+    // 최고 점수를 갱신하고, localStorage에 저장합니다.
     if (score > highScore) {
         highScore = score;
         localStorage.setItem('highScore', highScore);
@@ -180,6 +187,7 @@ function updateHighScore() {
 }
 
 function endGame(success) {
+    // 스테이지 클리어 또는 실패 시 게임을 종료하고, 메시지와 점수를 처리합니다.
     gameStarted = false;
     document.querySelectorAll(".card").forEach(card => {
         card.style.pointerEvents = "none";
@@ -210,6 +218,7 @@ function endGame(success) {
 }
 
 function resetGame() {
+    // 게임을 완전히 초기화하여 처음 상태로 되돌립니다.
     gameBoard.innerHTML = "";
     flippedCards = [];
     matchedCount = 0;
@@ -227,6 +236,7 @@ function resetGame() {
 }
 
 gameBoard.addEventListener("click", e => {
+    // 카드 클릭 시 뒤집기, 매칭 검사, 성공/실패 처리 등 게임의 핵심 로직을 담당합니다.
     if (!gameStarted) return;
     const clicked = e.target.closest(".card");
     if (!clicked || clicked.classList.contains("flipped") || flippedCards.length >= 2) return;
@@ -258,6 +268,7 @@ gameBoard.addEventListener("click", e => {
 
 // 게임 시작 버튼 이벤트 리스너
 startButton.addEventListener("click", () => {
+    // 게임 보드를 생성하고 게임을 시작합니다.
     createBoard();
     startGame();
 });

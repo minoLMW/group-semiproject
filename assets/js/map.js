@@ -58,7 +58,7 @@ const optionData = {
 
 // 카카오맵 API가 로드된 후 실행될 초기화 함수
 function initializeMap() {
-	// kakao 객체를 사용하는 코드는 여기서 실행
+	// 카카오맵 객체를 생성하고, 기본 위치와 마커, 오버레이를 설정합니다.
 	const DEFAULT_POSITION = new kakao.maps.LatLng(37.498095, 127.02761);
 	
 	map = new kakao.maps.Map(document.getElementById('map'), {
@@ -76,6 +76,7 @@ function initializeMap() {
 
 // 커스텀 오버레이 설정
 function setupCustomOverlay(position) {
+	// 지도에 커스텀 오버레이(매장명 등)를 표시합니다.
 	const content = '<div class="customoverlay">' +
 		'  <a href="https://www.baskinrobbins.co.kr/store/map.php" target="_blank">' +
 		'    <span class="title">Minoos</span>' +
@@ -92,6 +93,7 @@ function setupCustomOverlay(position) {
 
 // 마커 생성 함수
 function createMarker(position, title) {
+	// 지정한 위치와 타이틀로 커스텀 마커를 생성합니다.
 	return new kakao.maps.Marker({
 		position: position,
 		title: title,
@@ -104,6 +106,7 @@ function createMarker(position, title) {
 
 // 커스텀 마커 이미지 생성 함수
 function createCustomMarker(imageUrl, size) {
+	// 커스텀 마커 이미지를 생성합니다.
 	return new kakao.maps.MarkerImage(
 		imageUrl,
 		new kakao.maps.Size(size.width, size.height),
@@ -116,6 +119,7 @@ function createCustomMarker(imageUrl, size) {
 
 // 도/시 선택 옵션 초기화
 function initializeProvinceSelect() {
+	// 도/시 선택 드롭다운을 초기화합니다.
 	const provinceSelect = document.getElementById('province-select');
 	
 	// 도/시 옵션 추가
@@ -126,12 +130,14 @@ function initializeProvinceSelect() {
 
 // 구/군 선택 옵션 초기화
 function initializeCitySelect() {
+	// 구/군 선택 드롭다운을 초기화합니다.
 	const citySelect = document.getElementById('city-select');
 	citySelect.disabled = true; // 초기에는 비활성화
 }
 
 // 도/시 선택 이벤트 처리
 function handleProvinceChange(event) {
+	// 도/시 선택 시 구/군 목록을 갱신하고, 해당 지역으로 지도를 이동합니다.
 	const province = event.target.value;
 	const citySelect = document.getElementById('city-select');
 	
@@ -147,6 +153,9 @@ function handleProvinceChange(event) {
 			citySelect.appendChild(new Option(district, district));
 		});
 
+		// 선택된 도/시의 중심 좌표로 지도 이동
+		moveMapToRegion(province);
+
 		// 선택된 도/시의 베스킨라빈스 매장 검색
 		searchBaskinRobbinsByLocation(province);
 	} else {
@@ -156,17 +165,35 @@ function handleProvinceChange(event) {
 
 // 구/군 선택 이벤트 처리
 function handleCityChange(event) {
+	// 구/군 선택 시 해당 지역으로 지도를 이동하고, 매장 검색을 수행합니다.
 	const province = document.getElementById('province-select').value;
 	const city = event.target.value;
 	
 	if (province && city) {
+		// 선택된 구/군의 중심 좌표로 지도 이동
+		moveMapToRegion(province, city);
 		// 선택된 구/군의 베스킨라빈스 매장 검색
 		searchBaskinRobbinsByLocation(province, city);
 	}
 }
 
+// 지역명(도/시, 구/군)으로 지도 이동 함수 추가
+function moveMapToRegion(province, city = '') {
+	// 선택한 지역명(도/시, 구/군)으로 지도를 이동시킵니다.
+	const geocoder = new kakao.maps.services.Geocoder();
+	const address = city ? `${province} ${city}` : province;
+	geocoder.addressSearch(address, function(result, status) {
+		if (status === kakao.maps.services.Status.OK) {
+			const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+			map.setCenter(coords);
+			map.setLevel(5); // 적당한 줌 레벨로 이동
+		}
+	});
+}
+
 // 이벤트 리스너 설정
 function setupEventListeners() {
+	// 검색, 도/시/구/군 선택, 지도 이동/확대/축소 등 각종 이벤트 리스너를 설정합니다.
 	// 검색 버튼 이벤트
 	document.getElementById('search-button').addEventListener('click', searchPlaces);
 	document.getElementById('search_keyword').addEventListener('keypress', e => {
@@ -185,12 +212,12 @@ function setupEventListeners() {
 		citySelect.addEventListener('change', handleCityChange);
 	}
 
-	// 지도 이동이 끝나면 해당 지역의 베스킨라빈스 매장 검색
+	// 지도 이동이 끝나면 해당 지역의 베스킨라빈스 매장 재검색
 	kakao.maps.event.addListener(map, 'dragend', function() {
 		searchBaskinRobbins();
 	});
 
-	// 지도 줌 레벨이 변경되면 해당 지역의 베스킨라빈스 매장 검색
+	// 지도 줌 레벨이 변경되면 해당 지역의 베스킨라빈스 매장 재검색
 	kakao.maps.event.addListener(map, 'zoom_changed', function() {
 		searchBaskinRobbins();
 	});
@@ -198,19 +225,57 @@ function setupEventListeners() {
 
 // 장소 검색 함수
 function searchPlaces() {
-	const keyword = document.getElementById('search_keyword').value;
-	if (!keyword.trim()) {
-		alert('검색어를 입력해주세요.');
+	// 검색어, 옵션, 지역을 조합하여 매장을 검색합니다.
+	const keyword = document.getElementById('search_keyword').value.trim();
+	// 옵션 값 추출 (OR 조건으로 연결)
+	const checkedOptions = Array.from(document.querySelectorAll('.store-map-option__input:checked'));
+	const optionValues = checkedOptions.map(cb => cb.nextElementSibling.textContent);
+	const optionQuery = optionValues.length > 0 ? optionValues.join(' OR ') : '';
+	// 현재 지도 중심 좌표
+	const center = map.getCenter();
+
+	// 모든 값이 없으면 경고
+	if (!keyword && !optionQuery && !center) {
+		alert('검색 지역, 옵션 값, 검색어 중 하나 이상이 필요합니다.');
 		return;
 	}
 
+	// 검색어와 옵션이 모두 없으면 지역만으로 검색
+	let searchQuery = '';
+	if (keyword && optionQuery) {
+		searchQuery = optionQuery + ' ' + keyword;
+	} else if (keyword) {
+		searchQuery = keyword;
+	} else if (optionQuery) {
+		searchQuery = optionQuery;
+	} else {
+		searchQuery = '';
+	}
+
+	// 장소 검색 객체 생성
 	const ps = new kakao.maps.services.Places();
-	ps.keywordSearch(keyword, handleSearchResult);
+	// 검색 실행 (검색어/옵션이 없으면 지역 중심으로만 검색)
+	if (searchQuery) {
+		ps.keywordSearch(searchQuery, handleSearchResult, {
+			location: center,
+			radius: 1000,
+			sort: kakao.maps.services.SortBy.DISTANCE
+		});
+	} else {
+		// 검색어/옵션이 모두 없으면 지역 중심으로만 검색
+		ps.keywordSearch('베스킨라빈스', handleSearchResult, {
+			location: center,
+			radius: 1000,
+			sort: kakao.maps.services.SortBy.DISTANCE
+		});
+	}
 }
 
 // 검색 결과 처리 함수
 function handleSearchResult(data, status) {
+	// 검색 결과를 받아서 마커와 리스트로 표시하고, 콘솔에 전체 정보를 출력합니다.
 	if (status === kakao.maps.services.Status.OK) {
+		console.log('검색된 매장 전체 정보:', data); // 검색된 매장 정보 콘솔 출력
 		displayPlaces(data);
 		adjustMapBounds(data);
 	} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
@@ -222,6 +287,7 @@ function handleSearchResult(data, status) {
 
 // 지도 범위 조정 함수
 function adjustMapBounds(data) {
+	// 검색 결과에 맞게 지도의 범위를 조정합니다.
 	if (data.length > 0) {
 		const bounds = new kakao.maps.LatLngBounds();
 		data.forEach(place => {
@@ -231,8 +297,17 @@ function adjustMapBounds(data) {
 	}
 }
 
+// 지도 바운드 내에 있는지 체크하는 함수 추가
+function isInBounds(place, map) {
+	// 해당 장소가 현재 지도 바운드 내에 있는지 확인합니다.
+	const bounds = map.getBounds();
+	const latlng = new kakao.maps.LatLng(place.y, place.x);
+	return bounds.contain(latlng);
+}
+
 // 지역 기반 베스킨라빈스 매장 검색
 function searchBaskinRobbinsByLocation(province, city = '') {
+	// 도/시, 구/군을 기준으로 베스킨라빈스 매장을 검색합니다.
 	// 기존 마커 제거
 	removeAllMarkers();
 
@@ -260,6 +335,7 @@ function searchBaskinRobbinsByLocation(province, city = '') {
 
 // 매장 목록 업데이트
 function updateStoreList(places) {
+	// 검색된 매장 리스트를 화면에 표시합니다.
 	const storeList = document.querySelector('.store-list');
 	storeList.innerHTML = ''; // 기존 목록 초기화
 
@@ -305,22 +381,21 @@ function updateStoreList(places) {
 
 // 검색 결과 표시 함수
 function displayPlaces(places) {
-	const bounds = new kakao.maps.LatLngBounds();
-
+	// 지도에 마커를 표시하고, 바운드 내 매장만 리스트에 보여줍니다.
+	const bounds = map.getBounds();
 	// 기존 마커 제거
 	removeAllMarkers();
 
-	places.forEach(place => {
+	// 바운드 내 장소만 필터링
+	const filteredPlaces = places.filter(place => isInBounds(place, map));
+
+	filteredPlaces.forEach(place => {
 		// 마커 생성
 		const marker = createMarker(
 			new kakao.maps.LatLng(place.y, place.x),
 			place.place_name
 		);
-		
-		// 마커를 지도에 표시
 		marker.setMap(map);
-		
-		// 마커를 배열에 저장
 		markers.push(marker);
 
 		// 커스텀 오버레이 생성
@@ -331,38 +406,26 @@ function displayPlaces(places) {
 				</a>
 			</div>
 		`;
-
 		const customOverlay = new kakao.maps.CustomOverlay({
 			position: new kakao.maps.LatLng(place.y, place.x),
 			content: content,
 			yAnchor: 1
 		});
-
-		// 마커 클릭 이벤트
 		kakao.maps.event.addListener(marker, 'click', function() {
 			customOverlay.setMap(map);
 		});
-
-		// 마커 마우스아웃 이벤트
 		kakao.maps.event.addListener(marker, 'mouseout', function() {
 			customOverlay.setMap(null);
 		});
-
-		// 검색된 장소의 위치를 bounds에 추가
-		bounds.extend(new kakao.maps.LatLng(place.y, place.x));
 	});
 
-	// 검색된 장소가 있는 경우에만 지도 범위 재설정
-	if (places.length > 0) {
-		map.setBounds(bounds);
-	}
-
-	// 매장 목록 업데이트
-	updateStoreList(places);
+	// 매장 목록 업데이트 (바운드 내 장소만)
+	updateStoreList(filteredPlaces);
 }
 
 // 모든 마커 제거 함수
 function removeAllMarkers() {
+	// 지도에서 모든 마커를 제거합니다.
 	markers.forEach(marker => marker.setMap(null));
 	markers = [];
 }
@@ -489,6 +552,7 @@ function createOptionSection(sectionId, sectionData) {
 
 // 베스킨라빈스 매장 검색 함수
 function searchBaskinRobbins() {
+	// 현재 지도 중심과 반경을 기준으로 베스킨라빈스 매장을 검색합니다.
 	const bounds = map.getBounds();
 	const swLatLng = bounds.getSouthWest();
 	const neLatLng = bounds.getNorthEast();
