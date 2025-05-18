@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>기억력 카드 게임</title>
+  <style>
+    body {
+      font-family: 'Arial';
+      text-align: center;
+      background: #f0f0f0;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    #timer, #score {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+    #game {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      grid-gap: 10px;
+      justify-content: center;
+      margin: 20px auto;
+      max-width: 440px;
+    }
+    .card {
+      width: 100px;
+      height: 100px;
+      background-color: #1e90ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 32px;
+      cursor: pointer;
+      border-radius: 8px;
+      user-select: none;
+    }
+    .flipped {
+      background-color: #fff;
+      color: #333;
+      cursor: default;
+    }
+    .matched {
+      background-color: #8bc34a;
+      cursor: default;
+    }
+    #message {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>기억력 카드 게임</h1>
+  <div id="timer">남은 시간: 30초</div>
+  <div id="score">점수: 0</div>
+  <div id="game"></div>
+  <div id="message"></div>
+
+  <script>
+    const gameBoard = document.getElementById("game");
+    const timerDisplay = document.getElementById("timer");
+    const scoreDisplay = document.getElementById("score");
+    const messageDisplay = document.getElementById("message");
+
+    const symbols = ["🍎", "🍌", "🍇", "🍉", "🍓", "🍒", "🥝", "🍑"];
+    let cards = [...symbols, ...symbols];
+    let flippedCards = [];
+    let matchedCount = 0;
+    let gameStarted = false;
+    let timer;
+    let timeLeft = 30;
+    let score = 0;
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function createBoard() {
+      shuffle(cards);
+      cards.forEach((symbol, index) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.dataset.symbol = symbol;
+        card.dataset.index = index;
+        card.textContent = symbol;
+        gameBoard.appendChild(card);
+      });
+    }
+
+    function startGame() {
+      setTimeout(() => {
+        document.querySelectorAll(".card").forEach(card => {
+          card.textContent = "";
+        });
+        gameStarted = true;
+        startTimer();
+      }, 3000);
+    }
+
+    function startTimer() {
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `남은 시간: ${timeLeft}초`;
+
+        if (timeLeft === 0) {
+          clearInterval(timer);
+          endGame(false);
+        }
+      }, 1000);
+    }
+
+    function endGame(success) {
+      gameStarted = false;
+      document.querySelectorAll(".card").forEach(card => {
+        card.style.pointerEvents = "none";
+      });
+
+      if (success) {
+        score = 100;
+        scoreDisplay.textContent = `점수: ${score}`;
+        messageDisplay.textContent = "🎉 성공! 짝을 다 맞췄어요!";
+      } else {
+        messageDisplay.textContent = "⏰ 시간 초과! 다시 도전해보세요!";
+      }
+    }
+
+    gameBoard.addEventListener("click", e => {
+      if (!gameStarted) return;
+      const clicked = e.target;
+      if (!clicked.classList.contains("card") || clicked.classList.contains("flipped") || flippedCards.length >= 2) return;
+
+      const symbol = clicked.dataset.symbol;
+      clicked.textContent = symbol;
+      clicked.classList.add("flipped");
+      flippedCards.push(clicked);
+
+      if (flippedCards.length === 2) {
+        const [first, second] = flippedCards;
+        if (first.dataset.symbol === second.dataset.symbol) {
+          first.classList.add("matched");
+          second.classList.add("matched");
+          matchedCount++;
+          flippedCards = [];
+
+          if (matchedCount === symbols.length) {
+            clearInterval(timer);
+            endGame(true);
+          }
+        } else {
+          setTimeout(() => {
+            first.textContent = "";
+            second.textContent = "";
+            first.classList.remove("flipped");
+            second.classList.remove("flipped");
+            flippedCards = [];
+          }, 800);
+        }
+      }
+    });
+
+    // 게임 시작 확인
+    window.onload = () => {
+      const startConfirmed = confirm("게임을 시작하시겠습니까?");
+      if (startConfirmed) {
+        createBoard();
+        startGame();
+      } else {
+        messageDisplay.textContent = "게임이 취소되었습니다.";
+      }
+    };
+  </script>
+</body>
+</html>
