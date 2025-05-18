@@ -1,13 +1,16 @@
-import fs from "fs/promises";
-// promises?
-import path from "path";
-import { fileURLToPath } from "url";
+import { getIcecreams } from "../db/database.mjs";
+import MongoDb from "mongodb";
+const ObjectID = MongoDb.ObjectId;
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const jsonFile = path.join(__dirname, "baskin.json");
-
-export async function loadIcecreamData() {
-    const raw = await fs.readFile(jsonFile,'utf8')
-    const arr = JSON.parse(raw)
-    return arr.map(({_idx,ice_name,Image_Url,Description})=>({_idx,ice_name,Image_Url,Description}))
+// 포스트 작성
+export async function createIce(_idx, ice_name, Image_URL, Description) {
+  console.log("_idx:", _idx);
+  const col = getIcecreams();
+  return col.insertOne({
+    idx: _idx,
+    name: ice_name,
+    description: Description,
+    image_url: Image_URL,
+  })
+  .then((result) => result.insertedId.toString());
 }

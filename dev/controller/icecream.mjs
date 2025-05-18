@@ -1,11 +1,13 @@
-import { getIcecreams } from "../db/database.mjs";
-import { loadIcecreamData } from "../data/icecream.mjs";
+import * as iceRepository from "../data/icecream.mjs";
 
-// 모든 포스트 / 해당 아이디에 대한 포스트를 가져오는 함수
-// query : key=value값
-export async function getIcecreams(req, res, next) {
-  const data = await loadIcecreamData();
-  const col = getIcecreams().collection("icecream");
-  await col.deleteMany({});
-//   const result = awiat col.insertMany(data)
+// 포스트를 생성하는 함수
+export async function createIce(req, res, next) {
+  const { _idx, ice_name, Image_URL, Description } = req.body;
+  const icecreams = await iceRepository.createIce(
+    _idx,
+    ice_name,
+    Image_URL,
+    Description
+  );
+  res.status(201).json(icecreams);
 }

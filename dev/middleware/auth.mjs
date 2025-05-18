@@ -30,23 +30,8 @@ export const isAuth = async (req, res, next) => {
     }
     console.log("user.id: ", user.id);
     console.log("user.userid :", user.userid);
-    req.id = user.id;
+    req.user = user;
     next();
   });
 };
 
-// idx -primary
-// 이미지 url
-// 제품명
-// 제품설명
-// 가격
-// 수량
-
-/* 아이스크림
-전체 가져오기
- idx로 가져오기*/
-
-/*장바구니 --로그인 토큰
-idx로 가져오기
-아이스크림 삭제하기
-*/
