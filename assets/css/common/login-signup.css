@@ -1,25 +1,3 @@
-body,
-button,
-h2 {
-  box-sizing: border-box;
-}
-a {
-  text-decoration: none;
-  color: #000;
-  font-weight: bold;
-}
-[role="button"],
-button {
-  display: block;
-  cursor: pointer;
-  color: #000;
-  border: 0;
-  background: transparent;
-}
-html,
-body {
-  min-height: 100%;
-}
 /* 상단 */
 .page-header {
   margin-top: 7rem;
@@ -76,11 +54,6 @@ body {
   width: 60rem;      
   margin: 1.5rem auto;
   padding-top: 2rem;
-}
-/* 로그인 컨테이너 */
-body {
-  font-family: var(--font--family-ko);
-  word-break: keep-all;
 }
 .login__container {
   width: var(--size-pc);
@@ -188,39 +161,6 @@ body {
 
 
 /*--------회원가입-----------*/
-
-:root {
-  --font-family-ko: 'Pretendard', sans-serif;
-  --font-family-scoop: 'Scoop', cursive;
-
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-bold: 700;
-
-  --color-primary: #f986bd;
-  --color-accent: #ff008a;
-  --color-border: #c6c1bf;
-  --color-bg-input: #f9f6f1;
-  --color-placeholder: #ac9181;
-  --color-button-bg: #000;
-  --color-button-text: #fff;
-  --color-text: #4b4b4b;
-
-  --size-pc: 93.75rem; /* 1500px */
-  --size-content: 98rem;
-  --size-form: 46rem;
-}
-
-body {
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-family-ko);
-  word-break: keep-all;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
 
 /* 공통 상단 */
 .page-header {

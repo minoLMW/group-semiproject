@@ -1,26 +1,5 @@
 @charset "utf-8";
 
-/*:root {
-  --font5: #ccc;
-  --font3: #666;
-  --point: #f26b5b;
-  --font-weight-bold: 700;
-  --size-pc: 93.75rem; }/* 1500px 기준 */
-
-html {
-  font-size: 16px; /* 1rem = 16px */
-}
-
-body,li, h3, p {
-    margin: 0;
-    padding: 0;
-    margin: 0;
-  padding: 0;
-  list-style: none;
-  color: var(--font5);
-   background-color: #111;
-}
-
 /* 전체 푸터 */
 .footer {
   max-width: 1500px;
