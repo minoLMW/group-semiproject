@@ -24,3 +24,15 @@
     /* inner content */
     --size-pc: 1500px;
 }
+
+/* :root {
+    --font-family: 'Pretendard', sans-serif;
+    --color-primary: #f986bd;
+    --color-accent: #ff008a;
+    --color-bg: #fff5f9;
+    --color-border: #e0e0e0;
+    --color-text: #333;
+    --color-subtext: #999;
+    --color-sale: #ff4c80;
+    --color-highlight: #fff;
+} */
