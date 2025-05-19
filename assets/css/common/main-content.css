@@ -255,6 +255,7 @@
 .main-promotion {
   overflow: hidden;
   padding: 90px 0 100px;
+  background-color: white;
 }
 
 .main-promotion__container {
@@ -508,6 +509,7 @@
 .main-br-benefit {
   overflow: hidden;
   padding-top: 120px;
+  background-color: white;
 }
 
 .main-br-benefit__container {
@@ -555,6 +557,7 @@
 
 .main-box {
   padding: 134px 0 170px;
+  background-color: white;
 }
 
 .main-box__container {
