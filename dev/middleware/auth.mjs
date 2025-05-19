@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import * as authRepository from "../data/auth.mjs";
-import {config} from "../config.mjs"
+import { config } from "../config.mjs";
 
 const AUTH_ERROR = { message: "인증에러" };
 
@@ -17,7 +17,7 @@ export const isAuth = async (req, res, next) => {
   console.log(token);
 
   //   검증(디코딩)
-  jwt.verify(token, config.jwt.secretKey , async (error, decoded) => {
+  jwt.verify(token, config.jwt.secretKey, async (error, decoded) => {
     if (error) {
       console.log("토큰 에러");
       return res.status(401).json(AUTH_ERROR);
@@ -34,3 +34,19 @@ export const isAuth = async (req, res, next) => {
     next();
   });
 };
+
+// idx -primary
+// 이미지 url
+// 제품명
+// 제품설명
+// 가격
+// 수량
+
+/* 아이스크림
+전체 가져오기
+ idx로 가져오기*/
+
+/*장바구니 --로그인 토큰
+idx로 가져오기
+아이스크림 삭제하기
+*/
