@@ -11,3 +11,10 @@
 @import url("common/main-content.css");
 @import url("common/map.css");
 @import url("common/game.css");
+
+/* 수정 브랜치 */
+@import url("person/MW.css");
+@import url("person/CY.css");
+@import url("person/HJ.css");
+@import url("person/YK.css");
+/* // */
