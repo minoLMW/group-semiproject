@@ -1,0 +1,888 @@
+@charset "utf-8";
+
+.main {
+  min-width: var(--size-pc);
+}
+
+.main__container {
+  position: relative;
+  width: var(--size-pc);
+  margin: 0 auto;
+}
+
+.main .swiper-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.main .swiper-pagination-bullet {
+  display: block;
+  position: relative;
+  width: 27px;
+  height: 32px;
+  margin: 0 7px;
+  cursor: pointer;
+}
+
+.main .swiper-pagination-bullet:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 100%;
+  background: #f3ccd5;
+  content: "";
+}
+
+.main .swiper-pagination-bullet-active:before {
+  top: 0;
+  left: 0;
+  width: 27px;
+  height: 32px;
+  margin: 0;
+  border-radius: 0;
+  background: url(https://www.baskinrobbins.co.kr/assets/images/main/icon_bullet_active.png)
+    no-repeat;
+}
+
+.main-header {
+  display: flex;
+  justify-content: center;
+}
+
+.main-header__title {
+  position: relative;
+  padding: 12px 16px 0;
+  text-align: center;
+}
+
+.main-header__title[lang="en"] {
+  font-family: var(--font-family-en);
+}
+
+.main-header__text {
+  color: #ff5484;
+  font-family: var(--font-family-scoop);
+  font-weight: 700;
+  font-size: 50px;
+  text-align: center;
+  line-height: 1;
+}
+
+.main-header__count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 100%;
+  background: #ff008a;
+  color: #fff;
+  font-weight: var(--font-weight-sd-medium);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.main-header__description {
+  margin-top: 8px;
+  color: #858585;
+  font-weight: var(--font-weight-sd-medium);
+  font-size: 14px;
+  text-align: center;
+}
+
+.main-hero {
+  overflow: hidden;
+  position: relative;
+  padding-top: 30px;
+  background: url(https://www.baskinrobbins.co.kr/assets/images/main/bg_hero.jpg)
+    repeat;
+}
+
+.main-hero__container {
+  display: flex;
+  justify-content: center;
+}
+
+.main-hero__content {
+  position: relative;
+  width: 1500px;
+  height: 880px;
+  padding-top: 95px;
+  box-sizing: border-box;
+}
+
+.main-hero__content:before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1500px;
+  height: 840px;
+  margin-left: -750px;
+  background: url(https://www.baskinrobbins.co.kr/assets/images/main/bg_hero_frame.png)
+    no-repeat left top/contain;
+  content: "";
+}
+
+.main-hero__box {
+  overflow: hidden;
+  width: 1455px;
+  height: 729px;
+  margin: 0 auto;
+  border-radius: 174px;
+}
+
+.main-hero__video {
+  width: 100%;
+  height: 100%;
+}
+
+.main-hero__link {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+}
+
+.main-hero__text {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
+  -webkit-clip-path: inset(0 0 99.9% 99.9%);
+  clip-path: inset(0 0 99.9% 99.9%);
+}
+
+.main-hero-list {
+  position: absolute;
+  top: 120px;
+  right: 50px;
+  z-index: 20;
+}
+
+.main-hero-list--start .main-hero-list__button {
+  opacity: 1;
+}
+
+.main-hero-list--active .main-hero-list__item {
+  transform: translate(0);
+  opacity: 1;
+}
+
+.main-hero-list--active .main-hero-list__button {
+  left: -28px;
+  transform: rotate(0);
+}
+
+.main-hero-list__content {
+  overflow: hidden;
+  border-radius: 0 0 170px;
+}
+
+.main-hero-list__list {
+  width: 308px;
+}
+
+.main-hero-list__item {
+  transform: translate(100%);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.main-hero-list__item:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.main-hero-list__item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.main-hero-list__item:nth-child(3) {
+  transition-delay: 0.4s;
+}
+
+.main-hero-list__item + .main-hero-list__item {
+  margin-top: 18px;
+}
+
+.main-hero-list__link {
+  display: block;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.main-hero-list__button {
+  position: absolute;
+  bottom: 28px;
+  left: 200px;
+  width: 56px;
+  height: 56px;
+  background: url(https://www.baskinrobbins.co.kr/assets/images/main/btn_hero_banner.png)
+    no-repeat;
+  transform: rotate(-45deg);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease, left 0.8s ease;
+  transition-delay: 0.4s;
+}
+
+.main-hero-list__button-text {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
+  -webkit-clip-path: inset(0 0 99.9% 99.9%);
+  clip-path: inset(0 0 99.9% 99.9%);
+}
+
+.main-promotion {
+  overflow: hidden;
+  padding: 90px 0 100px;
+  background-color: white;
+}
+
+.main-promotion__container {
+  overflow: hidden;
+  margin-top: 70px;
+}
+
+.main-promotion .swiper-slide {
+  width: 258px;
+  margin-right: 52px;
+}
+
+.main-promotion__link {
+  display: block;
+}
+
+.main-promotion__frame {
+  overflow: hidden;
+  border-radius: 100% 100% 0 0;
+}
+
+.main-promotion__content {
+  margin-top: 28px;
+}
+
+.main-promotion__date {
+  color: #d9bb97;
+  font-weight: var(--font-weight-sd-medium);
+  font-size: 12px;
+}
+
+.main-promotion__text {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #f0e7d9;
+  color: #666;
+  font-weight: var(--font-weight-sd-medium);
+  font-size: 14px;
+  line-height: 1.4285714286;
+}
+
+.main-new {
+  overflow: hidden;
+  padding: 110px 0 150px;
+  background: #ffe4ea;
+}
+
+.main-new__container {
+  position: relative;
+  margin-top: 40px;
+}
+
+.main-new .swiper {
+  width: 1168px;
+}
+
+.main-new .swiper-pagination {
+  margin-top: 16px;
+}
+
+.main-new__content {
+  width: 1168px;
+}
+
+.main-new__list {
+  margin: -3px;
+}
+
+.main-new__list:after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.main-new__item {
+  float: left;
+  width: 400px;
+  margin: 3px;
+  border-radius: 15px;
+  background: #fff;
+}
+
+.main-new__item:nth-child(1) {
+  width: 356px;
+}
+
+.main-new__link {
+  display: flex;
+  position: relative;
+}
+
+.main-new__frame {
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.main-new__box {
+  width: calc(100% - 220px);
+  padding: 30px 20px 86px;
+  box-sizing: border-box;
+}
+
+.main-new__title {
+  font-weight: var(--font-weight-sd-semibold);
+  font-size: 15px;
+  line-height: 1.3333333333;
+}
+
+.main-new__button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 46px;
+  height: 46px;
+  border-radius: 100%;
+  background: url(https://www.baskinrobbins.co.kr/assets/images/main/icon_new_button.png)
+    no-repeat center;
+}
+
+.main-play {
+  overflow: hidden;
+  position: relative;
+  height: 900px;
+  padding-top: 150px;
+  background: url(https://www.baskinrobbins.co.kr/assets/images/main/bg_play.jpg)
+    repeat-x;
+  box-sizing: border-box;
+}
+
+.main-play:before {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  width: 1689px;
+  height: 869px;
+  margin-left: -845px;
+  background: url(https://www.baskinrobbins.co.kr/assets/images/main/bg_play_light.png)
+    no-repeat;
+  content: "";
+}
+
+.main-play .main__container {
+  z-index: 10;
+}
+
+.main-play .main-header__text,
+.main-play .main-header__description {
+  color: #37110e;
+}
+
+.main-play__container {
+  margin-top: 16px;
+}
+
+.main-play__list {
+  display: flex;
+  justify-content: center;
+}
+
+.main-play__item {
+  margin: 0 8px;
+}
+
+.main-play__link {
+  display: block;
+}
+
+.main-play__image {
+  filter: drop-shadow(0px 20px 20px rgba(81, 30, 1, 0.2))
+    drop-shadow(0px 1px 2.85px rgba(81, 30, 1, 0.8));
+  transform: translateZ(0);
+}
+
+.main-be-better {
+  overflow: hidden;
+  padding: 146px 0;
+  background: #f4e8df;
+}
+
+.main-be-better__container {
+  position: relative;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.main-be-better__list {
+  display: inline-block;
+  margin: -5px;
+}
+
+.main-be-better__list:after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.main-be-better__item {
+  float: left;
+  width: 546px;
+  margin: 5px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.main-be-better__item--circle .main-be-better__title {
+  color: #ed5c61;
+}
+
+.main-be-better__item--link .main-be-better__title {
+  color: #00a000;
+}
+
+.main-be-better__item--farm .main-be-better__title {
+  color: #947244;
+}
+
+.main-be-better__item--dream .main-be-better__title {
+  color: #fd565a;
+}
+
+.main-be-better__item:nth-child(2n + 1) {
+  clear: both;
+}
+
+.main-be-better__link {
+  display: flex;
+}
+
+.main-be-better__frame {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.main-be-better__content {
+  padding: 36px 20px;
+}
+
+.main-be-better__title {
+  font-weight: var(--font-weight-sd-semibold);
+  font-size: 22px;
+  text-align: left;
+}
+
+.main-be-better__text {
+  margin-top: 10px;
+  color: #464646;
+  font-weight: var(--font-weight-sd-semibold);
+  font-size: 15px;
+}
+
+.main-br-benefit {
+  overflow: hidden;
+  padding-top: 120px;
+  background-color: white;
+}
+
+.main-br-benefit__container {
+  width: calc(50% + 750px);
+  margin-left: auto;
+  padding-top: 46px;
+}
+
+.main-br-benefit .swiper-slide {
+  width: 295px;
+}
+
+.main-br-benefit__link {
+  display: block;
+  position: relative;
+}
+
+.main-br-benefit__frame {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.main-br-benefit__box {
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+  width: 100%;
+}
+
+.main-br-benefit__title {
+  color: #000;
+  font-weight: var(--font-weight-sd-semibold);
+  font-size: 13px;
+  text-align: center;
+}
+
+.main-br-benefit__text {
+  margin-top: 6px;
+  color: #000;
+  font-weight: var(--font-weight-sd-semibold);
+  font-size: 13px;
+  text-align: center;
+  line-height: 1.3846153846;
+}
+
+.main-box {
+  padding: 134px 0 170px;
+  background-color: white;
+}
+
+.main-box__container {
+  display: flex;
+}
+
+.main-box .main-header {
+  justify-content: flex-start;
+}
+
+.main-box .main-header__container {
+  display: flex;
+}
+
+.main-box .main-header__title {
+  margin-top: -3px;
+  padding: 0;
+}
+
+.main-box .main-header__text {
+  font-size: 40px;
+}
+
+.main-box .main-header__description {
+  margin: 0 0 0 25px;
+  text-align: left;
+}
+
+.main-store .main-header {
+  padding-left: 80px;
+}
+
+.main-store__container {
+  margin-top: 24px;
+}
+
+.main-br-way {
+  margin-left: 134px;
+}
+
+.main-br-way__container {
+  margin-top: -74px;
+}
+
+/* swiper */
+.swiper,
+swiper-container {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+  display: block;
+}
+
+.swiper-vertical > .swiper-wrapper {
+  flex-direction: column;
+}
+
+.swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  transition-property: transform;
+  transition-timing-function: var(
+    --swiper-wrapper-transition-timing-function,
+    initial
+  );
+  box-sizing: content-box;
+}
+
+.swiper-android .swiper-slide,
+.swiper-wrapper {
+  transform: translateZ(0);
+}
+
+.swiper-horizontal {
+  touch-action: pan-y;
+}
+
+.swiper-vertical {
+  touch-action: pan-x;
+}
+
+.swiper-slide,
+swiper-slide {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+  display: block;
+}
+
+.swiper-slide-invisible-blank {
+  visibility: hidden;
+}
+
+.swiper-autoheight,
+.swiper-autoheight .swiper-slide {
+  height: auto;
+}
+
+.swiper-autoheight .swiper-wrapper {
+  align-items: flex-start;
+  transition-property: transform, height;
+}
+
+.swiper-backface-hidden .swiper-slide {
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.swiper-3d.swiper-css-mode .swiper-wrapper {
+  perspective: 1200px;
+}
+
+.swiper-3d .swiper-wrapper {
+  transform-style: preserve-3d;
+}
+
+.swiper-3d {
+  perspective: 1200px;
+}
+
+.swiper-3d .swiper-cube-shadow,
+.swiper-3d .swiper-slide,
+.swiper-3d .swiper-slide-shadow,
+.swiper-3d .swiper-slide-shadow-bottom,
+.swiper-3d .swiper-slide-shadow-left,
+.swiper-3d .swiper-slide-shadow-right,
+.swiper-3d .swiper-slide-shadow-top {
+  transform-style: preserve-3d;
+}
+
+.swiper-3d .swiper-slide-shadow,
+.swiper-3d .swiper-slide-shadow-bottom,
+.swiper-3d .swiper-slide-shadow-left,
+.swiper-3d .swiper-slide-shadow-right,
+.swiper-3d .swiper-slide-shadow-top {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.swiper-3d .swiper-slide-shadow {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.swiper-3d .swiper-slide-shadow-left {
+  background-image: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.swiper-3d .swiper-slide-shadow-right {
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.swiper-3d .swiper-slide-shadow-top {
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.swiper-3d .swiper-slide-shadow-bottom {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.swiper-css-mode > .swiper-wrapper {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.swiper-css-mode > .swiper-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.swiper-css-mode > .swiper-wrapper > .swiper-slide {
+  scroll-snap-align: start start;
+}
+
+.swiper-horizontal.swiper-css-mode > .swiper-wrapper {
+  scroll-snap-type: x mandatory;
+}
+
+.swiper-vertical.swiper-css-mode > .swiper-wrapper {
+  scroll-snap-type: y mandatory;
+}
+
+.swiper-css-mode.swiper-free-mode > .swiper-wrapper {
+  scroll-snap-type: none;
+}
+
+.swiper-css-mode.swiper-free-mode > .swiper-wrapper > .swiper-slide {
+  scroll-snap-align: none;
+}
+
+.swiper-centered > .swiper-wrapper:before {
+  content: "";
+  flex-shrink: 0;
+  order: 9999;
+}
+
+.swiper-centered > .swiper-wrapper > .swiper-slide {
+  scroll-snap-align: center center;
+  scroll-snap-stop: always;
+}
+
+.swiper-centered.swiper-horizontal
+  > .swiper-wrapper
+  > .swiper-slide:first-child {
+  -webkit-margin-start: var(--swiper-centered-offset-before);
+  margin-inline-start: var(--swiper-centered-offset-before);
+}
+
+.swiper-centered.swiper-horizontal > .swiper-wrapper::before {
+  height: 100%;
+  min-height: 1px;
+  width: var(--swiper-centered-offset-after);
+}
+
+.swiper-centered.swiper-vertical > .swiper-wrapper > .swiper-slide:first-child {
+  -webkit-margin-before: var(--swiper-centered-offset-before);
+  margin-block-start: var(--swiper-centered-offset-before);
+}
+
+.swiper-centered.swiper-vertical > .swiper-wrapper::before {
+  width: 100%;
+  min-width: 1px;
+  height: var(--swiper-centered-offset-after);
+}
+
+.swiper-lazy-preloader {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -21px;
+  margin-top: -21px;
+  z-index: 10;
+  transform-origin: 50%;
+  box-sizing: border-box;
+  border: 4px solid var(--swiper-preloader-color, var(--swiper-theme-color));
+  border-radius: 50%;
+  border-top-color: transparent;
+}
+
+.swiper-watch-progress .swiper-slide-visible .swiper-lazy-preloader,
+.swiper:not(.swiper-watch-progress) .swiper-lazy-preloader,
+swiper-container:not(.swiper-watch-progress) .swiper-lazy-preloader {
+  animation: swiper-preloader-spin 1s infinite linear;
+}
+
+.swiper-lazy-preloader-white {
+  --swiper-preloader-color: #fff;
+}
+
+.swiper-lazy-preloader-black {
+  --swiper-preloader-color: #000;
+}
+
+.main-promotion .swiper-pagination {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  opacity: 1;
+}
+
+.main-promotion .swiper-pagination-bullet {
+  display: block;
+  position: relative;
+  width: 27px;
+  height: 32px;
+  margin: 0 7px;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 0;
+  background: none;
+  opacity: 1;
+}
+
+.main-promotion .swiper-pagination-bullet:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 100%;
+  background: #f3ccd5;
+}
+
+.main-promotion .swiper-pagination-bullet-active:before {
+  top: 0;
+  left: 0;
+  width: 27px;
+  height: 32px;
+  margin: 0;
+  border-radius: 0;
+  background: url(../../imgs/img/icon_bullet_active.png) no-repeat;
+}
