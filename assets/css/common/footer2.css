@@ -1,21 +1,16 @@
 @charset "utf-8";
 
 
-/*html {
-  font-size: 16px;
-  */
-
 /*body,li, h3, p {
     margin: 0;
     padding: 0;
   list-style: none;
   color: var(--font5);
-   background-color: #111;
 }*/
 
 /* 전체 푸터 */
 .footer {
-  max-width: 1500px;
+  width: 100%;
   background-color: #111;
   padding: 2.5rem 1.25rem;
   font-size: 0.875rem;
@@ -25,7 +20,7 @@
 
 .inner {
   display: flex;
-  width: 100%;
+  max-width:1500px;
   margin: 0 auto;
 }
 
