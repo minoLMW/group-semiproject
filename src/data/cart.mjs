@@ -3,11 +3,11 @@ import MongoDb from "mongodb";
 
 const ObjectId = MongoDb.ObjectId;
 
-// 장바구니 전체 조회 (lookup + 총 가격 포함)
+// 장바구니 전체 조회
 export async function findAllByUser(useridx) {
   return getCarts()
     .aggregate([
-      { $match: { useridx } },
+      { $match: { useridx: String(useridx) } },
       {
         $lookup: {
           from: "icecreams",
@@ -19,7 +19,7 @@ export async function findAllByUser(useridx) {
       { $unwind: "$icecreamInfo" },
       {
         $addFields: {
-          totalPrice: { $multiply: ["$quantity", 4500] },
+          totalPrice: { $multiply: [{ $toInt: "$quantity" }, 4500] },
         },
       },
       {
@@ -30,7 +30,6 @@ export async function findAllByUser(useridx) {
           name: 1,
           iceidx: 1,
           quantity: 1,
-          createdAt: 1,
           totalPrice: 1,
           "icecreamInfo.name": 1,
           "icecreamInfo.image_url": 1,
@@ -43,14 +42,14 @@ export async function findAllByUser(useridx) {
 
 // 특정 아이스크림 조회 (사용자 기준)
 export async function findByUserAndIce(useridx, iceidx) {
-  return getCarts().findOne({ useridx, iceidx });
+  return getCarts().findOne({ useridx: String(useridx), iceidx: String(iceidx) });
 }
 
-// 수량 증가 or 새 항목 추가
-export async function increaseQuantityOrInsert(user, iceidx, quantity) {
+// 메뉴에서 수량 입력 후 장바구니 담기 (있으면 누적, 없으면 추가)
+export async function addOrIncrease(user, iceidx, quantity) {
   const parsedQty = Number(quantity);
   if (isNaN(parsedQty) || parsedQty <= 0) {
-    throw new Error("유효하지 않은 수량입니다");
+    throw new Error("수량이 유효하지 않습니다");
   }
 
   const existing = await findByUserAndIce(user.id, iceidx);
@@ -64,10 +63,10 @@ export async function increaseQuantityOrInsert(user, iceidx, quantity) {
   }
 
   const newItem = {
-    useridx: user.id,
+    useridx: String(user.id),
     userid: user.userid,
     name: user.name,
-    iceidx,
+    iceidx: String(iceidx),
     quantity: parsedQty,
     createdAt: new Date(),
   };
@@ -76,7 +75,7 @@ export async function increaseQuantityOrInsert(user, iceidx, quantity) {
   return getCarts().findOne({ _id: result.insertedId });
 }
 
-// 수량 수정 (0일 경우 자동 삭제)
+// 장바구니 페이지에서 수량 수정
 export async function updateQuantity(useridx, iceidx, quantity) {
   const parsedQty = Number(quantity);
   if (isNaN(parsedQty)) {
@@ -89,14 +88,25 @@ export async function updateQuantity(useridx, iceidx, quantity) {
   }
 
   const result = await getCarts().findOneAndUpdate(
-    { useridx, iceidx },
+    {
+      useridx: String(useridx),
+      iceidx: String(iceidx),
+    },
     { $set: { quantity: parsedQty } },
     { returnDocument: "after" }
   );
+
+  // 정상 실패 (대상 없음)
+  if (!result || !result.value) {
+    return null;
+  }
+
+  // 정상 업데이트 성공
   return result.value;
 }
 
+
 // 장바구니 항목 삭제
 export async function deleteByUserAndIce(useridx, iceidx) {
-  return getCarts().deleteOne({ useridx, iceidx });
+  return getCarts().deleteOne({ useridx: String(useridx), iceidx: String(iceidx) });
 }

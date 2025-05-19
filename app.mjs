@@ -5,6 +5,7 @@ import icecreamsRouter from "./src/router/icecream.mjs";
 import cartsRouter from "./src/router/cart.mjs";
 import { config } from "./config.mjs";
 import { connectDB } from "./src/db/database.mjs";
+import cors from "cors"
 
 const app = express();
 

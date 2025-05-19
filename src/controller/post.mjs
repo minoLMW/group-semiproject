@@ -30,14 +30,14 @@ export async function createPost(req, res, next) {
 
 // 포스트 수정하는 함수
 export async function updatePost(req, res, next) {
-  const id = req.param.id;
+  const id = req.params.id;
   const text = req.body.text;
   const title = req.body.title;
   const post = await postRepository.getById(id);
   if (!post) {
-    return res.status(404).json({ message: `${id}의 포스트가 없습니다.` });
+    return res.status(404).json({ message: "해당 게시글을 찾을 수 없습니다." });
   }
-  if (post.useridx !== id) {
+  if (post.useridx !== req.user.id) {
     return res.sendStatus(403);
   }
   const updated = await postRepository.update(id, text, title);
@@ -46,12 +46,12 @@ export async function updatePost(req, res, next) {
 
 // 포스트 삭제하는 함수
 export async function deletePost(req, res, next) {
-  const id = req.param.id;
+  const id = req.params.id;
   const post = await postRepository.getById(id);
   if (!post) {
-    return res.status(404).json({ message: `${id}의 포스트가 없습니다.` });
+    return res.status(404).json({ message: "해당 게시글을 찾을 수 없습니다." });
   }
-  if (post.useridx !== id) {
+  if (post.useridx !== req.user.id) {
     return res.sendStatus(403);
   }
   await postRepository.remove(id);
