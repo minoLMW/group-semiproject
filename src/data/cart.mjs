@@ -110,3 +110,8 @@ export async function updateQuantity(useridx, iceidx, quantity) {
 export async function deleteByUserAndIce(useridx, iceidx) {
   return getCarts().deleteOne({ useridx: String(useridx), iceidx: String(iceidx) });
 }
+
+// 장바구니 전체 구매
+export async function clearCart(useridx) {
+  return getCarts().deleteMany({ useridx: String(useridx) });
+}
