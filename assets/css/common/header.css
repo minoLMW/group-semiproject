@@ -1,6 +1,6 @@
 .main-header-bg {
   width: 100%;
-  height: 90px;
+  height: 5.625rem;           /* 90px */
   background-color: transparent;
   align-content: center;
   position: fixed;
@@ -13,7 +13,7 @@
 .header-box {
   width: 100%;
   height: 100%;
-  padding: 0 200px;
+  padding: 0 12.5rem;         /* 200px */
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -21,25 +21,25 @@
 }
 
 .main-logo {
-  width: 52px;
-  height: 60px;
+  width: 3.25rem;             /* 52px */
+  height: 3.75rem;            /* 60px */
   background-image: url(../../imgs/img/h_logo.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .menu-container {
-  width: 440px;
-  height: 60px;
+  width: 27.5rem;             /* 440px */
+  height: 3.75rem;            /* 60px */
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .main-menu {
-  margin-left: 42px;
-  width: calc(100% - 94px);
-  height: 60px;
+  margin-left: 2.625rem;      /* 42px */
+  width: calc(100% - 5.875rem); /* 94px */
+  height: 3.75rem;            /* 60px */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,7 +49,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 30px;
+  gap: 1.875rem;              /* 30px */
 }
 
 .menu-item {
@@ -57,7 +57,7 @@
   height: 100%;
   font-family: var(--font-family-en);
   font-weight: var(--font-weight-sd-heavy);
-  font-size: 13px;
+  font-size: 0.8125rem;       /* 13px */
   transition-duration: 0.3s;
   color: var(--text-color-1);
 }
@@ -68,32 +68,32 @@
 }
 
 .h-side-bar {
-  width: 262px;
-  height: 43px;
+  width: 16.375rem;            /* 262px */
+  height: 2.6875rem;           /* 43px */
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .h-search-container {
-  width: 186px;
-  height: 30px;
+  width: 11.625rem;            /* 186px */
+  height: 1.875rem;            /* 30px */
   border-bottom: 2px solid #e01682;
   cursor: pointer;
-  margin-right: 20px;
+  margin-right: 1.25rem;       /* 20px */
 }
 
 .search-btn {
-  width: 22px;
-  height: 24px;
-  background-image: url(../..//imgs/img/btn_search.png);
+  width: 1.375rem;             /* 22px */
+  height: 1.5rem;              /* 24px */
+  background-image: url(../../imgs/img/btn_search.png);
   background-repeat: no-repeat;
   background-size: contain;
   float: right;
 }
 
 .basekt-btn img {
-  width: 35px;
+  width: 2.1875rem;            /* 35px */
 }
 
 .main-header-bg.active .basekt-btn img {
@@ -101,10 +101,10 @@
 }
 
 .user-btn {
-  width: 32px;
-  height: 32px;
-  margin: 0 20px;
-  background-image: url(../..//imgs/img/btn_user_menu.png);
+  width: 2rem;                 /* 32px */
+  height: 2rem;                /* 32px */
+  margin: 0 1.25rem;           /* 20px */
+  background-image: url(../../imgs/img/btn_user_menu.png);
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -116,7 +116,7 @@
 }
 
 .main-header-bg.active .main-logo {
-  background-image: url(../..//imgs/img/h_logo_white.png);
+  background-image: url(../../imgs/img/h_logo_white.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -126,25 +126,15 @@
 }
 
 .main-header-bg.active .h-search-container {
-  width: 186px;
-  height: 30px;
   border-bottom: 2px solid #fff;
-  cursor: pointer;
 }
 
 .main-header-bg.active .search-btn {
-  background-image: url(../..//imgs/img/btn_search_white.png);
-  background-repeat: no-repeat;
-  background-size: contain;
+  background-image: url(../../imgs/img/btn_search_white.png);
 }
 
 .main-header-bg.active .user-btn {
-  width: 32px;
-  height: 32px;
-  margin: 0 20px;
-  background-image: url(../..//imgs/img/btn_user_menu_white.png);
-  background-repeat: no-repeat;
-  background-size: contain;
+  background-image: url(../../imgs/img/btn_user_menu_white.png);
 }
 
 .menu-item a:hover {
@@ -152,36 +142,34 @@
 }
 
 .top-menu-1 a:hover .sub-list-1 {
-  height: 150px;
+  height: 9.375rem;            /* 150px */
 }
 
 /* Sub menu 활성화 */
 .sub-menu-container {
   width: 100%;
-  height: 150px;
+  height: 9.375rem;            /* 150px */
   overflow: hidden;
   background-color: #fff;
   position: absolute;
-  top: 90px;
+  top: 5.625rem;               /* 90px */
   left: 0;
   z-index: 900;
 }
 
 .sub-menu-list {
-  width: 1300px;
+  width: 81.25rem;             /* 1300px */
   height: 100%;
   box-sizing: border-box;
-  /* background-color: rgb(130, 220, 220); */
-  margin-left: 300px;
+  margin-left: 18.75rem;       /* 300px */
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 3.125rem;               /* 50px */
   transition-duration: 0.3s;
 }
 
 .sub-menu-item {
   font-family: var(--font-family-ko);
-  /* font-weight: var(--font-weight-sd-medium); */
   font-weight: var(--font-weight-sd-semibold);
   font-size: 1.35rem;
   color: #000;
@@ -200,19 +188,16 @@
   display: none;
 }
 
-/* Menu */
-/* none css style */
-
 /* BR Play */
 .sub-list-2 .sub-item-1 {
-  width: 203px;
-  height: 90px;
+  width: 12.6875rem;           /* 203px */
+  height: 5.625rem;            /* 90px */
 }
 
 .sub-list-2 .sub-item-2 {
-  width: 410px;
-  height: 90px;
-  padding-left: 90px;
+  width: 25.625rem;            /* 410px */
+  height: 5.625rem;            /* 90px */
+  padding-left: 5.625rem;      /* 90px */
   border-left: 1px solid #777;
 }
 
@@ -221,18 +206,14 @@
 }
 
 .sub-list2-a {
-  margin-top: 20px;
+  margin-top: 1.25rem;         /* 20px */
 }
 
 .sub-list2-a a {
-  width: 50%;
   font-size: 1rem;
   color: #777;
-  margin-right: 30px;
+  margin-right: 1.875rem;      /* 30px */
 }
-
-/* BR Story */
-/* none css style */
 
 /* Delivery/Store */
 .sub-list-4 .sub-menu-item {
@@ -241,14 +222,14 @@
 }
 
 .sub-list-4 .sub-item-1 {
-  width: 717px;
-  height: 90px;
+  width: 44.8125rem;           /* 717px */
+  height: 5.625rem;            /* 90px */
 }
 
 .sub-list-4 .sub-item-2 {
-  width: 203px;
-  height: 90px;
-  padding-left: 90px;
+  width: 12.6875rem;           /* 203px */
+  height: 5.625rem;            /* 90px */
+  padding-left: 5.625rem;      /* 90px */
   border-left: 1px solid #777;
 }
 
@@ -257,19 +238,19 @@
 }
 
 .sub-list4-a {
-  margin-top: 20px;
+  margin-top: 1.25rem;         /* 20px */
 }
 
 .sub-list4-a a {
   font-size: 1rem;
   color: #777;
-  margin-right: 30px;
+  margin-right: 1.875rem;      /* 30px */
 }
 
 /* Search(검색창) 버튼 활성화 */
 .search-bg-container {
   width: 100%;
-  height: 240px;
+  height: 15rem;               /* 240px */
   position: absolute;
   top: 0;
   left: 0;
@@ -279,9 +260,9 @@
 }
 
 .search-box-1 {
-  width: 1300px;
+  width: 81.25rem;             /* 1300px */
   margin: 0 auto;
-  height: 90px;
+  height: 5.625rem;            /* 90px */
   display: flex;
   justify-content: end;
   align-items: center;
@@ -289,91 +270,10 @@
 
 .search-close-btn img {
   display: block;
-  width: 20px;
-  height: 20px;
-  margin-left: 10px;
-  padding: 10px;
+  width: 1.25rem;              /* 20px */
+  height: 1.25rem;             /* 20px */
+  margin-left: 0.625rem;       /* 10px */
+  padding: 0.625rem;           /* 10px */
   border-radius: 50%;
-  border: 2px solid #000;
-}
-
-.outline {
-  width: 100%;
-  box-sizing: border-box;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.search-box-2 {
-  width: 100%;
-  height: 149px;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.search-input-container {
-  margin: 0 auto;
-  width: 600px;
-  height: 70px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid var(--text-color-1);
-}
-
-.search-input {
-  width: 100%;
-  height: 100%;
-  border-style: none;
-  text-align: center;
-  font-size: 2.3rem;
-}
-
-.search-input::placeholder {
-  color: #a7a7a7;
-}
-
-.search-input:focus {
-  outline: none;
-}
-
-.search-input-reset-btn {
-  width: 30px;
-  height: 30px;
-  margin-right: 20px;
-}
-
-.search-submit-btn {
-  width: 35px;
-  height: 35px;
-}
-
-/* User(유저) 버튼 활성화 */
-.user-btn-container {
-  width: 80px;
-  height: 110px;
-  border-radius: 13px;
-  border: 2px solid #000;
-  background-color: #fff;
-  position: absolute;
-  top: 60px;
-  right: 195px;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  display: none;
-}
-
-.user-btn-list {
-  height: calc(100% / 3);
-  text-align: center;
-  font-size: 0.7rem !important;
-  font-size: var(--text-color-1);
-  font-weight: var(--font-weight-sd-heavy);
-  cursor: default;
-}
-
-.main-header-bg.active .user-btn-container {
-  border-color: #e01682;
+  border: 2px solid
 }
