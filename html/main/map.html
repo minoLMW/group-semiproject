@@ -1,168 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title></title>
+	<title>매장 찾기</title>
 	<link rel="stylesheet" href="../../assets/css/common-ui.css">
-    <style>
-       .map_Body {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-      }
-      .map_header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 1rem;
-        background-color: #fff;
-      }
-      .map_header .main-menu {
-        display: flex;
-        gap: 2rem;
-        margin-bottom: 1rem;
-      }
-      .map_header p {
-        margin: 0;
-        font-size: 16px;
-        cursor: pointer;
-      }
-      .map_header p:hover {
-        color: #e31b23;
-      }
-      .map_header .store-menu {
-        color: #e31b23;
-        font-weight: bold;
-      }
-          .map-container {
-        flex: 1;
-        position: relative;
-      }
-        #map {
-        width: 100%;
-        height:100%;
-       
-      }
-      .map_Main_Container {
-        display: flex;
-        flex: 1;
-      }
-      .sidebar {
-        width: 350px;
-        background-color: #f5f5f5;
-        padding: 1rem;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-      }
-      .filter-options {
-        margin-bottom: 1rem;
-      }
-      .filter-button {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        background-color: white;
-        font-size: 14px;
-      }
-      .filter-button:focus {
-        outline: none;
-        border-color: #e31b23;
-      }
-      #province-select, #city-select {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        background-color: white;
-        font-size: 14px;
-      }
-      #province-select:focus, #city-select:focus {
-        outline: none;
-        border-color: #e31b23;
-      }
-      .location-selects {
-        display: flex;
-        gap: 8px;
-      }
-      .location-selects select {
-        flex: 1;
-        margin-bottom: 8px;
-      }
-    </style>
+	<link rel="stylesheet" href="../../assets/css/common/map.css">
 </head>
-<body>
+<body class="baskinrobbins-main">
 	<div class="page">
 		<div class="container">
 			<header class="header">
 				<div class="inner">작업</div>
 			</header>
 
-            <div class="map_Body">
-                <div class="map_header">
-                    <div class="main-menu">
-                        <p>매장 찾기</p>
-                        <p>100 Flavor</p>
-                        <p>Work Shop</p>
-                        <p>Order</p>
-                    </div>
-                    <p class="store-menu">Store</p>
-                </div>
-            <div class="map_Main_Container">
-         <div class="sidebar">
-			<div class="search-container">
-                
-                <div class="filter-options">
-                    <select class="filter-button">옵션 </select>
-                    <div class="location-selects">
-                        <select class="filter-button" id="province-select">
-                            <option value="">도/시 선택</option>
-                        </select>
-                        <select class="filter-button" id="city-select">
-                            <option value="">구/군 선택</option>
-                        </select>
-                    </div>
-                </div>
-         
-                <div class="search-box">
-                    <input type="text" 
-                    id="search_keyword"
-                    class="search-input" placeholder="매장명">
-                    <button id="search-button" class="search-button">검색</button>
-                </div>
-        
-                
-        
-                <div class="store-list">
-                    <!-- 매장 카드 예시 -->
-                    <div class="store-card">
-                        <div class="store-name">배스킨라빈스 강남점</div>
-                        <div class="store-info">
-                            <p>서울특별시 강남구 테헤란로 123</p>
-                            <p>02-123-4567</p>
-                            <p>영업시간: 10:00 - 22:00</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="map-container">
-            <div id="map"></div>
-        </div>
-        </div>
-    </div>
+			<main class="contents">
+				<div class="content">
+					<div class="map_Body">
+						<div class="map_header">
+						  <div class="main-menu">
+							<p>매장 찾기</p>
+							<p>100 Flavor</p>
+							<p>Work Shop</p>
+							<p>Order</p>
+						  </div>
+						  <p class="store-menu">Store</p>
+						</div>
+						<div class="map_Main_Container">
+						  <div class="sidebar">
+							<div class="search-container">
+							  <div class="filter-options">
+								<div class="store-map-option">
+								  <button
+									type="button"
+									class="store-map__button store-map-option__button"
+								  >
+									옵션 선택
+								  </button>
+								  <div class="store-map-option__content">
+									<dl class="store-map-option__list">
+									  <!-- 옵션 내용은 JavaScript에서 동적으로 생성됩니다 -->
+									</dl>
+								  </div>
+								</div>
+			  
+								<div class="location-selects">
+								  <select class="filter-button" id="province-select">
+									<option value="">도/시 선택</option>
+								  </select>
+								  <select class="filter-button" id="city-select">
+									<option value="">구/군 선택</option>
+								  </select>
+								</div>
+							  </div>
+			  
+							  <div class="search-box">
+								<input
+								  type="text"
+								  id="search_keyword"
+								  class="search-input"
+								  placeholder="매장명"
+								/>
+								<button id="search-button" class="search-button">검색</button>
+							  </div>
+			  
+							  <div class="store-list">
+								<!-- 매장 카드 예시 -->
+								<div class="store-card">
+								  <div class="store-name">배스킨라빈스 강남점</div>
+								  <div class="store-info">
+									<p>서울특별시 강남구 테헤란로 123</p>
+									<p>02-123-4567</p>
+									<p>영업시간: 10:00 - 22:00</p>
+								  </div>
+								</div>
+							  </div>
+							</div>
+						  </div>
+						  <div class="map-container">
+							<div id="map"></div>
+						  </div>
+						</div>
+					  </div>
+				</div>
+			</main>
+
 			<footer class="footer">
 				<div class="inner">작업</div>
 			</footer>
 		</div>
 	</div>
+<<<<<<< HEAD
 	<script src="../../assets/js/common-ui.js"></script>
     <script src="../../assets/js/map.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"></script>
     
+=======
+	<script src="../../assets/libs/jquery/jquery-3.6.0.min.js"></script>
+	<script src="../../assets/js/common-ui.js"></script>
+    <script src="../../assets/js/map.js"></script>
+	<script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=706f2ef595d7fa1279baace1d65f8f18&libraries=services"
+    ></script>
+>>>>>>> 1c540ad4f9068ca819878c53fcf1769f186c4d05
 </body>
 </html>
