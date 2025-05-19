@@ -442,10 +442,6 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	font-size:1.4rem;
 	color:var(--font5);
 }
-.inner {
-	margin:auto;
-}
-
 /* 푸터 왼쪽 영역 */
 .SiteFooterLeftbox img {
 	width:9.1rem;
@@ -498,21 +494,17 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	text-decoration:underline;
 	color:var(--point);
 }
-
-/* 푸터 하단 영역 */
 .footer-bottom {
 	display:flex;
+	flex-wrap:nowrap;
 	justify-content:space-between;
 	align-items:center;
-	flex-wrap:nowrap;
-	padding-top:6rem;
-	padding-bottom:6rem;
+	width:100%;
+	padding:6rem 0;
 	border-top:1px solid var(--font3);
 	margin-top:4rem;
 	gap:4rem;
 }
-
-/*협력사 리스트*/
 .site-footer-relation__list {
 	display:flex;
 	gap:2rem;
@@ -542,10 +534,10 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	align-items:center;
 }
 .site-footer-sns__list img {
-	width:2.8rem;
 	height:2.8rem;
 	filter:brightness(1000%);
 }
+
 
 /* 패밀리 사이트 */
 .family-site-wrapper {
@@ -607,7 +599,8 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	padding-bottom:17rem;
 }
 .inner {
-	min-width:var(--size-inner);
+	max-width:var(--size-inner);
+	margin:auto;
 }
 .page-title {
 	margin-top:12rem;
@@ -645,16 +638,6 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	position:relative;
 	width:calc(20% - 2.5rem);
 }
-.product-list__item.-new .product-list__link:before {
-	content:'';
-	position:absolute;
-	top:2rem;
-	left:4rem;
-	z-index:10;
-	width:6.7rem;
-	height:8.1rem;
-	background:url(https://www.baskinrobbins.co.kr/assets/images/common/icon_fom.png) no-repeat
-}
 .product-list__link {
 	display:block;
 	overflow:hidden;
@@ -667,9 +650,10 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .product-list__image {
 	position:absolute;
-	bottom:-100%;
+	top:50%;
 	left:50%;
-	max-width:80%
+	transform:translate(-50%, -50%);
+	width:80%
 }
 .product-list__hash {
 	position:absolute;
@@ -689,6 +673,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .product-list__hashitem {
 	display:inline-block;
+	word-break:keep-all;
 }
 .product-list__title {
 	display:block;
@@ -698,10 +683,6 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	font-weight:bold;
 	font-size:1.7rem;
 	text-align:center
-}
-.product-list__item.-icecream .product-list__image {
-	max-width:90%;
-	transform:translate(-50%,-78%);
 }
 .product-list__item:hover .product-list__link {
 	background:var(--product-list-color);
@@ -725,7 +706,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	opacity:0
 }
 .product-list__item.-icecream:hover .product-list__image {
-	transform:translate(-50%,-10rem)
+	transform:translate(-50%, 0%);
 }
 .product-view-top {
 	padding-top:6rem
@@ -996,7 +977,8 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .product-view-nutrition__name,
 .product-view-nutrition__text {
-	text-align:center
+	text-align:center;
+	text-wrap:nowrap;
 }
 .product-view-nutrition__name {
 	color:var(--brown-color-1)
@@ -1021,7 +1003,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .product-view-nutrition__description:first-of-type {
 	margin-top:2rem
 }
-.product-view-event,.product-view-content__container {
+.product-view-content__container {
 	width:98.5rem;
 	margin:9rem auto 0
 }
@@ -1031,12 +1013,6 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .product-view-content__image {
 	display:block;
 	margin:0 auto;
-}
-@media (max-width:1500px) { 
-	.swiper-button-next,
-	.swiper-button-prev {
-		display:none;
-	} 
 }
 /* // product */
 
@@ -1140,6 +1116,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	justify-content:center;
 	width:100%;
 	height:5rem;
+	margin-top:3rem;
 	border-radius:2.5rem;
 }
 .login__buttons {
@@ -1157,7 +1134,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	margin-left:1rem;
 }
 .login__button--login {
-	margin-top:1px;
+	margin-top:1rem;
 	background:#000;
 	color:#fff;
 	font-weight:var(--font-weight-sd-bold);
@@ -1168,21 +1145,16 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .login__button-text {
 	display:flex;
+	justify-content:center;
 	align-items:center;
-	height:3.3rem;
-	padding:2.5rem 15rem;
+	width:42rem;
+	padding:1rem;
 	background-color:#ffffff;
 	border-radius:3rem;
 	border:0.2rem solid #0d1085;
 	color:#0d1085;
-	text-align:center;
 	font-weight:var(--font-weight-sd-bold);
 	font-size:1.8rem;
-}
-.login__button {
-	display:flex;
-	justify-items:center;
-	margin-top:3rem;
 }
 .login__link + .login__link {
 	margin-right:0;
@@ -1327,71 +1299,6 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	border-radius:2rem;
 	cursor:pointer;
 }
-
-/*@media (max-width:768px) {
-	html {
-	font-size:1.4rem; 
-	}
-
-	.page-header {
-	margin-top:3rem;
-	}
-
-	.page-header__title {
-	font-size:5rem;
-	line-height:1.2;
-	}
-
-	.page-header__text strong {
-	font-size:2.2rem;
-	margin-bottom:1rem;
-	}
-
-	.divider {
-	width:90%;
-	margin:1.2rem auto;
-	}
-
-	.signup-container {
-	padding:1.5rem 1rem;
-	}
-
-	.signup__inner {
-	width:100%;
-	padding:0 1rem;
-	}
-
-	.signup__label {
-	font-size:1.3rem;
-	margin-top:0.8rem;
-	}
-
-	.signup__input {
-	height:4.4rem;
-	font-size:1.5rem;
-	}
-
-	.signup__button {
-	font-size:1.6rem;
-	height:4.2rem;
-	}
-
-	.signup__button--submit {
-	font-size:1.5rem;
-	height:4.2rem;
-	}
-
-	.signup__phone-group input.signup__input {
-	padding-right:9rem;
-	}
-
-	.signup__button--certify {
-	height:3.2rem;
-	font-size:1.3rem;
-	padding:0 1rem;
-	right:1rem;
-	}*/
-
 /* // login-signup */
 
 /* post */
@@ -1763,7 +1670,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .main-header__text {
 	color:#ff5484;
-	font-family:var(--font-family-scoop);
+	font-family:scoop;
 	font-weight:700;
 	font-size:5rem;
 	text-align:center;
@@ -1811,19 +1718,18 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	box-sizing:border-box;
 }
 .main-hero__content:before {
+	content:"";
 	position:absolute;
 	top:0;
 	left:50%;
+	transform:translateX(-50%);
 	width:var(--size-inner);
 	height:84rem;
-	margin-left:-75rem;
-	background:url(https://www.baskinrobbins.co.kr/assets/images/main/bg_hero_frame.png)
-	no-repeat left top/contain;
-	content:"";
+	background:url(https://www.baskinrobbins.co.kr/assets/images/main/bg_hero_frame.png) no-repeat left top/contain;
 }
 .main-hero__box {
 	overflow:hidden;
-	width:145.5rem;
+	width:100%;
 	height:72.9rem;
 	margin:0 auto;
 	border-radius:17.4rem;
@@ -1840,6 +1746,10 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	z-index:10;
 	width:100%;
 	height:100%;
+}
+.main-hero__box img {
+	display:block;
+	width:100%;
 }
 .main-hero__text {
 	overflow:hidden;
@@ -3056,3 +2966,174 @@ swiper-container:not(.swiper-watch-progress) .swiper-lazy-preloader {
 	text-shadow:0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
 }
 /* // game */
+.width-textsss {background-color:black; color:#fff;}
+@media (max-width:1500px) { 
+	.width-textsss {background-color:red; color:#111;}
+	:root {
+		--size-inner:100%;
+		--padd-in:2.4rem
+	}
+	.footer-bottom {
+		flex-direction:column;
+		align-items:flex-start
+	}
+	.swiper-button-next,
+	.swiper-button-prev {
+		display:none;
+	}
+	.product-list__item {
+		width:calc(25% - 2.5rem)
+	}
+	.product-view-nutrition {
+		width:100%;
+		margin:7.2rem auto 0;
+		padding-top:5.2rem;
+		border-top:1px solid #c6c1bf
+	}
+	.product-view-nutrition__container {
+		flex-direction:column;
+	}
+	.product-view-nutrition {
+		padding:var(--padd-in);
+	}
+	.product-view-nutrition__title {
+		width:100%;
+		font-size:3rem;
+	}
+	.product-view-nutrition__content {
+		gap:0;
+		width:100%;
+		margin-top:5rem;
+	}
+	.product-view-nutrition__content::-webkit-scrollbar {
+		display: none;
+	}
+	.product-view-nutrition__item {
+		flex:1;
+	}
+	.product-view-nutrition__name {
+		margin-top:0;
+		padding:0.3rem 1rem;
+		border:1px solid #fff;
+		background-color:#e6e6e6;
+	}
+	.product-view-nutrition__text {
+		margin-top:0;
+		padding:0.3rem 1rem;
+		border-bottom:1px solid #d3d3d3;
+		background-color:#fff;
+	}
+	.login__content {
+		width:100%;
+	}
+}
+@media (max-width:768px) {
+	.width-textsss {background-color:yellow; color:#111;}
+	.page-header {
+		margin-top:3rem;
+	}
+	.page-header__title {
+		font-size:5rem;
+		line-height:1.2;
+	}
+	.page-header__text strong {
+		font-size:2.2rem;
+		margin-bottom:1rem;
+	}
+	.footer-bottom {
+		align-items:center;
+	}
+	.footer-right {
+		margin-left:0;
+	}
+	.page-title__text {
+		padding:var(--padd-in);
+	}
+	.divider {
+		width:90%;
+		margin:1.2rem auto;
+	}
+	.login__inner {
+		width:100%;
+		padding:0 var(--padd-in);
+	}
+	.login__buttons {
+		padding:1rem var(--padd-in)
+	}
+	.login__button-text {
+		width:100%;
+	}
+	.signup-container {
+		padding:1.5rem 1rem;
+	}
+	.signup__inner {
+		width:100%;
+		padding:0 1rem;
+	}
+	.signup__label {
+		font-size:1.3rem;
+		margin-top:0.8rem;
+	}
+	.signup__input {
+		height:4.4rem;
+		font-size:1.5rem;
+	}
+	.signup__button {
+		font-size:1.6rem;
+		height:4.2rem;
+	}
+	.signup__button--submit {
+		font-size:1.5rem;
+		height:4.2rem;
+	}
+	.signup__phone-group input.signup__input {
+		padding-right:9rem;
+	}
+	.signup__button--certify {
+		height:3.2rem;
+		font-size:1.3rem;
+		padding:0 1rem;
+		right:1rem;
+	}
+	.product-view-top__content--center {
+		flex-wrap:wrap;
+		flex-direction:column-reverse;
+	}
+	.product-main-image {
+		width:100%;
+		margin:0 auto;
+		padding:var(--padd-in);
+	}
+	.product-view-hero {
+		width:100%;
+		height:100vw
+	}
+	.product-view-top__box {
+		padding-left:0;
+	}
+	.product-view-top__content .product-view-top__box {
+		width:100%;
+		padding:var(--padd-in);
+	}
+	.product-list__item {
+		width:calc(50% - 2.5rem)
+	}
+	.product-view-content__container {
+		width:100%;
+		margin:9rem auto 0
+	}
+	.product-view-nutrition__content {
+		overflow-x:scroll;
+	}
+}
+@media (max-width:414px) { 
+	.width-textsss {background-color:green; color:#111;}
+	.site-footer-relation__list,
+	.footer-right {
+		flex-wrap:wrap;
+	}
+	.product-list__hash {
+		top:3rem;
+		padding:0;
+	}
+}
