@@ -19,7 +19,7 @@
 .product-list__item.-new .product-list__link:before {
 	content:'';
 	position:absolute;
-	top:5rem;
+	top:2rem;
 	left:4rem;
 	z-index:10;
 	width:6.7rem;
