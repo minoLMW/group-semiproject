@@ -7,4 +7,9 @@
 @import url("common/product.css");
 @import url("common/login-signup.css");
 @import url("common/history.css");
+<<<<<<< HEAD
 @import url("common/main-content.css");
+=======
+@import url("common/map.css");
+@import url("common/game.css");
+>>>>>>> 3f058a17ad63e5d4e5b765004f50d83691e88baf
