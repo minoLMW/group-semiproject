@@ -4,6 +4,21 @@
   padding: 0 20px;
 }
 
+.plaza-container__header__title {
+  text-align: center;
+  font-size: 4rem;
+  color: #ff4d72;
+  margin-top: 40px;
+}
+
+.plaza-container__content__text {
+  text-align: center;
+  font-size: 1.125rem;
+  color: #ff4d72;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
 .card {
   border-radius: 16px;
   padding: 30px;
@@ -11,25 +26,25 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.card.pink {
+.card--pink {
   background-color: #ffeef2;
   color: #ff4d72;
 }
 
-.card .subtext {
+.card__subtext {
   font-size: 14px;
   color: #777;
   margin-bottom: 10px;
 }
 
-.card h2 {
+.card__title {
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 20px;
 }
 
-.form-box input,
-.form-box textarea {
+.post-form__input,
+.post-form__textarea {
   width: 100%;
   margin-bottom: 10px;
   border: 1px solid #ddd;
@@ -39,7 +54,7 @@
   resize: none;
 }
 
-.form-box button {
+.post-form__button {
   background-color: #ff4d72;
   color: white;
   font-weight: bold;
