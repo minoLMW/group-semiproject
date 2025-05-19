@@ -37,7 +37,6 @@ export async function signup(req, res, next) {
     res.status(201).json({ message: "회원가입 완료!", token, userid });
   }
 }
-
 export async function login(req, res, next) {
   const { userid, password } = req.body;
   const user = await authRepository.findByUserid(userid);
