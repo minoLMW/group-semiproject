@@ -73,31 +73,35 @@ function createBoard() {
         case 4: rows = 4; cols = 4; break;
         case 5: rows = 4; cols = 5; break;
     }
-    gameBoard.style.gridTemplateColumns = `repeat(${cols}, 100px)`;
-    gameBoard.style.gridTemplateRows = `repeat(${rows}, 100px)`;
-    gameBoard.style.gap = "10px";
-    gameBoard.style.justifyContent = "center";
+
+    // 게임 보드 스타일 설정
+    gameBoard.style.display = 'grid';
+    gameBoard.style.gridTemplateColumns = `repeat(${cols}, 131.25px)`;
+    gameBoard.style.gridTemplateRows = `repeat(${rows}, 170.625px)`;
+    gameBoard.style.gap = '15px';
+    gameBoard.style.padding = '15px';
+    gameBoard.style.width = 'fit-content';
+    gameBoard.style.margin = '0 auto';
+    gameBoard.style.justifyContent = 'center';
+    gameBoard.style.alignItems = 'center';
 
     cards.forEach((symbol, index) => {
-        // 각 카드 요소를 생성하고, 앞면(아이스크림+로고)과 뒷면(로고) div를 추가합니다.
         const card = document.createElement("div");
         card.classList.add("card");
         card.dataset.symbol = symbol;
         card.dataset.index = index;
 
-        // 앞면(아이스크림+로고 배경)
         const front = document.createElement("div");
         front.className = "card-front";
         front.style.backgroundImage = `url('${symbol}'), url('../../assets/imgs/img/h_logo_2.png')`;
-        front.style.backgroundSize = '70% 70%, cover';
+        front.style.backgroundSize = '75% 75%, cover';
         front.style.backgroundPosition = 'center, center';
         front.style.backgroundRepeat = 'no-repeat, no-repeat';
 
-        // 뒷면(로고)
         const back = document.createElement("div");
         back.className = "card-back";
         back.style.backgroundImage = "url('../../assets/imgs/img/h_logo.png')";
-        back.style.backgroundSize = '60% 60%';
+        back.style.backgroundSize = '65% 65%';
         back.style.backgroundPosition = 'center';
         back.style.backgroundRepeat = 'no-repeat';
         
@@ -171,6 +175,7 @@ function giveUp() {
     if (confirm("게임을 포기하시겠습니까?\n현재까지 획득한 점수를 잃게 됩니다.")) {
         clearInterval(timer);
         messageDisplay.textContent = `게임 포기! 현재 점수 ${score}점을 잃었습니다.`;
+        updateHighScore();
         setTimeout(() => {
             resetGame();
         }, 2000);
@@ -186,39 +191,38 @@ function updateHighScore() {
     }
 }
 
-
 function endGame(success) {
-	// 스테이지 클리어 또는 실패 시 게임을 종료하고, 메시지와 점수를 처리합니다.
-	gameStarted = false;
-	document.querySelectorAll(".card").forEach(card => {
-		card.style.pointerEvents = "none";
-	});
+    // 스테이지 클리어 또는 실패 시 게임을 종료하고, 메시지와 점수를 처리합니다.
+    gameStarted = false;
+    document.querySelectorAll(".card").forEach(card => {
+        card.style.pointerEvents = "none";
+    });
 
-	if (success) {
-		if (currentStage === totalStages) {
-			score += 100;
-			scoreDisplay.textContent = `점수: ${score}`;
-			messageDisplay.textContent = "🎉 축하합니다! 모든 스테이지를 클리어했습니다!";
-			console.log(`게임 클리어! 최종 점수: ${score}점`); // 콘솔에 점수 표시
-			updateHighScore();
-		} else {
-			score += 100;
-			scoreDisplay.textContent = `점수: ${score}`;
-			messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득! 다음 스테이지로...`;
-			console.log(`스테이지 ${currentStage} 클리어! 현재 점수: ${score}점`); // 콘솔에 점수 표시
-			setTimeout(() => {
-				nextStage();
-			}, 2000);
-			return;
-		}
-	} else {
-		messageDisplay.textContent = "⏰ 시간 초과! 다시 도전해보세요!";
-		console.log(`게임 오버! 최종 점수: ${score}점`); // 콘솔에 점수 표시
-	}
+    if (success) {
+        if (currentStage === totalStages) {
+            score += 100;
+            scoreDisplay.textContent = `점수: ${score}`;
+            messageDisplay.textContent = "🎉 축하합니다! 모든 스테이지를 클리어했습니다!";
+            console.log(`게임 클리어! 최종 점수: ${score}점`);
+            updateHighScore();
+        } else {
+            score += 100;
+            scoreDisplay.textContent = `점수: ${score}`;
+            messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득! 다음 스테이지로...`;
+            console.log(`스테이지 ${currentStage} 클리어! 현재 점수: ${score}점`);
+            setTimeout(() => {
+                nextStage();
+            }, 2000);
+            return;
+        }
+    } else {
+        messageDisplay.textContent = "⏰ 시간 초과! 다시 도전해보세요!";
+        console.log(`게임 오버! 최종 점수: ${score}점`);
+    }
 
-	setTimeout(() => {
-		resetGame();
-	}, 3000);
+    setTimeout(() => {
+        resetGame();
+    }, 3000);
 }
 
 function resetGame() {
@@ -237,7 +241,17 @@ function resetGame() {
     timerDisplay.textContent = `남은 시간: ${stageSettings[currentStage].time}초`;
     scoreDisplay.textContent = `점수: ${score}`;
     messageDisplay.textContent = "";
+
+    // 최고 점수 업데이트
+    highScore = localStorage.getItem('highScore') || 0;
+    highScoreDisplay.textContent = highScore;
 }
+
+// 게임 시작 시 최고 점수 로드
+window.addEventListener('load', () => {
+    highScore = localStorage.getItem('highScore') || 0;
+    highScoreDisplay.textContent = highScore;
+});
 
 gameBoard.addEventListener("click", e => {
     // 카드 클릭 시 뒤집기, 매칭 검사, 성공/실패 처리 등 게임의 핵심 로직을 담당합니다.
