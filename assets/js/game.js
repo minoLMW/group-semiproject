@@ -73,31 +73,35 @@ function createBoard() {
         case 4: rows = 4; cols = 4; break;
         case 5: rows = 4; cols = 5; break;
     }
-    gameBoard.style.gridTemplateColumns = `repeat(${cols}, 100px)`;
-    gameBoard.style.gridTemplateRows = `repeat(${rows}, 100px)`;
-    gameBoard.style.gap = "10px";
-    gameBoard.style.justifyContent = "center";
+
+    // 게임 보드 스타일 설정
+    gameBoard.style.display = 'grid';
+    gameBoard.style.gridTemplateColumns = `repeat(${cols}, 131.25px)`;
+    gameBoard.style.gridTemplateRows = `repeat(${rows}, 170.625px)`;
+    gameBoard.style.gap = '15px';
+    gameBoard.style.padding = '15px';
+    gameBoard.style.width = 'fit-content';
+    gameBoard.style.margin = '0 auto';
+    gameBoard.style.justifyContent = 'center';
+    gameBoard.style.alignItems = 'center';
 
     cards.forEach((symbol, index) => {
-        // 각 카드 요소를 생성하고, 앞면(아이스크림+로고)과 뒷면(로고) div를 추가합니다.
         const card = document.createElement("div");
         card.classList.add("card");
         card.dataset.symbol = symbol;
         card.dataset.index = index;
 
-        // 앞면(아이스크림+로고 배경)
         const front = document.createElement("div");
         front.className = "card-front";
         front.style.backgroundImage = `url('${symbol}'), url('../../assets/imgs/img/h_logo_2.png')`;
-        front.style.backgroundSize = '80% 80%, cover';
+        front.style.backgroundSize = '75% 75%, cover';
         front.style.backgroundPosition = 'center, center';
         front.style.backgroundRepeat = 'no-repeat, no-repeat';
 
-        // 뒷면(로고)
         const back = document.createElement("div");
         back.className = "card-back";
         back.style.backgroundImage = "url('../../assets/imgs/img/h_logo.png')";
-        back.style.backgroundSize = '60% 60%';
+        back.style.backgroundSize = '65% 65%';
         back.style.backgroundPosition = 'center';
         back.style.backgroundRepeat = 'no-repeat';
         
@@ -185,6 +189,8 @@ function updateHighScore() {
         highScoreDisplay.textContent = highScore;
     }
 }
+
+
 function endGame(success) {
 	// 스테이지 클리어 또는 실패 시 게임을 종료하고, 메시지와 점수를 처리합니다.
 	gameStarted = false;

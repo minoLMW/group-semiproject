@@ -1,6 +1,7 @@
 // 전역 변수 선언
 let map;
 let markers = []; // 마커를 저장할 배열
+let currentOverlay = null; // 함수 상단에 추가
 
 // 상수 정의 (kakao 객체를 사용하지 않는 부분)
 const MAP_CONFIG = {
@@ -34,6 +35,7 @@ const provinceData = {
 const optionData = {
 	storeType: {
 		name: '매장타입',
+		type: 'radio',  // 라디오 버튼 타입 추가
 		options: [
 			{ value: 'A', text: 'BR 31' },
 			{ value: 'B', text: '100flavor' },
@@ -41,6 +43,7 @@ const optionData = {
 	},
 	serviceInfo: {
 		name: '제공 서비스',
+		type: 'checkbox',  // 체크박스 타입 명시
 		options: [
 			{ value: 'A', text: '주차' },
 			{ value: 'B', text: '배달' },
@@ -85,14 +88,20 @@ function setupCustomOverlay(position) {
 }
 
 // 마커 생성 함수
-function createMarker(position, title) {
-	// 지정한 위치와 타이틀로 커스텀 마커를 생성합니다.
+function createMarker(position, title, markerType = 'default') {
+	// markerType이 'flavor'면 100flavor 마커 이미지 사용
+	let markerImagePath = '../../assets/imgs/img/map_marker.png';
+	let markerSize = MAP_CONFIG.MARKER_SIZE;
+	if (markerType === 'flavor') {
+		markerImagePath = '../../assets/imgs/img/icon_map_marker_flavors.png';
+		markerSize = { width: 118, height: 138 }; // 실제 이미지 크기에 맞게 조정
+	}
 	return new kakao.maps.Marker({
 		position: position,
 		title: title,
 		image: createCustomMarker(
-			MAP_CONFIG.MARKER_IMAGE,
-			MAP_CONFIG.MARKER_SIZE
+			markerImagePath,
+			markerSize
 		)
 	});
 }
@@ -218,50 +227,21 @@ function setupEventListeners() {
 
 // 장소 검색 함수
 function searchPlaces() {
-	// 검색어, 옵션, 지역을 조합하여 매장을 검색합니다.
 	const keyword = document.getElementById('search_keyword').value.trim();
-	// 옵션 값 추출 (OR 조건으로 연결)
-	const checkedOptions = Array.from(document.querySelectorAll('.store-map-option__input:checked'));
-	const optionValues = checkedOptions.map(cb => cb.nextElementSibling.textContent);
-	const optionQuery = optionValues.length > 0 ? optionValues.join(' OR ') : '';
-	// 현재 지도 중심 좌표
 	const center = map.getCenter();
 
-	// 모든 값이 없으면 경고
-	if (!keyword && !optionQuery && !center) {
-		alert('검색 지역, 옵션 값, 검색어 중 하나 이상이 필요합니다.');
-		return;
-	}
-
-	// 검색어와 옵션이 모두 없으면 지역만으로 검색
-	let searchQuery = '';
-	if (keyword && optionQuery) {
-		searchQuery = optionQuery + ' ' + keyword;
-	} else if (keyword) {
-		searchQuery = keyword;
-	} else if (optionQuery) {
-		searchQuery = optionQuery;
-	} else {
-		searchQuery = '';
-	}
+	// 검색어가 없으면 기본 검색어 '베스킨라빈스' 사용
+	const searchQuery = keyword || '베스킨라빈스';
 
 	// 장소 검색 객체 생성
 	const ps = new kakao.maps.services.Places();
-	// 검색 실행 (검색어/옵션이 없으면 지역 중심으로만 검색)
-	if (searchQuery) {
-		ps.keywordSearch(searchQuery, handleSearchResult, {
-			location: center,
-			radius: 1000,
-			sort: kakao.maps.services.SortBy.DISTANCE
-		});
-	} else {
-		// 검색어/옵션이 모두 없으면 지역 중심으로만 검색
-		ps.keywordSearch('베스킨라빈스', handleSearchResult, {
-			location: center,
-			radius: 1000,
-			sort: kakao.maps.services.SortBy.DISTANCE
-		});
-	}
+	
+	// 검색 실행
+	ps.keywordSearch(searchQuery, handleSearchResult, {
+		location: center,
+		radius: 1000,
+		sort: kakao.maps.services.SortBy.DISTANCE
+	});
 }
 
 // 검색 결과 처리 함수
@@ -403,45 +383,93 @@ function updateStoreList(places) {
 
 // 검색 결과 표시 함수
 function displayPlaces(places) {
-	// 지도에 마커를 표시하고, 바운드 내 매장만 리스트에 보여줍니다.
 	const bounds = map.getBounds();
-	// 기존 마커 제거
 	removeAllMarkers();
 
-	// 바운드 내 장소만 필터링
+	// 100flavor 선택 여부 확인 (마커 타입 결정용)
+	const flavorRadio = document.querySelector('.store-map-option__input[type="radio"][value="B"]');
+	const isFlavorSelected = flavorRadio && flavorRadio.checked;
+
+	// 선택된 서비스 옵션 가져오기
+	const selectedServices = Array.from(document.querySelectorAll('.store-map-option__input[type="checkbox"]:checked'))
+		.map(checkbox => {
+			const value = checkbox.value;
+			const text = checkbox.nextElementSibling.textContent;
+			return { value, text };
+		});
+
 	const filteredPlaces = places.filter(place => isInBounds(place, map));
 
+	let currentOverlay = null;
+
 	filteredPlaces.forEach(place => {
-		// 마커 생성
+		const markerType = isFlavorSelected ? 'flavor' : 'default';
 		const marker = createMarker(
 			new kakao.maps.LatLng(place.y, place.x),
-			place.place_name
+			place.place_name,
+			markerType
 		);
 		marker.setMap(map);
 		markers.push(marker);
 
-		// 커스텀 오버레이 생성
+		// 서비스 정보 HTML 생성
+		const servicesHTML = selectedServices.length > 0 
+			? `
+				<div style="margin-top:10px;padding-top:10px;border-top:1px solid #eee;">
+					<div style="font-weight:600;color:#333;margin-bottom:5px;">제공 서비스</div>
+					<div style="display:flex;flex-wrap:wrap;gap:5px;">
+						${selectedServices.map(service => `
+							<span style="
+								background-color:#f8f8f8;
+								color:#e31b6d;
+								padding:3px 8px;
+								border-radius:4px;
+								font-size:12px;
+								border:1px solid #e31b6d;
+							">${service.text}</span>
+						`).join('')}
+					</div>
+				</div>
+			`
+			: '';
+
+		// 커스텀 오버레이 내용 (매장 상세 정보 + 서비스)
 		const content = `
-			<div class="store-map-field__container">
-				<a href="${place.place_url}" target="_blank">
-					<span class="title">${place.place_name}</span>
-				</a>
+			<div class="store-map-field__container" style="min-width:220px;max-width:320px;background:#fff;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);border:2px solid #e31b6d;">
+				<div class="store-map-field__header" style="background:#fff;padding:15px;border-radius:8px 8px 0 0;">
+					<div class="store-map-field__title" style="margin:0;font-size:18px;color:#333;">${place.place_name}</div>
+				</div>
+				<div class="store-map-field__content" style="padding:0 15px 15px;background:#fff;border-radius:0 0 8px 8px;">
+					<div style="margin:5px 0;"><b>주소:</b> ${place.road_address_name || place.address_name}</div>
+					<div style="margin:5px 0;"><b>전화번호:</b> ${place.phone || '없음'}</div>
+					${servicesHTML}
+					<div style="margin-top:10px;text-align:right;">
+						<a href="${place.place_url}" target="_blank" style="color:#e31b6d;text-decoration:none;font-size:13px;">
+							카카오맵 링크 보기 >
+						</a>
+					</div>
+				</div>
 			</div>
 		`;
+
 		const customOverlay = new kakao.maps.CustomOverlay({
 			position: new kakao.maps.LatLng(place.y, place.x),
 			content: content,
 			yAnchor: 1
 		});
+
 		kakao.maps.event.addListener(marker, 'click', function() {
+			if (currentOverlay) currentOverlay.setMap(null);
 			customOverlay.setMap(map);
+			currentOverlay = customOverlay;
 		});
-		kakao.maps.event.addListener(marker, 'mouseout', function() {
-			customOverlay.setMap(null);
+
+		kakao.maps.event.addListener(map, 'click', function() {
+			if (currentOverlay) currentOverlay.setMap(null);
+			currentOverlay = null;
 		});
 	});
 
-	// 매장 목록 업데이트 (바운드 내 장소만)
 	updateStoreList(filteredPlaces);
 }
 
@@ -454,16 +482,16 @@ function removeAllMarkers() {
 
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', function() {
-	// 옵션 내용 초기화
+	// 메뉴 클릭 이벤트 설정
+	setupMenuClickEvents();
+	
+	// 기존 코드 유지
 	createOptionContent();
 	setupOptionButtonEvents();
 	setupCheckboxEvents();
-
-	// 도/시, 구/군 선택 옵션 초기화
 	initializeProvinceSelect();
 	initializeCitySelect();
 
-	// 카카오맵 API가 로드된 후 초기화 함수 실행
 	if (typeof kakao !== 'undefined') {
 		kakao.maps.load(function() {
 			initializeMap();
@@ -473,6 +501,48 @@ document.addEventListener('DOMContentLoaded', function() {
 		console.error('Kakao Maps API is not loaded');
 	}
 });
+
+// 메뉴 클릭 이벤트 설정 함수
+function setupMenuClickEvents() {
+	const menuItems = document.querySelectorAll('.main-menu p');
+	
+	menuItems.forEach(item => {
+		item.addEventListener('click', function() {
+			// 현재 활성화된 메뉴의 active 클래스 제거
+			document.querySelector('.main-menu p.active')?.classList.remove('active');
+			
+			// 클릭된 메뉴에 active 클래스 추가
+			this.classList.add('active');
+			
+			// 메뉴에 따른 추가 동작 처리
+			const menuType = this.getAttribute('data-menu');
+			handleMenuClick(menuType);
+		});
+	});
+}
+
+// 메뉴 클릭 처리 함수
+function handleMenuClick(menuType) {
+	// 각 메뉴 타입에 따른 동작 처리
+	switch(menuType) {
+		case 'store':
+			// 매장 찾기 관련 동작
+			console.log('매장 찾기 메뉴 클릭');
+			break;
+		case 'flavor':
+			// 100 Flavor 관련 동작
+			console.log('100 Flavor 메뉴 클릭');
+			break;
+		case 'workshop':
+			// Workshop 관련 동작
+			console.log('Workshop 메뉴 클릭');
+			break;
+		case 'order':
+			// Order 관련 동작
+			console.log('Order 메뉴 클릭');
+			break;
+	}
+}
 
 // 옵션 내용 초기화 및 이벤트 설정
 function initializeOptionContent() {
@@ -509,6 +579,15 @@ function setupCheckboxEvents() {
 	if (checkboxes && optionButton) {
 		checkboxes.forEach(checkbox => {
 			checkbox.addEventListener('change', () => {
+				// 매장 타입(라디오) 선택 시 다른 옵션들 초기화
+				if (checkbox.name === 'storeType') {
+					checkboxes.forEach(cb => {
+						if (cb.name !== 'storeType') {
+							cb.checked = false;
+						}
+					});
+				}
+
 				const selectedOptions = Array.from(checkboxes)
 					.filter(cb => cb.checked)
 					.map(cb => cb.nextElementSibling.textContent);
@@ -554,7 +633,7 @@ function createOptionSection(sectionId, sectionData) {
 		label.className = 'store-map-option__label';
 
 		const input = document.createElement('input');
-		input.type = 'checkbox';
+		input.type = sectionData.type || 'checkbox';  // 타입에 따라 input 타입 설정
 		input.className = 'store-map-option__input';
 		input.name = sectionId;
 		input.value = option.value;
@@ -593,6 +672,7 @@ function searchBaskinRobbins() {
 				console.log(`- 주소: ${place.road_address_name || place.address_name}`);
 				console.log(`- 전화번호: ${place.phone || '없음'}`);
 				console.log(`- 좌표: (${place.y}, ${place.x})`);
+				console.log(`- 카카오맵 링크: ${place.place_url}`);
 			});
 
 			displayPlaces(data);
