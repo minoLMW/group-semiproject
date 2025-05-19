@@ -149,6 +149,132 @@
     color: #333;
 }
 
+
+.store-map-field__container {
+    position: relative;
+    padding: 39px 0 21px
+}
+
+.store-map-field__container:before {
+    position: absolute;
+    bottom: 1px;
+    left: 50%;
+    z-index: 10;
+    width: 20px;
+    height: 21px;
+    margin-left: -10px;
+    background: url(/assets/images/store/map/bg_arrow.png) no-repeat;
+    content: ""
+}
+
+.store-map-field__inner {
+    position: relative;
+    width: 528px;
+    padding: 0 30px 30px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--pink-color-3);
+    border-radius: 20px;
+    background: #fff;
+    text-align: center
+}
+
+.store-map-field__header {
+    display: inline-block;
+    padding: 0 20px;
+    margin: -40px 0 0;
+    text-align: center
+}
+
+.store-map-field__header:before {
+    display: block;
+    width: calc(100% + 40px);
+    height: 40px;
+    margin-left: -20px;
+    border-style: solid;
+    border-width: 1px 1px 0 1px;
+    border-color: var(--pink-color-3);
+    border-radius: 16px 16px 0 0;
+    background: #fff;
+    box-sizing: border-box;
+    content: ""
+}
+
+.store-map-field__title {
+    position: relative;
+    z-index: 10;
+    margin-top: -25px;
+    color: var(--brown-color-2);
+    font-weight: var(--font-weight-sd-medium);
+    font-size: 28px
+}
+
+.store-map-field__type {
+    display: block;
+    position: relative;
+    z-index: 10;
+    padding-bottom: 2px;
+    color: var(--pink-color-3);
+    font-weight: var(--font-weight-sd-bold);
+    font-size: 15px
+}
+
+.store-map-field__close {
+    position: absolute;
+    top: 5px;
+    right: 5px
+}
+
+.store-map-field__content {
+    margin-top: 24px
+}
+
+.store-map-field__table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+.store-map-field__table th {
+    padding: 8px 0;
+    color: var(--brown-color-3);
+    font-weight: var(--font-weight-sd-medium);
+    font-size: 15px;
+    text-align: right;
+    vertical-align: top
+}
+
+.store-map-field__table td {
+    padding: 8px 0 8px 15px;
+    color: #000;
+    font-weight: var(--font-weight-sd-medium);
+    font-size: 15px;
+    text-align: left;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all
+}
+
+.store-map-promotion {
+    position: absolute;
+    top: 0;
+    right: -346px;
+    z-index: 10;
+    width: 346px;
+    height: 100%;
+    transition: right .3s ease
+}
+
+.store-map-promotion--active {
+    right: 0
+}
+
+.store-map-promotion--active .store-map-promotion__button-text {
+    background-image: url(/assets/images/store/map/icon_close.png)
+}
+
+
+
 /* 위치 선택 스타일 */
 .location-selects {
     display: flex;

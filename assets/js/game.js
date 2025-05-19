@@ -185,36 +185,38 @@ function updateHighScore() {
         highScoreDisplay.textContent = highScore;
     }
 }
-
 function endGame(success) {
-    // 스테이지 클리어 또는 실패 시 게임을 종료하고, 메시지와 점수를 처리합니다.
-    gameStarted = false;
-    document.querySelectorAll(".card").forEach(card => {
-        card.style.pointerEvents = "none";
-    });
+	// 스테이지 클리어 또는 실패 시 게임을 종료하고, 메시지와 점수를 처리합니다.
+	gameStarted = false;
+	document.querySelectorAll(".card").forEach(card => {
+		card.style.pointerEvents = "none";
+	});
 
-    if (success) {
-        if (currentStage === totalStages) {
-            score += 100;
-            scoreDisplay.textContent = `점수: ${score}`;
-            messageDisplay.textContent = "🎉 축하합니다! 모든 스테이지를 클리어했습니다!";
-            updateHighScore();
-        } else {
-            score += 100;
-            scoreDisplay.textContent = `점수: ${score}`;
-            messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득! 다음 스테이지로...`;
-            setTimeout(() => {
-                nextStage();
-            }, 2000);
-            return;
-        }
-    } else {
-        messageDisplay.textContent = "⏰ 시간 초과! 다시 도전해보세요!";
-    }
+	if (success) {
+		if (currentStage === totalStages) {
+			score += 100;
+			scoreDisplay.textContent = `점수: ${score}`;
+			messageDisplay.textContent = "🎉 축하합니다! 모든 스테이지를 클리어했습니다!";
+			console.log(`게임 클리어! 최종 점수: ${score}점`); // 콘솔에 점수 표시
+			updateHighScore();
+		} else {
+			score += 100;
+			scoreDisplay.textContent = `점수: ${score}`;
+			messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득! 다음 스테이지로...`;
+			console.log(`스테이지 ${currentStage} 클리어! 현재 점수: ${score}점`); // 콘솔에 점수 표시
+			setTimeout(() => {
+				nextStage();
+			}, 2000);
+			return;
+		}
+	} else {
+		messageDisplay.textContent = "⏰ 시간 초과! 다시 도전해보세요!";
+		console.log(`게임 오버! 최종 점수: ${score}점`); // 콘솔에 점수 표시
+	}
 
-    setTimeout(() => {
-        resetGame();
-    }, 3000);
+	setTimeout(() => {
+		resetGame();
+	}, 3000);
 }
 
 function resetGame() {

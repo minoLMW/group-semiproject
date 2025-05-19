@@ -65,19 +65,12 @@ function initializeMap() {
 		center: DEFAULT_POSITION,
 		level: MAP_CONFIG.DEFAULT_LEVEL
 	});
-
-	// 초기 마커 설정
-	const centerMarker = createMarker(DEFAULT_POSITION, '현재 위치');
-	centerMarker.setMap(map);
-
-	// 커스텀 오버레이 설정
-	setupCustomOverlay(DEFAULT_POSITION);
 }
 
 // 커스텀 오버레이 설정
 function setupCustomOverlay(position) {
 	// 지도에 커스텀 오버레이(매장명 등)를 표시합니다.
-	const content = '<div class="customoverlay">' +
+	const content = '<div class="store-map-field__container">' +
 		'  <a href="https://www.baskinrobbins.co.kr/store/map.php" target="_blank">' +
 		'    <span class="title">Minoos</span>' +
 		'  </a>' +
@@ -273,14 +266,31 @@ function searchPlaces() {
 
 // 검색 결과 처리 함수
 function handleSearchResult(data, status) {
-	// 검색 결과를 받아서 마커와 리스트로 표시하고, 콘솔에 전체 정보를 출력합니다.
 	if (status === kakao.maps.services.Status.OK) {
-		console.log('검색된 매장 전체 정보:', data); // 검색된 매장 정보 콘솔 출력
+		console.log('=== 검색 결과 정보 ===');
+		console.log(`총 검색된 장소 수: ${data.length}개`);
+		console.log('검색된 장소 상세 정보:');
+		data.forEach((place, index) => {
+			console.log(`\n[${index + 1}번째 장소]`);
+			console.log(`- 장소명: ${place.place_name}`);
+			console.log(`- 주소: ${place.road_address_name || place.address_name}`);
+			console.log(`- 전화번호: ${place.phone || '없음'}`);
+			console.log(`- 좌표: (${place.y}, ${place.x})`);
+		});
+		
 		displayPlaces(data);
 		adjustMapBounds(data);
+		
+		// 검색 결과 수 업데이트
+		const markerCount = document.getElementById('marker-count');
+		markerCount.textContent = data.length;
 	} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+		console.log('검색 결과가 없습니다.');
 		alert('검색 결과가 존재하지 않습니다.');
+		const markerCount = document.getElementById('marker-count');
+		markerCount.textContent = '0';
 	} else if (status === kakao.maps.services.Status.ERROR) {
+		console.log('검색 중 오류가 발생했습니다.');
 		alert('검색 중 오류가 발생했습니다.');
 	}
 }
@@ -307,27 +317,39 @@ function isInBounds(place, map) {
 
 // 지역 기반 베스킨라빈스 매장 검색
 function searchBaskinRobbinsByLocation(province, city = '') {
-	// 도/시, 구/군을 기준으로 베스킨라빈스 매장을 검색합니다.
-	// 기존 마커 제거
 	removeAllMarkers();
 
-	// 검색어 설정
 	const keyword = city ? `${province} ${city} 베스킨라빈스` : `${province} 베스킨라빈스`;
-
-	// 장소 검색 객체 생성
+	console.log(`검색 키워드: ${keyword}`);
+	
 	const ps = new kakao.maps.services.Places();
 
-	// 장소 검색 실행
 	ps.keywordSearch(keyword, (data, status) => {
 		if (status === kakao.maps.services.Status.OK) {
-			// 검색 결과 표시
-			displayPlaces(data);
+			console.log('=== 지역 검색 결과 정보 ===');
+			console.log(`검색 지역: ${keyword}`);
+			console.log(`총 검색된 장소 수: ${data.length}개`);
+			console.log('검색된 장소 상세 정보:');
+			data.forEach((place, index) => {
+				console.log(`\n[${index + 1}번째 장소]`);
+				console.log(`- 장소명: ${place.place_name}`);
+				console.log(`- 주소: ${place.road_address_name || place.address_name}`);
+				console.log(`- 전화번호: ${place.phone || '없음'}`);
+				console.log(`- 좌표: (${place.y}, ${place.x})`);
+			});
 
-			// 매장 목록 업데이트
+			displayPlaces(data);
 			updateStoreList(data);
+			
+			const markerCount = document.getElementById('marker-count');
+			markerCount.textContent = data.length;
 		} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+			console.log(`검색 결과가 없습니다. (검색 지역: ${keyword})`);
 			alert('해당 지역에 매장이 없습니다.');
+			const markerCount = document.getElementById('marker-count');
+			markerCount.textContent = '0';
 		} else if (status === kakao.maps.services.Status.ERROR) {
+			console.log('검색 중 오류가 발생했습니다.');
 			alert('검색 중 오류가 발생했습니다.');
 		}
 	});
@@ -400,7 +422,7 @@ function displayPlaces(places) {
 
 		// 커스텀 오버레이 생성
 		const content = `
-			<div class="customoverlay">
+			<div class="store-map-field__container">
 				<a href="${place.place_url}" target="_blank">
 					<span class="title">${place.place_name}</span>
 				</a>
@@ -552,36 +574,48 @@ function createOptionSection(sectionId, sectionData) {
 
 // 베스킨라빈스 매장 검색 함수
 function searchBaskinRobbins() {
-	// 현재 지도 중심과 반경을 기준으로 베스킨라빈스 매장을 검색합니다.
 	const bounds = map.getBounds();
-	const swLatLng = bounds.getSouthWest();
-	const neLatLng = bounds.getNorthEast();
-	
-	// 현재 지도 영역의 중심점 좌표
 	const center = map.getCenter();
-	
-	// 장소 검색 객체 생성
 	const ps = new kakao.maps.services.Places();
-	
-	// 검색어 설정 (현재 지도 영역의 중심점 기준)
 	const keyword = '베스킨라빈스';
 	
-	// 장소 검색 실행
+	console.log('=== 현재 지도 영역 검색 ===');
+	console.log(`검색 키워드: ${keyword}`);
+	console.log(`검색 중심점: (${center.getLat()}, ${center.getLng()})`);
+
 	ps.keywordSearch(keyword, (data, status) => {
 		if (status === kakao.maps.services.Status.OK) {
-			// 검색 결과 표시
+			console.log(`총 검색된 장소 수: ${data.length}개`);
+			console.log('검색된 장소 상세 정보:');
+			data.forEach((place, index) => {
+				console.log(`\n[${index + 1}번째 장소]`);
+				console.log(`- 장소명: ${place.place_name}`);
+				console.log(`- 주소: ${place.road_address_name || place.address_name}`);
+				console.log(`- 전화번호: ${place.phone || '없음'}`);
+				console.log(`- 좌표: (${place.y}, ${place.x})`);
+			});
+
 			displayPlaces(data);
+			
+			const markerCount = document.getElementById('marker-count');
+			markerCount.textContent = data.length;
 		} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-			// 검색 결과가 없는 경우
+			console.log('검색 결과가 없습니다.');
 			const storeList = document.querySelector('.store-list');
 			storeList.innerHTML = '<div class="store-card"><div class="store-info">검색된 매장이 없습니다.</div></div>';
+			
+			const markerCount = document.getElementById('marker-count');
+			markerCount.textContent = '0';
 		} else if (status === kakao.maps.services.Status.ERROR) {
+			console.log('검색 중 오류가 발생했습니다.');
 			alert('검색 중 오류가 발생했습니다.');
 		}
 	}, {
 		location: center,
-		radius: 1000, // 반경 1km
+		radius: 3000,
 		sort: kakao.maps.services.SortBy.DISTANCE
 	});
 }
+
+
 
