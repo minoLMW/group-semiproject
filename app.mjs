@@ -3,6 +3,7 @@ import authRouter from "./src/router/auth.mjs";
 import postsRouter from "./src/router/post.mjs";
 import icecreamsRouter from "./src/router/icecream.mjs";
 import cartsRouter from "./src/router/cart.mjs";
+import gameRouter from "./src/router/game.mjs"
 import { config } from "./config.mjs";
 import { connectDB } from "./src/db/database.mjs";
 import cors from "cors"
@@ -17,6 +18,7 @@ app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
 app.use("/icecreams", icecreamsRouter);
 app.use("/carts", cartsRouter);
+app.use("/game",gameRouter)
 
 app.use((req, res, next) => {
   res.sendStatus(404);
