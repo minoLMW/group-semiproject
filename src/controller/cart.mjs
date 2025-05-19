@@ -3,7 +3,7 @@ import * as cartRepository from "../data/cart.mjs";
 // 장바구니 전체 조회
 export async function getCart(req, res) {
   try {
-    const items = await cartRepository.findAllByUser(req.user.id); // user.id = useridx
+    const items = await cartRepository.findAllByUser(req.user); // user.id = useridx
     res.status(200).json(items);
   } catch (err) {
     res.status(500).json({ message: "장바구니 조회 실패", error: err.message });
@@ -16,7 +16,7 @@ export async function addToCart(req, res) {
 
   try {
     const item = await cartRepository.increaseQuantityOrInsert(
-      req.user, // 전체 user 객체 (user.id, user.userid, user.name 포함)
+      req.user,
       iceidx,
       quantity
     );
@@ -28,12 +28,12 @@ export async function addToCart(req, res) {
 
 // 수량 수정
 export async function updateCart(req, res) {
-  const { iceidx } = req.params;
+  const { iceidx } = Number(req.params.iceidx);
   const { quantity } = req.body;
 
   try {
     const updated = await cartRepository.updateQuantity(
-      req.user.id,
+      req.user,
       iceidx,
       quantity
     );

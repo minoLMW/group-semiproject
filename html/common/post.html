@@ -1,30 +1,63 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <title>배라광장 - 게시판</title>
-  
-  <link rel="stylesheet" href="/assets/css/common-ui.css">
-  <script defer src="/assets/js/post.js"></script>
-</head>
-<body>
-  <!-- 헤더 -->
-   <header></header>
-   <!-- 작성 카드 -->
-   <section class="plaza-container">
-    <div class="card pink">
-      <p class="subtext">내가 만드는 맛이<br>31가지 아이스크림이 된다고?</p>
-      <h2>내가 만드는 아이스크림</h2>
-      <div class="form-box">
-        <input id="title" type="text" placeholder="어떤 맛이 떠오르나요?" />
-        <textarea id="text" placeholder="간단한 설명을 남겨주세요"></textarea>
-        <button onclick="submitPost()">만들어주세요</button>
+  <head>
+    <meta charset="UTF-8" />
+    <title>배라광장 - 게시판</title>
+
+    <link rel="stylesheet" href="/assets/css/common/post.css" />
+    <script defer src="/assets/js/post.js"></script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <header class="header"></header>
+
+    <!-- 작성 폼 섹션 -->
+    <section class="plaza-container">
+      <div class="plaza-container__header">
+        <h2 class="plaza-container__header__title">" 배라광장 "</h2>
       </div>
-    </div>
-    <!-- 게시글 리스트 -->
-    <ul id="postList" class="post-list"></ul>
-  </section>
-  <!-- 푸터 -->
-   <footer></footer>
-</body>
+
+      <div class="plaza-container__content">
+        <p class="plaza-container__content__text">
+          배라에게 묻고 배라가 답해드려요,<br />
+          배라에게 다양한 의견을 전달해주세요
+        </p>
+      </div>
+
+      <div class="card card--pink">
+        <p class="card__subtext">
+          내가 만드는 맛이<br />31가지 아이스크림이 된다고?
+        </p>
+        <h2 class="card__title">내가 만드는 아이스크림</h2>
+
+        <form class="post-form" id="postForm">
+          <input
+            id="title"
+            name="title"
+            type="text"
+            class="post-form__input"
+            placeholder="어떤 맛이 떠오르나요?"
+            required
+          />
+          <textarea
+            id="text"
+            name="text"
+            class="post-form__textarea"
+            placeholder="간단한 설명을 남겨주세요"
+            rows="4"
+            required
+          ></textarea>
+          <button type="submit" class="post-form__button">
+            만들어주세요
+          </button>
+        </form>
+      </div>
+
+      <!-- 게시글 리스트 -->
+      <ul id="postList" class="post-list"></ul>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="footer"></footer>
+  </body>
 </html>
