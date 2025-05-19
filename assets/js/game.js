@@ -89,7 +89,7 @@ function createBoard() {
         const front = document.createElement("div");
         front.className = "card-front";
         front.style.backgroundImage = `url('${symbol}'), url('../../assets/imgs/img/h_logo_2.png')`;
-        front.style.backgroundSize = '80% 80%, cover';
+        front.style.backgroundSize = '70% 70%, cover';
         front.style.backgroundPosition = 'center, center';
         front.style.backgroundRepeat = 'no-repeat, no-repeat';
 
@@ -185,6 +185,8 @@ function updateHighScore() {
         highScoreDisplay.textContent = highScore;
     }
 }
+
+
 function endGame(success) {
 	// 스테이지 클리어 또는 실패 시 게임을 종료하고, 메시지와 점수를 처리합니다.
 	gameStarted = false;
