@@ -1,56 +1,78 @@
-async function createPost(event) {
-  event.preventDefault();
+// assets/js/post.js
 
-  const postTitle = document.getElementById("postTitle");
-  const postContent = document.getElementById("postContent");
+// 1) DOM 요소 가져오기
+const postList = document.getElementById("postList");
+const postForm = document.getElementById("postForm");
 
-  if (postTitle.value.trim() === "") {
-    alert("제목을 입력해주세요.");
-    postTitle.focus();
-    return false;
+// 2) HTML 이스케이프 함수 (XSS 방지)
+function escapeHtml(unsafe) {
+  return unsafe.replace(
+    /[&<"']/g,
+    (m) => ({ "&": "&amp;", "<": "&lt;", '"': "&quot;", "'": "&#039;" }[m])
+  );
+}
+
+// 3) 서버에서 게시글 목록 가져와 렌더링
+async function fetchPosts() {
+  const token = localStorage.getItem("token"); // 로그인 시 발급된 JWT
+  if (!token) {
+    alert("로그인이 필요합니다.");
+    return;
   }
-  if (postContent.value.trim() === "") {
-    alert("비밀번호를 입력해주세요.");
-    postContent.focus();
-    return false;
-  }
-
-  const createPostData = {
-    postTitle: postTitle.value,
-    postContent: postContent.value,
-  };
 
   try {
-    const response = await fetch("/posts/", {
-      method: "GET",
+    const res = await fetch("/posts", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) throw new Error(res.statusText);
+
+    const posts = await res.json();
+    renderPosts(posts);
+  } catch (err) {
+    console.error("게시글 불러오기 실패:", err);
+  }
+}
+
+function renderPosts(posts) {
+  postList.innerHTML = "";
+  posts.forEach((post) => {
+    const li = document.createElement("li");
+    li.className = "post-list__item";
+    li.innerHTML = `
+      <h3>${escapeHtml(post.title)}</h3>
+      <p>${escapeHtml(post.text)}</p>
+      <small>${new Date(post.createdAt).toLocaleString()}</small>
+    `;
+    postList.appendChild(li);
+  });
+}
+
+// 4) 새 글 작성 이벤트 핸들러
+postForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const title = postForm.title.value.trim();
+  const text = postForm.text.value.trim();
+  if (!title || !text) return;
+
+  const token = localStorage.getItem("token");
+  try {
+    const res = await fetch("/posts", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(createPostData),
+      body: JSON.stringify({ title, text }),
     });
+    if (!res.ok) throw new Error(res.statusText);
 
-    const data = await response.json();
-    console.log("서버 응답:", data);
-
-    if (response.ok) {
-      const { token, userid } = data;
-
-      if (token && userid) {
-        localStorage.setItem("token", token);
-        localStorage.setItem("userid", userid);
-
-        alert("로그인 성공!");
-        window.location.href = "/html/main/index.html"; 
-      } else {
-        alert("아이디 혹은 비번이 틀렸습니다");
-      }
-    } else {
-      alert(data.message || "로그인 실패");
-    }
-  } catch (error) {
-    console.error("에러 발생:", error);
-    alert("서버와 통신 중 문제가 발생했습니다.");
+    postForm.reset();
+    fetchPosts(); // 작성 후 목록 갱신
+  } catch (err) {
+    console.error("글 작성 실패:", err);
   }
+});
 
-  return false;
-}
+// 5) 페이지 로드 시 자동으로 게시글 불러오기
+document.addEventListener("DOMContentLoaded", fetchPosts);

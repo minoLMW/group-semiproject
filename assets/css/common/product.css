@@ -19,7 +19,7 @@
 .product-list__item.-new .product-list__link:before {
 	content:'';
 	position:absolute;
-	top:5rem;
+	top:2rem;
 	left:4rem;
 	z-index:10;
 	width:6.7rem;
@@ -106,7 +106,7 @@
 }
 .product-view-top__container {
 	position:relative;
-	min-width:var(--size-pc)
+	min-width:var(--size-pc);
 }
 .product-view-top__content--center {
 	display:flex;
@@ -322,7 +322,7 @@
 	border-radius:50% 50% 0 0;
 	background:url(https://www.baskinrobbins.co.kr/assets/images/menu/img_cone.png) no-repeat center bottom -6rem / 13rem auto
 }
-.product-view-hero--current .product-view-hero__image {
+.product-view-hero__image {
 	position:absolute;
 	bottom:-1.5rem;
 	left:50%;
@@ -339,9 +339,6 @@
 }
 .product-view-hero--right .product-view-hero__image {
 	left:1rem
-}
-.product-view-hero__image {
-	position:absolute
 }
 .product-view__container {
 	max-width:var(--size-pc);
@@ -375,7 +372,9 @@
 .product-view-nutrition__item:last-child {
 	flex-shrink:1
 }
-.product-view-nutrition__name,.product-view-nutrition__text {
+
+.product-view-nutrition__name,
+.product-view-nutrition__text {
 	text-align:center
 }
 .product-view-nutrition__name {
@@ -383,7 +382,12 @@
 }
 .product-view-nutrition__text {
 	margin-top:1rem;
-	color:#ff3f67
+	color:#ff3f67;
+	animation:showEffect 0.5s linear forwards;
+}
+@keyframes showEffect {
+	0% {opacity:0.1;}
+	100% {opacity:1;}
 }
 .product-view-nutrition__description {
 	color:var(--brown-color-1);
@@ -399,6 +403,13 @@
 .product-view-event,.product-view-content__container {
 	width:98.5rem;
 	margin:9rem auto 0
+}
+.product-view-content__content {
+	text-align:center;
+}
+.product-view-content__image {
+	display:block;
+	margin:0 auto;
 }
 @media (max-width: 1500px) { 
     .swiper-button-next,

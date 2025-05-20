@@ -2,84 +2,49 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>플라자 게시판(카드 레이아웃)</title>
-    <link rel="stylesheet" href="/assets/css/common/post.css" />
-    <link rel="stylesheet" href="/assets/css/common/color.css" />
-    <link rel="stylesheet" href="/assets/css/common/reset.css" />
+    <title>배라광장 - 게시판</title>
+    <link rel="stylesheet" href="/assets/css/common/style-origin.css">
+    <!-- <link rel="stylesheet" href="/assets/css/common/post.css"> -->
+    <script defer src="/assets/js/post.js"></script>
   </head>
   <body>
     <!-- 헤더 -->
-    <header></header>
-    <!-- 컨테이너 -->
-    <section class="site-container">
-      <div id="content" class="plaza-list">
-        <header class="page-header">
-          <div class="page-header__container">
-            <div class="page-header__content">
-              <h2 class="page-header__title">
-                "배라광장"
-              </h2>
-            </div>
-            <div class="page-header__content">
-              <p class="page-header__text">
-                "배라에게 묻고 배라가 답해드려요"
-                <br>
-                "배라에게 다양한 의견을 전달해주세요."
-              </p>
-            </div>
-          </div>
-        </div>
-      </header>
-      <nav class="plaza-list-nav">
-        <!-- 게시물 작성 -->
-        <ul class="plaza-list-nav__list">
-          <li class="plaza-list-nav__item plaza-list-nav__item--new">
-            <div class="plaza-list-nav__container">
-              <div class="plaza-list-nav__box">
-                <p class="plaza-list-nav__text">
-                  "내가 만드는 맛이"
-                  <br />
-                  "31가지 아이스크림이 된다고?"
-                </p>
-                <h3 class="plaza-list-nav__title">내가 만드는 아이스크림</h3>
-                <div class="plaza-list-nav__buttons">
-                  <a href="#" class="plaza-list-nav__link">만들어주세요</a>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </nav>
-      <!-- 리스트 컨테이너 -->
-      <div class="plaza-list__container">
-        <input type="hidden" name="csrf_token" value="" />
-        <div>
-          <div class="plaza-list-list">
-            <ul class="plaza-list-list__list">
-              <li class="plaza-list-list__item plaza-list-list__item--new">
-                <div class="plaza-list-list__header">
-                  <h4 class="plaza-list-list__title">허니치즈트랩 재출시</h4>
-                  <p class="plaza-list-list__category">NEW</p>
-                </div>
-                <p class="plaza-list-list__text">"매년 겨울마다 출시되었던"</p>
-                <p class="plaza-list-list__name">eas***님</p>
-                <div class="plaza-list-list__container">
-                  <div class="plaza-list-like">
-                    <button
-                      type="button"
-                      class="plaza-list-like__button"
-                      data-seq="25"
-                    ></button>
-                    <span class="plaza-list-like__text">추천</span>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+    <header class="header"></header>
+
+    <!-- 작성 폼 섹션 -->
+    <section class="plaza-container">
+      <div class="plaza-container__header">
+        <h2 class="plaza-container__header__title">" 배라광장 "</h2>
       </div>
+
+      <div class="plaza-container__content">
+        <p class="plaza-container__content__text">
+          배라에게 묻고 배라가 답해드려요,<br />
+          배라에게 다양한 의견을 전달해주세요
+        </p>
+      </div>
+
+      <div class="card card--pink">
+        <p class="card__subtext">
+          내가 만드는 맛이<br />31가지 아이스크림이 된다고?
+        </p>
+        <h2 class="card__title">내가 만드는 아이스크림</h2>
+
+        <form class="post-form" id="postForm">
+          <input id="title" name="title" type="text" class="post-form__input" placeholder="어떤 맛이 떠오르나요?" required/>
+          <textarea id="text" name="text" class="post-form__textarea" placeholder="간단한 설명을 남겨주세요" rows="4" required
+          ></textarea>
+          <button type="submit" class="post-form__button">
+            만들어주세요
+          </button>
+        </form>
+      </div>
+
+      <!-- 게시글 리스트 -->
+      <ul id="postList" class="post-list"></ul>
     </section>
+
     <!-- 푸터 -->
-    <footer></footer>
+    <footer class="footer"></footer>
   </body>
 </html>

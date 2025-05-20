@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/assets/css/common-ui.css" />
+    <link rel="stylesheet" href="/assets/css/common/login-signup.css" />
+  </head>
+  <body id="baskinrobbins-signup" class="baskinrobbins-signup">
+    <header></header>
+
+    <section class="sign-up-container">
+      <div id="content" class="signup">
+        <header class="page-header">
+          <div class="page-header__container">
+            <div class="page-header__content">
+              <h3 class="page-header__title">회원가입</h3>
+        
+            </div>
+          </div>
+        </header>
+
+        <hr class="divider" />
+
+        <div class="signup__inner">
+          <form action="" class="signup_form" method="post">
+            <fieldset class="login__block">
+              <input type="hidden" name="redirectUrl" value="/" />
+
+              <label class="signup__label"></label>
+                <input
+                  type="text"
+                  name="userid"
+                  placeholder="아이디"
+                  class="signup__input"
+                  required
+                />
+        
+
+              <label class="signup__label"></label>
+                <input
+                  type="password"
+                  name="userpw"
+                  placeholder="비밀번호"
+                  class="signup__input"
+                  required
+                />
+       
+              <label class="signup__label"></label>
+                <input
+                  type="email"
+                  name="useremail"
+                  placeholder="이메일 주소"
+                  class="signup__input"
+                  required
+                />
+        
+              <label class="signup__label"></label>
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="이름"
+                  class="signup__input"
+                  required
+                />
+         
+
+              <label class="signup__label"></label>
+                <input
+                  type="text"
+                  name="userbirth"
+                  placeholder="생년월일"
+                  class="signup__input"
+                  required
+                />
+              
+             <div class="signup__phone-group">
+             <input
+                type="tel"
+                name="userhp"
+                placeholder="휴대폰 번호 (예: 010-1234-5678)"
+                class="signup__input"
+                />
+             <button
+                 type="button"
+                 class="signup__button--certify">인증요청</button> 
+                </div>
+
+              <div class="signup__button"></div>
+              <button
+                type="submit"
+                class="signup__button--submit">제출하기
+              </button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer></footer>
+    <script src="/assets/js/signup.js"></script>
+  </body>
+</html>
