@@ -615,8 +615,8 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	font-weight:bold;
 	color:var(--pink-title-1);
 	font-family:Scoop;
-	letter-spacing:-0.025rem;
 	line-height:1;
+	letter-spacing:-0.025rem;
 }
 .page-title__text {
 	color:var(--pink-title-1);
