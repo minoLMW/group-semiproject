@@ -1417,178 +1417,18 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	opacity:0;
 }
 .story-story__list {
-	padding:10rem 0 16.8rem;
-	background:url(https://www.baskinrobbins.co.kr/assets/images/story/story/bg_story.png) no-repeat 20.5rem 0
+	/* padding:10rem 0 16.8rem; */
 }
-.story-story__visual {
-	position:absolute
-}
-.story-story__item:nth-child(2n) .story-story__logo-story {
-	right:0;
-	left:auto
-}
-.story-story__item:nth-child(2n) .story-story__logo-story--logo {
-	right:14.5rem;
-	left:auto
-}
-.story-story__item:nth-child(2n) .story-story__logo-story--year {
-	right:14.5rem;
-	left:auto
-}
-.story-story__item--1 {
-	height:63rem;
-	padding-left:30rem
-}
-.story-story__item--1 .story-story__logo-story--logo {
-	background-image:url(https://www.baskinrobbins.co.kr/assets/images/story/story/img_logo_1945.png)
-}
-.story-story__item--1 .story-story__visual {
-	top:6.2rem;
-	right:34rem;
-	left:initial
-}
-.story-story__item--2 {
-	height:63rem;
-	padding-left:82.4rem
-}
-.story-story__item--2 .story-story__logo-story--logo {
-	background-image:url(https://www.baskinrobbins.co.kr/assets/images/story/story/img_logo_1945.png)
-}
-.story-story__item--2 .story-story__visual {
-	top:7.2rem;
-	right:initial;
-	left:20rem
-}
-.story-story__item--3 {
-	height:62.6rem;
-	padding-left:30rem
-}
-.story-story__item--3 .story-story__logo-story--logo {
-	background-image:url(https://www.baskinrobbins.co.kr/assets/images/story/story/img_logo_1960.png)
-}
-.story-story__item--3 .story-story__visual {
-	top:6.4rem;
-	right:35.6rem;
-	left:initial
-}
-.story-story__item--4 {
-	height:63rem;
-	padding-left:71rem
-}
-.story-story__item--4 .story-story__logo-story--logo {
-	background-image:url(https://www.baskinrobbins.co.kr/assets/images/story/story/img_logo_1960.png)
-}
-.story-story__item--4 .story-story__visual {
-	top:13.2rem;
-	right:initial;
-	left:21.2rem
-}
-.story-story__item--5 {
-	height:63rem;
-	padding-left:30rem
-}
-.story-story__item--5 .story-story__logo-story--logo {
-	background-image:url(https://www.baskinrobbins.co.kr/assets/images/story/story/img_logo_1997.png)
-}
-.story-story__item--5 .story-story__visual {
-	top:13rem;
-	right:23.2rem;
-	left:initial
-}
-.story-story__item--6 {
-	height:63rem;
-	padding-left:70rem
-}
-.story-story__item--6 .story-story__logo-story--logo {
-	background-image:url(https://www.baskinrobbins.co.kr/assets/images/story/story/img_logo_1997.png)
-}
-.story-story__item--6 .story-story__visual {
-	top:9rem;
-	right:initial;
-	left:8.8rem
-}
-.story-story__item--7 {
-	height:63rem;
-	padding-left:30rem
-}
-.story-story__item--7 .story-story__logo-story--logo {
-	background-image:url(https://www.baskinrobbins.co.kr/assets/images/story/story/img_logo_2005.png)
-}
-.story-story__item--7 .story-story__visual {
-	top:14rem;
-	right:21rem;
-	left:initial
-}
-.story-story__item--8 {
-	height:75rem;
-	padding-left:71.2rem
-}
-.story-story__item--8 .story-story__logo-story--logo {
-	background-image:url(https://www.baskinrobbins.co.kr/assets/images/story/story/img_logo_2005.png)
-}
-.story-story__item--8 .story-story__visual {
-	top:10rem;
-	right:initial;
-	left:17.6rem
-}
-.story-story__item--9 {
-	height:63rem;
-	padding-left:30rem
-}
-.story-story__item--9 .story-story__logo-story--logo {
-	background-image:url(https://www.baskinrobbins.co.kr/assets/images/story/story/img_logo_2005.png)
-}
-.story-story__item--9 .story-story__visual {
-	top:10.4rem;
-	right:36.2rem;
-	left:initial
-}
-.story-story__item--10 {
-	height:75rem;
-	padding-left:30rem
-}
-.story-story__item--10 .story-story__logo-story--logo {
-	background-image:url(https://www.baskinrobbins.co.kr/assets/images/story/story/img_logo_2016.png)
-}
-.story-story__item--10 .story-story__visual {
-	top:24.4rem;
-	right:31.2rem;
-	left:initial
-}
-.story-story__item--11 {
-	height:63rem;
-	padding-left:93rem
-}
-.story-story__item--11 .story-story__logo-story--logo {
-	background-image:url(https://www.baskinrobbins.co.kr/assets/images/story/story/img_logo_2016.png)
-}
-.story-story__item--11 .story-story__visual {
-	top:9.4rem;
-	right:initial;
-	left:35.2rem
-}
-.story-story__title {
-	margin-bottom:2rem;
-	color:#e66787;
-	font-size:2.5rem;
-	line-height:1.2
-}
-.story-story__description {
-	color:#999;
-	font-weight:var(--font-weight-sd-bold);
-	line-height:1.67;
-	letter-spacing:-.05em
+.story-story__spoon {
+	display:block;
+	height:5rem;
+	margin-bottom:1rem;
+	background:url(https://www.baskinrobbins.co.kr/m/assets/images/story/story/img_spoon.png) no-repeat 50% /auto 4.9rem;
 }
 .story-story__logo-story {
-	position:absolute;
-	left:0;
-	width:45rem;
-	height:100%
+	display:flex;
 }
 .story-story__logo-story--year {
-	position:absolute;
-	left:14.6rem;
-	bottom:calc(50% - 12.7rem);
 	width:12.3rem;
 	height:13.4rem;
 	color:#fff;
@@ -1599,9 +1439,6 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	background:url(https://www.baskinrobbins.co.kr/assets/images/story/story/bg_logo_story_year.png) no-repeat center center
 }
 .story-story__logo-story--logo {
-	position:absolute;
-	left:14.6rem;
-	top:calc(50% - 11.3rem);
 	width:12.3rem;
 	height:12.3rem;
 	border:0.3rem solid #ff95b4;
@@ -1610,6 +1447,23 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	background-repeat:no-repeat;
 	background-position:center
 }
+.story-story__item:nth-of-type(1) .story-story__logo-story {
+    background-repeat: no-repeat,no-repeat,no-repeat;
+    background-image: url(/m/assets/images/story/story/img_line_top_left.png),url(/m/assets/images/story/story/img_line_bottom_right.png);
+    background-size: auto 114px,auto 114px;
+    background-position: 0 111px,calc(50% - 57px) 0
+}
+.story-story__item:nth-of-type(2n+2) .story-story__logo-story {
+    background-repeat: no-repeat,no-repeat,no-repeat;
+    background-image: url(/m/assets/images/story/story/img_line_bottom_left.png),url(/m/assets/images/story/story/img_line_top_right.png),url(/m/assets/images/story/story/img_line_horizontal.png);
+    background-size: auto 114px,auto 114px,auto 3px;
+    background-position: left 0,right 111px,114px 111px
+}
+
+
+
+
+
 /* // history */
 
 /* main-content */
@@ -2966,174 +2820,3 @@ swiper-container:not(.swiper-watch-progress) .swiper-lazy-preloader {
 	text-shadow:0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
 }
 /* // game */
-.width-textsss {background-color:black; color:#fff;}
-@media (max-width:1500px) { 
-	.width-textsss {background-color:red; color:#111;}
-	:root {
-		--size-inner:100%;
-		--padd-in:2.4rem
-	}
-	.footer-bottom {
-		flex-direction:column;
-		align-items:flex-start
-	}
-	.swiper-button-next,
-	.swiper-button-prev {
-		display:none;
-	}
-	.product-list__item {
-		width:calc(25% - 2.5rem)
-	}
-	.product-view-nutrition {
-		width:100%;
-		margin:7.2rem auto 0;
-		padding-top:5.2rem;
-		border-top:1px solid #c6c1bf
-	}
-	.product-view-nutrition__container {
-		flex-direction:column;
-	}
-	.product-view-nutrition {
-		padding:var(--padd-in);
-	}
-	.product-view-nutrition__title {
-		width:100%;
-		font-size:3rem;
-	}
-	.product-view-nutrition__content {
-		gap:0;
-		width:100%;
-		margin-top:5rem;
-	}
-	.product-view-nutrition__content::-webkit-scrollbar {
-		display: none;
-	}
-	.product-view-nutrition__item {
-		flex:1;
-	}
-	.product-view-nutrition__name {
-		margin-top:0;
-		padding:0.3rem 1rem;
-		border:1px solid #fff;
-		background-color:#e6e6e6;
-	}
-	.product-view-nutrition__text {
-		margin-top:0;
-		padding:0.3rem 1rem;
-		border-bottom:1px solid #d3d3d3;
-		background-color:#fff;
-	}
-	.login__content {
-		width:100%;
-	}
-}
-@media (max-width:768px) {
-	.width-textsss {background-color:yellow; color:#111;}
-	.page-header {
-		margin-top:3rem;
-	}
-	.page-header__title {
-		font-size:5rem;
-		line-height:1.2;
-	}
-	.page-header__text strong {
-		font-size:2.2rem;
-		margin-bottom:1rem;
-	}
-	.footer-bottom {
-		align-items:center;
-	}
-	.footer-right {
-		margin-left:0;
-	}
-	.page-title__text {
-		padding:var(--padd-in);
-	}
-	.divider {
-		width:90%;
-		margin:1.2rem auto;
-	}
-	.login__inner {
-		width:100%;
-		padding:0 var(--padd-in);
-	}
-	.login__buttons {
-		padding:1rem var(--padd-in)
-	}
-	.login__button-text {
-		width:100%;
-	}
-	.signup-container {
-		padding:1.5rem 1rem;
-	}
-	.signup__inner {
-		width:100%;
-		padding:0 1rem;
-	}
-	.signup__label {
-		font-size:1.3rem;
-		margin-top:0.8rem;
-	}
-	.signup__input {
-		height:4.4rem;
-		font-size:1.5rem;
-	}
-	.signup__button {
-		font-size:1.6rem;
-		height:4.2rem;
-	}
-	.signup__button--submit {
-		font-size:1.5rem;
-		height:4.2rem;
-	}
-	.signup__phone-group input.signup__input {
-		padding-right:9rem;
-	}
-	.signup__button--certify {
-		height:3.2rem;
-		font-size:1.3rem;
-		padding:0 1rem;
-		right:1rem;
-	}
-	.product-view-top__content--center {
-		flex-wrap:wrap;
-		flex-direction:column-reverse;
-	}
-	.product-main-image {
-		width:100%;
-		margin:0 auto;
-		padding:var(--padd-in);
-	}
-	.product-view-hero {
-		width:100%;
-		height:100vw
-	}
-	.product-view-top__box {
-		padding-left:0;
-	}
-	.product-view-top__content .product-view-top__box {
-		width:100%;
-		padding:var(--padd-in);
-	}
-	.product-list__item {
-		width:calc(50% - 2.5rem)
-	}
-	.product-view-content__container {
-		width:100%;
-		margin:9rem auto 0
-	}
-	.product-view-nutrition__content {
-		overflow-x:scroll;
-	}
-}
-@media (max-width:414px) { 
-	.width-textsss {background-color:green; color:#111;}
-	.site-footer-relation__list,
-	.footer-right {
-		flex-wrap:wrap;
-	}
-	.product-list__hash {
-		top:3rem;
-		padding:0;
-	}
-}
