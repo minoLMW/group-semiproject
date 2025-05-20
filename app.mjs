@@ -6,11 +6,30 @@ import cartsRouter from "./src/router/cart.mjs";
 import gameRouter from "./src/router/game.mjs"
 import { config } from "./config.mjs";
 import { connectDB } from "./src/db/database.mjs";
-// import cors from "cors"
+import __dirname from "__dirname"
+import fileURLToPath from "url"
+import fs from fs
+import path from "path";
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const app = express();
-
+app.use(express.static("html"));
 app.use(express.json());
+// app.use(cors());
+app.get("/", (req, res) => {
+  fs.readFile(__dirname + "/html/main/index.html", (err, data) => {
+    if (err) {
+      res.status(500);
+      return res.send("파일 읽기 오류");
+    }
+    res.status(200).set({ "Content-Type": "text/html" });
+    res.send(data);
+  });
+});
+
+
 
 // app.use(express.static(path.join(process.cwd(), "html")));
 
