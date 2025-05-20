@@ -24,7 +24,7 @@ const validateSignup = [
   ...validateLogin,
   body("name").trim().notEmpty().withMessage("이름 입력"),
   body("email").trim().isEmail().withMessage("이메일 형식 확인"),
-  body("ph").trim().notEmpty().withMessage("전화번호 입력"),
+  body("ph").trim().isMobilePhone().withMessage("전화번호 입력"),
   body("birth").trim().isNumeric().withMessage("생년월일 입력"),
   validate,
 ];
