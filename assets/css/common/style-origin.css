@@ -1417,6 +1417,8 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
     opacity:0;
 }
 .story-story__list {
+	width:var(--size-inner);
+	margin:0 auto;
     padding: 10rem 0 16.8rem;
     background: url(https://www.baskinrobbins.co.kr/assets/images/story/story/bg_story.png) no-repeat 20.5rem 0
 }
