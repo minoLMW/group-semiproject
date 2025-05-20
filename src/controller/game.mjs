@@ -17,3 +17,14 @@ export async function claimGamePoint(req, res) {
     });
   }
 }
+
+export async function resetGame(req, res) {
+  try {
+    const success = await gameRepository.endGame(req.user.id);
+    if (!success) throw new Error("초기화 실패 또는 이미 초기화됨");
+    
+    res.status(200).json({ message: "게임 세션 종료 및 초기화 완료" });
+  } catch (err) {
+    res.status(400).json({ message: "게임 종료 실패", error: err.message });
+  }
+}

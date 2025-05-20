@@ -1,6 +1,9 @@
 import * as cartRepository from "../data/cart.mjs";
 import * as userRepository from "../data/auth.mjs"
 // console.log("[DEBUG] cartRepository keys:", Object.keys(cartRepository));
+import { ObjectId } from "mongodb";
+import { signup } from "./auth.mjs";
+import { getIcecreams } from "../db/database.mjs";
 
 // 장바구니 전체 조회
 export async function getCart(req, res) {
@@ -81,5 +84,22 @@ export async function purchaseCart(req, res) {
     });
   } catch (err) {
     res.status(500).json({ message: "구매 실패", error: err.message });
+  }
+}
+
+// 장바구니 개별 구매
+export async function buyOneItem(req, res) {
+  const { iceidx } = req.params;
+  const { quantity } = req.body;
+
+  try {
+    const result = await cartRepository.purchaseOneItem(
+      req.user,
+      iceidx,
+      Number(quantity)
+    );
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({ message: "개별 구매 실패", error: err.message });
   }
 }

@@ -1,5 +1,8 @@
-import { getCarts } from "../db/database.mjs";
+import { getCarts, getIcecreams, getUsers } from "../db/database.mjs";
 import MongoDb from "mongodb";
+import { login } from "./auth.mjs";
+import { createIce } from "../controller/icecream.mjs";
+import { getAllByUserid } from "./post.mjs";
 
 const ObjectId = MongoDb.ObjectId;
 
@@ -42,7 +45,10 @@ export async function findAllByUser(useridx) {
 
 // 특정 아이스크림 조회 (사용자 기준)
 export async function findByUserAndIce(useridx, iceidx) {
-  return getCarts().findOne({ useridx: String(useridx), iceidx: String(iceidx) });
+  return getCarts().findOne({
+    useridx: String(useridx),
+    iceidx: String(iceidx),
+  });
 }
 
 // 메뉴에서 수량 입력 후 장바구니 담기 (있으면 누적, 없으면 추가)
@@ -105,13 +111,48 @@ export async function updateQuantity(useridx, iceidx, quantity) {
   return result.value;
 }
 
-
 // 장바구니 항목 삭제
 export async function deleteByUserAndIce(useridx, iceidx) {
-  return getCarts().deleteOne({ useridx: String(useridx), iceidx: String(iceidx) });
+  return getCarts().deleteOne({
+    useridx: String(useridx),
+    iceidx: String(iceidx),
+  });
 }
 
 // 장바구니 전체 구매
 export async function clearCart(useridx) {
   return getCarts().deleteMany({ useridx: String(useridx) });
+}
+
+// 개별 장바구니 구매
+const ICECREAM_PRICE = 4500;
+
+export async function purchaseOneItem(user, iceidx, quantity) {
+  const useridx = user.useridx;
+  const totalPrice = quantity * ICECREAM_PRICE;
+
+  const userData = await getUsers().findOne({ useridx });
+  if (!userData || userData.point < totalPrice) {
+    throw new Error("포인트가 부족합니다.");
+  }
+
+  const icecream = await getIcecreams().findOne({ idx: iceidx });
+  if (!icecream) {
+    throw new Error("해당 아이스크림이 존재하지 않습니다.");
+  }
+
+  await getUsers().updateOne({ useridx }, { $inc: { point: -totalPrice } });
+
+  await getCarts().deleteOne({ useridx, iceidx }); // 장바구니에서 제거
+
+  return {
+    message: "구매 완료",
+    used: totalPrice,
+    remaining: userData.point - totalPrice,
+    item: {
+      name: icecream.ice_name,
+      quantity,
+      price: ICECREAM_PRICE,
+    },
+  };
 }
