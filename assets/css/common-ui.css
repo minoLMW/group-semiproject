@@ -505,7 +505,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .footer-menu ul li a:hover,
 .footer-section ul li a:hover {
 	text-decoration:underline;
-	color:var(--point);
+	color:var(--pink-color-2);
 }
 .footer-bottom {
 	display:flex;
@@ -913,8 +913,8 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	background-color:var(--bg-root);
 }
 .product-function__cart:hover {
-	border:1px solid var(--point);
-	background-color:var(--point);
+	border:1px solid var(--pink-color-2);
+	background-color:var(--pink-color-2);
 	color:var(--text-white);
 }
 .product-function__buy {
@@ -928,8 +928,8 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	color:var(--text-white)
 }
 .product-function__buy:hover {
-	background-color:var(--point);
-	border:1px solid var(--point);
+	background-color:var(--pink-color-2);
+	border:1px solid var(--pink-color-2);
 }
 .product-view-hero {
 	overflow:hidden;

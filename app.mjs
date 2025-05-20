@@ -25,6 +25,7 @@ const assetsDir = path.join(__dirname, "assets");
 // 정적 리소스 서빙 설정
 app.use("/assets", express.static(assetsDir));
 app.use("/html",   express.static(htmlDir)); 
+app.use('/src/json', express.static(path.join(__dirname, 'src/json')));
 app.use(express.static(htmlDir));
 
 // GET 루트로 접속 시 main/index.html 파일 전송
