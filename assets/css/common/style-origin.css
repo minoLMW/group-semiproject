@@ -73,6 +73,7 @@ html {
 body {color:var(--color-root); font-size:1.5rem; line-height:1.5; font-family:var(--word); letter-spacing:-0.025em; overflow-wrap:break-word; -webkit-text-size-adjust:none; background-color:var(--bg-root);}
 
 legend {overflow:hidden !important; position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; white-space:nowrap !important; clip:rect(1px, 1px, 1px, 1px) !important; clip-path:inset(50%) !important;}
+
 :root {
 	--bg-root:#fff;
 	--bg-root2:#f0f0f0;
@@ -108,8 +109,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	--font4:#999;
 	--font5:#f1f1f1;
 	--text-white:#fff;
-	--color-primary:var(--pink-color-2)
-	/* inner content */
+	--color-primary:var(--pink-color-2);
 	--size-inner:150rem;
 }
 /* header */
@@ -658,7 +658,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	position:relative;
 	width:100%;
 	height:21rem;
-	border:1px solid var(--border-gray);
+	border:1px solid var(--border-gray2);
 	border-radius:4.5rem;
 	box-sizing:border-box
 }
