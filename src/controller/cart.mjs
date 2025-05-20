@@ -1,4 +1,5 @@
 import * as cartRepository from "../data/cart.mjs";
+import * as userRepository from "../data/auth.mjs"
 // console.log("[DEBUG] cartRepository keys:", Object.keys(cartRepository));
 
 // 장바구니 전체 조회
@@ -42,8 +43,6 @@ export async function updateCart(req, res) {
   }
 }
 
-
-
 // 장바구니 항목 삭제
 export async function deleteCart(req, res) {
   const { iceidx } = req.params;
@@ -52,5 +51,35 @@ export async function deleteCart(req, res) {
     res.status(200).json({ message: "삭제 완료" });
   } catch (err) {
     res.status(500).json({ message: "삭제 실패", error: err.message });
+  }
+}
+
+// 장바구니 전체 구매
+export async function purchaseCart(req, res) {
+  const userId = req.user.id;
+
+  try {
+    const cartItems = await cartRepository.findAllByUser(userId);
+    if (!cartItems.length) {
+      return res.status(400).json({ message: "장바구니가 비어있습니다." });
+    }
+
+    const total = cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
+    const user = await userRepository.findById(userId);
+
+    if (user.point < total) {
+      return res.status(400).json({ message: "포인트가 부족합니다." });
+    }
+
+    await userRepository.updatePoint(userId, user.point - total);
+    await cartRepository.clearCart(userId);
+
+    res.status(200).json({
+      message: "구매 완료",
+      used: total,
+      remaining: user.point - total
+    });
+  } catch (err) {
+    res.status(500).json({ message: "구매 실패", error: err.message });
   }
 }
