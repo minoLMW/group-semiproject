@@ -6,98 +6,76 @@
 	<title>회원가입</title>
 	<link rel="stylesheet" href="/assets/css/common-ui.css" />
 </head>
-<body id="baskinrobbins-signup" class="baskinrobbins-signup">
-    <header></header>
+<body>
+	<div class="page">
+		<div class="container">
 
-    <section class="sign-up-container">
-		<div id="content" class="signup">
-			<div class="page-title">
-				<div class="page-title__container">
-					<div class="page-title__content">
-						<h2 class="page-title__title">회원가입</h2>
-					</div>
+			<header class="header"></header>
+
+			<main class="contents">
+				<div class="content">
+					<section class="sign-up-container">
+						<div id="content" class="signup">
+							<div class="page-title">
+								<div class="page-title__container">
+									<div class="page-title__content">
+										<h2 class="page-title__title">회원가입</h2>
+										<p class="page-title__text">지금 가입하고 특별한 서비스를 이용해보세요</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="signup__inner">
+								<form action="" class="signup_form" method="post">
+									<fieldset class="login__block">
+										<input type="hidden" name="redirectUrl" value="/" />
+
+										<div class="signup__field">
+											<input type="text" id="user-id" name="userid" class="signup__input" required/>
+											<label for="user-id" class="signup__label">아이디</label>
+										</div>
+
+										<div class="signup__field">
+											<input type="password" id="user-pw" name="userpw" class="signup__input" required/>
+											<label for="user-pw" class="signup__label">비밀번호</label>
+										</div>
+
+										<div class="signup__field">
+											<input type="text" id="user-email" name="useremail" class="signup__input" required/>
+											<label for="user-email" class="signup__label">이메일 주소</label>
+										</div>
+									
+										<div class="signup__field">
+											<input type="text" id="user-name" name="username" class="signup__input" required/>
+											<label for="user-name" class="signup__label">이름</label>
+										</div>
+									
+										<div class="signup__field">
+											<input type="text" id="user-birth" name="userbirth" class="signup__input" required/>
+											<label for="user-birth" class="signup__label">생년월일</label>
+										</div>
+										
+										<div class="signup__field signup__phone-group">
+											<input type="text" id="user-hp" name="userhp" class="signup__input" required/>
+											<label for="user-hp" class="signup__label">휴대폰 번호</label>
+											<button type="button" class="signup__button--certify">인증요청</button> 
+										</div>
+
+										<button type="submit" class="signup__button--submit">제출하기</button>
+									</fieldset>
+								</form>
+							</div>
+						</div>
+					</section>
 				</div>
-			</div>
+			</main>
 
-			<hr class="divider" />
+			<footer class="footer"></footer>
 
-			<div class="signup__inner">
-			<form action="" class="signup_form" method="post">
-				<fieldset class="login__block">
-				<input type="hidden" name="redirectUrl" value="/" />
-
-				<label class="signup__label"></label>
-					<input
-					type="text"
-					name="userid"
-					placeholder="아이디"
-					class="signup__input"
-					required
-					/>
-			
-
-				<label class="signup__label"></label>
-					<input
-					type="password"
-					name="userpw"
-					placeholder="비밀번호"
-					class="signup__input"
-					required
-					/>
-		
-				<label class="signup__label"></label>
-					<input
-					type="email"
-					name="useremail"
-					placeholder="이메일 주소"
-					class="signup__input"
-					required
-					/>
-			
-				<label class="signup__label"></label>
-					<input
-					type="text"
-					name="username"
-					placeholder="이름"
-					class="signup__input"
-					required
-					/>
-			
-
-				<label class="signup__label"></label>
-					<input
-					type="text"
-					name="userbirth"
-					placeholder="생년월일"
-					class="signup__input"
-					required
-					/>
-				
-				<div class="signup__phone-group">
-				<input
-					type="tel"
-					name="userhp"
-					placeholder="휴대폰 번호 (예: 010-1234-5678)"
-					class="signup__input"
-					/>
-				<button
-					type="button"
-					class="signup__button--certify">인증요청</button> 
-					</div>
-
-				<div class="signup__button"></div>
-				<button
-					type="submit"
-					class="signup__button--submit">제출하기
-				</button>
-				</fieldset>
-			</form>
-			</div>
 		</div>
-    </section>
-
-    <footer></footer>
-
+	</div>
+    <script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/assets/js/common-ui.js"></script>
     <script src="/assets/js/signup.js"></script>
 </body>
 </html>
