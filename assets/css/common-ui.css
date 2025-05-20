@@ -1339,22 +1339,22 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
   margin-top:1rem;
   margin-bottom:4rem;
 }
-.card {
+.plaza-container .card {
   border-radius:1.6rem;
   padding:3rem;
   margin-bottom:4rem;
   box-shadow:0 0.4rem 1rem rgba(0, 0, 0, 0.08);
 }
-.card--pink {
+.plaza-container .card--pink {
   background-color:var(--bg-root2);
   color:var(--pink-color-2);
 }
-.card__subtext {
+.plaza-container .card__subtext {
   font-size:1.4rem;
   color:var(--brown-color-4);
   margin-bottom:1rem;
 }
-.card__title {
+.plaza-container .card__title {
   font-size:2.4rem;
   font-weight:700;
   margin-bottom:2rem;
@@ -2702,7 +2702,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .game-screen {
     padding:2rem;
 }
-.card {
+#game .card {
     position:relative;
     width:100%;
     height:100%;
@@ -2716,11 +2716,12 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
     box-shadow:0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
     margin:0;
 }
-.card:hover {
+#game .card:hover {
     transform:scale(1.05) translateY(-0.5rem);
     box-shadow:0 0.8rem 1.6rem rgba(0, 0, 0, 0.3);
 }
-.card-front, .card-back {
+#game .card-front, 
+#game .card-back {
     position:absolute;
     top:0;
     left:0;
@@ -2736,13 +2737,13 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
     justify-content:center;
     align-items:center;
 }
-.card-front {
+#game .card-front {
     z-index:2;
     transform:rotateY(180deg);
     background:linear-gradient(45deg, #3498db, #2980b9);
     border:0.2rem solid #fff;
 }
-.card-back {
+#game .card-back {
     background:linear-gradient(135deg, #f1c40f, #f39c12);
     z-index:1;
     transform:rotateY(0deg);
@@ -2755,10 +2756,10 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
     background-size:2rem 2rem;
     background-position:0 0, 0 1rem, 1rem -1rem, -1rem 0;
 }
-.card.flipped .card-front {
+#game .card.flipped .card-front {
     transform:rotateY(0deg);
 }
-.card.flipped .card-back {
+#game .card.flipped .card-back {
     transform:rotateY(-180deg);
 }
 .matched {
