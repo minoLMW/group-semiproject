@@ -1,7 +1,7 @@
 import * as authRepository from "../data/auth.mjs";
 import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { config } from "../config.mjs";
+import { config } from "../../config.mjs";
 
 const secretKey = config.jwt.secretKey;
 const bcryptSaltRounds = config.bcrypt.saltRounds;
@@ -12,7 +12,7 @@ async function createJwtToken(id) {
 }
 
 export async function signup(req, res, next) {
-  const { userid, password, name, email,ph,birth } = req.body;
+  const { userid, password, name, email, ph, birth ,point} = req.body;
 
   // 회원 중복 체크
   const found = await authRepository.findByUserid(userid);
@@ -29,7 +29,8 @@ export async function signup(req, res, next) {
     name,
     email,
     ph,
-    birth
+    birth,
+    point
   });
   const token = await createJwtToken(users.id);
   console.log(token);

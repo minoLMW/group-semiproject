@@ -4,7 +4,7 @@ import * as UserRepository from "./auth.mjs";
 const ObjectID = MongoDb.ObjectId;
 
 // 모든 포스트를 리턴
-export async function getAll() {
+export async function getAllByUserid() {
   return getPosts().find().sort({ createAt: -1 }).toArray();
 }
 
@@ -18,7 +18,6 @@ export async function getById(id) {
 
 // 포스트 작성
 export async function create(text,title, id) {
-  console.log("id:", id);
   return UserRepository.findByid(id).then((user) =>
     getPosts()
       .insertOne({
@@ -40,7 +39,7 @@ export async function update(id, text,title) {
   return getPosts()
     .findOneAndUpdate(
       { _id: new ObjectID(id) },
-      { $set: { text ,menu } },
+      { $set: { text ,title } },
       { returnDocument: "after" }
     )
     .then((result) => result);

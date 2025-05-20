@@ -1,61 +1,85 @@
 import * as cartRepository from "../data/cart.mjs";
+import * as userRepository from "../data/auth.mjs"
+// console.log("[DEBUG] cartRepository keys:", Object.keys(cartRepository));
 
 // 장바구니 전체 조회
 export async function getCart(req, res) {
   try {
-    const items = await cartRepository.findAllByUser(req.user.id); // user.id = useridx
+    const items = await cartRepository.findAllByUser(req.user.id);
     res.status(200).json(items);
   } catch (err) {
     res.status(500).json({ message: "장바구니 조회 실패", error: err.message });
   }
 }
 
-// 장바구니 항목 추가
+// 장바구니 항목 추가 또는 수량 누적 (메뉴에서 사용)
 export async function addToCart(req, res) {
   const { iceidx, quantity } = req.body;
-
   try {
-    const item = await cartRepository.increaseQuantityOrInsert(
-      req.user, // 전체 user 객체 (user.id, user.userid, user.name 포함)
+    const item = await cartRepository.addOrIncrease(
+      req.user,
       iceidx,
       quantity
     );
     res.status(200).json({ message: "장바구니 반영 완료", item });
   } catch (err) {
-    res.status(500).json({ message: "장바구니 추가 실패", error: err.message });
+    res.status(400).json({ message: "장바구니 추가 실패", error: err.message });
   }
 }
 
-// 수량 수정
+// 장바구니 수량 수정 (장바구니 페이지에서 사용)
 export async function updateCart(req, res) {
   const { iceidx } = req.params;
   const { quantity } = req.body;
-
   try {
-    const updated = await cartRepository.updateQuantity(
+    await cartRepository.updateQuantity(
       req.user.id,
       iceidx,
       quantity
     );
-
-    if (!updated) {
-      return res.status(404).json({ message: "해당 항목을 찾을 수 없습니다." });
-    }
-
-    res.status(200).json(updated);
+    res.status(200).json({ message: "수정 완료" });
   } catch (err) {
-    res.status(500).json({ message: "수량 수정 실패", error: err.message });
+    res.status(500).json({ message: "수정 실패", error: err.message });
   }
 }
 
 // 장바구니 항목 삭제
 export async function deleteCart(req, res) {
   const { iceidx } = req.params;
-
   try {
     await cartRepository.deleteByUserAndIce(req.user.id, iceidx);
     res.status(200).json({ message: "삭제 완료" });
   } catch (err) {
     res.status(500).json({ message: "삭제 실패", error: err.message });
+  }
+}
+
+// 장바구니 전체 구매
+export async function purchaseCart(req, res) {
+  const userId = req.user.id;
+
+  try {
+    const cartItems = await cartRepository.findAllByUser(userId);
+    if (!cartItems.length) {
+      return res.status(400).json({ message: "장바구니가 비어있습니다." });
+    }
+
+    const total = cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
+    const user = await userRepository.findById(userId);
+
+    if (user.point < total) {
+      return res.status(400).json({ message: "포인트가 부족합니다." });
+    }
+
+    await userRepository.updatePoint(userId, user.point - total);
+    await cartRepository.clearCart(userId);
+
+    res.status(200).json({
+      message: "구매 완료",
+      used: total,
+      remaining: user.point - total
+    });
+  } catch (err) {
+    res.status(500).json({ message: "구매 실패", error: err.message });
   }
 }

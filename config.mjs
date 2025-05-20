@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 function required(key, defaultValue = undefined) {
-  // process : Node.js의 전반적인 과정이 들어가있음
   const value = process.env[key] || defaultValue;
   if (value == null) {
     throw new Error(`키 ${key}는 undefined!!`);
