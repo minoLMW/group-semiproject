@@ -31,6 +31,17 @@ export async function findByid(id) {
     .then(mapOptionalUser);
 }
 
+export async function findById(userId) {
+  return getUsers().findOne({ _id: new ObjectID(userId) });
+}
+
+export async function updatePoint(userId, newPoint) {
+  return getUsers().updateOne(
+    { _id: new ObjectID(userId) },
+    { $set: { point: newPoint } }
+  );
+}
+
 function mapOptionalUser(user) {
   return user ? { ...user, id: user._id.toString() } : user;
 }
