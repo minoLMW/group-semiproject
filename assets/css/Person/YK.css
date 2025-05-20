@@ -7,31 +7,31 @@
 }
 
 .map_header {
-    padding: 1.25rem; /* 20px */
+    padding: 2rem;
     background-color: #fff;
-    border-bottom: 0.0625rem solid #ddd; /* 1px */
+    border-bottom: 1px solid #ddd;
 }
 
 .main-menu {
     display: flex;
-    gap: 1.5rem; /* 24px */
-    margin-bottom: 1.875rem; /* 30px */
+    gap: 2.4rem;
+    margin-bottom: 3rem;
     justify-content: center;
     align-items: center;
 }
 
 .main-menu p {
     color: #f48cbc;
-    font-size: 1.125rem; /* 18px */
+    font-size: 1.8rem;
     font-weight: 500;
     background: none;
     border: none;
-    padding: 0.375rem 1.125rem; /* 6px 18px */
+    padding: 0.48rem 1.8rem;
     margin: 0;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
-    border-radius: 0.25rem; /* 4px */
+    border-radius: 0.8rem;
 }
 
 .main-menu p.active {
@@ -43,23 +43,23 @@
 .main-menu p:not(:first-child)::before {
     content: '';
     display: inline-block;
-    width: 0.0625rem; /* 1px */
-    height: 1rem; /* 16px */
+    width: 1px;
+    height: 1.6rem;
     background: #f48cbc;
     position: absolute;
-    left: -0.8125rem; /* -13px */
+    left: -1.3rem;
     top: 50%;
     transform: translateY(-50%);
 }
 
 .store-menu {
     text-align: center;
-    font-size: 4.5rem; /* 72px */
+    font-size: 7.2rem;
     font-weight: 700;
     color: #f48cbc;
-    margin-top: 2.5rem; /* 40px */
-    margin-bottom: 2.5rem; /* 40px */
-    letter-spacing: 0.125rem; /* 2px */
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    letter-spacing: 0.2rem;
 }
 
 .map_Main_Container {
@@ -68,8 +68,8 @@
 }
 
 .sidebar {
-    width: 18.75rem; /* 300px */
-    padding: 1.25rem; /* 20px */
+    width: 30rem;
+    padding: 2rem;
     background-color: #f5f5f5;
     overflow-y: auto;
 }
@@ -82,49 +82,49 @@
 #map {
     width: 100%;
     height: 100%;
-    min-height: 25rem; /* 400px */
+    min-height: 40rem;
 }
 
 /* 검색 관련 스타일 */
 .search-container {
-    margin-bottom: 1.25rem; /* 20px */
+    margin-bottom: 2rem;
 }
 
 .filter-options {
-    margin-bottom: 0.9375rem; /* 15px */
+    margin-bottom: 1.5rem;
 }
 
 /* 옵션 선택 버튼 스타일 수정 */
 .store-map-option {
     position: relative;
-    margin-bottom: 0.9375rem; /* 15px */
+    margin-bottom: 1.5rem;
 }
 
 .store-map-option__button {
     width: 100%;
-    padding: 0.5rem 0.75rem; /* 8px 12px */
-    font-size: 0.875rem; /* 14px */
+    padding: 0.8rem 1.2rem;
+    font-size: 1.4rem;
     color: #333;
     background-color: #fff;
-    border: 0.0625rem solid #ddd; /* 1px */
-    border-radius: 0.25rem; /* 4px */
+    border: 1px solid #ddd;
+    border-radius: 0.4rem;
     cursor: pointer;
     text-align: left;
     position: relative;
-    margin-bottom: 0.5rem; /* 8px */
+    margin-bottom: 0.8rem;
 }
 
 .store-map-option__button::after {
     content: '';
     position: absolute;
-    right: 0.75rem; /* 12px */
+    right: 1.2rem;
     top: 50%;
     transform: translateY(-50%);
     width: 0;
     height: 0;
-    border-left: 0.3125rem solid transparent; /* 5px */
-    border-right: 0.3125rem solid transparent; /* 5px */
-    border-top: 0.3125rem solid #666; /* 5px */
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-top: 0.5rem solid #666;
 }
 
 .store-map-option__button:hover {
@@ -139,11 +139,11 @@
     left: 0;
     width: 100%;
     background-color: #fff;
-    border: 0.0625rem solid #ddd; /* 1px */
-    border-radius: 0.25rem; /* 4px */
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* 2px 4px */
+    border: 1px solid #ddd;
+    border-radius: 0.4rem;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    margin-top: 0.25rem; /* 4px */
+    margin-top: 0.4rem;
 }
 
 .store-map-option__content.active {
@@ -153,43 +153,43 @@
 /* 옵션 리스트 스타일 수정 */
 .store-map-option__list {
     margin: 0;
-    padding: 0.5rem; /* 8px */
+    padding: 0.8rem;
 }
 
 .store-map-option__item {
-    margin-bottom: 0.75rem; /* 12px */
+    margin-bottom: 1.2rem;
 }
 
 .store-map-option__name {
     font-weight: bold;
-    margin-bottom: 0.5rem; /* 8px */
+    margin-bottom: 0.8rem;
     color: #333;
 }
 
 .store-map-option__area {
     margin: 0;
-    padding: 0.25rem 0; /* 4px */
+    padding: 0.4rem 0;
 }
 
 .store-map-option__label {
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 0.5rem 0; /* 8px */
+    padding: 0.8rem 0;
 }
 
 .store-map-option__input {
-    margin-right: 0.5rem; /* 8px */
+    margin-right: 0.8rem;
 }
 
 .store-map-option__input[type="radio"] {
     appearance: none;
     -webkit-appearance: none;
-    width: 1.125rem; /* 18px */
-    height: 1.125rem; /* 18px */
-    border: 0.125rem solid #ddd; /* 2px */
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 0.2rem solid #ddd;
     border-radius: 50%;
-    margin-right: 0.5rem; /* 8px */
+    margin-right: 0.8rem;
     position: relative;
     cursor: pointer;
     vertical-align: middle;
@@ -206,8 +206,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 0.625rem; /* 10px */
-    height: 0.625rem; /* 10px */
+    width: 1rem;
+    height: 1rem;
     background-color: #e31b6d;
     border-radius: 50%;
 }
@@ -217,11 +217,11 @@
 }
 
 .store-map-option__input[type="checkbox"] {
-    width: 1.125rem; /* 18px */
-    height: 1.125rem; /* 18px */
-    border: 0.125rem solid #ddd; /* 2px */
-    border-radius: 0.25rem; /* 4px */
-    margin-right: 0.5rem; /* 8px */
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 0.2rem solid #ddd;
+    border-radius: 0.4rem;
+    margin-right: 0.8rem;
     position: relative;
     cursor: pointer;
     vertical-align: middle;
@@ -239,7 +239,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
-    font-size: 0.75rem; /* 12px */
+    font-size: 1.2rem;
 }
 
 .store-map-option__input[type="checkbox"]:hover {
@@ -247,7 +247,7 @@
 }
 
 .store-map-option__text {
-    font-size: 0.875rem; /* 14px */
+    font-size: 1.4rem;
     color: #333;
     user-select: none;
 }
@@ -256,11 +256,11 @@
     position: relative;
     padding: 0;
     background: #fff;
-    border-radius: 0.625rem; /* 10px */
-    box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.1); /* 2px 6px */
-    border: 0.125rem solid #e31b6d; /* 2px */
-    min-width: 22rem;   /* 352px */
-    max-width: 32rem;   /* 512px */
+    border-radius: 1rem;
+    box-shadow: 0 0.2rem 0.6rem rgba(0,0,0,0.1);
+    border: 0.2rem solid #e31b6d;
+    min-width: 35.2rem;
+    max-width: 51.2rem;
 }
 
 .store-map-field__container:before {
@@ -268,34 +268,34 @@
 }
 
 .store-map-field__header {
-    padding: 1.5rem; /* 24px */
+    padding: 2.4rem;
     background: #fff;
-    border-radius: 0.75rem 0.75rem 0 0; /* 12px */
+    border-radius: 1.2rem 1.2rem 0 0;
 }
 
 .store-map-field__title {
     margin: 0;
     color: #333;
     font-weight: 700;
-    font-size: 1.5rem; /* 24px */
+    font-size: 2.4rem;
 }
 
 .store-map-field__content {
-    padding: 0 1.5rem 1.5rem; /* 0 24px 24px */
+    padding: 0 2.4rem 2.4rem;
     background: #fff;
-    border-radius: 0 0 0.75rem 0.75rem; /* 0 0 12px 12px */
+    border-radius: 0 0 1.2rem 1.2rem;
 }
 
 .store-map-field__content div {
-    margin: 0.625rem 0; /* 10px */
+    margin: 1rem 0;
     color: #666;
-    font-size: 1.125rem; /* 18px */
+    font-size: 1.8rem;
 }
 
 .store-map-field__content a {
     color: #e31b6d;
     text-decoration: none;
-    font-size: 1rem; /* 16px */
+    font-size: 1.6rem;
 }
 
 .store-map-field__content a:hover {
@@ -306,16 +306,16 @@
     display: block;
     position: relative;
     z-index: 10;
-    padding-bottom: 0.125rem; /* 2px */
+    padding-bottom: 2px;
     color: var(--pink-color-3);
     font-weight: var(--font-weight-sd-bold);
-    font-size: 0.9375rem; /* 15px */
+    font-size: 1.5rem;
 }
 
 .store-map-field__close {
     position: absolute;
-    top: 0.3125rem; /* 5px */
-    right: 0.3125rem; /* 5px */
+    top: 0.5rem;
+    right: 0.5rem;
 }
 
 .store-map-field__table {
@@ -325,19 +325,19 @@
 }
 
 .store-map-field__table th {
-    padding: 0.5rem 0; /* 8px */
+    padding: 0.8rem 0;
     color: var(--brown-color-3);
     font-weight: var(--font-weight-sd-medium);
-    font-size: 0.9375rem; /* 15px */
+    font-size: 1.5rem;
     text-align: right;
     vertical-align: top
 }
 
 .store-map-field__table td {
-    padding: 0.5rem 0 0.5rem 0.9375rem; /* 8px 0 8px 15px */
+    padding: 0.8rem 0 0.8rem 1.5rem;
     color: #000;
     font-weight: var(--font-weight-sd-medium);
-    font-size: 0.9375rem; /* 15px */
+    font-size: 1.5rem;
     text-align: left;
     white-space: normal;
     word-wrap: break-word;
@@ -347,9 +347,9 @@
 .store-map-promotion {
     position: absolute;
     top: 0;
-    right: -21.625rem; /* -346px */
+    right: -34.6rem;
     z-index: 10;
-    width: 21.625rem; /* 346px */
+    width: 34.6rem;
     height: 100%;
     transition: right .3s ease
 }
@@ -365,48 +365,48 @@
 /* 위치 선택 스타일 */
 .location-selects {
     display: flex;
-    gap: 0.625rem; /* 10px */
-    margin-bottom: 0.9375rem; /* 15px */
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .filter-button {
     flex: 1;
-    padding: 0.5rem; /* 8px */
-    border: 0.0625rem solid #ddd; /* 1px */
-    border-radius: 0.25rem; /* 4px */
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 0.4rem;
 }
 
 /* 검색 박스 스타일 */
 .search-box {
     display: flex;
     flex-direction: column;
-    gap: 0.625rem; /* 10px */
-    margin-bottom: 0.9375rem; /* 15px */
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .search-input {
     width: 100%;
-    padding: 0.625rem; /* 10px */
-    border: 0.0625rem solid #ddd; /* 1px */
-    border-radius: 0.25rem; /* 4px */
-    font-size: 0.875rem; /* 14px */
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.4rem;
+    font-size: 1.4rem;
 }
 
 .search-input:focus {
     border-color: #e31b6d;
     outline: none;
-    box-shadow: 0 0 0 0.125rem rgba(227, 27, 109, 0.1); /* 2px */
+    box-shadow: 0 0 0 0.2rem rgba(227, 27, 109, 0.1);
 }
 
 .search-button {
     width: 100%;
-    padding: 0.625rem; /* 10px */
+    padding: 1rem;
     background-color: #e31b6d;
     color: #fff;
     border: none;
-    border-radius: 0.25rem; /* 4px */
+    border-radius: 0.4rem;
     cursor: pointer;
-    font-size: 0.875rem; /* 14px */
+    font-size: 1.4rem;
     font-weight: 600;
     transition: background-color 0.2s;
 }
@@ -417,79 +417,79 @@
 
 /* 매장 목록 스타일 */
 .store-list {
-    margin-top: 1.25rem; /* 20px */
-    max-height: calc(100vh - 25rem); /* 400px */
-    overflow-y: auto; /* 세로 스크롤바 표시 */
-    padding-right: 0.625rem; /* 10px */
+    margin-top: 2rem;
+    max-height: calc(100vh - 40rem);
+    overflow-y: auto;
+    padding-right: 1rem;
 }
 
 /* 스크롤바 스타일링 */
 .store-list::-webkit-scrollbar {
-    width: 0.5rem; /* 8px */
+    width: 0.8rem;
 }
 
 .store-list::-webkit-scrollbar-track {
-    background: #f1f1f1; /* 스크롤바 트랙 배경색 */
-    border-radius: 0.25rem; /* 4px */
+    background: #f1f1f1;
+    border-radius: 0.4rem;
 }
 
 .store-list::-webkit-scrollbar-thumb {
-    background: #888; /* 스크롤바 색상 */
-    border-radius: 0.25rem; /* 4px */
+    background: #888;
+    border-radius: 0.4rem;
 }
 
 .store-list::-webkit-scrollbar-thumb:hover {
-    background: #555; /* 스크롤바 호버 시 색상 */
+    background: #555;
 }
 
 .store-card {
     background-color: #fff;
-    border: 0.0625rem solid #ddd; /* 1px */
-    border-radius: 0.25rem; /* 4px */
-    padding: 0.9375rem; /* 15px */
-    margin-bottom: 0.625rem; /* 10px */
-    cursor: pointer; /* 클릭 가능함을 표시 */
-    transition: all 0.2s ease; /* 부드러운 전환 효과 */
+    border: 1px solid #ddd;
+    border-radius: 0.4rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .store-card:hover {
-    transform: translateY(-0.125rem); /* -2px */
-    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1); /* 2px 8px */
+    transform: translateY(-0.2rem);
+    box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.1);
 }
 
 .store-name {
     font-weight: bold;
-    margin-bottom: 0.625rem; /* 10px */
+    margin-bottom: 1rem;
 }
 
 .store-info p {
-    margin: 0.3125rem 0; /* 5px */
+    margin: 0.5rem 0;
     color: #666;
 }
   
 /* 게임 */
 .start-screen {
-    max-width: 50rem;
-    margin: 3.125rem auto;
-    padding: 2.5rem;
+    max-width: 80rem;
+    margin: 5rem auto;
+    padding: 4rem;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 1.25rem;
-    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.1);
+    border-radius: 2rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
 }
 
 .game-rules {
-    margin: 1.875rem 0;
+    margin: 3rem 0;
     text-align: left;
-    padding: 0 1.875rem;
+    padding: 0 3rem;
 }
 
 .game-rules h2 {
     color: #2c3e50;
-    margin-bottom: 1.25rem;
-    font-size: 1.5rem;
-    border-bottom: 0.125rem solid #3498db;
-    padding-bottom: 0.625rem;
+    margin-bottom: 2rem;
+    font-size: 2.4rem;
+    border-bottom: 0.2rem solid #3498db;
+    padding-bottom: 1rem;
 }
 
 .game-rules ul {
@@ -498,104 +498,104 @@
 }
 
 .game-rules li {
-    margin: 0.9375rem 0;
-    padding: 0.9375rem;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
     background: #f8f9fa;
-    border-radius: 0.625rem;
+    border-radius: 1rem;
     color: #34495e;
-    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.05);
     transition: transform 0.2s;
 }
 
 .game-rules li:hover {
-    transform: translateX(5px);
+    transform: translateX(0.5rem);
 }
 
 .start-button {
-    padding: 0.9375rem 3.125rem;
-    font-size: 1.25rem;
+    padding: 1.5rem 5rem;
+    font-size: 2rem;
     background: linear-gradient(45deg, #3498db, #2980b9);
     color: white;
     border: none;
-    border-radius: 1.875rem;
+    border-radius: 3rem;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 0.3125rem 0.9375rem rgba(52, 152, 219, 0.3);
+    box-shadow: 0 0.5rem 1.5rem rgba(52, 152, 219, 0.3);
 }
 
 .start-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0.5rem 1.25rem rgba(52, 152, 219, 0.4);
+    transform: translateY(-0.2rem);
+    box-shadow: 0 0.8rem 2rem rgba(52, 152, 219, 0.4);
 }
 
 .game-screen {
-    padding: 1.875rem;
+    padding: 3rem;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 1.25rem;
-    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.1);
-    margin: 1.25rem auto;
-    max-width: 100rem;
-    min-height: 60rem;
+    border-radius: 2rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 160rem;
+    min-height: 96rem;
 }
 
 .game-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem;
+    padding: 2rem;
     background: rgba(255, 255, 255, 0.9);
-    border-radius: 0.9375rem;
-    margin-bottom: 1.875rem;
-    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
+    border-radius: 1.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    margin-top: 1.25rem;
+    margin-top: 2rem;
     color: #333;
 }
 
 #timer, #score {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     color: #2c3e50;
     font-weight: bold;
-    text-shadow: 0.0625rem 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .game-container {
     display: grid;
-    margin: 1.875rem auto;
-    padding: 1rem; /* 적당한 패딩 */
+    margin: 3rem auto;
+    padding: 1.6rem;
     background: rgba(255, 255, 255, 0.9);
-    border-radius: 1.25rem;
-    box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.1);
-    gap: 0.4rem;
-    min-height: 37.5rem;
+    border-radius: 2rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    gap: 0.64rem;
+    min-height: 60rem;
     width: fit-content;
     max-width: 100%;
 }
 
 .game-screen {
-    padding: 1.25rem;
+    padding: 2rem;
 }
 
 .card {
     position: relative;
-    width: 100%; /* grid에서 셀 크기와 맞추기 위해 */
+    width: 100%;
     height: 100%;
     max-width: none;
     max-height: none;
-    perspective: 62.5rem;
+    perspective: 100rem;
     cursor: pointer;
-    border-radius: 0.9375rem;
+    border-radius: 1.5rem;
     overflow: hidden;
     transition: transform 0.3s;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
     margin: 0;
 }
 
 .card:hover {
-    transform: scale(1.05) translateY(-5px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    transform: scale(1.05) translateY(-0.5rem);
+    box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.3);
 }
 
 .card-front, .card-back {
@@ -607,7 +607,7 @@ h1 {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 0.9375rem;
+    border-radius: 1.5rem;
     backface-visibility: hidden;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
@@ -619,21 +619,21 @@ h1 {
     z-index: 2;
     transform: rotateY(180deg);
     background: linear-gradient(45deg, #3498db, #2980b9);
-    border: 0.125rem solid #fff;
+    border: 0.2rem solid #fff;
 }
 
 .card-back {
     background: linear-gradient(135deg, #f1c40f, #f39c12);
     z-index: 1;
     transform: rotateY(0deg);
-    border: 0.125rem solid #fff;
+    border: 0.2rem solid #fff;
     background-image: 
         linear-gradient(45deg, #f1c40f 25%, transparent 25%),
         linear-gradient(-45deg, #f1c40f 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, #f1c40f 75%),
         linear-gradient(-45deg, transparent 75%, #f1c40f 75%);
-    background-size: 1.25rem 1.25rem;
-    background-position: 0 0, 0 0.625rem, 0.625rem -0.625rem, -0.625rem 0;
+    background-size: 2rem 2rem;
+    background-position: 0 0, 0 1rem, 1rem -1rem, -1rem 0;
 }
 
 .card.flipped .card-front {
@@ -645,39 +645,74 @@ h1 {
 }
 
 .matched {
-    box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
-    border: 0.125rem solid #2ecc71;
+    box-shadow: 0 0 2rem rgba(46, 204, 113, 0.5);
+    border: 0.2rem solid #2ecc71;
 }
 
 #message {
-    font-size: 1.75rem;
-    margin-top: 1.875rem;
+    font-size: 2.8rem;
+    margin-top: 3rem;
     color: #2c3e50;
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .give-up-button {
-    padding: 0.625rem 1.5625rem;
-    font-size: 1rem;
+    padding: 1rem 2.5rem;
+    font-size: 1.6rem;
     background: linear-gradient(45deg, #e74c3c, #c0392b);
     color: white;
     border: none;
-    border-radius: 1.25rem;
+    border-radius: 2rem;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 0.1875rem 0.625rem rgba(231, 76, 60, 0.3);
+    box-shadow: 0 0.3rem 1rem rgba(231, 76, 60, 0.3);
 }
 
 .give-up-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0.3125rem 0.9375rem rgba(231, 76, 60, 0.4);
+    transform: translateY(-0.2rem);
+    box-shadow: 0 0.5rem 1.5rem rgba(231, 76, 60, 0.4);
 }
 
 .high-score {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     color: #2c3e50;
-    margin: 1.25rem 0;
+    margin: 2rem 0;
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 서비스 태그 스타일 */
+.store-map-services {
+    margin-top: 1rem;
+}
+
+.store-map-services__title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.8rem;
+}
+
+.store-map-services__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.service-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e31b6d;
+    border-radius: 2rem;
+    color: #e31b6d;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.service-badge:hover {
+    background-color: #e31b6d;
+    color: #fff;
 }
