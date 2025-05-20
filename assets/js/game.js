@@ -1,3 +1,5 @@
+// import 문 제거 (필요한 경우 올바른 import 문 추가)
+
 const startScreen = document.getElementById("start-screen");        // 시작 화면
 const gameScreen = document.getElementById("game-screen");          // 게임 화면
 const startButton = document.getElementById("start-button");        // 게임 시작 버튼
@@ -77,14 +79,14 @@ function createBoard() {
     const screenWidth = window.innerWidth;
     let cardWidth, cardHeight, gap;
     if (screenWidth <= 480) {
-        cardWidth = 8; // 80px / 16
-        cardHeight = 10; // 104px / 16
+        cardWidth = 8; // 80px 
+        cardHeight = 10; // 104px 
     } else if (screenWidth <= 768) {
-        cardWidth = 10; // 100px / 16
-        cardHeight = 13; // 130px / 16
+        cardWidth = 10; // 100px 
+        cardHeight = 13; // 130px 
     } else {
-        cardWidth = 11; // 110px / 16
-        cardHeight = 17; // 170.625px / 16
+        cardWidth = 11; // 110px 
+        cardHeight = 17; // 170.625px 
     }
     gap = 5; // 간격을 0.4rem로 고정
 
@@ -162,9 +164,7 @@ function startTimer() {
 }
 
 function nextStage() {
-    // 다음 스테이지로 넘어갈 때 보드와 상태를 초기화하고, 3초 동안 카드를 공개합니다.
     currentStage++;
-    onStageClear(score);
     if (currentStage > totalStages) {
         endGame(true);
         return;
@@ -219,11 +219,9 @@ function endGame(success) {
         } else {
             score += 100;
             scoreDisplay.textContent = `점수: ${score}`;
-            messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득! 다음 스테이지로...`;
+            messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득!`;
             console.log(`스테이지 ${currentStage} 클리어! 현재 점수: ${score}점`);
-            setTimeout(() => {
-                nextStage();
-            }, 2000);
+            onStageClear(score);
             return;
         }
     } else {
@@ -294,7 +292,6 @@ gameBoard.addEventListener("click", e => {
 
 // 게임 시작 버튼 이벤트 리스너
 startButton.addEventListener("click", () => {
-    // 게임 보드를 생성하고 게임을 시작합니다.
     createBoard();
     startGame();
 });
@@ -318,8 +315,7 @@ function onStageClear(currentScore) {
 // "도전하기" 버튼 클릭 시
 document.getElementById('next-stage-btn').onclick = function() {
     document.getElementById('stage-clear-modal').style.display = 'none';
-    // 다음 스테이지 시작 함수 호출
-    startNextStage();
+    nextStage();
 };
 
 // "종료하기" 버튼 클릭 시
