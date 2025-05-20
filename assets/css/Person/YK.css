@@ -681,3 +681,38 @@ h1 {
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
+
+/* 서비스 태그 스타일 */
+.store-map-services {
+    margin-top: 1rem;
+}
+
+.store-map-services__title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.8rem;
+}
+
+.store-map-services__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.service-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e31b6d;
+    border-radius: 2rem;
+    color: #e31b6d;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.service-badge:hover {
+    background-color: #e31b6d;
+    color: #fff;
+}
