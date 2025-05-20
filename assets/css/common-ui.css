@@ -71,8 +71,8 @@ html {
 
 
 body {color:var(--color-root); font-size:1.5rem; line-height:1.5; font-family:var(--word); letter-spacing:-0.025em; overflow-wrap:break-word; -webkit-text-size-adjust:none; background-color:var(--bg-root);}
-
 legend {overflow:hidden !important; position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; white-space:nowrap !important; clip:rect(1px, 1px, 1px, 1px) !important; clip-path:inset(50%) !important;}
+.hide {overflow:hidden !important; position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; white-space:nowrap !important; clip:rect(1px, 1px, 1px, 1px) !important; clip-path:inset(50%) !important;}
 
 :root {
 	--bg-root:#fff;
@@ -1111,11 +1111,12 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	display:block;
 	width:100%;
 	height:5.2rem;
+	margin-bottom:1rem;
 	border:0.1rem solid var(--border-gray);
-	background:var(--bg-root2);
-	color:var(--brown-color-4);
+	border-radius:0.8rem;
+	color:var(--font1);
 	font-weight:var(--font-weight-sd-medium);
-	font-size:1.8rem;
+	font-size:2.2rem;
 	text-align:center;
 }
 .login__input::-moz-placeholder {
@@ -1123,15 +1124,6 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .login__input::placeholder {
 	color:var(--brown-color-4);
-}
-.login__button {
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	width:100%;
-	height:5rem;
-	margin-top:3rem;
-	border-radius:2.5rem;
 }
 .login__buttons {
 	display:flex;
@@ -1148,11 +1140,18 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	margin-left:1rem;
 }
 .login__button--login {
-	margin-top:1rem;
+	display:block;
+	width:100%;
+	height:6rem;
+	margin-top:4.5rem;
+	border-radius:2.5rem;
 	background:var(--bg-black);
 	color:var(--text-white);
-	font-weight:var(--font-weight-sd-bold);
-	font-size:1.8rem;
+	font-weight:700;
+	font-size:2.2rem;
+}
+.login__button--login:hover {
+	background:var(--pink-color-2);
 }
 .login__button--happy {
 	border:0.2rem solid var(--deepblue);
@@ -1288,17 +1287,15 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	font-weight:bold;
 }
 .signup__button--submit {
+	display:block;
 	width:100%;
+	height:6rem;
+	margin-top:4.5rem;
+	border-radius:2.5rem;
 	background:var(--bg-black);
 	color:var(--text-white);
-	justify-items:center;
-	align-items:center;
 	font-weight:700;
 	font-size:2.2rem;
-	height:6rem;
-	border:none;
-	border-radius:2.5rem;
-	margin-top:4.5rem;
 }
 .signup__button--submit:hover {
 	background:var(--pink-color-2);

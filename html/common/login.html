@@ -1,72 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <link rel="stylesheet" href="/assets/css/common/style-origin.css" />
-  </head>
-  <body id="baskinrobbins-login" class="baskinrobbins-login">
-    <header></header>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>로그인</title>
+	<link rel="stylesheet" href="/assets/css/common-ui.css" />
+</head>
+<body>
+	<div class="page">
+		<div class="container">
 
-    <section class="site-container">
-      <div id="content" class="login">
-        <header class="page-header">
-          <div class="page-header__container">
-            <div class="page-header__content">
-              <h2 class="page-header__title">로그인</h2>
-            </div>
-            <div class="page-header__content">
-              <p class="page-header__text">
-                해피포인트 통합 아이디로 간편하게 로그인 하세요
-              </p>
-            </div>
-          </div>
-        </header>
-        <hr class="divider" />
-        <div class="login__container">
-          <div class="login__content">
-            <div class="login__inner">
-              <form action="" class="login__form" method="post">
-                <fieldset class="login__block">
-                  <!-- <legend>계정 입력 폼</legend> -->
-                  <input type="hidden" name="redirectUrl" value="/" /><label
-                    class="login__label"
-                    ><input type="text" name="userid" placeholder="아이디" class="login__input"
-                    />
-                  </label>
-                  <label class="login__label">
-                    <input type="password" name="password" placeholder="비밀번호" class="login__input"
-                    />
-                  </label>
-                  <button type="submit" class="login__button login__button--login"
-                  >
-                    제출하기
-                  </button>
-                </fieldset>
-              </form>
-              <div class="login__buttons">
-                <a href="#" target="" class="login__link">아이디 찾기</a>
-                <a href="#" target="" class="login__link">비밀번호 재발급</a>
-              </div>
-            </div>
-            <p class="login__text">
-              "해피포인트 회원이 아니시라면 지금 해피포인트에"
-              <br />
-              "가입하시고 다양한 혜택을 경험하세요"
-            </p>
-            <div class="login__buttons">
-              <a href="#none" target="" class="login__button login))button--happy"
-              >
-                <span class="login__button-text"> 해피포인트 가입</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+			<header class="header"></header>
 
-    <footer class="footer">
-			</footer>
-  </body>
+			<main class="contents">
+				<div class="content">
+					<section class="site-container">
+						<div id="content" class="login">
+							<div class="page-title">
+								<div class="page-title__container">
+									<div class="page-title__content">
+										<h2 class="page-title__title">로그인</h2>
+										<p class="page-title__text">해피포인트 통합 아이디로 간편하게 로그인 하세요</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="login__container">
+								<div class="login__content">
+									<div class="login__inner">
+										<form action="" class="login__form" method="post">
+											<fieldset class="login__block">
+												<legend>계정 입력 폼</legend>
+												<input type="hidden" name="redirectUrl" value="/" />
+												
+												<label class="login__label hide">아이디</label>
+												<input type="text" name="userid" placeholder="아이디" class="login__input"/>
+												
+												<label class="login__label hide">비밀번호</label>
+												<input type="password" name="password" placeholder="비밀번호" class="login__input"/>
+												
+												<button type="submit" class="login__button--login">제출하기</button>
+											</fieldset>
+										</form>
+										<div class="login__buttons">
+											<a href="#" target="" class="login__link">아이디 찾기</a>
+											<a href="#" target="" class="login__link">비밀번호 재발급</a>
+										</div>
+									</div>
+									<p class="login__text">
+										"해피포인트 회원이 아니시라면 지금 해피포인트에"
+										<br />
+										"가입하시고 다양한 혜택을 경험하세요"
+									</p>
+									<div class="login__buttons">
+										<a href="#none" target="" class="login__button login))button--happy"
+										>
+											<span class="login__button-text"> 해피포인트 가입</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</main>
+
+			<footer class="footer"></footer>
+
+		</div>
+	</div>
+    <script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/assets/js/common-ui.js"></script>
+    <script src="/assets/js/signup.js"></script>
+</body>
 </html>
