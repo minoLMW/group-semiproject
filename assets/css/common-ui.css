@@ -136,7 +136,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .main-logo {
 	width:5.2rem;
 	height:6rem;
-	background-image:url(../../imgs/img/h_logo.png);
+	background-image:url(../imgs/img/h_logo.png);
 	background-repeat:no-repeat;
 	background-size:contain;
 }
@@ -191,7 +191,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .search-btn {
 	width:2.2rem;
 	height:2.4rem;
-	background-image:url(../..//imgs/img/btn_search.png);
+	background-image:url(../imgs/img/btn_search.png);
 	background-repeat:no-repeat;
 	background-size:contain;
 	float:right;
@@ -206,7 +206,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	width:3.2rem;
 	height:3.2rem;
 	margin:0 2rem;
-	background-image:url(../..//imgs/img/btn_user_menu.png);
+	background-image:url(../imgs/img/btn_user_menu.png);
 	background-repeat:no-repeat;
 	background-size:contain;
 	cursor:pointer;
@@ -217,7 +217,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	background-color:var(--pink-color-3);
 }
 .main-header-bg.active .main-logo {
-	background-image:url(../..//imgs/img/h_logo_white.png);
+	background-image:url(../imgs/img/h_logo_white.png);
 	background-repeat:no-repeat;
 	background-size:contain;
 }
@@ -231,7 +231,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	cursor:pointer;
 }
 .main-header-bg.active .search-btn {
-	background-image:url(../..//imgs/img/btn_search_white.png);
+	background-image:url(../imgs/img/btn_search_white.png);
 	background-repeat:no-repeat;
 	background-size:contain;
 }
@@ -239,7 +239,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	width:3.2rem;
 	height:3.2rem;
 	margin:0 2rem;
-	background-image:url(../..//imgs/img/btn_user_menu_white.png);
+	background-image:url(../imgs/img/btn_user_menu_white.png);
 	background-repeat:no-repeat;
 	background-size:contain;
 }
