@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 connectDB()
   .then(() => {
     app.listen(config.host.port, () => {
-      console.log("실행중");
+      console.log("실행중", config.host.port);
     });
   })
   .catch(console.error);
