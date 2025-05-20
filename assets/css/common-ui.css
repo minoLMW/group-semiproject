@@ -1094,7 +1094,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	margin:7rem auto;
 }
 .login__content {
-	width:98rem;
+	width:var(--size-inner);
 	margin:0 auto;
 }
 .login__inner {
@@ -1232,31 +1232,49 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	align-items:center;
 }
 .signup__inner {
+	width:var(--size-inner);
+	margin:5rem auto 0;
+}
+.signup_form {
 	width:46rem;
-	margin:0 auto;
+	margin:5rem auto 0;
+	border-top:1px solid var(--border-gray);
+}
+.signup__field {
+	position:relative;
+	margin-top:4.5rem;
 }
 .signup__label {
 	display:block;
-	font-size:1.6rem;
-	font-weight:var(--font-weight-medium);
-	margin-top:1rem;
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
+	font-size:2.2rem;
 }
 .signup__input {
 	width:100%;
 	height:5.2rem;
-	border:0.1rem solid var(--color-border);
+	border:1px solid var(--border-gray);
+	border-radius:0.8rem;
 	background:var(--color-bg-input);
-	color:var(--color-placeholder);
-	font-weight:var(--font-weight-medium);
-	font-size:1.8rem;
+	color:var(--font1);
+	font-weight:500;
+	font-size:2.2rem;
 	text-align:center;
-	margin-top:0.5rem;
 }
 .signup__input::placeholder {
-	color:var(--color-placeholder);
+	color:var(--font4);
+}
+.signup__input:focus + .signup__label,
+.signup__input:valid + .signup__label {
+	left:0; 
+	top:-2.8rem;
+	font-size:1.5rem;
+	transform:translate(0);
+	transition:all 0.5s ease-in-out;
 }
 
-/* 버튼 스타일 */
 .signup__button {
 	display:flex;
 	align-items:center;
@@ -1276,27 +1294,18 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	justify-items:center;
 	align-items:center;
 	font-weight:700;
-	font-size:1.7rem;
-	padding:1.5rem,0;
-	height:4.5rem;
+	font-size:2.2rem;
+	height:6rem;
 	border:none;
 	border-radius:2.5rem;
-	margin-top:1rem;
-	transition:all 0.3s ease;
+	margin-top:4.5rem;
 }
 .signup__button--submit:hover {
-	background:linear-gradient(135deg, var(--pink-color-1), var(--pink-color-3));
-	box-shadow:0 0.8rem 1.5rem rgba(249, 134, 189, 0.6);
-	transform:translateY(-0.2rem);
+	background:var(--pink-color-2);
 }
 .signup__phone-group {
 	position:relative;
 	width:100%;
-	margin-top:1rem;
-	margin-bottom:0.25rem;
-}
-.signup__phone-group input.signup__input {
-	padding-right:10rem; 
 }
 .signup__button--certify {
 	position:absolute;
@@ -1419,7 +1428,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 
 /* history */
 .story-story__container {
-    width:var(--size-pc);
+    width:var(--size-inner);
     margin:2.6rem auto 0
 }
 .story-story__item {
