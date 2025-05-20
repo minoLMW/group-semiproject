@@ -55,4 +55,4 @@ async function sendit(event) {
 }
 
 // 1) cmd 터미널 입력 값: npm run dev
-// 2) http://localhost:8080/common/login.html url 접속
+// 2) http://localhost:8080/common/login.html url 접속 

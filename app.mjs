@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json())
 
 // 1) HTML 폴더 절대 경로
-const htmlDir = path.join(__dirname, "html");
+const htmlDir = path.join(__dirname, "html"); 
 // 2) assets 폴더 절대 경로
 const assetsDir = path.join(__dirname, "assets");
 
