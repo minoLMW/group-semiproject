@@ -1,25 +1,495 @@
+/* 매장 찾기 */
+.map_Body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.map_header {
+    padding: 1.25rem; /* 20px */
+    background-color: #fff;
+    border-bottom: 0.0625rem solid #ddd; /* 1px */
+}
+
+.main-menu {
+    display: flex;
+    gap: 1.5rem; /* 24px */
+    margin-bottom: 1.875rem; /* 30px */
+    justify-content: center;
+    align-items: center;
+}
+
+.main-menu p {
+    color: #f48cbc;
+    font-size: 1.125rem; /* 18px */
+    font-weight: 500;
+    background: none;
+    border: none;
+    padding: 0.375rem 1.125rem; /* 6px 18px */
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border-radius: 0.25rem; /* 4px */
+}
+
+.main-menu p.active {
+    background: #f48cbc;
+    color: #fff;
+    font-weight: 600;
+}
+
+.main-menu p:not(:first-child)::before {
+    content: '';
+    display: inline-block;
+    width: 0.0625rem; /* 1px */
+    height: 1rem; /* 16px */
+    background: #f48cbc;
+    position: absolute;
+    left: -0.8125rem; /* -13px */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.store-menu {
+    text-align: center;
+    font-size: 4.5rem; /* 72px */
+    font-weight: 700;
+    color: #f48cbc;
+    margin-top: 2.5rem; /* 40px */
+    margin-bottom: 2.5rem; /* 40px */
+    letter-spacing: 0.125rem; /* 2px */
+}
+
+.map_Main_Container {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    width: 18.75rem; /* 300px */
+    padding: 1.25rem; /* 20px */
+    background-color: #f5f5f5;
+    overflow-y: auto;
+}
+
+.map-container {
+    flex: 1;
+    position: relative;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    min-height: 25rem; /* 400px */
+}
+
+/* 검색 관련 스타일 */
+.search-container {
+    margin-bottom: 1.25rem; /* 20px */
+}
+
+.filter-options {
+    margin-bottom: 0.9375rem; /* 15px */
+}
+
+/* 옵션 선택 버튼 스타일 수정 */
+.store-map-option {
+    position: relative;
+    margin-bottom: 0.9375rem; /* 15px */
+}
+
+.store-map-option__button {
+    width: 100%;
+    padding: 0.5rem 0.75rem; /* 8px 12px */
+    font-size: 0.875rem; /* 14px */
+    color: #333;
+    background-color: #fff;
+    border: 0.0625rem solid #ddd; /* 1px */
+    border-radius: 0.25rem; /* 4px */
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+    margin-bottom: 0.5rem; /* 8px */
+}
+
+.store-map-option__button::after {
+    content: '';
+    position: absolute;
+    right: 0.75rem; /* 12px */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 0.3125rem solid transparent; /* 5px */
+    border-right: 0.3125rem solid transparent; /* 5px */
+    border-top: 0.3125rem solid #666; /* 5px */
+}
+
+.store-map-option__button:hover {
+    background-color: #f5f5f5;
+}
+
+/* 옵션 내용 스타일 수정 */
+.store-map-option__content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 0.0625rem solid #ddd; /* 1px */
+    border-radius: 0.25rem; /* 4px */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* 2px 4px */
+    z-index: 1000;
+    margin-top: 0.25rem; /* 4px */
+}
+
+.store-map-option__content.active {
+    display: block;
+}
+
+/* 옵션 리스트 스타일 수정 */
+.store-map-option__list {
+    margin: 0;
+    padding: 0.5rem; /* 8px */
+}
+
+.store-map-option__item {
+    margin-bottom: 0.75rem; /* 12px */
+}
+
+.store-map-option__name {
+    font-weight: bold;
+    margin-bottom: 0.5rem; /* 8px */
+    color: #333;
+}
+
+.store-map-option__area {
+    margin: 0;
+    padding: 0.25rem 0; /* 4px */
+}
+
+.store-map-option__label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem 0; /* 8px */
+}
+
+.store-map-option__input {
+    margin-right: 0.5rem; /* 8px */
+}
+
+.store-map-option__input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.125rem; /* 18px */
+    height: 1.125rem; /* 18px */
+    border: 0.125rem solid #ddd; /* 2px */
+    border-radius: 50%;
+    margin-right: 0.5rem; /* 8px */
+    position: relative;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.store-map-option__input[type="radio"]:checked {
+    border-color: #e31b6d;
+    background-color: #fff;
+}
+
+.store-map-option__input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.625rem; /* 10px */
+    height: 0.625rem; /* 10px */
+    background-color: #e31b6d;
+    border-radius: 50%;
+}
+
+.store-map-option__input[type="radio"]:hover {
+    border-color: #e31b6d;
+}
+
+.store-map-option__input[type="checkbox"] {
+    width: 1.125rem; /* 18px */
+    height: 1.125rem; /* 18px */
+    border: 0.125rem solid #ddd; /* 2px */
+    border-radius: 0.25rem; /* 4px */
+    margin-right: 0.5rem; /* 8px */
+    position: relative;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.store-map-option__input[type="checkbox"]:checked {
+    border-color: #e31b6d;
+    background-color: #e31b6d;
+}
+
+.store-map-option__input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 0.75rem; /* 12px */
+}
+
+.store-map-option__input[type="checkbox"]:hover {
+    border-color: #e31b6d;
+}
+
+.store-map-option__text {
+    font-size: 0.875rem; /* 14px */
+    color: #333;
+    user-select: none;
+}
+
+.store-map-field__container {
+    position: relative;
+    padding: 0;
+    background: #fff;
+    border-radius: 0.625rem; /* 10px */
+    box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.1); /* 2px 6px */
+    border: 0.125rem solid #e31b6d; /* 2px */
+    min-width: 22rem;   /* 352px */
+    max-width: 32rem;   /* 512px */
+}
+
+.store-map-field__container:before {
+    display: none;
+}
+
+.store-map-field__header {
+    padding: 1.5rem; /* 24px */
+    background: #fff;
+    border-radius: 0.75rem 0.75rem 0 0; /* 12px */
+}
+
+.store-map-field__title {
+    margin: 0;
+    color: #333;
+    font-weight: 700;
+    font-size: 1.5rem; /* 24px */
+}
+
+.store-map-field__content {
+    padding: 0 1.5rem 1.5rem; /* 0 24px 24px */
+    background: #fff;
+    border-radius: 0 0 0.75rem 0.75rem; /* 0 0 12px 12px */
+}
+
+.store-map-field__content div {
+    margin: 0.625rem 0; /* 10px */
+    color: #666;
+    font-size: 1.125rem; /* 18px */
+}
+
+.store-map-field__content a {
+    color: #e31b6d;
+    text-decoration: none;
+    font-size: 1rem; /* 16px */
+}
+
+.store-map-field__content a:hover {
+    text-decoration: underline;
+}
+
+.store-map-field__type {
+    display: block;
+    position: relative;
+    z-index: 10;
+    padding-bottom: 0.125rem; /* 2px */
+    color: var(--pink-color-3);
+    font-weight: var(--font-weight-sd-bold);
+    font-size: 0.9375rem; /* 15px */
+}
+
+.store-map-field__close {
+    position: absolute;
+    top: 0.3125rem; /* 5px */
+    right: 0.3125rem; /* 5px */
+}
+
+.store-map-field__table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+.store-map-field__table th {
+    padding: 0.5rem 0; /* 8px */
+    color: var(--brown-color-3);
+    font-weight: var(--font-weight-sd-medium);
+    font-size: 0.9375rem; /* 15px */
+    text-align: right;
+    vertical-align: top
+}
+
+.store-map-field__table td {
+    padding: 0.5rem 0 0.5rem 0.9375rem; /* 8px 0 8px 15px */
+    color: #000;
+    font-weight: var(--font-weight-sd-medium);
+    font-size: 0.9375rem; /* 15px */
+    text-align: left;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all
+}
+
+.store-map-promotion {
+    position: absolute;
+    top: 0;
+    right: -21.625rem; /* -346px */
+    z-index: 10;
+    width: 21.625rem; /* 346px */
+    height: 100%;
+    transition: right .3s ease
+}
+
+.store-map-promotion--active {
+    right: 0
+}
+
+.store-map-promotion--active .store-map-promotion__button-text {
+    background-image: url(/assets/images/store/map/icon_close.png)
+}
+
+/* 위치 선택 스타일 */
+.location-selects {
+    display: flex;
+    gap: 0.625rem; /* 10px */
+    margin-bottom: 0.9375rem; /* 15px */
+}
+
+.filter-button {
+    flex: 1;
+    padding: 0.5rem; /* 8px */
+    border: 0.0625rem solid #ddd; /* 1px */
+    border-radius: 0.25rem; /* 4px */
+}
+
+/* 검색 박스 스타일 */
+.search-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem; /* 10px */
+    margin-bottom: 0.9375rem; /* 15px */
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.625rem; /* 10px */
+    border: 0.0625rem solid #ddd; /* 1px */
+    border-radius: 0.25rem; /* 4px */
+    font-size: 0.875rem; /* 14px */
+}
+
+.search-input:focus {
+    border-color: #e31b6d;
+    outline: none;
+    box-shadow: 0 0 0 0.125rem rgba(227, 27, 109, 0.1); /* 2px */
+}
+
+.search-button {
+    width: 100%;
+    padding: 0.625rem; /* 10px */
+    background-color: #e31b6d;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem; /* 4px */
+    cursor: pointer;
+    font-size: 0.875rem; /* 14px */
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.search-button:hover {
+    background-color: #d41960;
+}
+
+/* 매장 목록 스타일 */
+.store-list {
+    margin-top: 1.25rem; /* 20px */
+    max-height: calc(100vh - 25rem); /* 400px */
+    overflow-y: auto; /* 세로 스크롤바 표시 */
+    padding-right: 0.625rem; /* 10px */
+}
+
+/* 스크롤바 스타일링 */
+.store-list::-webkit-scrollbar {
+    width: 0.5rem; /* 8px */
+}
+
+.store-list::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 스크롤바 트랙 배경색 */
+    border-radius: 0.25rem; /* 4px */
+}
+
+.store-list::-webkit-scrollbar-thumb {
+    background: #888; /* 스크롤바 색상 */
+    border-radius: 0.25rem; /* 4px */
+}
+
+.store-list::-webkit-scrollbar-thumb:hover {
+    background: #555; /* 스크롤바 호버 시 색상 */
+}
+
+.store-card {
+    background-color: #fff;
+    border: 0.0625rem solid #ddd; /* 1px */
+    border-radius: 0.25rem; /* 4px */
+    padding: 0.9375rem; /* 15px */
+    margin-bottom: 0.625rem; /* 10px */
+    cursor: pointer; /* 클릭 가능함을 표시 */
+    transition: all 0.2s ease; /* 부드러운 전환 효과 */
+}
+
+.store-card:hover {
+    transform: translateY(-0.125rem); /* -2px */
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1); /* 2px 8px */
+}
+
+.store-name {
+    font-weight: bold;
+    margin-bottom: 0.625rem; /* 10px */
+}
+
+.store-info p {
+    margin: 0.3125rem 0; /* 5px */
+    color: #666;
+}
+  
+/* 게임 */
 .start-screen {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 40px;
+    max-width: 50rem;
+    margin: 3.125rem auto;
+    padding: 2.5rem;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 1.25rem;
+    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
 }
 
 .game-rules {
-    margin: 30px 0;
+    margin: 1.875rem 0;
     text-align: left;
-    padding: 0 30px;
+    padding: 0 1.875rem;
 }
 
 .game-rules h2 {
     color: #2c3e50;
-    margin-bottom: 20px;
-    font-size: 24px;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 10px;
+    margin-bottom: 1.25rem;
+    font-size: 1.5rem;
+    border-bottom: 0.125rem solid #3498db;
+    padding-bottom: 0.625rem;
 }
 
 .game-rules ul {
@@ -28,12 +498,12 @@
 }
 
 .game-rules li {
-    margin: 15px 0;
-    padding: 15px;
+    margin: 0.9375rem 0;
+    padding: 0.9375rem;
     background: #f8f9fa;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     color: #34495e;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.05);
     transition: transform 0.2s;
 }
 
@@ -42,88 +512,90 @@
 }
 
 .start-button {
-    padding: 15px 50px;
-    font-size: 20px;
+    padding: 0.9375rem 3.125rem;
+    font-size: 1.25rem;
     background: linear-gradient(45deg, #3498db, #2980b9);
     color: white;
     border: none;
-    border-radius: 30px;
+    border-radius: 1.875rem;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 0.3125rem 0.9375rem rgba(52, 152, 219, 0.3);
 }
 
 .start-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+    box-shadow: 0 0.5rem 1.25rem rgba(52, 152, 219, 0.4);
 }
 
 .game-screen {
-    padding: 30px;
+    padding: 1.875rem;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    max-width: 1200px;
-    min-height: 800px;
+    border-radius: 1.25rem;
+    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.1);
+    margin: 1.25rem auto;
+    max-width: 100rem;
+    min-height: 60rem;
 }
 
 .game-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 1.25rem;
     background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0.9375rem;
+    margin-bottom: 1.875rem;
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    margin-top: 20px;
+    margin-top: 1.25rem;
     color: #333;
 }
 
 #timer, #score {
-    font-size: 24px;
+    font-size: 1.5rem;
     color: #2c3e50;
     font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    text-shadow: 0.0625rem 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
 }
 
 .game-container {
     display: grid;
-    margin: 30px auto;
-    padding: 40px;
+    margin: 1.875rem auto;
+    padding: 1rem; /* 적당한 패딩 */
     background: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    gap: 20px;
-    min-height: 600px;
+    border-radius: 1.25rem;
+    box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.1);
+    gap: 0.4rem;
+    min-height: 37.5rem;
     width: fit-content;
     max-width: 100%;
 }
 
 .game-screen {
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 .card {
     position: relative;
-    width: 131.25px;
-    height: 170.625px;
-    perspective: 1000px;
+    width: 100%; /* grid에서 셀 크기와 맞추기 위해 */
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    perspective: 62.5rem;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 0.9375rem;
     overflow: hidden;
     transition: transform 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
     margin: 0;
 }
 
 .card:hover {
     transform: scale(1.05) translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
 }
 
 .card-front, .card-back {
@@ -135,7 +607,7 @@ h1 {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 15px;
+    border-radius: 0.9375rem;
     backface-visibility: hidden;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
@@ -147,21 +619,21 @@ h1 {
     z-index: 2;
     transform: rotateY(180deg);
     background: linear-gradient(45deg, #3498db, #2980b9);
-    border: 2px solid #fff;
+    border: 0.125rem solid #fff;
 }
 
 .card-back {
     background: linear-gradient(135deg, #f1c40f, #f39c12);
     z-index: 1;
     transform: rotateY(0deg);
-    border: 2px solid #fff;
+    border: 0.125rem solid #fff;
     background-image: 
         linear-gradient(45deg, #f1c40f 25%, transparent 25%),
         linear-gradient(-45deg, #f1c40f 25%, transparent 25%),
         linear-gradient(45deg, transparent 75%, #f1c40f 75%),
         linear-gradient(-45deg, transparent 75%, #f1c40f 75%);
-    background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    background-size: 1.25rem 1.25rem;
+    background-position: 0 0, 0 0.625rem, 0.625rem -0.625rem, -0.625rem 0;
 }
 
 .card.flipped .card-front {
@@ -174,38 +646,38 @@ h1 {
 
 .matched {
     box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
-    border: 2px solid #2ecc71;
+    border: 0.125rem solid #2ecc71;
 }
 
 #message {
-    font-size: 28px;
-    margin-top: 30px;
+    font-size: 1.75rem;
+    margin-top: 1.875rem;
     color: #2c3e50;
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .give-up-button {
-    padding: 10px 25px;
-    font-size: 16px;
+    padding: 0.625rem 1.5625rem;
+    font-size: 1rem;
     background: linear-gradient(45deg, #e74c3c, #c0392b);
     color: white;
     border: none;
-    border-radius: 20px;
+    border-radius: 1.25rem;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+    box-shadow: 0 0.1875rem 0.625rem rgba(231, 76, 60, 0.3);
 }
 
 .give-up-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+    box-shadow: 0 0.3125rem 0.9375rem rgba(231, 76, 60, 0.4);
 }
 
 .high-score {
-    font-size: 24px;
+    font-size: 1.5rem;
     color: #2c3e50;
-    margin: 20px 0;
+    margin: 1.25rem 0;
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }

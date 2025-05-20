@@ -75,8 +75,7 @@ function createBoard() {
 
     // 화면 크기에 따른 카드 크기 조정
     const screenWidth = window.innerWidth;
-    let cardWidth, cardHeight;
-    
+    let cardWidth, cardHeight, gap;
     if (screenWidth <= 480) {
         cardWidth = 5; // 80px / 16
         cardHeight = 6.5; // 104px / 16
@@ -84,16 +83,17 @@ function createBoard() {
         cardWidth = 6.25; // 100px / 16
         cardHeight = 8.125; // 130px / 16
     } else {
-        cardWidth = 8.203125; // 131.25px / 16
+        cardWidth = 6.875; // 110px / 16
         cardHeight = 10.6640625; // 170.625px / 16
     }
+    gap = 10; // 간격을 0.4rem로 고정
 
     // 게임 보드 스타일 설정
     gameBoard.style.display = 'grid';
     gameBoard.style.gridTemplateColumns = `repeat(${cols}, ${cardWidth}rem)`;
     gameBoard.style.gridTemplateRows = `repeat(${rows}, ${cardHeight}rem)`;
-    gameBoard.style.gap = '0.9375rem'; // 15px / 16
-    gameBoard.style.padding = '0.9375rem'; // 15px / 16
+    gameBoard.style.gap = `${gap}rem`;
+    gameBoard.style.padding = `${gap}rem`;
     gameBoard.style.width = 'fit-content';
     gameBoard.style.margin = '0 auto';
     gameBoard.style.justifyContent = 'center';
