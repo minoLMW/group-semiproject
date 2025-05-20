@@ -57,7 +57,6 @@ function shuffle(array) {
 }
 
 function createBoard() {
-    // 게임 보드를 초기화하고, 현재 스테이지에 맞는 카드 쌍을 생성합니다.
     gameBoard.innerHTML = "";
     const pairs = stageSettings[currentStage].pairs;
     const stageSymbols = symbols.slice(0, pairs);
@@ -74,12 +73,27 @@ function createBoard() {
         case 5: rows = 4; cols = 5; break;
     }
 
+    // 화면 크기에 따른 카드 크기 조정
+    const screenWidth = window.innerWidth;
+    let cardWidth, cardHeight;
+    
+    if (screenWidth <= 480) {
+        cardWidth = 5; // 80px / 16
+        cardHeight = 6.5; // 104px / 16
+    } else if (screenWidth <= 768) {
+        cardWidth = 6.25; // 100px / 16
+        cardHeight = 8.125; // 130px / 16
+    } else {
+        cardWidth = 8.203125; // 131.25px / 16
+        cardHeight = 10.6640625; // 170.625px / 16
+    }
+
     // 게임 보드 스타일 설정
     gameBoard.style.display = 'grid';
-    gameBoard.style.gridTemplateColumns = `repeat(${cols}, 131.25px)`;
-    gameBoard.style.gridTemplateRows = `repeat(${rows}, 170.625px)`;
-    gameBoard.style.gap = '15px';
-    gameBoard.style.padding = '15px';
+    gameBoard.style.gridTemplateColumns = `repeat(${cols}, ${cardWidth}rem)`;
+    gameBoard.style.gridTemplateRows = `repeat(${rows}, ${cardHeight}rem)`;
+    gameBoard.style.gap = '0.9375rem'; // 15px / 16
+    gameBoard.style.padding = '0.9375rem'; // 15px / 16
     gameBoard.style.width = 'fit-content';
     gameBoard.style.margin = '0 auto';
     gameBoard.style.justifyContent = 'center';
@@ -112,7 +126,6 @@ function createBoard() {
 }
 
 function startGame() {
-    // 게임을 시작할 때 초기화 작업을 수행하고, 3초 동안 모든 카드를 공개합니다.
     startScreen.style.display = "none";
     gameScreen.style.display = "block";
     currentStage = 1;
@@ -171,7 +184,6 @@ function nextStage() {
 }
 
 function giveUp() {
-    // 사용자가 게임을 포기할 때 점수를 잃고 게임을 초기화합니다.
     if (confirm("게임을 포기하시겠습니까?\n현재까지 획득한 점수를 잃게 됩니다.")) {
         clearInterval(timer);
         messageDisplay.textContent = `게임 포기! 현재 점수 ${score}점을 잃었습니다.`;
@@ -190,39 +202,37 @@ function updateHighScore() {
     }
 }
 
-
 function endGame(success) {
-	// 스테이지 클리어 또는 실패 시 게임을 종료하고, 메시지와 점수를 처리합니다.
-	gameStarted = false;
-	document.querySelectorAll(".card").forEach(card => {
-		card.style.pointerEvents = "none";
-	});
+    gameStarted = false;
+    document.querySelectorAll(".card").forEach(card => {
+        card.style.pointerEvents = "none";
+    });
 
-	if (success) {
-		if (currentStage === totalStages) {
-			score += 100;
-			scoreDisplay.textContent = `점수: ${score}`;
-			messageDisplay.textContent = "🎉 축하합니다! 모든 스테이지를 클리어했습니다!";
-			console.log(`게임 클리어! 최종 점수: ${score}점`); // 콘솔에 점수 표시
-			updateHighScore();
-		} else {
-			score += 100;
-			scoreDisplay.textContent = `점수: ${score}`;
-			messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득! 다음 스테이지로...`;
-			console.log(`스테이지 ${currentStage} 클리어! 현재 점수: ${score}점`); // 콘솔에 점수 표시
-			setTimeout(() => {
-				nextStage();
-			}, 2000);
-			return;
-		}
-	} else {
-		messageDisplay.textContent = "⏰ 시간 초과! 다시 도전해보세요!";
-		console.log(`게임 오버! 최종 점수: ${score}점`); // 콘솔에 점수 표시
-	}
+    if (success) {
+        if (currentStage === totalStages) {
+            score += 100;
+            scoreDisplay.textContent = `점수: ${score}`;
+            messageDisplay.textContent = "🎉 축하합니다! 모든 스테이지를 클리어했습니다!";
+            console.log(`게임 클리어! 최종 점수: ${score}점`);
+            updateHighScore();
+        } else {
+            score += 100;
+            scoreDisplay.textContent = `점수: ${score}`;
+            messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득! 다음 스테이지로...`;
+            console.log(`스테이지 ${currentStage} 클리어! 현재 점수: ${score}점`);
+            setTimeout(() => {
+                nextStage();
+            }, 2000);
+            return;
+        }
+    } else {
+        messageDisplay.textContent = "⏰ 시간 초과! 다시 도전해보세요!";
+        console.log(`게임 오버! 최종 점수: ${score}점`);
+    }
 
-	setTimeout(() => {
-		resetGame();
-	}, 3000);
+    setTimeout(() => {
+        resetGame();
+    }, 3000);
 }
 
 function resetGame() {
@@ -244,7 +254,6 @@ function resetGame() {
 }
 
 gameBoard.addEventListener("click", e => {
-    // 카드 클릭 시 뒤집기, 매칭 검사, 성공/실패 처리 등 게임의 핵심 로직을 담당합니다.
     if (!gameStarted) return;
     const clicked = e.target.closest(".card");
     if (!clicked || clicked.classList.contains("flipped") || flippedCards.length >= 2) return;
@@ -283,3 +292,10 @@ startButton.addEventListener("click", () => {
 
 // 게임 포기 버튼 이벤트 리스너
 giveUpButton.addEventListener("click", giveUp);
+
+// 화면 크기 변경 이벤트 리스너 추가
+window.addEventListener('resize', () => {
+    if (gameStarted) {
+        createBoard();
+    }
+});

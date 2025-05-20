@@ -7,7 +7,10 @@ let currentOverlay = null; // 함수 상단에 추가
 const MAP_CONFIG = {
 	DEFAULT_LEVEL: 2,
 	MARKER_IMAGE: '../../assets/imgs/img/map_marker.png',
-	MARKER_SIZE: { width: 137, height: 106 }
+	MARKER_SIZE: { 
+		width: 8.5625, // 137px / 16
+		height: 6.625  // 106px / 16
+	}
 };
 
 // 도/시 데이터
@@ -108,7 +111,6 @@ function createMarker(position, title, markerType = 'default') {
 
 // 커스텀 마커 이미지 생성 함수
 function createCustomMarker(imageUrl, size) {
-	// 커스텀 마커 이미지를 생성합니다.
 	return new kakao.maps.MarkerImage(
 		imageUrl,
 		new kakao.maps.Size(size.width, size.height),
@@ -415,17 +417,17 @@ function displayPlaces(places) {
 		// 서비스 정보 HTML 생성
 		const servicesHTML = selectedServices.length > 0 
 			? `
-				<div style="margin-top:10px;padding-top:10px;border-top:1px solid #eee;">
-					<div style="font-weight:600;color:#333;margin-bottom:5px;">제공 서비스</div>
-					<div style="display:flex;flex-wrap:wrap;gap:5px;">
+				<div style="margin-top:0.625rem;padding-top:0.625rem;border-top:0.0625rem solid #eee;">
+					<div style="font-weight:600;color:#333;margin-bottom:0.3125rem;">제공 서비스</div>
+					<div style="display:flex;flex-wrap:wrap;gap:0.3125rem;">
 						${selectedServices.map(service => `
 							<span style="
 								background-color:#f8f8f8;
 								color:#e31b6d;
-								padding:3px 8px;
-								border-radius:4px;
-								font-size:12px;
-								border:1px solid #e31b6d;
+								padding:0.1875rem 0.5rem;
+								border-radius:0.25rem;
+								font-size:0.75rem;
+								border:0.0625rem solid #e31b6d;
 							">${service.text}</span>
 						`).join('')}
 					</div>
@@ -435,16 +437,16 @@ function displayPlaces(places) {
 
 		// 커스텀 오버레이 내용 (매장 상세 정보 + 서비스)
 		const content = `
-			<div class="store-map-field__container" style="min-width:220px;max-width:320px;background:#fff;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);border:2px solid #e31b6d;">
-				<div class="store-map-field__header" style="background:#fff;padding:15px;border-radius:8px 8px 0 0;">
-					<div class="store-map-field__title" style="margin:0;font-size:18px;color:#333;">${place.place_name}</div>
+			<div class="store-map-field__container" style="min-width:13.75rem;max-width:20rem;background:#fff;border-radius:0.625rem;box-shadow:0 0.125rem 0.375rem rgba(0,0,0,0.1);border:0.125rem solid #e31b6d;">
+				<div class="store-map-field__header" style="background:#fff;padding:0.9375rem;border-radius:0.5rem 0.5rem 0 0;">
+					<div class="store-map-field__title" style="margin:0;font-size:1.125rem;color:#333;">${place.place_name}</div>
 				</div>
-				<div class="store-map-field__content" style="padding:0 15px 15px;background:#fff;border-radius:0 0 8px 8px;">
-					<div style="margin:5px 0;"><b>주소:</b> ${place.road_address_name || place.address_name}</div>
-					<div style="margin:5px 0;"><b>전화번호:</b> ${place.phone || '없음'}</div>
+				<div class="store-map-field__content" style="padding:0 0.9375rem 0.9375rem;background:#fff;border-radius:0 0 0.5rem 0.5rem;">
+					<div style="margin:0.3125rem 0;"><b>주소:</b> ${place.road_address_name || place.address_name}</div>
+					<div style="margin:0.3125rem 0;"><b>전화번호:</b> ${place.phone || '없음'}</div>
 					${servicesHTML}
-					<div style="margin-top:10px;text-align:right;">
-						<a href="${place.place_url}" target="_blank" style="color:#e31b6d;text-decoration:none;font-size:13px;">
+					<div style="margin-top:0.625rem;text-align:right;">
+						<a href="${place.place_url}" target="_blank" style="color:#e31b6d;text-decoration:none;font-size:0.8125rem;">
 							카카오맵 링크 보기 >
 						</a>
 					</div>
@@ -695,6 +697,27 @@ function searchBaskinRobbins() {
 		radius: 3000,
 		sort: kakao.maps.services.SortBy.DISTANCE
 	});
+}
+
+// 반응형 미디어 쿼리 관련 수정
+function adjustMapLevel() {
+	const screenWidth = window.innerWidth;
+	if (screenWidth <= 480) {
+		map.setLevel(4);
+	} else if (screenWidth <= 768) {
+		map.setLevel(3);
+	} else {
+		map.setLevel(2);
+	}
+}
+
+// 오버레이 크기 조정
+function adjustOverlaySize() {
+	const screenWidth = window.innerWidth;
+	const overlayWidth = screenWidth <= 480 ? '11.25rem' : // 180px / 16
+						screenWidth <= 768 ? '12.5rem' : // 200px / 16
+						'20rem'; // 320px / 16
+	return overlayWidth;
 }
 
 
