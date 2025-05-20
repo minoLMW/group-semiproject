@@ -1339,7 +1339,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
   margin-top:1rem;
   margin-bottom:4rem;
 }
-.card {
+.card__plaza {
   border-radius:1.6rem;
   padding:3rem;
   margin-bottom:4rem;
