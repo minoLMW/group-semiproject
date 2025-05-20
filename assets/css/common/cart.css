@@ -1,220 +1,146 @@
-
 .container {
-  max-width: 1500px; /* PC 기준 넓이 지정 */
-  margin: 0 ;    /* 가운데 정렬 */
- padding: 1rem 2rem;   /* 좌우 여백 */
-  box-sizing: border-box;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-
+.cart-wrapper {
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 2rem;
+  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.05);
+}
 .cart-header-bar {
-     margin-top: 0.5rem;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  .cart-header-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.cart-header-left {
   font-size: 2rem;
   font-weight: bold;
-  margin-right: 2rem;
-  margin:0;
 }
 
-  .cart-header-left {
-    display: flex;
-    align-items: center;
-    font-size: 2.4rem;
-    font-weight: bold;
-    color: var(--color-text);
-  }
-  
-  .cart-step-bar {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    font-size: 1.6rem;
-    color: var(--color-subtext);
-  }
-  
-  .cart-step-bar .step.active {
-    color: var(--color-primary);
-    font-weight: bold;
-  }
-  
-  .cart-container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 4rem 3rem;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .cart-main {
-    display: flex;
-    gap: 3rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-  }
-  
-  .cart-items {
-    flex:1;
-    min-width: 500px;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-   
-  }
-  
-  .cart-item {
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: 1.2rem;
-    padding: 2rem;
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-  }
-  
-  .item-thumb {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 0.5rem;
-  }
-  
-  .item-info {
-    flex: 1;
-  }
-  
-  .item-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 0.7rem;
-  }
-  
+.cart-step-bar {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1.2rem;
+  color: #555;
+}
 
-  
-  .tag {
-    background: var(--color-primary);
-    color: #fff;
-    font-size: 0.85rem;
-    padding: 0.3rem 0.7rem;
-    border-radius: 1rem;
-    margin-left: 0.5rem;
-  }
-  
-  .item-price {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: var(--color-text);
-    margin-bottom: 1rem;
-  }
-  
-  .item-sale {
-    font-size: 1rem;
-    color: var(--color-sale);
-    margin-left: 0.5rem;
-  }
-  
-  .item-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  
-  .item-controls button,
-  .item-controls input {
-    height: 3rem;
-    font-size: 1.2rem;
-    border-radius: 0.5rem;
-    border: 1px solid var(--color-border);
-    padding: 0 1rem;
-  }
-  
-  .item-controls input {
-    width: 4rem;
-    text-align: center;
-    background: #f9f9f9;
-  }
-  
-  .item-remove {
-    background: transparent;
-    color: var(--color-sale);
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .cart-summary {
-    width: 350px;
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: 1.2rem;
-    padding: 2.5rem;
-    box-sizing: border-box;
-  }
-  
-  .cart-summary h3 {
-    margin-top: 0;
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-    color: var(--color-text);
-  }
-  
-  .summary-item,
-  .summary-total {
-    display: flex;
-    justify-content: space-between;
-    margin: 1rem 0;
-    font-size: 1.2rem;
-  }
-  
-  .summary-total {
-    font-weight: bold;
-    font-size: 1.4rem;
-    border-top: 1px dashed var(--color-border);
-    padding-top: 1.2rem;
-    margin-top: 1.5rem;
-  }
-  
-  .discount {
-    color: var(--color-sale);
-  }
-  
-  .summary-buy {
-    width: 100%;
-    padding: 1.2rem;
-    font-size: 1.3rem;
-    background: var(--color-primary);
-    color: #fff;
-    border: none;
-    border-radius: 2.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 2.5rem;
-    transition: background 0.3s;
-  }
-  
-  .summary-buy:hover {
-    background: var(--color-accent);
-  }
-  
-  @media (max-width: 768px) {
-    body {
-      font-size: 1rem;
-    }
-    .cart-main {
-      flex-direction: column;
-    }
-    .cart-items {
-      min-width: 100%;
-    }
-    .cart-summary {
-      width: 100%;
-    }
-  }
-  
+.cart-step-bar .active {
+  color: #ff4d72;
+  font-weight: bold;
+}
+
+.cart-container {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1.6rem;
+  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.08);
+}
+
+.cart-main {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.cart-items {
+  flex: 1;
+  min-width: 400px;
+}
+
+.cart-item {
+  display: flex;
+  background-color: #ffeef2;
+  color: #ff4d72;
+  border-radius: 1.6rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.08);
+  align-items: center;
+}
+
+.item-thumb {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 1rem;
+  margin-right: 2rem;
+}
+
+.item-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.item-price {
+  margin-bottom: 0.5rem;
+}
+
+.item-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.item-controls button,
+.item-controls input {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+}
+
+.item-remove {
+  background-color: transparent;
+  border: none;
+  color: #ff4d72;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cart-summary {
+  width: 350px;
+  background: #fff;
+  border-radius: 1.6rem;
+  padding: 2rem;
+  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.08);
+}
+
+.cart-summary h3 {
+  margin-top: 0;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.summary-item,
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  font-size: 1rem;
+}
+
+.summary-total {
+  font-weight: bold;
+  border-top: 1px dashed #ccc;
+  padding-top: 1rem;
+}
+
+.summary-buy {
+  width: 100%;
+  padding: 1rem;
+  background-color: #ff4d72;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+}
