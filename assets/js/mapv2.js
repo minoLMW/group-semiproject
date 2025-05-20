@@ -6,8 +6,11 @@ let currentOverlay = null; // 함수 상단에 추가
 // 상수 정의 (kakao 객체를 사용하지 않는 부분)
 const MAP_CONFIG = {
 	DEFAULT_LEVEL: 2,
-	MARKER_IMAGE: '../../assets/imgs/img/map_marker.png',
-	MARKER_SIZE: { width: 137, height: 106 }
+	MARKER_IMAGE: '../assets/imgs/img/map_marker.png',
+	MARKER_SIZE: { 
+		width: 8.5625, // 137px / 16
+		height: 6.625  // 106px / 16
+	}
 };
 
 // 도/시 데이터
@@ -61,13 +64,17 @@ const optionData = {
 
 // 카카오맵 API가 로드된 후 실행될 초기화 함수
 function initializeMap() {
-	// 카카오맵 객체를 생성하고, 기본 위치와 마커, 오버레이를 설정합니다.
 	const DEFAULT_POSITION = new kakao.maps.LatLng(37.498095, 127.02761);
 	
 	map = new kakao.maps.Map(document.getElementById('map'), {
 		center: DEFAULT_POSITION,
 		level: MAP_CONFIG.DEFAULT_LEVEL
 	});
+
+	// 초기 마커 생성 및 표시
+	const initialMarker = createMarker(DEFAULT_POSITION, '기본 위치');
+	initialMarker.setMap(map);
+	markers.push(initialMarker);
 }
 
 // 커스텀 오버레이 설정
@@ -83,40 +90,35 @@ function setupCustomOverlay(position) {
 		map: map,
 		position: position,
 		content: content,
-		yAnchor: 1
+		yAnchor: 0
 	});
 }
 
 // 마커 생성 함수
 function createMarker(position, title, markerType = 'default') {
-	// markerType이 'flavor'면 100flavor 마커 이미지 사용
-	let markerImagePath = '../../assets/imgs/img/map_marker.png';
+	let markerImagePath = '../../assets/imgs/img/map_marker.png'; // ← 경로 수정!
 	let markerSize = MAP_CONFIG.MARKER_SIZE;
+	
 	if (markerType === 'flavor') {
-		markerImagePath = '../../assets/imgs/img/icon_map_marker_flavors.png';
-		markerSize = { width: 118, height: 138 }; // 실제 이미지 크기에 맞게 조정
+		markerImagePath = '../../assets/imgs/img/icon_map_marker_flavors.png'; // ← 경로 수정!
+		markerSize = { width: 118, height: 138 };
+	} else {
+		markerSize = { width: 137, height: 106 };
 	}
-	return new kakao.maps.Marker({
-		position: position,
-		title: title,
-		image: createCustomMarker(
-			markerImagePath,
-			markerSize
-		)
-	});
-}
 
-// 커스텀 마커 이미지 생성 함수
-function createCustomMarker(imageUrl, size) {
-	// 커스텀 마커 이미지를 생성합니다.
-	return new kakao.maps.MarkerImage(
-		imageUrl,
-		new kakao.maps.Size(size.width, size.height),
+	const markerImage = new kakao.maps.MarkerImage(
+		markerImagePath,
+		new kakao.maps.Size(markerSize.width, markerSize.height),
 		{
-			offset: new kakao.maps.Point(size.width / 2, size.height / 2),
+			offset: new kakao.maps.Point(markerSize.width / 2, markerSize.height),
 			alt: '마커 이미지'
 		}
 	);
+	return new kakao.maps.Marker({
+		position: position,
+		title: title,
+		image: markerImage
+	});
 }
 
 // 도/시 선택 옵션 초기화
@@ -386,84 +388,56 @@ function displayPlaces(places) {
 	const bounds = map.getBounds();
 	removeAllMarkers();
 
-	// 100flavor 선택 여부 확인 (마커 타입 결정용)
+	// 100flavor 선택 여부 확인
 	const flavorRadio = document.querySelector('.store-map-option__input[type="radio"][value="B"]');
 	const isFlavorSelected = flavorRadio && flavorRadio.checked;
 
-	// 선택된 서비스 옵션 가져오기
-	const selectedServices = Array.from(document.querySelectorAll('.store-map-option__input[type="checkbox"]:checked'))
-		.map(checkbox => {
-			const value = checkbox.value;
-			const text = checkbox.nextElementSibling.textContent;
-			return { value, text };
-		});
-
 	const filteredPlaces = places.filter(place => isInBounds(place, map));
-
-	let currentOverlay = null;
 
 	filteredPlaces.forEach(place => {
 		const markerType = isFlavorSelected ? 'flavor' : 'default';
-		const marker = createMarker(
-			new kakao.maps.LatLng(place.y, place.x),
-			place.place_name,
-			markerType
-		);
+		const position = new kakao.maps.LatLng(place.y, place.x);
+		const marker = createMarker(position, place.place_name, markerType);
+		
+		// 마커를 지도에 표시
 		marker.setMap(map);
 		markers.push(marker);
 
-		// 서비스 정보 HTML 생성
-		const servicesHTML = selectedServices.length > 0 
-			? `
-				<div class="store-map-services">
-					<div class="store-map-services__title">제공 서비스</div>
-					<div class="store-map-services__list">
-						${selectedServices.map(service => `
-							<span class="service-badge">${service.text}</span>
-						`).join('')}
-					</div>
-				</div>
-			`
-			: '';
-
-		// 커스텀 오버레이 내용 (매장 상세 정보 + 서비스)
-		const content = `
-			<div class="store-map-field__container">
-				<div class="store-map-field__header">
-					<div class="store-map-field__title">${place.place_name}</div>
-				</div>
-				<div class="store-map-field__content">
-					<div><b>주소:</b> ${place.road_address_name || place.address_name}</div>
-					<div><b>전화번호:</b> ${place.phone || '없음'}</div>
-					${servicesHTML}
-					<div style="margin-top:0.625rem;text-align:right;">
-						<a href="${place.place_url}" target="_blank">
-							카카오맵 링크 보기 &gt;
-						</a>
-					</div>
-				</div>
-			</div>
-		`;
-
-		const customOverlay = new kakao.maps.CustomOverlay({
-			position: new kakao.maps.LatLng(place.y, place.x),
-			content: content,
-			yAnchor: 1
-		});
-
+		// 마커 클릭 이벤트 추가
 		kakao.maps.event.addListener(marker, 'click', function() {
 			if (currentOverlay) currentOverlay.setMap(null);
+			
+			const content = `
+				<div class="store-map-field__container" style="min-width:13.75rem;max-width:20rem;background:#fff;border-radius:0.625rem;box-shadow:0 0.125rem 0.375rem rgba(0,0,0,0.1);border:0.125rem solid #e31b6d;">
+					<div class="store-map-field__header" style="background:#fff;padding:0.9375rem;border-radius:0.5rem 0.5rem 0 0;">
+						<div class="store-map-field__title" style="margin:0;font-size:1.125rem;color:#333;">${place.place_name}</div>
+					</div>
+					<div class="store-map-field__content" style="padding:0 0.9375rem 0.9375rem;background:#fff;border-radius:0 0 0.5rem 0.5rem;">
+						<div style="margin:0.3125rem 0;"><b>주소:</b> ${place.road_address_name || place.address_name}</div>
+						<div style="margin:0.3125rem 0;"><b>전화번호:</b> ${place.phone || '없음'}</div>
+						<div style="margin-top:0.625rem;text-align:right;">
+							<a href="${place.place_url}" target="_blank" style="color:#e31b6d;text-decoration:none;font-size:0.8125rem;">
+								카카오맵 링크 보기 >
+							</a>
+						</div>
+					</div>
+				</div>
+			`;
+
+			const customOverlay = new kakao.maps.CustomOverlay({
+				position: position,
+				content: content,
+				yAnchor: 0
+			});
+
 			customOverlay.setMap(map);
 			currentOverlay = customOverlay;
 		});
-
-		kakao.maps.event.addListener(map, 'click', function() {
-			if (currentOverlay) currentOverlay.setMap(null);
-			currentOverlay = null;
-		});
 	});
 
-	updateStoreList(filteredPlaces);
+	// 검색 결과 수 업데이트
+	const markerCount = document.getElementById('marker-count');
+	markerCount.textContent = filteredPlaces.length;
 }
 
 // 모든 마커 제거 함수
@@ -646,11 +620,14 @@ function createOptionSection(sectionId, sectionData) {
 
 // 베스킨라빈스 매장 검색 함수
 function searchBaskinRobbins() {
+	// 기존 마커/리스트 초기화
+	removeAllMarkers();
+
 	const bounds = map.getBounds();
 	const center = map.getCenter();
 	const ps = new kakao.maps.services.Places();
 	const keyword = '베스킨라빈스';
-	
+
 	console.log('=== 현재 지도 영역 검색 ===');
 	console.log(`검색 키워드: ${keyword}`);
 	console.log(`검색 중심점: (${center.getLat()}, ${center.getLng()})`);
@@ -688,6 +665,27 @@ function searchBaskinRobbins() {
 		radius: 3000,
 		sort: kakao.maps.services.SortBy.DISTANCE
 	});
+}
+
+// 반응형 미디어 쿼리 관련 수정
+function adjustMapLevel() {
+	const screenWidth = window.innerWidth;
+	if (screenWidth <= 480) {
+		map.setLevel(4);
+	} else if (screenWidth <= 768) {
+		map.setLevel(3);
+	} else {
+		map.setLevel(2);
+	}
+}
+
+// 오버레이 크기 조정
+function adjustOverlaySize() {
+	const screenWidth = window.innerWidth;
+	const overlayWidth = screenWidth <= 480 ? '11.25rem' : // 180px / 16
+						screenWidth <= 768 ? '12.5rem' : // 200px / 16
+						'20rem'; // 320px / 16
+	return overlayWidth;
 }
 
 

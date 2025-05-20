@@ -16,4 +16,8 @@ router.patch("/:iceidx", isAuth, cartController.updateCart);
 // 장바구니 항목 삭제
 router.delete("/:iceidx", isAuth, cartController.deleteCart);
 
+// 장바구니 전체 구매
+router.post("/purchase", isAuth, cartController.purchaseCart);
+
+
 export default router;
