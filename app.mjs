@@ -13,7 +13,10 @@ import fs from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
 const app = express();
+app.use(express.json())
+
 // 1) HTML 폴더 절대 경로
 const htmlDir = path.join(__dirname, "html");
 // 2) assets 폴더 절대 경로
