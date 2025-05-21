@@ -1691,8 +1691,8 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	height:3.2rem;
 	margin:0;
 	border-radius:0;
-	background:url(https://www.baskinrobbins.co.kr/assets/images/main/icon_bullet_active.png)
-	no-repeat;
+	background:url(/assets/imgs/img/icon_bullet_active.png) no-repeat;
+
 }
 .main-header {
 	display:flex;
@@ -2195,7 +2195,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	height:3.2rem;
 	margin:0;
 	border-radius:0;
-	background:url(../../imgs/img/icon_bullet_active.png) no-repeat;
+	background:url(/assets/imgs/img/icon_bullet_active.png) no-repeat;
 }
 /* // main-content */
 

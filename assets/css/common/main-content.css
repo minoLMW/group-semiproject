@@ -874,7 +874,6 @@ swiper-container:not(.swiper-watch-progress) .swiper-lazy-preloader {
   height: 14px;
   margin: -7px 0 0 -7px;
   border-radius: 100%;
-  background: #f3ccd5;
 }
 
 .main-promotion .swiper-pagination-bullet-active:before {
@@ -884,5 +883,4 @@ swiper-container:not(.swiper-watch-progress) .swiper-lazy-preloader {
   height: 32px;
   margin: 0;
   border-radius: 0;
-  background: url(../../imgs/img/icon_bullet_active.png) no-repeat;
 }
