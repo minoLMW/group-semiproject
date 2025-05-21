@@ -55,7 +55,7 @@
 
 			let jsonData = [];
 
-			fetch("../../src/json/baskin_robbins_nutrition_generated.json")
+			fetch("/src/json/baskin_robbins_nutrition_generated.json")
 				.then((response) => response.json())
 				.then((data) => {
 					jsonData = data.response.body.items.item;
@@ -223,7 +223,7 @@
 				});
 			}
 
-			window.initializeCartButton = function(buttonElement) {
+			window.initializeCartButton = function (buttonElement) {
 				const activeSlide = buttonElement.closest(".swiper-slide");
 				if (!activeSlide) return;
 				const currentIdx = Number(activeSlide.dataset.idx);
@@ -233,6 +233,7 @@
 					alert("수량을 올바르게 입력해주세요.");
 					return;
 				}
+
 				const confirmAdd = confirm(`선택한 수량 ${quantity}개를 장바구니에 담으시겠습니까?`);
 				if (confirmAdd) {
 					const matchedItem = jsonData.find(item => Number(item._idx) === currentIdx);
@@ -242,13 +243,49 @@
 						console.log(`- 설명: ${matchedItem.Description}`);
 						console.log(`- 이미지 URL: ${matchedItem.Image_URL}`);
 						console.log(`- 수량: ${quantity}`);
-						alert(`장바구니에 ${quantity}개가 담겼습니다.`);
-						input.val(0);
+
+						const userid = localStorage.getItem("userid");
+						const token = localStorage.getItem("token");
+
+						if (!userid || !token) {
+							alert("로그인 후 이용해주세요.");
+							return;
+						}
+
+						const cartData = {
+							userid: userid,
+							name: matchedItem.ice_name,
+							iceidx: matchedItem._idx,
+							quantity: quantity,
+							createdAt: Date.now()
+						};
+
+						fetch("/carts", {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								"Authorization": `Bearer ${token}` // ✅ 토큰 포함!
+							},
+							body: JSON.stringify(cartData)
+						})
+						.then(res => {
+							if (!res.ok) throw new Error("장바구니 저장 실패");
+							return res.json();
+						})
+						.then(data => {
+							alert(`✅ 장바구니에 ${quantity}개 저장 완료!`);
+							input.val(0);
+						})
+						.catch(err => {
+							console.error("❌ 저장 실패:", err);
+							alert("서버 오류로 장바구니 저장에 실패했습니다.");
+						});
 					} else {
 						console.error("상품 정보를 찾을 수 없습니다.");
 					}
 				}
 			};
+
 
 			window.initializeBuyButton = function(buttonElement) {
 				const activeSlide = buttonElement.closest(".swiper-slide");
