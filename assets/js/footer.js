@@ -7,10 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		dropdownList.classList.toggle("show");
 	});
 
-	// 외부 클릭 시 닫기
+	
 	window.addEventListener("click", function (e) {
 		if (!e.target.closest(".family-site-wrapper")) {
 			dropdownList.classList.remove("show");
 		}
 	});
+	
+
 });
