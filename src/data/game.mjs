@@ -28,12 +28,33 @@ export async function giveGamePoint(userId, stage) {
   return reward;
 }
 
-// 스테이지 초기화
-export async function endGame(userId) {
-  const users = getUsers();
-  const result = await users.updateOne(
-    { _id: new ObjectId(userId) },
-    { $unset: { clearedStages: "" } } // 필드 제거
-  );
-  return result.modifiedCount > 0;
+//사용자 이름, 포인트 반환
+export async function getPoint(userId) {
+  try {
+    if (!userId) {
+      throw new Error('사용자 ID가 필요합니다.');
+    }
+
+    const users = getUsers();
+    if (!users) {
+      throw new Error('데이터베이스 연결이 없습니다.');
+    }
+
+    const result = await users.findOne(
+      { _id: new ObjectId(userId) },
+      { projection: { name: 1, point: 1 } }
+    );
+    
+    if (!result) {
+      throw new Error('사용자를 찾을 수 없습니다.');
+    }
+    
+    return {
+      name: result.name,
+      point: result.point
+    };
+  } catch (error) {
+    console.error('getPoint 에러:', error);
+    throw error;
+  }
 }

@@ -18,13 +18,29 @@ export async function claimGamePoint(req, res) {
   }
 }
 
-export async function resetGame(req, res) {
+export async function getPoint(req, res) {
   try {
-    const success = await gameRepository.endGame(req.user.id);
-    if (!success) throw new Error("초기화 실패 또는 이미 초기화됨");
-    
-    res.status(200).json({ message: "게임 세션 종료 및 초기화 완료" });
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        message: "인증되지 않은 사용자입니다.",
+      });
+    }
+
+    const userId = req.user.id;
+    const userInfo = await gameRepository.getPoint(userId);
+
+    res.status(200).json({
+      message: "포인트 조회 완료",
+      name: userInfo.name,
+      point: userInfo.point
+    });
   } catch (err) {
-    res.status(400).json({ message: "게임 종료 실패", error: err.message });
+    console.error('getPoint 컨트롤러 에러:', err);
+    res.status(400).json({  
+      message: "포인트 조회 실패",
+      error: err.message,
+    });
   }
 }
+
+      

@@ -7,8 +7,7 @@ const router = express.Router();
 // POST /game/point
 router.post("/point", isAuth, gameController.claimGamePoint);
 
-// POST /game/end
-router.post("/game/end", isAuth,gameController.resetGame);  // 게임 종료 및 초기화
-
+// GET /game/getpoint
+router.get("/getpoint", isAuth, gameController.getPoint);
 
 export default router;

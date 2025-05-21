@@ -9,7 +9,7 @@ const timerDisplay = document.getElementById("timer");              // 타이머
 const scoreDisplay = document.getElementById("score");              // 점수 표시
 const messageDisplay = document.getElementById("message");          // 메시지 표시
 const highScoreDisplay = document.getElementById("high-score");     // 최고 점수 표시
-
+const currentPointDisplay = document.getElementById("current-point"); // 현재 보유 포인트 표시
 const symbols = [
     "https://www.baskinrobbins.co.kr/upload/product/main/df8edecf77ec6f9869758e40cdced484.png",
     "https://www.baskinrobbins.co.kr/upload/product/main/ce2877eeb77d7ab5abaf74c62968a6d3.png",
@@ -38,10 +38,11 @@ let score = 0;
 let currentStage = 1;
 let highScore = Number(localStorage.getItem('highScore')) || 0;
 const totalStages = 5;
-
+let userPoint = getPoint().point;
+let userName = getPoint().name;
 // 최고 점수 표시 업데이트
 highScoreDisplay.textContent = highScore;
-
+currentPointDisplay.textContent = userPoint;
 // 스테이지별 설정 (카드 쌍 수와 제한 시간)
 const stageSettings = {
     1: { pairs: 2, time: 30 },  // 4장 (2쌍) - 30초
@@ -132,7 +133,8 @@ function startGame() {
     gameScreen.style.display = "block";
     currentStage = 1;
     score = 0;
-    scoreDisplay.textContent = `점수: ${score}`;
+    currentPointDisplay.textContent = userPoint;
+    scoreDisplay.textContent = `${userName}님의 점수: ${score}`;
     messageDisplay.textContent = `스테이지 ${currentStage}`;
 
     // 3초 동안 모두 뒤집기
@@ -185,10 +187,10 @@ function nextStage() {
 }
 
 async function giveUp() {
-    if (confirm(`게임을 포기하시겠습니까?\n현재까지 획득한 ${score}점을 잃게 됩니다.`)) {
+    if (confirm(`${userName}님, 게임을 포기하시겠습니까?\n현재까지 획득한 ${score}점을 잃게 됩니다.\n현재 포인트: ${userPoint}점`)) {
         clearInterval(timer);
         messageDisplay.textContent = `게임 포기! 현재 점수 ${score}점을 잃었습니다.`;
-       
+        score=0;
         
         setTimeout(() => {
             resetGame();
@@ -215,23 +217,25 @@ async function endGame(success) {
         if (currentStage === totalStages) {
             score += 10000;
             scoreDisplay.textContent = `점수: ${score}`;
-            messageDisplay.textContent = "🎉 축하합니다! 모든 스테이지를 클리어했습니다!";
-            console.log(`게임 클리어! 최종 점수: ${score}점`);
+            currentPointDisplay.textContent = userPoint + score;
+            messageDisplay.textContent = `🎉 축하합니다! ${userName}님 모든 스테이지를 클리어했습니다!`;
+            console.log(`게임 클리어! 최종 점수: ${score}`);
             
             sendPoint(currentStage);
+            console.log(`${userName}님의 현재 포인트: ${userPoint + score}`);
             updateHighScore();
         } else {
             score += 400;
-            scoreDisplay.textContent = `점수: ${score}`;
-            messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득!`;
-            console.log(`스테이지 ${currentStage} 클리어! 현재 점수: ${score}점`);
+            scoreDisplay.textContent = `${userName}님의 점수: ${score}`;
+            messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +400점 획득!`;
+            console.log(`스테이지 ${currentStage} 클리어! 현재 점수: ${score}`);
             onStageClear(score);
             return;
         }
     } else {
-        messageDisplay.textContent = "⏰ 시간 초과! 다시 도전해보세요!";
-        console.log(`게임 오버! 최종 점수: ${score}점`);
-        sendPoint(currentStage);
+        messageDisplay.textContent = `⏰ 시간 초과! 다시 도전해보세요!<br> 최종 점수: ${score}`;
+        console.log(`게임 오버! 최종 점수: ${score}를 잃었습니다.`);
+        score = 0;
     }
 
     if (score > highScore) {
@@ -262,6 +266,7 @@ function resetGame() {
     clearInterval(timer);
     timerDisplay.textContent = `남은 시간: ${stageSettings[currentStage].time}초`;
     scoreDisplay.textContent = `점수: ${score}`;
+    currentPointDisplay.textContent = userPoint;
     messageDisplay.textContent = "";
 }
 
@@ -359,3 +364,46 @@ async function sendPoint(currentStage) {
         alert(err.message);
     }
 }
+
+async function getPoint() {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('로그인이 필요합니다.');
+        }
+
+        const response = await fetch("/game/getpoint", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('포인트 조회에 실패했습니다.');
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (err) {
+        console.error("에러 발생:", err);
+        return { name: '게스트', point: 0 };
+    }
+}
+
+// 게임 시작 시 포인트 조회
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const userData = await getPoint();
+        if (userData) {
+            userName = userData.name;
+            userPoint = userData.point;
+            
+            document.getElementById('user-name').textContent = userName;
+            document.getElementById('user-name-start').textContent = userName;
+            document.getElementById('current-point').textContent = userPoint;
+        }
+    } catch (error) {
+        console.error('사용자 정보를 가져오는데 실패했습니다:', error);
+    }
+});

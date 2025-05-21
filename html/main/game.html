@@ -39,6 +39,7 @@
 
 					<div id="game-screen" class="game-screen" style="display: none;">
 						<h1>베라 카드 게임</h1>
+						<div class="user-greeting">안녕하세요 <span id="user-name"></span>님</div>
 						<div class="game-info">
 							<div id="timer">남은 시간: 30초</div>
 							<div id="score">점수: 0</div>
@@ -50,7 +51,11 @@
 
 					<div id="start-screen" class="start-screen">
 						<h1>베라 카드 게임</h1>
-						<div class="high-score">최고 점수: <span id="high-score">0</span>점</div>
+						<div class="user-greeting">안녕하세요 <span id="user-name-start"></span>님</div>
+						<div class="score-container">
+							<div class="high-score">현재 보유 포인트: <span id="current-point">0</span>점</div>
+							<div class="high-score">최고 점수: <span id="high-score">0</span>점</div>
+						</div>
 						<div class="game-rules">
 							<h2>게임 규칙</h2>
 							<ul>
