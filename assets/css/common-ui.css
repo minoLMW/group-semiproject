@@ -197,8 +197,10 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	background-repeat:no-repeat;
 	background-size:contain;
 	float:right;
+	background-color: transparent;
 }
-.basekt-btn {
+
+.basekt-btn, .basekt-btn button {
 	background-color:transparent;
 }
 .basekt-btn img {
