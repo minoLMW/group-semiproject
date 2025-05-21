@@ -273,8 +273,12 @@
 							return res.json();
 						})
 						.then(data => {
-							alert(`✅ 장바구니에 ${quantity}개 저장 완료!`);
-							input.val(0);
+							const confirmMove = confirm(`✅ 장바구니에 ${quantity}개 저장 완료!\n장바구니 페이지로 이동하시겠습니까?`);
+							if (confirmMove) {
+								window.location.href = "/html/cart/cart.html"; // ✅ 이동
+							} else {
+								input.val(0); // ❌ 이동 안 하고 수량만 초기화
+							}
 						})
 						.catch(err => {
 							console.error("❌ 저장 실패:", err);
