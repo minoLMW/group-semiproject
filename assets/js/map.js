@@ -521,18 +521,21 @@ function handleMenuClick(menuType) {
 		case 'store':
 			// 매장 찾기 관련 동작
 			console.log('매장 찾기 메뉴 클릭');
+			window.location.href = 'map.html';
 			break;
 		case 'flavor':
 			// 100 Flavor 관련 동작
-			console.log('100 Flavor 메뉴 클릭');
+			console.log('Baskin Minoo\'s Card Game 메뉴 클릭');
+			window.location.href = 'game.html';
 			break;
 		case 'workshop':
 			// Workshop 관련 동작
-			console.log('Workshop 메뉴 클릭');
+			console.log('Minoo\'s History 메뉴 클릭');
+			window.location.href = '../../html/history/HI-010.html';
 			break;
 		case 'order':
 			// Order 관련 동작
-			console.log('Order 메뉴 클릭');
+			window.location.href = '../../html/product/P-020.html';
 			break;
 	}
 }
