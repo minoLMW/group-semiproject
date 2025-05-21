@@ -98,7 +98,7 @@ $(document).ready(function () {
   });
 
   // searchOverlay와 userCon이 열려있을 때, 다른 곳 클릭 시 닫기
-  $(document).on("click", function (e) {
+  $('document').on("click", function (e) {
     var $t = $(e.target);
 
     // 검색 오버레이가 열려 있고, 클릭한 곳이 오버레이나 검색 버튼이 아니면 닫기
@@ -120,14 +120,17 @@ $(document).ready(function () {
       $userCon.slideUp(200);
     }
   });
+});
 
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 100) {
-      $("header").addClass("active");
-    } else {
-      $("header").removeClass("active");
-    }
-  });
+
+
+$(window).scroll(function () {
+  console.log($(this))
+  if ($(this).scrollTop() > 100) {
+    $(".baskinrobbins-main .main-header-bg").addClass("active");
+  } else {
+    $(".baskinrobbins-main .main-header-bg").removeClass("active");
+  }
 });
 
 function handleSearch() {
