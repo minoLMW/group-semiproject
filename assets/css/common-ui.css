@@ -198,8 +198,10 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	background-repeat:no-repeat;
 	background-size:contain;
 	float:right;
+	background-color: transparent;
 }
-.basekt-btn {
+
+.basekt-btn, .basekt-btn button {
 	background-color:transparent;
 }
 .basekt-btn img {
@@ -1693,8 +1695,8 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	height:3.2rem;
 	margin:0;
 	border-radius:0;
-	background:url(https://www.baskinrobbins.co.kr/assets/images/main/icon_bullet_active.png)
-	no-repeat;
+	background:url(/assets/imgs/img/icon_bullet_active.png) no-repeat;
+
 }
 .main-header {
 	display:flex;
@@ -2197,7 +2199,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	height:3.2rem;
 	margin:0;
 	border-radius:0;
-	background:url(../../imgs/img/icon_bullet_active.png) no-repeat;
+	background:url(/assets/imgs/img/icon_bullet_active.png) no-repeat;
 }
 /* // main-content */
 
@@ -2654,19 +2656,23 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 		transform:translateX(0.5rem);
 }
 .start-button {
-		padding:1.5rem 5rem;
-		font-size:2rem;
-		background:linear-gradient(45deg, #3498db, #2980b9);
-		color:white;
-		border:none;
-		border-radius:3rem;
-		cursor:pointer;
-		transition:all 0.3s;
-		box-shadow:0 0.5rem 1.5rem rgba(52, 152, 219, 0.3);
+    display: block;
+    margin: 4rem auto 0;
+    padding: 1.5rem 5rem;
+    font-size: 2rem;
+    background: linear-gradient(45deg, var(--pink-color-3), var(--pink-color-2));
+    color: white;
+    border: none;
+    border-radius: 3rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0.5rem 1.5rem rgba(255, 124, 152, 0.3);
 }
+
 .start-button:hover {
-		transform:translateY(-0.2rem);
-		box-shadow:0 0.8rem 2rem rgba(52, 152, 219, 0.4);
+    transform: translateY(-0.2rem);
+    box-shadow: 0 0.8rem 2rem rgba(255, 124, 152, 0.4);
+    background: linear-gradient(45deg, var(--pink-color-2), var(--pink-color-3));
 }
 .game-screen {
 		padding:3rem;
@@ -2802,6 +2808,18 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 		margin:2rem 0;
 		font-weight:bold;
 		text-shadow:1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.score-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+    padding: 0 2rem;
+}
+
+.score-container .high-score {
+    margin: 0;
 }
 
 /*게임 내 모달 */
@@ -3031,3 +3049,31 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	background-color:var(--pink-color-2);
 }
 /* // cart */
+
+.game-screen h1 {
+    text-align: center;
+    font-size: 3.6rem;
+    color: var(--pink-color-2);
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.start-screen h1 {
+    text-align: center;
+    font-size: 3.6rem;
+    color: var(--pink-color-2);
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.user-greeting {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--font2);
+    margin-bottom: 2rem;
+}
+
+.user-greeting span {
+    color: var(--blue);
+    font-weight: bold;
+}
