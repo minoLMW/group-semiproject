@@ -28,7 +28,7 @@
   <li class="sub-menu-item sub-item-1">
     <a href="#" class="sub-item-title">이벤트</a>
     <ul class="sub-list2-a sub-list2-a-1">
-      <li><a href="/html/main/game.html" class="sub-list2-a-con-1">프로모션</a></li>
+      <li><a href="/html/main/game.html" class="sub-list2-a-con-1">게임</a></li>
     </ul>
   </li>
   <!-- BR Play -->
@@ -84,39 +84,53 @@
         </ul>
       </nav>
     </div>
-    <ul class="h-side-bar">
-      <li class="h-search-container">
-        <button class="search-btn"></button>
-      </li>
-      <li>
-        <button class="basekt-btn">
-          <img src="../../../assets/imgs/img/btn_shoppingbasket.png" alt="" />
-        </button>
-      </li>
-      <ul class="user-btn">
-        <li class="user-btn-container">
-          <button class="user-btn-list user-btn-list-1">
-            <a href="/html/common/login.html">Login</a>
-          </button>
-          <button class="user-btn-list user-btn-list-2">
-            <a href="/html/common/signup.html">Join</a>
-          </button>
-          <button class="user-btn-list user-btn-list-3">
-            <a href="#">CS CENTER</a>
-          </button>
-        </li>
-      </ul>
-    </ul>
+<!-- 타입 변경 및 onclick 추가 -->
+<ul class="h-side-bar">
+  <li class="h-search-container">
+    <button 
+      type="button" 
+      class="search-btn" 
+      onclick="handleSearch()">
+    </button>
+  </li>
+  <li class="basekt-btn">
+    <button 
+      type="button" 
+      class="basket-btn" 
+      onclick="location.href='/html/cart/cart.html'">
+      <img 
+        src="../../../assets/imgs/img/btn_shoppingbasket.png" 
+        alt="Shopping Basket" />
+    </button>
+  </li>
+  <li class="user-btn">
+    <div class="user-btn-container">
+      <button 
+        type="button" 
+        class="user-btn-list user-btn-list-1" 
+        onclick="location.href='/html/common/login.html'">
+        Login
+      </button>
+      <button 
+        type="button" 
+        class="user-btn-list user-btn-list-2" 
+        onclick="location.href='/html/common/signup.html'">
+        Join
+      </button>
+      <button 
+        type="button" 
+        class="user-btn-list user-btn-list-3" 
+        onclick="openCSCenter()">
+        CS CENTER
+      </button>
+    </div>
+  </li>
+</ul>
   </div>
 </header>
 <div class="search-bg-container">
   <div class="search-box search-box-1">
-    close
-    <button class="search-close-btn">
-      <img
-        src="../../../assets/imgs/img/icon_close_big.png"
-        alt="search-close"
-      />
+    <img src="/assets/imgs/img/icon_close_big.png" alt="search-close" />
     </button>
   </div>
   <div class="search-box outline"></div>
@@ -129,19 +143,20 @@
       />
       <button type="button" class="search-input-reset-btn">
         <img
-          src="../../../assets/imgs/img/icon_close_big.png"
+          src="/assets/imgs/img/icon_close_big.png"
           alt="search-reset"
         />
       </button>
-      <button type="submit" class="search-submit-btn">
+      <button type="submit" class="search-submit-btn"> //
         <img
-          src="../../../assets/imgs/img/btn_search_big.png"
-          alt="search-submit"
-        />
+          src="/assets/imgs/img/btn_search_big.png" alt="search-submit"/>
       </button>
     </div>
   </div>
 </div>
+</div>
 
 <!-- Script -->
 <script src="../../../assets/js/header.js"></script>
+
+

@@ -1,3 +1,5 @@
+// import 문 제거 (필요한 경우 올바른 import 문 추가)
+
 const startScreen = document.getElementById("start-screen");        // 시작 화면
 const gameScreen = document.getElementById("game-screen");          // 게임 화면
 const startButton = document.getElementById("start-button");        // 게임 시작 버튼
@@ -34,7 +36,7 @@ let timer;
 let timeLeft = 30;
 let score = 0;
 let currentStage = 1;
-let highScore = localStorage.getItem('highScore') || 0;
+let highScore = Number(localStorage.getItem('highScore')) || 0;
 const totalStages = 5;
 
 // 최고 점수 표시 업데이트
@@ -77,16 +79,16 @@ function createBoard() {
     const screenWidth = window.innerWidth;
     let cardWidth, cardHeight, gap;
     if (screenWidth <= 480) {
-        cardWidth = 5; // 80px / 16
-        cardHeight = 6.5; // 104px / 16
+        cardWidth = 8; // 80px 
+        cardHeight = 10; // 104px 
     } else if (screenWidth <= 768) {
-        cardWidth = 6.25; // 100px / 16
-        cardHeight = 8.125; // 130px / 16
+        cardWidth = 10; // 100px 
+        cardHeight = 13; // 130px 
     } else {
-        cardWidth = 6.875; // 110px / 16
-        cardHeight = 10.6640625; // 170.625px / 16
+        cardWidth = 11; // 110px 
+        cardHeight = 17; // 170.625px 
     }
-    gap = 10; // 간격을 0.4rem로 고정
+    gap = 5; // 간격을 0.4rem로 고정
 
     // 게임 보드 스타일 설정
     gameBoard.style.display = 'grid';
@@ -162,7 +164,6 @@ function startTimer() {
 }
 
 function nextStage() {
-    // 다음 스테이지로 넘어갈 때 보드와 상태를 초기화하고, 3초 동안 카드를 공개합니다.
     currentStage++;
     if (currentStage > totalStages) {
         endGame(true);
@@ -218,11 +219,9 @@ function endGame(success) {
         } else {
             score += 100;
             scoreDisplay.textContent = `점수: ${score}`;
-            messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득! 다음 스테이지로...`;
+            messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득!`;
             console.log(`스테이지 ${currentStage} 클리어! 현재 점수: ${score}점`);
-            setTimeout(() => {
-                nextStage();
-            }, 2000);
+            onStageClear(score);
             return;
         }
     } else {
@@ -230,9 +229,17 @@ function endGame(success) {
         console.log(`게임 오버! 최종 점수: ${score}점`);
     }
 
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('highScore', highScore);
+    }
+    highScoreDisplay.textContent = highScore;
+    document.getElementById('game-screen').style.display = 'none';
+    document.getElementById('start-screen').style.display = 'block';
+
     setTimeout(() => {
         resetGame();
-    }, 3000);
+    }, 2000);
 }
 
 function resetGame() {
@@ -285,7 +292,6 @@ gameBoard.addEventListener("click", e => {
 
 // 게임 시작 버튼 이벤트 리스너
 startButton.addEventListener("click", () => {
-    // 게임 보드를 생성하고 게임을 시작합니다.
     createBoard();
     startGame();
 });
@@ -299,3 +305,22 @@ window.addEventListener('resize', () => {
         createBoard();
     }
 });
+
+// 스테이지 클리어 시 호출
+function onStageClear(currentScore) {
+    document.getElementById('stage-clear-score').textContent = currentScore;
+    document.getElementById('stage-clear-modal').style.display = 'flex';
+}
+
+// "도전하기" 버튼 클릭 시
+document.getElementById('next-stage-btn').onclick = function() {
+    document.getElementById('stage-clear-modal').style.display = 'none';
+    nextStage();
+};
+
+// "종료하기" 버튼 클릭 시
+document.getElementById('end-game-btn').onclick = function() {
+    document.getElementById('stage-clear-modal').style.display = 'none';
+    // 게임 종료 함수 호출
+    endGame();
+};

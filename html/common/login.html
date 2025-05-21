@@ -28,7 +28,7 @@
 							<div class="login__container">
 								<div class="login__content">
 									<div class="login__inner">
-										<form action="" class="login__form" method="post">
+										<form action="" class="login__form" method="post" onsubmit="return sendit(event)">
 											<fieldset class="login__block">
 												<legend>계정 입력 폼</legend>
 												<input type="hidden" name="redirectUrl" value="/" />
@@ -71,6 +71,6 @@
 	</div>
     <script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
     <script src="/assets/js/common-ui.js"></script>
-    <script src="/assets/js/signup.js"></script>
+    <script src="/assets/js/login.js"></script>
 </body>
 </html>

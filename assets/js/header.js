@@ -129,3 +129,18 @@ $(document).ready(function () {
     }
   });
 });
+
+function handleSearch() {
+  // 검색 모달 열기 or 검색 실행 로직
+  console.log('검색 버튼 클릭');
+}
+
+function openBasket() {
+  // 장바구니 페이지로 이동하거나 모달 열기
+  location.href = '/html/common/basket.html';
+}
+
+function openCSCenter() {
+  // CS 센터 페이지로 이동
+  location.href = '/html/common/cs-center.html';
+}
