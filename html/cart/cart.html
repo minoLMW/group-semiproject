@@ -1,63 +1,61 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>장바구니</title>
-    <link rel="stylesheet" href="/assets/css/common-ui.css" />
-    <link rel="stylesheet" href="/assets/css/common/cart.css" />
-  </head>
-  <body id="baskinrobbins-cart" class="baskinrobbins-cart">
-    <div class="container">
-    <div class="cart-header-bar">
-      <div class="cart-header-left">
-        <span class="cart-back">&lt;</span>
-        <strong class="cart-header-title">장바구니(0)</strong>
-      </div>
-      <div class="cart-step-bar">
-        <span class="step">01 옵션선택</span>
-        <span class="arrow">›</span>
-        <span class="step active">02 장바구니</span>
-        <span class="arrow">›</span>
-        <span class="step">03 주문/결제</span>
-        <span class="arrow">›</span>
-        <span class="step">04 주문완료</span>
-      </div>
-    </div>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title></title>
+	<link rel="stylesheet" href="/assets/css/common-ui.css">
+</head>
+<body>
+	<div class="page">
+		<div class="container">
+			<header class="header"></header>
 
-    <section class="cart-container">
-      <div class="cart-main">
-        <!-- 상품 리스트 영역 -->
-        <div class="cart-items">
-          <div class="cart-item">
-            <img src="#"  class="item-thumb" />
-            <div class="item-info">
-              <p class="item-title"></p>
-              <p class="item-shipping"></p>
-              <p class="item-price"> <span class="item-sale"></span></p>
-              <div class="item-controls">
-                <button>-</button>
-                <input type="text" value="1" readonly />
-                <button>+</button>
-                <button class="item-remove">삭제</button>
-              </div>
-            </div>
-          </div>
+			<main class="contents">
+				<div class="content">
 
-          <!-- 다른 상품 반복 -->
-        </div>
+					<section class="cart-container">
+						<div class="cart-main">
+							<!-- 상품 리스트 영역 -->
+							<div class="cart-items">
+								<div class="cart-item">
+									<img src="#"	class="item-thumb" />
+									<div class="item-info">
+										<p class="item-title"></p>
+										<p class="item-shipping"></p>
+										<p class="item-price"> <span class="item-sale"></span></p>
+										<div class="item-controls">
+											<button>-</button>
+											<input type="text" value="1" readonly />
+											<button>+</button>
+											<button class="item-remove">삭제</button>
+										</div>
+									</div>
+								</div>
 
-        <!-- 주문 요약 영역 -->
-        <aside class="cart-summary">
-          <h3>주문 예상 금액</h3>
-          <div class="summary-item"><span>총 상품 가격</span><span>0원</span></div>
-          <div class="summary-item"><span>총 할인</span><span class="discount">-0원</span></div>
-          <div class="summary-item"><span>총 배송비</span><span>+0원</span></div>
-          <div class="summary-total"><span>합계</span><span>0원</span></div>
-          <button id="buyBtn" class="summary-buy">구매하기 (0)</button>
-        </aside>
-      </div>
-    </section>
-     </div>
-  </body>
+								<!-- 다른 상품 반복 -->
+							</div>
+
+							<!-- 주문 요약 영역 -->
+							<aside class="cart-summary">
+								<h3>주문 예상 금액</h3>
+								<div class="summary-item"><span>총 상품 가격</span><span>0원</span></div>
+								<div class="summary-item"><span>총 할인</span><span class="discount">-0원</span></div>
+								<div class="summary-item"><span>총 배송비</span><span>+0원</span></div>
+								<div class="summary-total"><span>합계</span><span>0원</span></div>
+								<button id="buyBtn" class="summary-buy">구매하기 (0)</button>
+							</aside>
+						</div>
+					</section>
+
+				</div>
+			</main>
+
+			<footer class="footer"></footer>
+		</div>
+	</div>
+	<script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
+	<script src="/assets/js/common-ui.js"></script>
+	<script src="/assets/js/cart.js"></script>
+</body>
 </html>
