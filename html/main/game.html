@@ -17,6 +17,25 @@
 
 			<main class="contents">
 				<div class="content">
+					<!-- <div class="map_header">
+						<div class="main-menu">
+						  <p class="active" data-menu="store">매장 찾기</p>
+						  <p data-menu="flavor">Baskin Minoo's Card Game</p>
+						  <p data-menu="workshop">Minoo's History</p>
+						  <p data-menu="order">Order</p>
+						</div>
+						<p class="store-menu">Baskin Minoo's Game</p>
+					  </div> -->
+
+					  <div class="page-title">
+						<div class="page-title__container">
+							<div class="page-title__content">
+								<h2 class="page-title__title">Baskin Minoo's<br>Card Game</h2>
+								<p class="page-title__text">Baskin Minoo's Game</p>
+							</div>
+						</div>
+					</div>
+
 
 					<div id="game-screen" class="game-screen" style="display: none;">
 						<h1>베라 카드 게임</h1>
@@ -38,19 +57,31 @@
 								<li>카드의 짝을 맞추는 게임입니다.</li>
 								<li>게임 시작 시 3초 동안 모든 카드가 보입니다.</li>
 								<li>총 5개의 스테이지가 있습니다.</li>
-								<li>스테이지 1: 4장 (2쌍) - 30초</li>
-								<li>스테이지 2: 8장 (4쌍) - 30초</li>
-								<li>스테이지 3: 12장 (6쌍) - 30초</li>
-								<li>스테이지 4: 16장 (8쌍) - 30초</li>
-								<li>스테이지 5: 20장 (10쌍) - 30초</li>
-								<li>각 스테이지 클리어 시 100점을 획득합니다.</li>
+								<li>각 스테이지 시작 시 30초가 주어집니다.</li>
+								<li>스테이지 클리어 시 300점을 획득하고 이후,</br> 스테이지 4까지  클리어 시 300점씩 추가로 획득합니다.</li>
+								<li>스테이지 5 클리어 시 추가로 4500점을 획득합니다.</li>
 								<li>게임 포기 시 현재까지 획득한 점수를 잃게 됩니다.</li>
 							</ul>
 						</div>
 						<button id="start-button" class="start-button">게임 시작하기</button>
 					</div>
 
-					
+					<div id="stage-clear-modal" class="stage-clear-modal" style="display:none;">
+						<div class="stage-clear-modal__content">
+							<h2>다음 스테이지를 도전하시겠습니까?</h2>
+							<div class="stage-clear-modal__score">
+								현재 점수: <span id="stage-clear-score"></span>점
+							</div>
+							<div class="stage-clear-modal__warning">
+								※ 다음 스테이지에서 실패하면 <b>현재 점수</b>를 모두 잃을 수 있습니다!
+							</div>
+							<div class="stage-clear-modal__buttons">
+								<button id="next-stage-btn" class="next-stage-btn">도전하기</button>
+								<button id="end-game-btn" class="end-game-btn">종료하기</button>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</main>
 			<footer class="footer">
@@ -58,8 +89,8 @@
 			</footer>
 		</div>
 	</div>
-	<script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
-	<script src="/assets/js/common-ui.js"></script>
-	<script src="/assets/js/game.js"></script>
+	<script src="../../assets/libs/jquery/jquery-3.6.0.min.js"></script>
+	<script src="../../assets/js/common-ui.js"></script>
+	<script src="../../assets/js/game.js"></script>
 </body>
 </html>
