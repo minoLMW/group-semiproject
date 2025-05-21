@@ -2957,6 +2957,9 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	font-weight:500;
 	margin-bottom:0.5rem;
 }
+.cart__items--name:hover {
+	text-decoration:underline;
+}
 .cart__items--description {
 	font-size:1.3rem;
 	font-weight:300;
