@@ -239,7 +239,7 @@ function endGame(success) {
 
     setTimeout(() => {
         resetGame();
-    }, 1000);
+    }, 2000);
 }
 
 function resetGame() {
