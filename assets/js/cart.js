@@ -30,7 +30,6 @@ async function updateCart(iceidx, quantity) {
 
 // 사용자 포인트 가져오기
 async function fetchUserPoint() {
-	alert('ㄷ러ㅏ')
 	const res = await fetch("/auth/me", {
 		headers: { Authorization: `Bearer ${token}` },
 	});
@@ -222,24 +221,32 @@ document.addEventListener("DOMContentLoaded", async function () {
 						price: parseInt(controls.dataset.price)
 					};
 				});
+
 				const totalPrice = selectedItems.reduce((sum, i) => sum + i.price, 0);
+
 				try {
 					const user = await fetchUserPoint();
-					console.log(user); // 여기에 point 나와야 함
 					if (user.point < totalPrice) {
 						alert("포인트가 모자랍니다.\n카드게임을 하여 포인트를 획득하세요");
 						location.href = "/html/main/game.html";
 						return;
 					}
-					await purchaseCartItems(selectedItems);
+					const result = await purchaseCartItems(selectedItems);
 					alert("구매가 완료되었습니다.");
 					location.reload();
+
 				} catch (err) {
 					console.error("구매 실패:", err);
-					alert("구매 중 오류 발생");
+					if (err.message?.includes("포인트")) {
+						alert("포인트가 모자랍니다.\n카드게임을 하여 포인트를 획득하세요");
+						location.href = "/html/main/game.html";
+					} else {
+						alert("구매 중 오류 발생");
+					}
 				}
 			}
 		});
+
 	} catch (err) {
 		console.error("❌ 장바구니 로딩 에러:", err);
 		container.innerHTML = `<p>장바구니 정보를 불러오는 데 실패했습니다.</p>`;
