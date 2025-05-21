@@ -2699,7 +2699,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 		background:rgba(255, 255, 255, 0.9);
 		border-radius:2rem;
 		box-shadow:0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
-		gap:0.64rem;
+		gap:0.4rem;
 		min-height:60rem;
 		width:fit-content;
 		max-width:100%;
@@ -2707,7 +2707,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .game-screen {
 		padding:2rem;
 }
-#game .card {
+#game .game-card {
 		position:relative;
 		width:100%;
 		height:100%;
@@ -2721,12 +2721,12 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 		box-shadow:0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
 		margin:0;
 }
-#game .card:hover {
+#game .game-card:hover {
 		transform:scale(1.05) translateY(-0.5rem);
 		box-shadow:0 0.8rem 1.6rem rgba(0, 0, 0, 0.3);
 }
-#game .card-front, 
-#game .card-back {
+#game .game-card-front, 
+#game .game-card-back {
 		position:absolute;
 		top:0;
 		left:0;
@@ -2742,13 +2742,13 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 		justify-content:center;
 		align-items:center;
 }
-#game .card-front {
+#game .game-card-front {
 		z-index:2;
 		transform:rotateY(180deg);
 		background:linear-gradient(45deg, #3498db, #2980b9);
 		border:0.2rem solid #fff;
 }
-#game .card-back {
+#game .game-card-back {
 		background:linear-gradient(135deg, #f1c40f, #f39c12);
 		z-index:1;
 		transform:rotateY(0deg);
@@ -2761,10 +2761,10 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 		background-size:2rem 2rem;
 		background-position:0 0, 0 1rem, 1rem -1rem, -1rem 0;
 }
-#game .card.flipped .card-front {
+#game .game-card.flipped .game-card-front {
 		transform:rotateY(0deg);
 }
-#game .card.flipped .card-back {
+#game .game-card.flipped .game-card-back {
 		transform:rotateY(-180deg);
 }
 .matched {
@@ -2801,6 +2801,77 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 		font-weight:bold;
 		text-shadow:1px 1px 2px rgba(0, 0, 0, 0.1);
 }
+
+/*게임 내 모달 */
+
+.stage-clear-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stage-clear-modal__content {
+    background: var(--bg-root);
+    border-radius: 2rem;
+    padding: 3rem 4rem;
+    box-shadow: 0 0.8rem 2rem rgba(0,0,0,0.2);
+    text-align: center;
+    min-width: 32rem;
+}
+
+.stage-clear-modal__score {
+    font-size: 2rem;
+    color: var(--font2);
+    margin: 2rem 0 1rem 0;
+    font-weight: bold;
+}
+
+.stage-clear-modal__warning {
+    color: var(--deeppink);
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+}
+
+.stage-clear-modal__buttons {
+    display: flex;
+    gap:0.8rem;
+    justify-content: center;
+}
+
+.next-stage-btn, .end-game-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.4rem;
+    border-radius: 2rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.next-stage-btn {
+    width:20rem;
+    background: linear-gradient(45deg, var(--blue), var(--blue));
+    color: #fff;
+}
+
+.next-stage-btn:hover {
+    background: linear-gradient(45deg, var(--blue), var(--blue));
+}
+
+.end-game-btn {
+    background: linear-gradient(45deg, var(--deeppink), var(--deeppink));
+    color: #fff;
+}
+
+.end-game-btn:hover {
+    background: linear-gradient(45deg, var(--deeppink), var(--deeppink));
+}
+
+
 
 /* 서비스 태그 스타일 */
 .store-map-services {
