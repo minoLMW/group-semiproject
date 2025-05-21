@@ -9,7 +9,7 @@ export async function giveGamePoint(userId, stage) {
   if (!user) throw new Error("사용자를 찾을 수 없습니다.");
 
   const stageIndex = Number(stage);
-  const STAGE_POINTS = [0, 400, 600, 800, 1000, 1700];
+  const STAGE_POINTS = [0, 400, 800, 1200, 1600, 11600];
 
   if (isNaN(stageIndex) || stageIndex < 1 || stageIndex > 5) {
     throw new Error("유효하지 않은 스테이지 값입니다 (1~5)");

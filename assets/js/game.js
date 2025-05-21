@@ -213,7 +213,7 @@ async function endGame(success) {
 
     if (success) {
         if (currentStage === totalStages) {
-            score += 100;
+            score += 10000;
             scoreDisplay.textContent = `점수: ${score}`;
             messageDisplay.textContent = "🎉 축하합니다! 모든 스테이지를 클리어했습니다!";
             console.log(`게임 클리어! 최종 점수: ${score}점`);
@@ -221,7 +221,7 @@ async function endGame(success) {
             sendPoint(currentStage);
             updateHighScore();
         } else {
-            score += 100;
+            score += 400;
             scoreDisplay.textContent = `점수: ${score}`;
             messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득!`;
             console.log(`스테이지 ${currentStage} 클리어! 현재 점수: ${score}점`);
