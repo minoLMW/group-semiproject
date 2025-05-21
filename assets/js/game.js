@@ -80,15 +80,15 @@ function createBoard() {
     let cardWidth, cardHeight, gap;
     if (screenWidth <= 480) {
         cardWidth = 8; // 80px 
-        cardHeight = 10; // 104px 
+        cardHeight = 13; // 100px 
     } else if (screenWidth <= 768) {
-        cardWidth = 10; // 100px 
-        cardHeight = 13; // 130px 
+        cardWidth = 11; // 100px 
+        cardHeight = 18; // 130px 
     } else {
-        cardWidth = 11; // 110px 
-        cardHeight = 17; // 170.625px 
+        cardWidth = 15; // 110px 
+        cardHeight = 21; // 180px 
     }
-    gap = 5; // 간격을 0.4rem로 고정
+    gap = 2; // 0.4rem = 4px
 
     // 게임 보드 스타일 설정
     gameBoard.style.display = 'grid';
@@ -103,19 +103,19 @@ function createBoard() {
 
     cards.forEach((symbol, index) => {
         const card = document.createElement("div");
-        card.classList.add("card");
+        card.classList.add("game-card");
         card.dataset.symbol = symbol;
         card.dataset.index = index;
 
         const front = document.createElement("div");
-        front.className = "card-front";
+        front.className = "game-card-front";
         front.style.backgroundImage = `url('${symbol}'), url('../../assets/imgs/img/h_logo_2.png')`;
         front.style.backgroundSize = '75% 75%, cover';
         front.style.backgroundPosition = 'center, center';
         front.style.backgroundRepeat = 'no-repeat, no-repeat';
 
         const back = document.createElement("div");
-        back.className = "card-back";
+        back.className = "game-card-back";
         back.style.backgroundImage = "url('../../assets/imgs/img/h_logo.png')";
         back.style.backgroundSize = '65% 65%';
         back.style.backgroundPosition = 'center';
@@ -136,9 +136,9 @@ function startGame() {
     messageDisplay.textContent = `스테이지 ${currentStage}`;
 
     // 3초 동안 모두 뒤집기
-    document.querySelectorAll('.card').forEach(card => card.classList.add('flipped'));
+    document.querySelectorAll('.game-card').forEach(card => card.classList.add('flipped'));
     setTimeout(() => {
-        document.querySelectorAll(".card").forEach(card => {
+        document.querySelectorAll(".game-card").forEach(card => {
             card.classList.remove("flipped");
         });
         gameStarted = true;
@@ -174,9 +174,9 @@ function nextStage() {
     matchedCount = 0;
     messageDisplay.textContent = `스테이지 ${currentStage}`;
     createBoard();
-    document.querySelectorAll('.card').forEach(card => card.classList.add('flipped'));
+    document.querySelectorAll('.game-card').forEach(card => card.classList.add('flipped'));
     setTimeout(() => {
-        document.querySelectorAll(".card").forEach(card => {
+        document.querySelectorAll(".game-card").forEach(card => {
             card.classList.remove("flipped");
         });
         gameStarted = true;
@@ -205,7 +205,7 @@ function updateHighScore() {
 
 function endGame(success) {
     gameStarted = false;
-    document.querySelectorAll(".card").forEach(card => {
+    document.querySelectorAll(".game-card").forEach(card => {
         card.style.pointerEvents = "none";
     });
 
@@ -262,7 +262,7 @@ function resetGame() {
 
 gameBoard.addEventListener("click", e => {
     if (!gameStarted) return;
-    const clicked = e.target.closest(".card");
+    const clicked = e.target.closest(".game-card");
     if (!clicked || clicked.classList.contains("flipped") || flippedCards.length >= 2) return;
 
     clicked.classList.add("flipped");
