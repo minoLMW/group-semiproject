@@ -184,10 +184,12 @@ function nextStage() {
     }, 3000);
 }
 
-function giveUp() {
-    if (confirm("게임을 포기하시겠습니까?\n현재까지 획득한 점수를 잃게 됩니다.")) {
+async function giveUp() {
+    if (confirm(`게임을 포기하시겠습니까?\n현재까지 획득한 ${score}점을 잃게 됩니다.`)) {
         clearInterval(timer);
         messageDisplay.textContent = `게임 포기! 현재 점수 ${score}점을 잃었습니다.`;
+       
+        
         setTimeout(() => {
             resetGame();
         }, 2000);
@@ -203,7 +205,7 @@ function updateHighScore() {
     }
 }
 
-function endGame(success) {
+async function endGame(success) {
     gameStarted = false;
     document.querySelectorAll(".game-card").forEach(card => {
         card.style.pointerEvents = "none";
@@ -215,6 +217,8 @@ function endGame(success) {
             scoreDisplay.textContent = `점수: ${score}`;
             messageDisplay.textContent = "🎉 축하합니다! 모든 스테이지를 클리어했습니다!";
             console.log(`게임 클리어! 최종 점수: ${score}점`);
+            
+            sendPoint(currentStage);
             updateHighScore();
         } else {
             score += 100;
@@ -227,6 +231,7 @@ function endGame(success) {
     } else {
         messageDisplay.textContent = "⏰ 시간 초과! 다시 도전해보세요!";
         console.log(`게임 오버! 최종 점수: ${score}점`);
+        sendPoint(currentStage);
     }
 
     if (score > highScore) {
@@ -236,7 +241,7 @@ function endGame(success) {
     highScoreDisplay.textContent = highScore;
     document.getElementById('game-screen').style.display = 'none';
     document.getElementById('start-screen').style.display = 'block';
-
+    
     setTimeout(() => {
         resetGame();
     }, 2000);
@@ -278,6 +283,7 @@ gameBoard.addEventListener("click", e => {
 
             if (matchedCount === stageSettings[currentStage].pairs) {
                 clearInterval(timer);
+               
                 endGame(true);
             }
         } else {
@@ -307,7 +313,7 @@ window.addEventListener('resize', () => {
 });
 
 // 스테이지 클리어 시 호출
-function onStageClear(currentScore) {
+async function onStageClear(currentScore) {
     document.getElementById('stage-clear-score').textContent = currentScore;
     document.getElementById('stage-clear-modal').style.display = 'flex';
 }
@@ -324,3 +330,32 @@ document.getElementById('end-game-btn').onclick = function() {
     // 게임 종료 함수 호출
     endGame();
 };
+
+// 전역 스코프의 await 코드를 즉시 실행 함수로 감싸기
+async function sendPoint(currentStage) {
+    try {
+        const token = localStorage.getItem('token'); // 로컬 스토리지에서 토큰 가져오기
+        if (!token) {
+            throw new Error('로그인이 필요합니다.');
+        }
+
+        const response = await fetch("/game/point", {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}` // 인증 토큰 추가
+            },
+            body: JSON.stringify({ stage: currentStage }),
+        });
+
+        const result = await response.json();
+        console.log("서버 응답:", result);
+
+        if (!response.ok) {
+            throw new Error(result.message || "포인트 전송에 실패했습니다.");
+        }
+    } catch (err) {
+        console.error("에러 발생:", err);
+        alert(err.message);
+    }
+}
