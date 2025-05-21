@@ -20,6 +20,7 @@ export const isAuth = async (req, res, next) => {
       return res.status(401).json(AUTH_ERROR);
     }
 
+    req.id = user.id;
     // 로그인 정보 req에 저장
     req.user = {
       id: user.id,
