@@ -154,3 +154,4 @@ function openBasket() {
 function openCSCenter() {
   location.href = '/html/common/cs-center.html';
 }
+
