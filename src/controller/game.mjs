@@ -30,14 +30,15 @@ export async function getPoint(req, res) {
     const userInfo = await gameRepository.getPoint(userId);
 
     res.status(200).json({
-      message: "포인트 조회 완료",
+      message: "사용자 정보 조회 완료",
       name: userInfo.name,
-      point: userInfo.point
+      point: userInfo.point,
+      maxClearedStage: userInfo.maxClearedStage
     });
   } catch (err) {
     console.error('getPoint 컨트롤러 에러:', err);
     res.status(400).json({  
-      message: "포인트 조회 실패",
+      message: "사용자 정보 조회 실패",
       error: err.message,
     });
   }

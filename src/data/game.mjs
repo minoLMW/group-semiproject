@@ -42,16 +42,22 @@ export async function getPoint(userId) {
 
     const result = await users.findOne(
       { _id: new ObjectId(userId) },
-      { projection: { name: 1, point: 1 } }
+      { projection: { name: 1, point: 1, clearedStages: 1 } }
     );
     
     if (!result) {
       throw new Error('사용자를 찾을 수 없습니다.');
     }
+
+    // clearedStages 배열이 없거나 비어있는 경우 0 반환
+    const maxClearedStage = result.clearedStages && result.clearedStages.length > 0 
+      ? Math.max(...result.clearedStages) 
+      : 0;
     
     return {
       name: result.name,
-      point: result.point
+      point: result.point,
+      maxClearedStage: maxClearedStage
     };
   } catch (error) {
     console.error('getPoint 에러:', error);

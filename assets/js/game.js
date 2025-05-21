@@ -36,13 +36,12 @@ let timer;
 let timeLeft = 30;
 let score = 0;
 let currentStage = 1;
-let highScore = Number(localStorage.getItem('highScore')) || 0;
+
 const totalStages = 5;
 let userPoint = getPoint().point;
 let userName = getPoint().name;
-// 최고 점수 표시 업데이트
-highScoreDisplay.textContent = highScore;
-currentPointDisplay.textContent = userPoint;
+let maxClearedStage = getPoint().maxClearedStage;
+
 // 스테이지별 설정 (카드 쌍 수와 제한 시간)
 const stageSettings = {
     1: { pairs: 2, time: 30 },  // 4장 (2쌍) - 30초
@@ -192,18 +191,9 @@ async function giveUp() {
         messageDisplay.textContent = `게임 포기! 현재 점수 ${score}점을 잃었습니다.`;
         score=0;
         
-        setTimeout(() => {
-            resetGame();
+        setTimeout(async () => {
+            await resetGame();
         }, 2000);
-    }
-}
-
-function updateHighScore() {
-    // 최고 점수를 갱신하고, localStorage에 저장합니다.
-    if (score > highScore) {
-        highScore = score;
-        localStorage.setItem('highScore', highScore);
-        highScoreDisplay.textContent = highScore;
     }
 }
 
@@ -221,9 +211,9 @@ async function endGame(success) {
             messageDisplay.textContent = `🎉 축하합니다! ${userName}님 모든 스테이지를 클리어했습니다!`;
             console.log(`게임 클리어! 최종 점수: ${score}`);
             
-            sendPoint(currentStage);
+            await sendPoint(currentStage);
             console.log(`${userName}님의 현재 포인트: ${userPoint + score}`);
-            updateHighScore();
+            
         } else {
             score += 400;
             scoreDisplay.textContent = `${userName}님의 점수: ${score}`;
@@ -234,24 +224,18 @@ async function endGame(success) {
         }
     } else {
         messageDisplay.textContent = `⏰ 시간 초과! 다시 도전해보세요!<br> 최종 점수: ${score}`;
-        console.log(`게임 오버! 최종 점수: ${score}를 잃었습니다.`);
         score = 0;
     }
 
-    if (score > highScore) {
-        highScore = score;
-        localStorage.setItem('highScore', highScore);
-    }
-    highScoreDisplay.textContent = highScore;
     document.getElementById('game-screen').style.display = 'none';
     document.getElementById('start-screen').style.display = 'block';
     
-    setTimeout(() => {
-        resetGame();
+    setTimeout(async () => {
+        await resetGame();
     }, 2000);
 }
 
-function resetGame() {
+async function resetGame() {
     // 게임을 완전히 초기화하여 처음 상태로 되돌립니다.
     gameBoard.innerHTML = "";
     flippedCards = [];
@@ -266,7 +250,22 @@ function resetGame() {
     clearInterval(timer);
     timerDisplay.textContent = `남은 시간: ${stageSettings[currentStage].time}초`;
     scoreDisplay.textContent = `점수: ${score}`;
-    currentPointDisplay.textContent = userPoint;
+    
+    // 사용자 정보 새로 불러오기
+    try {
+        const userData = await getPoint();
+        if (userData) {
+            userPoint = userData.point;
+            userName = userData.name;
+            maxClearedStage = userData.maxClearedStage;
+            
+            document.getElementById('current-point').textContent = userPoint;
+            document.getElementById('high-score').textContent = maxClearedStage;
+        }
+    } catch (error) {
+        console.error('사용자 정보를 가져오는데 실패했습니다:', error);
+    }
+    
     messageDisplay.textContent = "";
 }
 
@@ -330,10 +329,12 @@ document.getElementById('next-stage-btn').onclick = function() {
 };
 
 // "종료하기" 버튼 클릭 시
-document.getElementById('end-game-btn').onclick = function() {
+document.getElementById('end-game-btn').onclick = async function() {
     document.getElementById('stage-clear-modal').style.display = 'none';
-    // 게임 종료 함수 호출
-    endGame();
+    await sendPoint(currentStage);
+    gameScreen.style.display = "none";
+    startScreen.style.display = "block";
+    await resetGame();
 };
 
 // 전역 스코프의 await 코드를 즉시 실행 함수로 감싸기
@@ -402,6 +403,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('user-name').textContent = userName;
             document.getElementById('user-name-start').textContent = userName;
             document.getElementById('current-point').textContent = userPoint;
+            document.getElementById('high-score').textContent = userData.maxClearedStage;
         }
     } catch (error) {
         console.error('사용자 정보를 가져오는데 실패했습니다:', error);
