@@ -322,7 +322,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .sub-list2-a a {
 	width:50%;
-	font-size:1rem;
+	font-size:1.5rem;
 	color:var(--font3);
 	margin-right:3rem;
 }
