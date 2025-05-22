@@ -108,10 +108,15 @@ document.addEventListener("DOMContentLoaded", function () {
         if (result.verified) {
           alert("인증이 완료되었습니다.");
           submitBtn.disabled = false; // 제출 버튼 활성화
+          certificationField.style.display = "none"; // 인증번호 입력 필드 숨김
+        } else {
+          throw new Error("인증번호가 일치하지 않습니다. 다시 확인해주세요.");
         }
       } catch (error) {
         console.error("인증번호 확인 오류:", error);
         alert(error.message);
+        certification.value = ""; // 인증번호 입력 필드 초기화
+        certification.focus(); // 인증번호 입력 필드로 포커스
       }
     });
   } else {
