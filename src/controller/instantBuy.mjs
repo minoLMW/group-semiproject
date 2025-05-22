@@ -2,6 +2,7 @@ import { getIcecreams } from "../db/database.mjs";
 import * as userRepo from "../data/auth.mjs";
 
 export async function instantBuy(req, res) {
+	// const {getIcecreams} = req.body
 	const { quantity } = req.body;
 	const userId = req.user.id;
 
