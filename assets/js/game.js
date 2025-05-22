@@ -28,6 +28,24 @@ const symbols = [
     "https://www.baskinrobbins.co.kr/upload/product/main/e72e22d7c61114e415411c311ee052bd.png",
     "https://www.baskinrobbins.co.kr/upload/product/main/91c8668227bcf556c43a968b97e342e6.png"
 ];
+const symbolsColor = [
+    "#e37070",
+    "#92564a",
+    "#ffe681",
+    "#ffb700",
+    "#fca311",
+    "#a97157",
+    "#ebc349",
+    "#eed2ff",
+    "#8e7dbe",
+    "#ecf39e",
+    "#e0b1cb",
+    "#a7c957",
+    "#004e98",
+    "#9bb053",
+    "#3c713b",
+    "#f8cb5c"
+];
 let cards = [];
 let flippedCards = [];
 let matchedCount = 0;
@@ -108,11 +126,13 @@ function createBoard() {
         card.dataset.index = index;
 
         const front = document.createElement("div");
+        const symbolIndex = symbols.indexOf(symbol);
         front.className = "game-card-front";
-        front.style.backgroundImage = `url('${symbol}'), url('../../assets/imgs/img/h_logo_2.png')`;
+        front.style.backgroundImage = `url('${symbol}')`;
         front.style.backgroundSize = '75% 75%, cover';
         front.style.backgroundPosition = 'center, center';
         front.style.backgroundRepeat = 'no-repeat, no-repeat';
+        front.style.backgroundColor = symbolsColor[symbolIndex]
 
         const back = document.createElement("div");
         back.className = "game-card-back";
@@ -120,6 +140,7 @@ function createBoard() {
         back.style.backgroundSize = '65% 65%';
         back.style.backgroundPosition = 'center';
         back.style.backgroundRepeat = 'no-repeat';
+        back.style.backgroundColor = 'var(--bg-root)';
         
         card.appendChild(front);
         card.appendChild(back);

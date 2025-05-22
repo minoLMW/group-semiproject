@@ -125,7 +125,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	/* pink tone - 살짝 톤다운 */
 	--pink-color-1: #ff9eb2;
 	--pink-color-2: #ff3366;
-	--pink-color-3: #ff668a;
+	--pink-color-3: #772f40;
 	--pink-title-1: #e273a5;
 	
 	/* brown tone - 어두운 테마에 맞춰 더 부드럽게 */
@@ -162,6 +162,9 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	--color-primary: var(--pink-color-2);
 	}
 	.dark-mode .footer {background-color:var(--bg-root2);}
+	.dark-mode .cart-summary {background-color:var(--bg-root2);}
+	.dark-mode .start-screen,
+	.dark-mode .game-screen {background:#705ea3;}
 /* } */
 /* header */
 .main-header-bg {
@@ -2229,7 +2232,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	line-height:1.3846153846;
 }
 .main-box {
-	padding:13.4rem 0 17rem;
+	padding:13.4rem 0 0;
 	background-color:var(--bg-root);
 }
 .main-box__container {
@@ -2778,7 +2781,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	padding:0 3rem;
 }
 .game-rules h2 {
-	color:#2c3e50;
+	color:var(--font2);
 	margin-bottom:2rem;
 	font-size:2.4rem;
 	border-bottom:0.2rem solid var(--blue);
@@ -2899,13 +2902,13 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	z-index:2;
 	transform:rotateY(180deg);
 	background:linear-gradient(45deg, #3498db, #2980b9);
-	border:0.2rem solid #fff;
+	border:0.2rem solid var(--border-gray2);
 }
 #game .game-card-back {
 	background:linear-gradient(135deg, #f1c40f, #f39c12);
 	z-index:1;
 	transform:rotateY(0deg);
-	border:0.2rem solid #fff;
+	border:0.2rem solid var(--border-gray2);
 	background-image:
 		linear-gradient(45deg, #f1c40f 25%, transparent 25%),
 		linear-gradient(-45deg, #f1c40f 25%, transparent 25%),
@@ -2928,7 +2931,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 #message {
 	font-size:2.8rem;
 	margin-top:3rem;
-	color:#2c3e50;
+	color:var(--font2);
 	font-weight:bold;
 	text-shadow:1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -2949,7 +2952,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .high-score {
 	font-size:2.4rem;
-	color:#2c3e50;
+	color:var(--font2);
 	margin:2rem 0;
 	font-weight:bold;
 	text-shadow:1px 1px 2px rgba(0, 0, 0, 0.1);
@@ -3093,9 +3096,9 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	flex:1;
 	min-width:40rem;
 	padding:2rem;
-	border:1px solid var(--border-gray);
 	border-radius:1.6rem;
 	background-color:var(--bg-root2);
+	box-shadow:0 0.4rem 1rem rgba(0, 0, 0, 0.08);
 }
 .cart-items__notresult {
 	padding-top:20rem;
@@ -3213,6 +3216,12 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	background-color:var(--bg-root);
 	color:var(--font2);
 }
+.cart-items__input {
+	width:3rem;
+	padding:0;
+	text-align:center;
+	margin:0 0.5rem;
+}
 .cart-items__remove,
 .cart-items__option {
 	font-weight:bold;
@@ -3234,9 +3243,9 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .cart-summary {
 	width:35rem;
-	background:var(--bg-root);
 	border-radius:1.6rem;
 	padding:2rem;
+	background-color:var(--bg-root);
 	box-shadow:0 0.4rem 1rem rgba(0, 0, 0, 0.08);
 }
 .cart-summary h3 {
