@@ -115,54 +115,6 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	--color-primary:var(--pink-color-2);
 	--size-inner:150rem;
 }
-/* @media (prefers-color-scheme:dark) { */
-	:root .dark-mode {
-	/* 배경 */
-	--bg-root: #333;
-	--bg-root2: #1e1e1e;
-	--bg-black: #eee;
-	
-	/* pink tone - 살짝 톤다운 */
-	--pink-color-1: #ff9eb2;
-	--pink-color-2: #ff3366;
-	--pink-color-3: #ff668a;
-	--pink-title-1: #e273a5;
-	
-	/* brown tone - 어두운 테마에 맞춰 더 부드럽게 */
-	--brown-color-1: #2e1f1b;
-	--brown-color-2: #1c1411;
-	--brown-color-3: #7a6c65;
-	--brown-color-4: #555;
-	--brown-color-5: #999999;
-	
-	/* border */
-	--border-black: #999;
-	--border-gray: #555;
-	--border-gray2: #444;
-	--border-white: #222;
-	
-	/* ETC colors - 너무 튀지 않게 톤 낮춤 */
-	--blue: #5b9be0;
-	--deepblue: #3962c3;
-	--green: #00b39a;
-	--deeppink: #ff007a;
-	--gold: #b39b7a;
-	
-	/* 텍스트 */
-	--font1: #f0f0f0;
-	--font2: #cccccc;
-	--font3: #999;
-	--font4: #777;
-	--font5: #555;
-	--text-white: #fff;
-	
-	/* 포인트 & 프라이머리 컬러 */
-	--point: var(--pink-color-2);
-	--color-root: var(--font1);
-	--color-primary: var(--pink-color-2);
-	}
-	.dark-mode .footer {background-color:var(--bg-root2);}
-/* } */
 /* header */
 .main-header-bg {
 	width:100%;
@@ -481,28 +433,33 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 
 /* User(유저) 버튼 활성화 */
+/* user-btn-container 자동 크기 & 테두리 제거 */
 .user-btn-container {
-	width: 8rem;
-    height: 11rem;
-    border-radius: 0.3rem;
-    border: 0.3rem solid var(--border-black);
-    background-color: var(--bg-root);
-    position: absolute;
-    top: 6rem;
-    right: 15rem;
-    z-index: 999;
-    display: flex
-;
-    flex-direction: column;
-    display: none;
+position: absolute;
+top: 6rem;
+right: 15rem;
+z-index: 999;
+display: none;       /* 기존대로 숨김 상태 */
+width: auto !important;
+height: auto !important;
+padding: 0.5rem 1rem; /* 내용 주변 여백 */
+border: none !important;
+background: none !important;
+box-shadow: none !important;
 }
+
 .user-btn-list {
-	height:calc(100% / 3);
-	text-align:center;
-	font-size:1.4rem !important;
-	font-size:var(--text-color-1);
-	font-weight:var(--font-weight-sd-heavy);
-	cursor:default;
+display: block;            /* 블록으로 변경 */
+width: auto;               /* 내용에 딱 맞게 */
+height: auto;              /* 내용에 딱 맞게 */
+margin: 0.25rem 0;         /* 버튼 간 간격 */
+padding: 0.5rem 1rem;      /* 클릭 영역 확보 */
+text-align: center;
+font-size: 1.4rem;
+font-weight: var(--font-weight-sd-heavy);
+background: var(--bg-root);/* 배경 흰색 */
+border-radius: 0.5rem;
+cursor: pointer;
 }
 .main-header-bg.active .user-btn-container {
 	border-color:var(--deeppink);
@@ -1983,7 +1940,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .main-promotion {
 	overflow:hidden;
 	padding:9rem 0 10rem;
-	background-color:white;
+	background-color: var(--bg-root2);
 }
 .main-promotion__container {
 	overflow:hidden;
@@ -2230,7 +2187,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	line-height:1.3846153846;
 }
 .main-box {
-	padding:13.4rem 0 17rem;
+	padding:13.4rem 0 0;
 	background-color:var(--bg-root);
 }
 .main-box__container {
@@ -2779,7 +2736,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	padding:0 3rem;
 }
 .game-rules h2 {
-	color:#2c3e50;
+	color:var(--font2);
 	margin-bottom:2rem;
 	font-size:2.4rem;
 	border-bottom:0.2rem solid var(--blue);
@@ -2900,13 +2857,13 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	z-index:2;
 	transform:rotateY(180deg);
 	background:linear-gradient(45deg, #3498db, #2980b9);
-	border:0.2rem solid #fff;
+	border:0.2rem solid var(--border-gray2);
 }
 #game .game-card-back {
 	background:linear-gradient(135deg, #f1c40f, #f39c12);
 	z-index:1;
 	transform:rotateY(0deg);
-	border:0.2rem solid #fff;
+	border:0.2rem solid var(--border-gray2);
 	background-image:
 		linear-gradient(45deg, #f1c40f 25%, transparent 25%),
 		linear-gradient(-45deg, #f1c40f 25%, transparent 25%),
@@ -2929,7 +2886,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 #message {
 	font-size:2.8rem;
 	margin-top:3rem;
-	color:#2c3e50;
+	color:var(--font2);
 	font-weight:bold;
 	text-shadow:1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -2950,7 +2907,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .high-score {
 	font-size:2.4rem;
-	color:#2c3e50;
+	color:var(--font2);
 	margin:2rem 0;
 	font-weight:bold;
 	text-shadow:1px 1px 2px rgba(0, 0, 0, 0.1);
@@ -3094,9 +3051,9 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	flex:1;
 	min-width:40rem;
 	padding:2rem;
-	border:1px solid var(--border-gray);
 	border-radius:1.6rem;
 	background-color:var(--bg-root2);
+	box-shadow:0 0.4rem 1rem rgba(0, 0, 0, 0.08);
 }
 .cart-items__notresult {
 	padding-top:20rem;
@@ -3214,6 +3171,12 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	background-color:var(--bg-root);
 	color:var(--font2);
 }
+.cart-items__input {
+	width:3rem;
+	padding:0;
+	text-align:center;
+	margin:0 0.5rem;
+}
 .cart-items__remove,
 .cart-items__option {
 	font-weight:bold;
@@ -3235,9 +3198,9 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .cart-summary {
 	width:35rem;
-	background:var(--bg-root);
 	border-radius:1.6rem;
 	padding:2rem;
+	background-color:var(--bg-root);
 	box-shadow:0 0.4rem 1rem rgba(0, 0, 0, 0.08);
 }
 .cart-summary h3 {
@@ -3377,3 +3340,108 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .h-side-bar .welcome-msg:hover {
   color: var(--pink-color-2);
 }
+
+
+@media (prefers-color-scheme:dark) {
+	:root {
+		/* 배경 */
+		--bg-root: #333;
+		--bg-root2: #1e1e1e;
+		--bg-black: #eee;
+		
+		/* pink tone - 살짝 톤다운 */
+		--pink-color-1: #ff9eb2;
+		--pink-color-2: #ff3366;
+		--pink-color-3: #772f40;
+		--pink-title-1: #e273a5;
+		
+		/* brown tone - 어두운 테마에 맞춰 더 부드럽게 */
+		--brown-color-1: #2e1f1b;
+		--brown-color-2: #1c1411;
+		--brown-color-3: #7a6c65;
+		--brown-color-4: #555;
+		--brown-color-5: #999999;
+		
+		/* border */
+		--border-black: #999;
+		--border-gray: #555;
+		--border-gray2: #444;
+		--border-white: #222;
+		
+		/* ETC colors - 너무 튀지 않게 톤 낮춤 */
+		--blue: #5b9be0;
+		--deepblue: #3962c3;
+		--green: #00b39a;
+		--deeppink: #ff007a;
+		--gold: #b39b7a;
+		
+		/* 텍스트 */
+		--font1: #f0f0f0;
+		--font2: #cccccc;
+		--font3: #999;
+		--font4: #777;
+		--font5: #555;
+		--text-white: #fff;
+		
+		/* 포인트 & 프라이머리 컬러 */
+		--point: var(--pink-color-2);
+		--color-root: var(--font1);
+		--color-primary: var(--pink-color-2);
+	}
+	/* 개별 스타일 */
+	.footer {background-color:var(--bg-root2);}
+	.cart-summary {background-color:var(--bg-root2);}
+	.start-screen,
+	.game-screen {background:#705ea3;}
+	.main-hero {background:none;}
+}
+:root .dark-modes {
+	/* 배경 */
+	--bg-root: #333;
+	--bg-root2: #1e1e1e;
+	--bg-black: #eee;
+	
+	/* pink tone - 살짝 톤다운 */
+	--pink-color-1: #ff9eb2;
+	--pink-color-2: #ff3366;
+	--pink-color-3: #772f40;
+	--pink-title-1: #e273a5;
+	
+	/* brown tone - 어두운 테마에 맞춰 더 부드럽게 */
+	--brown-color-1: #2e1f1b;
+	--brown-color-2: #1c1411;
+	--brown-color-3: #7a6c65;
+	--brown-color-4: #555;
+	--brown-color-5: #999999;
+	
+	/* border */
+	--border-black: #999;
+	--border-gray: #555;
+	--border-gray2: #444;
+	--border-white: #222;
+	
+	/* ETC colors - 너무 튀지 않게 톤 낮춤 */
+	--blue: #5b9be0;
+	--deepblue: #3962c3;
+	--green: #00b39a;
+	--deeppink: #ff007a;
+	--gold: #b39b7a;
+	
+	/* 텍스트 */
+	--font1: #f0f0f0;
+	--font2: #cccccc;
+	--font3: #999;
+	--font4: #777;
+	--font5: #555;
+	--text-white: #fff;
+	
+	/* 포인트 & 프라이머리 컬러 */
+	--point: var(--pink-color-2);
+	--color-root: var(--font1);
+	--color-primary: var(--pink-color-2);
+}
+.dark-mode .footer {background-color:var(--bg-root2);}
+.dark-mode .cart-summary {background-color:var(--bg-root2);}
+.dark-mode .start-screen,
+.dark-mode .game-screen {background:#705ea3;}
+.dark-mode .main-hero {background:none;}
