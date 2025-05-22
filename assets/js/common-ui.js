@@ -10,11 +10,11 @@
 
 
 
+// https://codepen.io/jreece/pen/AEOrwb
 
 
 
-
-
+$('body').addClass('dark-mode')
 
 
 

@@ -71,7 +71,7 @@ html {
 @media (max-width:280px) { html { font-size:50%; } }
 
 
-body {color:var(--color-root); font-size:1.5rem; line-height:1.5; font-family:'Pretendard-Regular'; letter-spacing:-0.025em; overflow-wrap:break-word; -webkit-text-size-adjust:none; background-color:var(--bg-root);}
+body {color:var(--color-root); font-size:1.5rem; line-height:1.5; font-family:'Pretendard-Regular'; letter-spacing:-0.025em; overflow-wrap:break-word; -webkit-text-size-adjust:none; background-color:var(--bg-root); color:var(--font1)}
 legend {overflow:hidden !important; position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; white-space:nowrap !important; clip:rect(1px, 1px, 1px, 1px) !important; clip-path:inset(50%) !important;}
 .hide {overflow:hidden !important; position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; white-space:nowrap !important; clip:rect(1px, 1px, 1px, 1px) !important; clip-path:inset(50%) !important;}
 
@@ -113,6 +113,54 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	--color-primary:var(--pink-color-2);
 	--size-inner:150rem;
 }
+/* @media (prefers-color-scheme:dark) { */
+	:root .dark-mode {
+		/* 배경 */
+		--bg-root: #111;
+		--bg-root2: #1e1e1e;
+		--bg-black: #eee;
+	
+		/* pink tone - 살짝 톤다운 */
+		--pink-color-1: #ff9eb2;
+		--pink-color-2: #ff3366;
+		--pink-color-3: #ff668a;
+		--pink-title-1: #e273a5;
+	
+		/* brown tone - 어두운 테마에 맞춰 더 부드럽게 */
+		--brown-color-1: #2e1f1b;
+		--brown-color-2: #1c1411;
+		--brown-color-3: #7a6c65;
+		--brown-color-4: #555;
+		--brown-color-5: #999999;
+	
+		/* border */
+		--border-black: #999;
+		--border-gray: #555;
+		--border-gray2: #444;
+		--border-white: #222;
+	
+		/* ETC colors - 너무 튀지 않게 톤 낮춤 */
+		--blue: #5b9be0;
+		--deepblue: #3962c3;
+		--green: #00b39a;
+		--deeppink: #ff007a;
+		--gold: #b39b7a;
+	
+		/* 텍스트 */
+		--font1: #f0f0f0;
+		--font2: #cccccc;
+		--font3: #999999;
+		--font4: #777777;
+		--font5: #555555;
+		--text-white: #ffffff;
+	
+		/* 포인트 & 프라이머리 컬러 */
+		--point: var(--pink-color-2);
+		--color-root: var(--font1);
+		--color-primary: var(--pink-color-2);
+	}
+	.dark-mode .footer {background-color:var(--bg-root2);}
+/* } */
 /* header */
 .main-header-bg {
 	width:100%;
@@ -982,7 +1030,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .product-view-nutrition__title {
 	width:12rem;
-	color:var(--brown-color-1);
+	color:var(--font1);
 	font-weight:bold;
 	font-size:2.3rem
 }
@@ -1008,7 +1056,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	text-wrap:nowrap;
 }
 .product-view-nutrition__name {
-	color:var(--brown-color-1)
+	color:var(--font2)
 }
 .product-view-nutrition__text {
 	margin-top:1rem;
@@ -1145,7 +1193,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .login__link {
 	text-decoration:none;
-	color:#333;
+	color:var(--font2);
 }
 .login__link + .login__link {
 	border-left:1px solid var(--font1);
@@ -1158,7 +1206,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	height:6rem;
 	margin-top:4.5rem;
 	border-radius:2.5rem;
-	background:var(--bg-black);
+	background:var(--pink-color-3);
 	color:var(--text-white);
 	font-weight:700;
 	font-size:2.2rem;
@@ -1305,7 +1353,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	height:6rem;
 	margin-top:4.5rem;
 	border-radius:2.5rem;
-	background:var(--bg-black);
+	background:var(--pink-color-3);
 	color:var(--text-white);
 	font-weight:700;
 	font-size:2.2rem;
@@ -1451,8 +1499,8 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .story-story__list {
 	width:var(--size-inner);
 	margin:0 auto;
-		padding:10rem 0 16.8rem;
-		background:url(https://www.baskinrobbins.co.kr/assets/images/story/story/bg_story.png) no-repeat 20.5rem 0
+	padding:10rem 0 16.8rem;
+	background:url(https://www.baskinrobbins.co.kr/assets/images/story/story/bg_story.png) no-repeat 20.5rem 0
 }
 .story-story__visual {
 		position:absolute
@@ -2997,9 +3045,9 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	flex:1;
 	min-width:40rem;
 	padding:2rem;
+	border:1px solid var(--border-gray);
 	border-radius:1.6rem;
-	background-color:var(--bg-root);
-	box-shadow:0 0.4rem 1rem rgba(0, 0, 0, 0.08);
+	background-color:var(--bg-root2);
 }
 .cart-items__notresult {
 	padding-top:20rem;
@@ -3013,8 +3061,11 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	border-radius:1.6rem;
 	padding:2rem;
 	margin-bottom:2rem;
-	box-shadow:0 0.4rem 1rem rgba(0, 0, 0, 0.08);
+	background-color:var(--bg-root);
 	align-items:center;
+}
+.cart-items__item:last-child {
+	margin-bottom:0;
 }
 .cart-items__checkeds {
 	margin-right:1rem;
@@ -3110,9 +3161,9 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	padding:0.5rem 1rem;
 	font-size:1rem;
 	border-radius:0.5rem;
-	border:1px solid #ccc;
-	background-color:#fff;
-	color:#333;
+	border:1px solid var(--border-gray);
+	background-color:var(--bg-root);
+	color:var(--font2);
 }
 .cart-items__remove,
 .cart-items__option {
