@@ -394,7 +394,7 @@ async function getPoint() {
             throw new Error('로그인이 필요합니다.');
         }
 
-        const response = await fetch("/game/getpoint", {
+        const response = await fetch("/game/point", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`
