@@ -169,7 +169,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	height:100%;
 	font-family:var(--font-family-en);
 	font-weight:var(--font-weight-sd-heavy);
-	font-size:1.3rem;
+	font-size:1.6rem;
 	transition-duration:0.3s;
 	color:var(--text-color-1);
 }
@@ -284,7 +284,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .sub-menu-item {
 	font-weight:500;
-	font-size:1.3rem;
+	font-size:1.6rem;
 	color:var(--font1);
 }
 .sub-item-title {
@@ -432,23 +432,24 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 
 /* User(유저) 버튼 활성화 */
 .user-btn-container {
-	width:8rem;
-	height:11rem;
-	border-radius:1.3rem;
-	border:0.2rem solid var(--border-black);
-	background-color:var(--bg-root);
-	position:absolute;
-	top:6rem;
-	right:19.5rem;
-	z-index:999;
-	display:flex;
-	flex-direction:column;
-	display:none;
+	width: 8rem;
+    height: 11rem;
+    border-radius: 0.3rem;
+    border: 0.3rem solid var(--border-black);
+    background-color: var(--bg-root);
+    position: absolute;
+    top: 6rem;
+    right: 15rem;
+    z-index: 999;
+    display: flex
+;
+    flex-direction: column;
+    display: none;
 }
 .user-btn-list {
 	height:calc(100% / 3);
 	text-align:center;
-	font-size:0.7rem !important;
+	font-size:1.4rem !important;
 	font-size:var(--text-color-1);
 	font-weight:var(--font-weight-sd-heavy);
 	cursor:default;
