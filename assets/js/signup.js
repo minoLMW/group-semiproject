@@ -23,6 +23,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });*/
   
+
+
+  //coolsms 인증요청
   document.addEventListener("DOMContentLoaded", function () {
   const sendBtn = document.getElementById("btn-send-code");
   const verifyBtn = document.getElementById("btn-verify-code");
@@ -45,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     try {
-      const res = await fetch("/send-code", {
+      const res = await fetch("/sms/send-code", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone }),
@@ -71,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const code = codeInput.value.trim();
 
     try {
-      const res = await fetch("/verify-code", {
+      const res = await fetch("/sms/verify-code", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone, code }),
@@ -94,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-  // 제출하기 버튼
+  ///회원가입 제출버튼/////
   submitBtn.addEventListener("click", async function (e) {
     e.preventDefault();
 
