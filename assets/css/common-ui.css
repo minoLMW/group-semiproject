@@ -202,6 +202,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 
 .basekt-btn, .basekt-btn button {
+	flex: 0 0 2.8rem;
 	background-color:transparent;
 }
 .basekt-btn img {
@@ -211,6 +212,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	filter:invert(1);
 }
 .user-btn {
+	flex: 0 0 2.8rem;
 	width:3.2rem;
 	height:3.2rem;
 	margin:0 2rem;
@@ -1686,6 +1688,9 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	width:var(--size-inner);
 	margin:0 auto;
 }
+.baskinrobbins-main .content{
+	padding-top: 0
+}
 .main .swiper-pagination {
 	display:flex;
 	align-items:center;
@@ -1767,9 +1772,9 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .main-hero {
 	overflow:hidden;
 	position:relative;
-	padding-top:3rem;
-	background:url(https://www.baskinrobbins.co.kr/assets/images/main/bg_hero.jpg)
-	repeat;
+	padding-top:12rem;
+	background:url(https://www.baskinrobbins.co.kr/assets/images/main/bg_hero.jpg) repeat;
+
 }
 .main-hero__container {
 	display:flex;
@@ -1813,8 +1818,9 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	height:100%;
 }
 .main-hero__box img {
-	display:block;
-	width:100%;
+	width: 1500px;
+    height: auto;
+    max-width: none;
 }
 .main-hero__text {
 	overflow:hidden;
@@ -3238,7 +3244,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 
 .search-bg-container .search-input {
   flex: 1;                      /* 남은 공간을 쭉 채움 */
-  border: none;
+  border: 1px solid var(--border-gray);
   outline: none;
   font-size: 2.3rem;
   text-align: center;
@@ -3260,4 +3266,35 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
   width: 2rem;                  /* 아이콘 크기도 균일하게 */
   height: 2rem;
   display: block;
+}
+
+/* .h-side-bar 가 flex 컨테이너라 가정 */
+.welcome-msg {
+  margin-right: 2rem;            /* 아이콘과 거리 */
+  font-size: 1.4rem;             /* 필요에 따라 조정 */
+  color: var(--text-color-1);    /* 로그인되지 않은 상태 색 */
+  white-space: nowrap;
+}
+
+/* 로그인되면 .main-header-bg.active 상태에서 색 바꾸고 싶으면 */
+.main-header-bg.active .welcome-msg {
+  color: var(--pink-color-3);
+}
+
+/* 환영 메시지도 포인터 커서 */
+.h-side-bar .welcome-msg {
+  cursor: pointer;
+  padding: 0 1.5rem;            /* 다른 버튼들과 간격 맞추기 */
+  color: var(--text-color-1);   /* 기본 색 */
+  transition: color 0.2s;
+}
+
+/* 헤더 active 상태에서 색 반전 */
+.main-header-bg.active .welcome-msg {
+  color: var(--text-white);
+}
+
+/* hover 시 강조 색 */
+.h-side-bar .welcome-msg:hover {
+  color: var(--pink-color-2);
 }

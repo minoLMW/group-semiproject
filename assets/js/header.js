@@ -1,4 +1,18 @@
 $(document).ready(function () {
+  // ── 디버그 로그 & 로그인 환영 메시지 세팅 ──
+  console.log('🔥 common-ui.js ready fired');
+  const userid = localStorage.getItem('userid');
+  console.log('🔥 localStorage.userid →', userid);
+  const $welcome = $('.welcome-msg');
+  console.log('🔥 .welcome-msg element exists? →', $welcome.length);
+  if (userid && $welcome.length) {
+    $welcome.text(`환영합니다 ${userid}님`);
+    console.log('✅ 환영 메시지 렌더링 완료');
+  } else {
+    console.warn('⚠️ 환영 메시지 렌더링 조건 미충족');
+  }
+  // ────────────────────────────────────────────────
+
   const $body = $('body');
   const $header = $('.main-header-bg');
 
@@ -26,9 +40,15 @@ $(document).ready(function () {
     $header.find('.menu-item a').css('color', '');
   }).on('mouseleave', function (e) {
     const to = e.relatedTarget || e.toElement;
-    if (!$(to).closest('.sub-menu-container').length) {
+    // 환영 메시지 or 서브메뉴로 이동하면 닫지 않음
+    if (!$(to).closest('.sub-menu-container, .welcome-msg').length) {
       hideSub(true);
     }
+  });
+
+  // 환영 메시지 호버 시 헤더 유지
+  $welcome.on('mouseenter', function () {
+    $header.addClass('active');
   });
 
   // Menu-item hover
@@ -46,7 +66,7 @@ $(document).ready(function () {
   // Sub-menu container leave
   $subMenucontainer.on('mouseleave', function (e) {
     const to = e.relatedTarget || e.toElement;
-    if ($(to).closest('.main-header').length) {
+    if ($(to).closest('.main-header, .welcome-msg').length) {
       hideSub(false);
     } else {
       hideSub(true);
@@ -64,9 +84,8 @@ $(document).ready(function () {
   const $searchOverlay = $('.search-bg-container');
   $('.search-btn').on('click', function (e) {
     e.preventDefault();
-    $searchOverlay.slideDown(200);
-    $('.h-search-container').css({ opacity: 0 });
-  }); 
+    handleSearch();
+  });
   $('.search-close-btn').on('click', function (e) {
     e.preventDefault();
     $searchOverlay.slideUp(200);
@@ -87,11 +106,17 @@ $(document).ready(function () {
   // Click outside to close overlays
   $(document).on('click', function (e) {
     const $t = $(e.target);
-    if ($searchOverlay.is(':visible') && !$t.closest('.search-bg-container, .search-btn').length) {
+    if (
+      $searchOverlay.is(':visible') &&
+      !$t.closest('.search-bg-container, .search-btn, .welcome-msg').length
+    ) {
       $searchOverlay.slideUp(200);
       $('.h-search-container').css({ opacity: 1 });
     }
-    if ($userCon.is(':visible') && !$t.closest('.user-btn-container, .user-btn').length) {
+    if (
+      $userCon.is(':visible') &&
+      !$t.closest('.user-btn-container, .user-btn, .welcome-msg').length
+    ) {
       $userCon.slideUp(200);
     }
   });
@@ -100,7 +125,6 @@ $(document).ready(function () {
 // Scroll 시 header active 토글 (baskinrobbins-main 페이지에서만 적용)
 $(window).on('scroll', function () {
   const $body = $('body');
-  // main 페이지에만 스크롤 토글 적용
   if (!$body.hasClass('baskinrobbins-main')) return;
   if ($(this).scrollTop() > 100) {
     $('.main-header-bg').addClass('active');
