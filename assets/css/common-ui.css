@@ -116,7 +116,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 /* @media (prefers-color-scheme:dark) { */
 	:root .dark-mode {
 		/* 배경 */
-		--bg-root: #111;
+		--bg-root: #333;
 		--bg-root2: #1e1e1e;
 		--bg-black: #eee;
 	
@@ -149,10 +149,10 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 		/* 텍스트 */
 		--font1: #f0f0f0;
 		--font2: #cccccc;
-		--font3: #999999;
-		--font4: #777777;
-		--font5: #555555;
-		--text-white: #ffffff;
+		--font3: #999;
+		--font4: #777;
+		--font5: #555;
+		--text-white: #fff;
 	
 		/* 포인트 & 프라이머리 컬러 */
 		--point: var(--pink-color-2);
@@ -2335,6 +2335,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .map_Main_Container {
 		display:flex;
 		flex:1;
+		margin-top:5rem;
 }
 .sidebar {
 		width:30rem;
