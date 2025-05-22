@@ -1,5 +1,3 @@
-// assets/js/post.js
-
 // 1) DOM 요소 가져오기
 const postList = document.getElementById("postList");
 const postForm = document.getElementById("postForm");

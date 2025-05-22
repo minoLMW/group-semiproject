@@ -208,7 +208,7 @@ async function endGame(success) {
             score += 10000;
             scoreDisplay.textContent = `점수: ${score}`;
             currentPointDisplay.textContent = userPoint + score;
-            messageDisplay.textContent = `🎉 축하합니다! ${userName}님 모든 스테이지를 클리어했습니다!`;
+            messageDisplay.textContent = `축하합니다! ${userName}님 모든 스테이지를 클리어했습니다!`;
             console.log(`게임 클리어! 최종 점수: ${score}`);
             
             await sendPoint(currentStage);
@@ -223,7 +223,7 @@ async function endGame(success) {
             return;
         }
     } else {
-        messageDisplay.textContent = `⏰ 시간 초과! 다시 도전해보세요!<br> 최종 점수: ${score}`;
+        messageDisplay.textContent = `시간 초과! 다시 도전해보세요!<br> 최종 점수: ${score}`;
         score = 0;
     }
 

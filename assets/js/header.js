@@ -66,7 +66,7 @@ $(document).ready(function () {
     e.preventDefault();
     $searchOverlay.slideDown(200);
     $('.h-search-container').css({ opacity: 0 });
-  });
+  }); 
   $('.search-close-btn').on('click', function (e) {
     e.preventDefault();
     $searchOverlay.slideUp(200);
@@ -111,7 +111,10 @@ $(window).on('scroll', function () {
 
 // 기타 helper 함수
 function handleSearch() {
-  console.log('검색 버튼 클릭');
+  const $searchOverlay = $('.search-bg-container');
+  const $hSearch = $('.h-side-bar .h-search-container');
+  $searchOverlay.slideDown(200);
+  $hSearch.css({ opacity: 0 });
 }
 function openBasket() {
   location.href = '/html/common/basket.html';
