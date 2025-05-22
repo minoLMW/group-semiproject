@@ -1336,12 +1336,6 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 /* // login-signup */
 
 /* post */
-
-.content {
-	margin: 4rem auto;
-	padding: 0 2rem;
-	max-width: var(--size-inner);
-}
 .page_title__container {
 	text-align: center;
 	margin-bottom: 4rem;
