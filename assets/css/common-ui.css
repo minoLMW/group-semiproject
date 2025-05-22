@@ -3425,14 +3425,8 @@ cursor: pointer;
 	to {opacity: 0.1;}
 }
 .buyCardSwiper {
-	position:fixed;
-	left:50%; 
-	top:50%;
-	transform:translate(-50%, -50%);
-	z-index:100;
 	width: 240px;
 	height: 320px;
-	opacity: 0;
 }
 .buyCardSwiper .swiper-slide {
 	display: flex;
@@ -3449,6 +3443,32 @@ cursor: pointer;
 	text-align:center;
 	text-shadow:0.1rem 0.1rem 0.5rem #000;
 	word-break:keep-all;
+}
+.fixed-set {
+	position:fixed;
+	left:50%;
+	top:50%;
+	transform:translateX(-50%);
+}
+.back-keys {
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	gap:0.8rem;
+	margin-top:15rem;
+}
+.back-key {
+	flex:1;
+	width:100%;
+	padding:1rem 2rem;
+	background-color:var(--pink-color-3);
+	color:var(--text-white);
+	font-size:2.2rem;
+	font-weight:bold;
+	border:none;
+	border-radius:1.4rem;
+	cursor:pointer;
+	white-space:nowrap;
 }
 
 @media (prefers-color-scheme:dark) {
@@ -3504,6 +3524,7 @@ cursor: pointer;
 	.game-screen {background:rgba(255, 255, 255, 0.1);}
 	.main-hero {background:none;}
 	.post-card {background-color:rgb(255 158 178 / 10%);}
+	.basekt-btn img {filter:invert(1);}
 }
 :root .dark-modes {
 	/* 배경 */
@@ -3556,3 +3577,4 @@ cursor: pointer;
 .dark-mode .game-screen {background:#705ea3;}
 .dark-mode .main-hero {background:none;}
 .dark-mode .post-card {background-color:rgb(255 158 178 / 10%);}
+.dark-mode .basekt-btn img {filter:invert(1);}

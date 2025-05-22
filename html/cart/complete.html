@@ -62,8 +62,16 @@
 			</svg>
 		</div>
 
-		<div class="swiper buyCardSwiper">
-			<div class="swiper-wrapper"></div>
+		<div class="fixed-set">
+			<div class="swiper buyCardSwiper">
+				<div class="swiper-wrapper"></div>
+			</div>
+
+			<div class="back-keys">
+				<a href="../product/P-010.html" class="back-key">목록으로</a>
+				<a href="../main/index.html" class="back-key">메인홈</a>
+				<a href="../main/game.html" class="back-key">게임하기</a>
+			</div>
 		</div>
 	</div>
 
@@ -147,18 +155,25 @@
 		});
 
 		anime({
-			targets: '.buyCardSwiper',
-			translateY: [100, -50+"%"],      // 아래 → 원래 위치
-			translateX: [-50+"%", -50+"%"],      // 아래 → 원래 위치
-			opacity: [0, 1],           // 서서히 보이기
+			targets: '.fixed-set',
+			translateY: [100, -50+"%"],
+			translateX: [-50+"%", -50+"%"],
+			opacity: [0, 1],
 			easing: 'easeOutElastic',
 			duration: 500,
-			delay: 2000 // 요소마다 순차적으로 등장
+			delay: 2000
+		});
+
+		anime({
+			targets: '.back-keys',
+			opacity: [0, 1],
+			duration: 500,
+			delay: 3000
 		});
 
 		document.addEventListener('keydown', function(event) {
 			if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'x') {
-				const swiper = document.querySelector('.buyCardSwiper');
+				const swiper = document.querySelector('.fixed-set');
 
 				if (swiper) {
 					const isHidden = swiper.style.display === 'none';
@@ -171,8 +186,6 @@
 				}
 			}
 		});
-
-
 	</script>
 </body>
 </html>
