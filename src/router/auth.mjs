@@ -57,10 +57,16 @@ router.post("/send-verification", async (req, res) => {
       });
     }
 
+    // 이전 인증번호가 있다면 삭제
+    if (verificationCodes.has(phone)) {
+      verificationCodes.delete(phone);
+    }
+
     // 인증번호 저장 (3분 유효)
     verificationCodes.set(phone, {
       code: code,
-      expires: Date.now() + 3 * 60 * 1000 // 3분
+      expires: Date.now() + 3 * 60 * 1000, // 3분
+      attempts: 0 // 인증 시도 횟수 추가
     });
 
     console.log('저장된 인증번호:', verificationCodes.get(phone)); // 디버깅용
@@ -78,7 +84,10 @@ router.post("/send-verification", async (req, res) => {
       text: `[아이스크림 쇼핑몰] 인증번호는 [${code}] 입니다.`
     });
 
-    console.log('SMS 전송 결과:', result);
+    // 개발 환경에서만 인증번호 로깅
+    if (process.env.NODE_ENV === 'development') {
+      console.log('개발 환경 - 인증번호:', code);
+    }
 
     res.status(200).json({ 
       message: "인증번호가 발송되었습니다.",
@@ -118,8 +127,17 @@ router.post("/verify-code", async (req, res) => {
       });
     }
 
-    // 인증번호 확인 (문자열 비교)
+    // 인증 시도 횟수 확인
+    if (verificationInfo.attempts >= 5) {
+      verificationCodes.delete(phone);
+      return res.status(400).json({
+        message: "인증 시도 횟수를 초과했습니다. 다시 발송해주세요."
+      });
+    }
+
+    // 인증번호 확인
     if (verificationInfo.code.toString() !== code.toString()) {
+      verificationInfo.attempts += 1;
       return res.status(400).json({
         message: "인증번호가 일치하지 않습니다.",
         received: code,
