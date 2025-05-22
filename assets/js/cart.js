@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 			try {
 				const result = await purchaseCart();
-				alert(`✅ 구매 완료!\n사용 포인트: ${result.used}P\n남은 포인트: ${result.remaining}P`);
+				alert(`구매 완료!\n사용 포인트: ${result.used}P\n남은 포인트: ${result.remaining}P`);
 				location.reload();
 			} catch (err) {
 				if (err.message.includes("포인트")) {
@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 			}
 		});
 	} catch (err) {
-		console.error("❌ 장바구니 로딩 에러:", err);
+		console.error("장바구니 로딩 에러:", err);
 		container.innerHTML = `<p>장바구니 정보를 불러오는 데 실패했습니다.</p>`;
 	}
 });
