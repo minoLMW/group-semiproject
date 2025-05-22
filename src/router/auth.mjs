@@ -81,7 +81,7 @@ router.post("/send-verification", async (req, res) => {
     const result = await messageService.sendOne({
       to: phone,
       from: config.coolsms.senderNumber,
-      text: `[아이스크림 쇼핑몰] 인증번호는 [${code}] 입니다.`
+      text: `[Baskin Minoo's] 인증번호는 [${code}] 입니다.`
     });
 
     // 개발 환경에서만 인증번호 로깅
@@ -91,7 +91,7 @@ router.post("/send-verification", async (req, res) => {
 
     res.status(200).json({ 
       message: "인증번호가 발송되었습니다.",
-      code: code // 테스트를 위해 인증번호 반환 (실제 운영시에는 제거)
+      code: code // 테스트를 위해 인증번호 반환 
     });
   } catch (error) {
     console.error("인증번호 발송 실패:", error);

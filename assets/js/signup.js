@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitBtn = document.querySelector(".signup__button--submit");
   const certificationField = document.getElementById("certification-field");
 
-  console.log("인증 요청 버튼:", sendCertifyBtn);
-  console.log("인증 확인 버튼:", verifyCertifyBtn);
+  //console.log("인증 요청 버튼:", sendCertifyBtn);
+  //console.log("인증 확인 버튼:", verifyCertifyBtn);
 
   const userid = document.querySelector('input[name="userid"]');
   const password = document.querySelector('input[name="password"]');
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
         certificationField.style.display = "flex";
         alert("인증번호가 발송되었습니다.");
         
-        // 테스트를 위해 콘솔에 인증번호 출력 (개발 환경에서만)
+        //콘솔에 인증번호 출력 
         console.log("인증번호:", result.code);
       } catch (error) {
         console.error("인증번호 발송 오류:", error);
