@@ -1,4 +1,3 @@
-
 function buyLoadingPopup(time = 3) {
 	return new Promise(resolve => {
 		const duration = time * 1000;

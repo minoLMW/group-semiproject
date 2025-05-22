@@ -333,35 +333,6 @@
 				observer.observe(section);
 			});
 		});
-
-		// document.addEventListener("DOMContentLoaded", function() {
-		// 	const sections = document.querySelectorAll(".story-story__item");
-		// 	const animateSection = (element) => {
-		// 		anime({
-		// 			targets: element,
-		// 			opacity: [0, 1],
-		// 			translateY: [200, 0],
-		// 			easing: "easeOutElastic",
-		// 			duration: 1000
-		// 		});
-		// 	};
-		// 	const onScroll = () => {
-		// 		const scrollTop = window.scrollY || document.documentElement.scrollTop;
-		// 		const windowHeight = window.innerHeight;
-		// 		sections.forEach(section => {
-		// 			const sectionTop = section.offsetTop;
-		// 			const sectionHeight = section.offsetHeight;
-		// 			if (scrollTop + windowHeight * 0.1 > sectionTop) {
-		// 				if (!section.classList.contains("animated")) {
-		// 					section.classList.add("animated");
-		// 					animateSection(section);
-		// 				}
-		// 			}
-		// 		});
-		// 	};
-		// 	window.addEventListener("scroll", onScroll);
-		// 	onScroll();
-		// });
 	</script>
 </body>
 </html>
