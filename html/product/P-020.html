@@ -273,8 +273,12 @@
 							return res.json();
 						})
 						.then(data => {
-							alert(`✅ 장바구니에 ${quantity}개 저장 완료!`);
-							input.val(0);
+							const confirmMove = confirm(`✅ 장바구니에 ${quantity}개 저장 완료!\n장바구니 페이지로 이동하시겠습니까?`);
+							if (confirmMove) {
+								window.location.href = "/html/cart/cart.html"; // ✅ 이동
+							} else {
+								input.val(0); // ❌ 이동 안 하고 수량만 초기화
+							}
 						})
 						.catch(err => {
 							console.error("❌ 저장 실패:", err);
@@ -287,31 +291,51 @@
 			};
 
 
-			window.initializeBuyButton = function(buttonElement) {
+			window.initializeBuyButton = async function (buttonElement) {
 				const activeSlide = buttonElement.closest(".swiper-slide");
 				if (!activeSlide) return;
+
 				const currentIdx = Number(activeSlide.dataset.idx);
 				const input = $(activeSlide).find(".product-function__input");
-				let quantity = parseInt(input.val()) || 0;
-				if (quantity <= 0 || isNaN(quantity)) {
+				const quantity = parseInt(input.val()) || 0;
+
+				if (quantity <= 0) {
 					alert("수량을 올바르게 입력해주세요.");
 					return;
 				}
+
 				const confirmBuy = confirm(`선택한 수량 ${quantity}개를 바로 구매하시겠습니까?`);
-				if (confirmBuy) {
-					const matchedItem = jsonData.find(item => Number(item._idx) === currentIdx);
-					if (matchedItem) {
-						console.log(`- _idx: ${matchedItem._idx}`);
-						console.log(`- 이름: ${matchedItem.ice_name}`);
-						console.log(`- 수량: ${quantity}`);
-						console.log(`- 금액: N,NNN,NNN`);
-						alert(`바로구매로 ${quantity}개를 구매하셨습니다.`);
-						input.val(0);
-					} else {
-						console.error("상품 정보를 찾을 수 없습니다.");
+				if (!confirmBuy) return;
+
+				try {
+					const res = await fetch(`/buy/${currentIdx}`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": `Bearer ${localStorage.getItem("token")}`
+						},
+						body: JSON.stringify({ quantity })
+					});
+
+					const data = await res.json();
+
+					if (!res.ok) {
+						if (data.message?.includes("포인트")) {
+							const goGame = confirm("포인트가 부족합니다.\n게임을 통해서 포인트를 획득하세요!");
+							if (goGame) location.href = "/html/main/game.html";
+						} else {
+							alert(data.message || "바로구매 실패");
+						}
+						return;
 					}
+
+					alert(`✅ 바로구매 완료!\n사용 포인트: ${data.used}P\n남은 포인트: ${data.remaining}P`);
+					input.val(0);
+				} catch (err) {
+					alert("구매 중 오류 발생");
 				}
 			};
+
 				
 		});
 	</script>

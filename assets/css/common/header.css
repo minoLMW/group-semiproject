@@ -24,7 +24,7 @@
 .main-logo {
   width: 3.25rem;             /* 52px */
   height: 7rem;            
-  background-image: url(../../imgs/img/h_logo.png);
+  background-image: url(/assets/imgs/img/h_logo.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -117,7 +117,7 @@
   width: 2rem;                 /* 32px */
   height: 2rem;                /* 32px */
   margin: 0 1.25rem;           /* 20px */
-  background-image: url(../../imgs/img/btn_user_menu.png);
+  background-image: url(/assets/imgs/img/btn_user_menu.png);
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -151,7 +151,7 @@
 }
 
 .main-header-bg.active .user-btn {
-  background-image: url(../../imgs/img/btn_user_menu_white.png);
+  background-image: url(/assets/imgs/img/btn_user_menu_white.png);
 }
 
 .menu-item a:hover {
