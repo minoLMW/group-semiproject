@@ -1982,7 +1982,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .main-promotion {
 	overflow:hidden;
 	padding:9rem 0 10rem;
-	background-color:white;
+	background-color: var(--bg-root2);
 }
 .main-promotion__container {
 	overflow:hidden;
