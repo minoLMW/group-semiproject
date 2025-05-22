@@ -24,4 +24,10 @@ export const config = {
   db: {
     host: required("DB_HOST"),
   },
+
+  coolsms: {
+    apiKey: required("COOLSMS_API_KEY"),
+    apiSecret: required("COOLSMS_API_SECRET"),
+    senderNumber: required("COOLSMS_SENDER")
+  }
 };
