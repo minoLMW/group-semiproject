@@ -20,6 +20,6 @@ router.delete("/:iceidx", isAuth, cartController.deleteCart);
 router.post("/purchase", isAuth, cartController.purchaseCart);
 
 // 장바구니 개별구매
-router.post("/purchase/:iceidx", isAuth,cartController.buyOneItem);
+router.post("/purchase/:iceidx", isAuth, cartController.buyOneItem);
 
 export default router;

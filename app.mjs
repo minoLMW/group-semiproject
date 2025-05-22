@@ -10,13 +10,13 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
-import buyRouter from "./src/router/buy.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-app.use(express.json())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // 1) HTML 폴더 절대 경로
 const htmlDir = path.join(__dirname, "html"); 
@@ -43,7 +43,6 @@ app.use("/posts", postsRouter);
 app.use("/icecreams", icecreamsRouter);
 app.use("/carts", cartsRouter);
 app.use("/game", gameRouter);
-app.use("/buy", buyRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
