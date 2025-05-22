@@ -301,6 +301,10 @@
 				const confirmBuy = confirm(`선택한 수량 ${quantity}개를 바로 구매하시겠습니까?`);
 				if (!confirmBuy) return;
 
+				/* 모달 시연용 약 3초 */
+				await buyLoadingPopup();
+				/* // */
+
 				try {
 					const res = await fetch(`/carts/purchase/${currentIdx}`, {
 						method: "POST",
@@ -323,7 +327,7 @@
 						return;
 					}
 
-					alert(`바로구매 완료!\n사용 포인트: ${data.used}P\n남은 포인트: ${data.remaining}P`);
+					alert(`바로구매 완료!\n사용 포인트: ${data.used.toLocaleString()}P\n남은 포인트: ${data.remaining.toLocaleString()}P`);
 					input.val(0);
 				} catch (err) {
 					alert("구매 중 오류 발생");

@@ -219,10 +219,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 						quantity: parseInt(controls.dataset.quantity)
 					};
 				});
+
+				/* 모달 시연용 약 3초 */
+				await buyLoadingPopup();
+				/* // */
 			
 				try {
 					const result = await purchaseCart(selectedItems);  // ✅ selectedItems 전달
-					alert(`✅ 구매 완료!\n사용 포인트: ${result.used}P\n남은 포인트: ${result.remaining}P`);
+					alert(`✅ 구매 완료!\n사용 포인트: ${result.used.toLocaleString()}P\n남은 포인트: ${result.remaining.toLocaleString()}P`);
 					location.reload();
 				} catch (err) {
 					if (err.message.includes("포인트")) {
