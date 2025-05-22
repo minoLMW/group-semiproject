@@ -2617,6 +2617,47 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 		margin:0.5rem 0;
 		color:var(--font3);
 }
+
+/* info window 안에 카카오맵 모달 스타일 */
+
+.kakao-map-modal {
+	display: none;
+	position: fixed;
+	top: 0; left: 0; width: 100vw; height: 100vh;
+	z-index: 9999;
+	background: rgba(0,0,0,0.5);
+}
+.kakao-map-modal__content {
+	position: relative;
+	width: 90vw; height: 90vh;
+	margin: 5vh auto;
+	background: var(--bg-root);
+	border-radius: 1rem;
+	box-shadow: 0 0.4rem 1rem rgba(0,0,0,0.2);
+}
+.kakao-map-modal__iframe {
+	width: 100%; height: 100%;
+	border: none;
+	border-radius: 1rem;
+}
+.kakao-map-modal__close {
+	position: absolute;
+	top: 1rem; right: 1rem;
+	width: 3rem; height: 3rem;
+	background: var(--bg-root);
+	border: 2px solid var(--deeppink);
+	border-radius: 50%;
+	color: var(--deeppink);
+	font-size: 2rem;
+	line-height: 2.6rem;
+	text-align: center;
+	cursor: pointer;
+	z-index: 1001;
+}
+.kakao-map-modal__close:hover {
+	background: var(--deeppink);
+	color: var(--text-white);
+}
 /* // map */
 
 /* game */

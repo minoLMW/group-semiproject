@@ -1,7 +1,7 @@
 // 전역 변수 선언
 let map;
 let markers = []; // 마커를 저장할 배열
-let currentOverlay = null; // 함수 상단에 추가
+let currentInfoWindow = null; // 함수 상단에 추가
 
 // 상수 정의 (kakao 객체를 사용하지 않는 부분)
 const MAP_CONFIG = {
@@ -70,22 +70,6 @@ function initializeMap() {
 	});
 }
 
-// 커스텀 오버레이 설정
-function setupCustomOverlay(position) {
-	// 지도에 커스텀 오버레이(매장명 등)를 표시합니다.
-	const content = '<div class="store-map-field__container">' +
-		'  <a href="https://www.baskinrobbins.co.kr/store/map.php" target="_blank">' +
-		'    <span class="title">Minoos</span>' +
-		'  </a>' +
-		'</div>';
-
-	const customOverlay = new kakao.maps.CustomOverlay({
-		map: map,
-		position: position,
-		content: content,
-		yAnchor: 1
-	});
-}
 
 // 마커 생성 함수
 function createMarker(position, title, markerType = 'default') {
@@ -216,11 +200,19 @@ function setupEventListeners() {
 
 	// 지도 이동이 끝나면 해당 지역의 베스킨라빈스 매장 재검색
 	kakao.maps.event.addListener(map, 'dragend', function() {
+		if (currentInfoWindow) {
+			currentInfoWindow.close();
+			currentInfoWindow = null;
+		}
 		searchBaskinRobbins();
 	});
 
 	// 지도 줌 레벨이 변경되면 해당 지역의 베스킨라빈스 매장 재검색
 	kakao.maps.event.addListener(map, 'zoom_changed', function() {
+		if (currentInfoWindow) {
+			currentInfoWindow.close();
+			currentInfoWindow = null;
+		}
 		searchBaskinRobbins();
 	});
 }
@@ -242,6 +234,11 @@ function searchPlaces() {
 		radius: 1000,
 		sort: kakao.maps.services.SortBy.DISTANCE
 	});
+
+	if (currentInfoWindow) {
+		currentInfoWindow.close();
+		currentInfoWindow = null;
+	}
 }
 
 // 검색 결과 처리 함수
@@ -400,7 +397,7 @@ function displayPlaces(places) {
 
 	const filteredPlaces = places.filter(place => isInBounds(place, map));
 
-	let currentOverlay = null;
+	let currentInfoWindow = null; // InfoWindow 중복 방지
 
 	filteredPlaces.forEach(place => {
 		const markerType = isFlavorSelected ? 'flavor' : 'default';
@@ -426,18 +423,18 @@ function displayPlaces(places) {
 			`
 			: '';
 
-		// 커스텀 오버레이 내용 (매장 상세 정보 + 서비스)
-		const content = `
-			<div class="store-map-field__container">
-				<div class="store-map-field__header">
-					<div class="store-map-field__title">${place.place_name}</div>
+		// InfoWindow 내용
+		const iwContent = `
+			<div class="store-map-field__container" ">
+				<div class="store-map-field__header" >
+					<div class="store-map-field__title" >${place.place_name}</div>
 				</div>
-				<div class="store-map-field__content">
-					<div><b>주소:</b> ${place.road_address_name || place.address_name}</div>
-					<div><b>전화번호:</b> ${place.phone || '없음'}</div>
+				<div class="store-map-field__content" >
+					<div ><b>주소:</b> ${place.road_address_name || place.address_name}</div>
+					<div ><b>전화번호:</b> ${place.phone || '없음'}</div>
 					${servicesHTML}
-					<div style="margin-top:0.625rem;text-align:right;">
-						<a href="${place.place_url}" target="_blank">
+					<div >
+						<a href="${place.place_url}" target="_blank" class="kakao-map-link">
 							카카오맵 링크 보기 &gt;
 						</a>
 					</div>
@@ -445,25 +442,65 @@ function displayPlaces(places) {
 			</div>
 		`;
 
-		const customOverlay = new kakao.maps.CustomOverlay({
-			position: new kakao.maps.LatLng(place.y, place.x),
-			content: content,
-			yAnchor: 1
+		const infowindow = new kakao.maps.InfoWindow({
+			content: iwContent,
+			removable: true
 		});
 
+		// 마커 클릭 시 InfoWindow 열기
 		kakao.maps.event.addListener(marker, 'click', function() {
-			if (currentOverlay) currentOverlay.setMap(null);
-			customOverlay.setMap(map);
-			currentOverlay = customOverlay;
+			if (currentInfoWindow) currentInfoWindow.close();
+			infowindow.open(map, marker);
+			currentInfoWindow = infowindow;
 		});
 
+		// 지도 클릭 시 InfoWindow 닫기
 		kakao.maps.event.addListener(map, 'click', function() {
-			if (currentOverlay) currentOverlay.setMap(null);
-			currentOverlay = null;
+			if (currentInfoWindow) currentInfoWindow.close();
+			currentInfoWindow = null;
 		});
 	});
 
 	updateStoreList(filteredPlaces);
+
+	// InfoWindow를 사용하는 displayPlaces 함수 바깥(최상단)에 아래 코드 추가(중복 생성 방지)
+	if (!document.querySelector('.kakao-map-modal')) {
+		const modalHTML = `
+			<div class="kakao-map-modal" ">
+				<div class="kakao-map-modal__content" >
+					<button class="kakao-map-modal__close" >&times;</button>
+					<iframe class="kakao-map-modal__iframe" src="" frameborder="0" ></iframe>
+				</div>
+			</div>
+		`;
+		document.body.insertAdjacentHTML('beforeend', modalHTML);
+	}
+	const modal = document.querySelector('.kakao-map-modal');
+	const modalIframe = modal.querySelector('.kakao-map-modal__iframe');
+	const closeButton = modal.querySelector('.kakao-map-modal__close');
+
+	// 모달 닫기 이벤트
+	closeButton.addEventListener('click', () => {
+		modal.style.display = 'none';
+		modalIframe.src = '';
+	});
+	// 모달 외부 클릭 시 닫기
+	modal.addEventListener('click', (e) => {
+		if (e.target === modal) {
+			modal.style.display = 'none';
+			modalIframe.src = '';
+		}
+	});
+
+	// InfoWindow 내부 링크 클릭 시 모달로 띄우기 (이벤트 위임)
+	document.addEventListener('click', function(e) {
+		if (e.target.classList.contains('kakao-map-link')) {
+			e.preventDefault();
+			const url = e.target.getAttribute('href') || e.target.getAttribute('data-url');
+			modalIframe.src = url;
+			modal.style.display = 'block';
+		}
+	});
 }
 
 // 모든 마커 제거 함수
@@ -691,6 +728,11 @@ function searchBaskinRobbins() {
 		radius: 3000,
 		sort: kakao.maps.services.SortBy.DISTANCE
 	});
+
+	if (currentInfoWindow) {
+		currentInfoWindow.close();
+		currentInfoWindow = null;
+	}
 }
 
 
