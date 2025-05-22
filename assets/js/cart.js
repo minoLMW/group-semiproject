@@ -1,6 +1,12 @@
 const CART_URL = "http://localhost:8080/carts";
 const token = localStorage.getItem("token");
 
+window.addEventListener("pageshow", function (event) {
+	if (event.persisted) {
+		location.reload();
+	}
+});
+
 // 공통 API
 async function fetchCart() {
 	const res = await fetch(CART_URL, {
@@ -83,6 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 		cartItems = await fetchCart();
 		if (cartItems.length === 0) {
 			container.innerHTML = `<p class="cart-items__notresult">장바구니가 비어 있습니다.</p>`;
+			document.getElementById('allcheck').style.display = "none";
 			return;
 		}
 
@@ -108,7 +115,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 								<input type="text" value="${item.quantity}" maxlength="2" class="cart-items__input"/>
 								<button class="cart-items__increase">+</button>
 							</div>
-							<button class="cart-items__option">옵션 변경</button>
+							<button class="cart-items__option">수량 변경</button>
 							<button class="cart-items__remove">삭제</button>
 						</div>
 					</div>
@@ -126,10 +133,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 					item.querySelector(".cart-items__image").classList.add("-delete-anima");
 					item.querySelector(".cart-items__check").checked = false;
 				});
+
+				productPriceEl.textContent = "0원";
+				totalPriceEl.textContent = "0원";
+				discountEl.textContent = "-0원";
 			});
 		});
 
-		// 옵션 변경
+		// 수량 변경
 		container.querySelectorAll(".cart-items__option").forEach(btn => {
 			btn.addEventListener("click", async () => {
 				const item = btn.closest(".cart-items__item");
@@ -165,18 +176,30 @@ document.addEventListener("DOMContentLoaded", async () => {
 		// 체크 선택 시 가격 및 버튼 텍스트 갱신
 		container.addEventListener("change", () => {
 			const checks = container.querySelectorAll(".cart-items__check:checked");
-			const total = [...checks].reduce((sum, cb) => {
-				const item = cb.closest(".cart-items__item");
-				const price = parseInt(item.querySelector(".cart-items__controls").dataset.price);
-				return sum + price;
-			}, 0);
 			const count = checks.length;
+
+			// 모드에 따라 가격 계산 여부 분기
+			if (mode === "buy") {
+				const total = [...checks].reduce((sum, cb) => {
+					const item = cb.closest(".cart-items__item");
+					const price = parseInt(item.querySelector(".cart-items__controls").dataset.price);
+					return sum + price;
+				}, 0);
+
+				productPriceEl.textContent = `${total.toLocaleString()}원`;
+				totalPriceEl.textContent = `${total.toLocaleString()}원`;
+				discountEl.textContent = `-0원`;
+			} else {
+				// 삭제 모드일 땐 항상 0원 표시
+				productPriceEl.textContent = "0원";
+				totalPriceEl.textContent = "0원";
+				discountEl.textContent = "-0원";
+			}
+
+			// 버튼 텍스트는 모드에 관계없이 처리
 			compBtn.textContent = mode === "delete"
 				? (count === 0 ? "삭제 취소하기" : `삭제하기 (${count})`)
 				: `구매하기 (${count})`;
-			productPriceEl.textContent = `${total.toLocaleString()}원`;
-			totalPriceEl.textContent = `${total.toLocaleString()}원`;
-			discountEl.textContent = `-0원`;
 		});
 
 		// 구매 또는 삭제 실행
@@ -210,7 +233,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 			if (mode === "buy") {
 				if (checked.length === 0) return;
-			
+
 				const selectedItems = [...checked].map(cb => {
 					const item = cb.closest(".cart-items__item");
 					const controls = item.querySelector(".cart-items__controls");
@@ -219,11 +242,38 @@ document.addEventListener("DOMContentLoaded", async () => {
 						quantity: parseInt(controls.dataset.quantity)
 					};
 				});
-			
+
+				const totalQuantity = selectedItems.reduce((sum, item) => sum + item.quantity, 0);
+
+				// 사용자에게 확인창
+				const confirmPurchase = confirm(`선택한 수량 ${totalQuantity}개를 구매하시겠습니까?`);
+				if (!confirmPurchase) return;
+
+				/* 모달 시연용 약 3초 */
+				await buyLoadingPopup();
+				/* // */
+
 				try {
-					const result = await purchaseCart(selectedItems);  // ✅ selectedItems 전달
-					alert(`✅ 구매 완료!\n사용 포인트: ${result.used}P\n남은 포인트: ${result.remaining}P`);
-					location.reload();
+					const purchasedVisuals = [...checked].map(cb => {
+						const item = cb.closest(".cart-items__item");
+						const img = item.querySelector("img").src;
+						const name = item.querySelector(".cart-items__name").textContent;
+						const bg = item.querySelector("img").style.backgroundColor;
+
+						return { img, text: name, bg };
+					});
+
+					localStorage.setItem("purchasedItems", JSON.stringify(purchasedVisuals));
+
+					const result = await purchaseCart(selectedItems);
+					await fetch('/carts/clear', {
+						method: 'DELETE',
+						headers: {
+							Authorization: `Bearer ${token}`
+						}
+					});
+
+					location.href = "/html/cart/complete.html";
 				} catch (err) {
 					if (err.message.includes("포인트")) {
 						const goGame = confirm("포인트가 부족합니다.\n게임을 통해서 포인트를 획득하세요!");
@@ -239,3 +289,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 		container.innerHTML = `<p>장바구니 정보를 불러오는 데 실패했습니다.</p>`;
 	}
 });
+
+function toggleCheckAll(button) {
+	const checkboxes = document.querySelectorAll('.cart-items__check');
+	const isAllChecked = [...checkboxes].every(cb => cb.checked);
+
+	checkboxes.forEach(cb => {
+		cb.checked = !isAllChecked;
+
+		// ✅ 각 체크박스에 change 이벤트 강제 발생
+		cb.dispatchEvent(new Event('change'));
+	});
+
+	// ✅ 수동으로 change 이벤트 한 번 더 트리거 (전체 계산 강제 실행)
+	const container = document.getElementById('cartItemsContainer');
+	if (container) {
+		container.dispatchEvent(new Event('change'));
+	}
+}
