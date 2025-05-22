@@ -1368,7 +1368,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .card__subtext {
 	font-size: 2rem;
-	color: #121212;
+	color: var(--font1);
 	margin-bottom: 1rem;
 	text-align: center;
 }
@@ -1376,6 +1376,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	font-size: 4rem;
 	font-weight: 700;
 	margin-bottom: 2rem;
+	font-family:Scoop;
 }
 .post-form{
 	display: flex;
@@ -3386,8 +3387,9 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	.footer {background-color:var(--bg-root2);}
 	.cart-summary {background-color:var(--bg-root2);}
 	.start-screen,
-	.game-screen {background:#705ea3;}
+	.game-screen {background:rgba(255, 255, 255, 0.1);}
 	.main-hero {background:none;}
+	.post-card {background-color:rgb(255 158 178 / 10%);}
 }
 :root .dark-modes {
 	/* 배경 */
@@ -3439,3 +3441,4 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .dark-mode .start-screen,
 .dark-mode .game-screen {background:#705ea3;}
 .dark-mode .main-hero {background:none;}
+.dark-mode .post-card {background-color:rgb(255 158 178 / 10%);}
