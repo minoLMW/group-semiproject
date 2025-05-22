@@ -76,6 +76,7 @@ html {
 body {color:var(--color-root); font-size:1.5rem; line-height:1.5; font-family:'Pretendard-Regular'; letter-spacing:-0.025em; overflow-wrap:break-word; -webkit-text-size-adjust:none; background-color:var(--bg-root); color:var(--font1)}
 legend {overflow:hidden !important; position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; white-space:nowrap !important; clip:rect(1px, 1px, 1px, 1px) !important; clip-path:inset(50%) !important;}
 .hide {overflow:hidden !important; position:absolute !important; width:1px !important; height:1px !important; margin:0 !important; padding:0 !important; border:0 !important; white-space:nowrap !important; clip:rect(1px, 1px, 1px, 1px) !important; clip-path:inset(50%) !important;}
+body.lock {overflow:hidden;}
 
 :root {
 	--bg-root:#fff;
@@ -3342,8 +3343,27 @@ cursor: pointer;
 .h-side-bar .welcome-msg:hover {
   color: var(--pink-color-2);
 }
-
-
+.modal {position:fixed; left:0; top:0; z-index:2000; width:100vw; height:100vh; background-color:rgba(0,0,0,0.3);}
+.motion-box {overflow:hidden; position:fixed; left:50%; top:40%; transform:translate(-50%, -50%); z-index:100; width:100rem; height:50rem; padding-bottom:10rem; background-color:#2c2c2c;}
+.motion-box__bill {animation:shredMoneyMotion 1.5s infinite;position:absolute;z-index:1;left:-11.5em;top:50%;width:5.75em;height:2.5em;margin-top:-1.25em;background-color:#229F58;background-image:linear-gradient(157deg,#229F58 0%,#229F58 50%,#208f4e 51%,#208f4e 100%);box-shadow:0.25em 0.25em 0 rgba(0, 0, 0, 0.125);color:#42cc7a;font-family:"Arial Black", sans-serif;font-size:3.33em;font-weight:bold;line-height:2.25em;text-align:center;}
+.motion-box__bill:before,
+.motion-box__bill:after,
+.motion-box__bill .inner:before,
+.motion-box__bill .inner:after {content:"";position:absolute;width:1px;height:1px;background:#42cc7a;border:0.15em solid #42cc7a;border-radius:100%;}
+.motion-box__bill:before {left:0;top:0;}
+.motion-box__bill:after {left:0;bottom:0;}
+.motion-box__bill .inner {position:absolute;z-index:1;left:0;right:0;top:0;bottom:0;border:0.1em solid #42cc7a;}
+.motion-box__bill .inner:before {right:-0.0875em;top:-0.0825em;}
+.motion-box__bill .inner:after {right:-0.0875em;bottom:-0.0825em;}
+.motion-box__shredder {background-image:linear-gradient(#2c2c2c 50%, transparent 50%);background-size:0.33em 0.33em;overflow:hidden;position:absolute;z-index:2;left:50%;right:0;top:50%;height:3.5em;margin-top:-1.75em;color:black;font-size:3.33em;}
+.motion-box__shredder .bar {position:absolute;left:0;top:0;width:0.33em;height:3.5em;background:#111;}
+@keyframes shredMoneyMotion {
+	0% {left:-5.75em; width:30%;}
+	30% {left:33%;}
+	60% {left:40%; transform:scaleX(0.8); width:30%;}
+	100% {left:57.5em; margin-left:0; width:200%;}
+}
+.motion-box__text {position:absolute; left:0; bottom:0; width:100%; padding-bottom:2rem; font-size:5rem; text-align:center; font-family:Scoop;}
 @media (prefers-color-scheme:dark) {
 	:root {
 		/* 배경 */
