@@ -48,11 +48,10 @@ async function purchaseCart() {
 	return data;
 }
 
-// 장바구니 로딩 및 이벤트
 document.addEventListener("DOMContentLoaded", async () => {
 	const userid = localStorage.getItem("userid");
 	const container = document.getElementById("cartItemsContainer");
-	const buyBtn = document.getElementById("buyBtn");
+	const compBtn = document.getElementById("buyBtn");
 	const totalPriceEl = document.querySelector(".summary-total span:last-child");
 	const productPriceEl = document.querySelector(".summary-item span:last-child");
 	const discountEl = document.querySelector(".summary-item .discount");
@@ -65,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 	let nutritionData = [];
 	let cartItems = [];
-	let deleteMode = false;
+	let mode = "buy";
 
 	try {
 		const nutritionRes = await fetch("/src/json/baskin_robbins_nutrition_generated.json");
@@ -116,8 +115,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 		// 삭제 모드 진입
 		container.querySelectorAll(".cart-items__remove").forEach(btn => {
 			btn.addEventListener("click", () => {
-				deleteMode = true;
-				buyBtn.textContent = "삭제 취소하기";
+				mode = "delete";
+				compBtn.textContent = "삭제 취소하기";
 				container.querySelectorAll(".cart-items__item").forEach(item => {
 					item.querySelector(".cart-items__controls").style.display = "none";
 					item.querySelector(".cart-items__image").classList.add("-delete-anima");
@@ -159,7 +158,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 			});
 		});
 
-		// 체크박스 선택 시 가격 합산
+		// 체크 선택 시 가격 및 버튼 텍스트 갱신
 		container.addEventListener("change", () => {
 			const checks = container.querySelectorAll(".cart-items__check:checked");
 			const total = [...checks].reduce((sum, cb) => {
@@ -168,7 +167,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 				return sum + price;
 			}, 0);
 			const count = checks.length;
-			buyBtn.textContent = deleteMode
+			compBtn.textContent = mode === "delete"
 				? (count === 0 ? "삭제 취소하기" : `삭제하기 (${count})`)
 				: `구매하기 (${count})`;
 			productPriceEl.textContent = `${total.toLocaleString()}원`;
@@ -176,12 +175,24 @@ document.addEventListener("DOMContentLoaded", async () => {
 			discountEl.textContent = `-0원`;
 		});
 
-		// 구매 또는 삭제 버튼 클릭
-		buyBtn.addEventListener("click", async () => {
+		// 구매 또는 삭제 실행
+		compBtn.addEventListener("click", async () => {
 			const checked = container.querySelectorAll(".cart-items__check:checked");
-			if (checked.length === 0) return;
 
-			if (deleteMode) {
+			if (mode === "delete") {
+				if (compBtn.textContent === "삭제 취소하기") {
+					container.querySelectorAll(".cart-items__item").forEach(item => {
+						item.querySelector(".cart-items__controls").style.display = "flex";
+						item.querySelector(".cart-items__image").classList.remove("-delete-anima");
+						item.querySelector(".cart-items__check").checked = false;
+					});
+					compBtn.textContent = "구매하기 (0)";
+					mode = "buy";
+					return;
+				}
+
+				if (checked.length === 0) return;
+
 				if (confirm("정말 삭제하시겠습니까?")) {
 					for (const checkbox of checked) {
 						const item = checkbox.closest(".cart-items__item");
@@ -193,16 +204,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 				return;
 			}
 
-			try {
-				const result = await purchaseCart();
-				alert(`구매 완료!\n사용 포인트: ${result.used}P\n남은 포인트: ${result.remaining}P`);
-				location.reload();
-			} catch (err) {
-				if (err.message.includes("포인트")) {
-					const goGame = confirm("포인트가 부족합니다.\n게임을 통해서 포인트를 획득하세요!");
-					if (goGame) location.href = "/html/main/game.html";
-				} else {
-					alert("구매 중 오류 발생");
+			if (mode === "buy") {
+				if (checked.length === 0) return;
+
+				try {
+					const result = await purchaseCart();
+					alert(`✅ 구매 완료!\n사용 포인트: ${result.used}P\n남은 포인트: ${result.remaining}P`);
+					location.reload();
+				} catch (err) {
+					if (err.message.includes("포인트")) {
+						const goGame = confirm("포인트가 부족합니다.\n게임을 통해서 포인트를 획득하세요!");
+						if (goGame) location.href = "/html/main/game.html";
+					} else {
+						alert("구매 중 오류 발생");
+					}
 				}
 			}
 		});
