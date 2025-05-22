@@ -72,7 +72,17 @@ $(document).ready(function () {
   // Menu-item hover
   $('.menu-item').on('mouseenter', function () {
     const idx = $(this).data('sub') - 1;
-    $lists.hide().eq(idx).css('display', 'flex');
+    const $targetList = $lists.eq(idx);
+
+    // 하위 메뉴가 없으면 아무 동작하지 않고 접어두기
+    if (!$targetList.children().length) {
+      hideSub(true);
+      return;
+    }
+
+    // 하위 메뉴가 있을 때만 슬라이드다운
+    $lists.hide();
+    $targetList.css('display', 'flex');
     if (!$subMenucontainer.is(':visible')) {
       $subMenucontainer.stop(true).slideDown(200);
     }

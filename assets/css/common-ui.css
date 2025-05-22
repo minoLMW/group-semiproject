@@ -322,7 +322,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 .sub-list2-a a {
 	width:50%;
-	font-size:1rem;
+	font-size:1.5rem;
 	color:var(--font3);
 	margin-right:3rem;
 }
@@ -457,7 +457,7 @@ padding: 0.5rem 1rem;      /* 클릭 영역 확보 */
 text-align: center;
 font-size: 1.4rem;
 font-weight: var(--font-weight-sd-heavy);
-background: var(--bg-root);/* 배경 흰색 */
+background: #fff/* 배경 흰색 */
 border-radius: 0.5rem;
 cursor: pointer;
 }
@@ -860,7 +860,8 @@ cursor: pointer;
 	color:var(--font2);
 	font-weight:bold;
 	font-size:1.2rem;
-	text-align:center
+	text-align:center;
+	word-break:keep-all;
 }
 .product-function {
 	display:flex;
