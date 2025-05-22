@@ -63,27 +63,31 @@
     </button>
   </li>
   <li class="user-btn">
-    <div class="user-btn-container">
-      <button 
-        type="button" 
-        class="user-btn-list user-btn-list-1" 
-        onclick="location.href='/html/common/login.html'">
-        Login
-      </button>
-      <button 
-        type="button" 
-        class="user-btn-list user-btn-list-2" 
-        onclick="location.href='/html/common/signup.html'">
-        Join
-      </button>
-      <button 
-        type="button" 
-        class="user-btn-list user-btn-list-3" 
-        onclick="openCSCenter()">
-        CS CENTER
-      </button>
-    </div>
-  </li>
+  <div class="user-btn-container">
+    <!-- 로그인 전 표시 -->
+    <button 
+      type="button" 
+      class="user-btn-list btn-login" 
+      onclick="location.href='/html/common/login.html'">
+      Login
+    </button>
+    <button 
+      type="button" 
+      class="user-btn-list btn-join" 
+      onclick="location.href='/html/common/signup.html'">
+      Join
+    </button>
+
+    <!-- 로그인 후 표시 -->
+    <button 
+      type="button" 
+      class="user-btn-list btn-logout" 
+      onclick="handleLogout()" 
+      style="display:none">
+      Logout
+    </button>
+  </div>
+</li>
 </ul>
   </div>
 </div>

@@ -481,28 +481,33 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 
 /* User(유저) 버튼 활성화 */
+/* user-btn-container 자동 크기 & 테두리 제거 */
 .user-btn-container {
-	width: 8rem;
-    height: 11rem;
-    border-radius: 0.3rem;
-    border: 0.3rem solid var(--border-black);
-    background-color: var(--bg-root);
-    position: absolute;
-    top: 6rem;
-    right: 15rem;
-    z-index: 999;
-    display: flex
-;
-    flex-direction: column;
-    display: none;
+position: absolute;
+top: 6rem;
+right: 15rem;
+z-index: 999;
+display: none;       /* 기존대로 숨김 상태 */
+width: auto !important;
+height: auto !important;
+padding: 0.5rem 1rem; /* 내용 주변 여백 */
+border: none !important;
+background: none !important;
+box-shadow: none !important;
 }
+
 .user-btn-list {
-	height:calc(100% / 3);
-	text-align:center;
-	font-size:1.4rem !important;
-	font-size:var(--text-color-1);
-	font-weight:var(--font-weight-sd-heavy);
-	cursor:default;
+display: block;            /* 블록으로 변경 */
+width: auto;               /* 내용에 딱 맞게 */
+height: auto;              /* 내용에 딱 맞게 */
+margin: 0.25rem 0;         /* 버튼 간 간격 */
+padding: 0.5rem 1rem;      /* 클릭 영역 확보 */
+text-align: center;
+font-size: 1.4rem;
+font-weight: var(--font-weight-sd-heavy);
+background: var(--bg-root);/* 배경 흰색 */
+border-radius: 0.5rem;
+cursor: pointer;
 }
 .main-header-bg.active .user-btn-container {
 	border-color:var(--deeppink);

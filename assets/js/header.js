@@ -13,7 +13,27 @@ $(document).ready(function () {
   }
   // ────────────────────────────────────────────────
 
-  const $body = $('body');
+  // ── 로그인/로그아웃 버튼만 토글 ──
+  const $loginBtn  = $('.btn-login');
+  const $joinBtn   = $('.btn-join');
+  const $logoutBtn = $('.btn-logout');
+
+  if (userid) {
+    // 로그인 상태
+    $loginBtn.hide();
+    $joinBtn.hide();
+    $logoutBtn.show();
+    $welcome.show();
+  } else {
+    // 비로그인 상태
+    $logoutBtn.hide();
+    $loginBtn.show();
+    $joinBtn.show();
+    $welcome.hide();
+  }
+  // ────────────────────────────────────────────────
+
+  const $body   = $('body');
   const $header = $('.main-header-bg');
 
   // body 클래스가 baskinrobbins-main이 아닐 경우 헤더 항상 active
@@ -23,11 +43,10 @@ $(document).ready(function () {
 
   // Sub menu
   const $subMenucontainer = $('.sub-menu-container');
-  const $lists = $subMenucontainer.find('.sub-menu-list');
+  const $lists            = $subMenucontainer.find('.sub-menu-list');
 
   function hideSub(removeActive) {
     $subMenucontainer.stop(true).slideUp(200);
-    // removeActive && body 클래스가 main일 때만 active 제거
     if (removeActive && $body.hasClass('baskinrobbins-main')) {
       $header.removeClass('active');
       $header.find('.menu-item a').css('color', '');
@@ -40,14 +59,13 @@ $(document).ready(function () {
     $header.find('.menu-item a').css('color', '');
   }).on('mouseleave', function (e) {
     const to = e.relatedTarget || e.toElement;
-    // 환영 메시지 or 서브메뉴로 이동하면 닫지 않음
     if (!$(to).closest('.sub-menu-container, .welcome-msg').length) {
       hideSub(true);
     }
   });
 
   // 환영 메시지 호버 시 헤더 유지
-  $welcome.on('mouseenter', function () {
+  $welcome.on('mouseenter', () => {
     $header.addClass('active');
   });
 
@@ -92,7 +110,7 @@ $(document).ready(function () {
     $('.h-search-container').css({ opacity: 1 });
   });
 
-  // User menu
+  // User menu toggle
   const $userCon = $('.user-btn-container');
   $('.user-btn').on('click', function (e) {
     e.preventDefault();
@@ -136,7 +154,7 @@ $(window).on('scroll', function () {
 // 기타 helper 함수
 function handleSearch() {
   const $searchOverlay = $('.search-bg-container');
-  const $hSearch = $('.h-side-bar .h-search-container');
+  const $hSearch       = $('.h-side-bar .h-search-container');
   $searchOverlay.slideDown(200);
   $hSearch.css({ opacity: 0 });
 }
@@ -145,4 +163,14 @@ function openBasket() {
 }
 function openCSCenter() {
   location.href = '/html/common/cs-center.html';
+}
+
+// ── 로그아웃 처리 함수 ──
+function handleLogout() {
+  // 1) 로컬스토리지에서 userid 제거
+  localStorage.removeItem('userid');
+  // 2) 로그아웃 성공 메시지
+  alert('로그아웃 성공!');
+  // 3) 로그인 전 상태로 돌아가도록 새로고침
+  location.reload();
 }
