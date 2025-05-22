@@ -1402,13 +1402,14 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	margin-bottom: 4rem;
 }
 .post-card {
+	width: var(--size-inner);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	border-radius: 1.6rem;
 	padding: 3rem;
-	margin: 4rem;
+	margin: 4rem auto;
 	box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.08);
 	background-color: #ffeef2;
 	color: var(--pink-color-2);
@@ -1429,18 +1430,25 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width:100%;
 	padding: 2rem;
 }
 .post-form__input{
-	padding: 2rem 10rem;
-	border: 3px solid var(--pink-color-1);
+	width:100%;
+	height:6rem;
+	padding: 0 2rem;
+	border: 0.3rem solid var(--pink-color-1);
 	border-radius: 1.5rem;
+	font-size: 2rem;
 }
 .post-form__textarea{
-	padding: 2rem 13rem;
+	width:100%;
+	height:10.9rem;
+	padding: 2rem;
 	border: 3px solid var(--pink-color-1);
 	border-radius: 1.5rem;
 	margin: 1rem;
+	resize:none;
 }
 .post-form__button{
 	color: white;
@@ -1448,16 +1456,14 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	padding: 1.2rem 5rem;
 	margin: 1.5rem;
 	border-radius: 2rem;
-
 }
 .post-card-list{
 	display: flex;
 	flex-wrap: wrap;
-	width: 100%;
-	justify-content: space-between;
-	align-items: center;
+	width: var(--size-inner);
+	align-items: stretch;
 	gap: 1rem;
-
+	margin: 0 auto;
 }
 .post-list__item {
 	display: flex;
@@ -1471,7 +1477,8 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .post-list__badge {
 	width: 100%;
 	flex-wrap: wrap;
-	flex: 0.5;
+	position:relative;
+	height:100%;
 	background-color: var(--text-white);
 	padding: 2rem;
 	border-radius: 1.2rem;
@@ -1496,8 +1503,30 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	color: var(--brown-color-1);
 	font-size: 1.5rem;
 }
-.post-list__badge__delete .post-list__badge__change{
+.post-list__badge__delete, 
+.post-list__badge__change{
+	position:absolute;
+	bottom:2rem;
 	background-color: var(--pink-color-1);
+	color: var(--text-white);
+	font-weight: bold;
+	padding: 0.5rem 1.5rem;
+	margin-left: 0.3rem;
+	border-radius: 1rem;
+}
+.post-list__badge__change{
+	right:8rem;
+}
+.post-list__badge__delete {
+	right:2rem;
+}
+.post-list__badge__change:hover{
+	background-color: var(--pink-color-2);
+	transform: scale(1.1);
+}
+.post-list__badge__delete:hover{
+	background-color: var(--pink-color-2);
+	transform: scale(1.1);
 }
 
 /* // post */
