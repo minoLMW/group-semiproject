@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 						<div class="cart-items__controls" data-iceidx="${item.iceidx}" data-price="${item.totalPrice}" data-quantity="${item.quantity}">
 							<div class="cart-items__options" style="display: none">
 								<button class="cart-items__decrease">-</button>
-								<input type="text" value="${item.quantity}" readonly class="cart-items__input"/>
+								<input type="text" value="${item.quantity}" maxlength="2" class="cart-items__input"/>
 								<button class="cart-items__increase">+</button>
 							</div>
 							<button class="cart-items__option">옵션 변경</button>
