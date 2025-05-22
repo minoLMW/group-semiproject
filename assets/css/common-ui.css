@@ -3259,3 +3259,21 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .main-header-bg.active .welcome-msg {
   color: var(--pink-color-3);
 }
+
+/* 환영 메시지도 포인터 커서 */
+.h-side-bar .welcome-msg {
+  cursor: pointer;
+  padding: 0 1.5rem;            /* 다른 버튼들과 간격 맞추기 */
+  color: var(--text-color-1);   /* 기본 색 */
+  transition: color 0.2s;
+}
+
+/* 헤더 active 상태에서 색 반전 */
+.main-header-bg.active .welcome-msg {
+  color: var(--text-white);
+}
+
+/* hover 시 강조 색 */
+.h-side-bar .welcome-msg:hover {
+  color: var(--pink-color-2);
+}
