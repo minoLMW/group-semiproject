@@ -377,9 +377,11 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	width:2rem;
 	height:2rem;
 	margin-left:1rem;
+	/*
 	padding:1rem;
 	border-radius:50%;
 	border:0.2rem solid var(--border-black);
+	*/
 }
 .outline {
 	width:100%;
@@ -419,7 +421,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .search-input-reset-btn {
 	width:3rem;
 	height:3rem;
-	margin-right:2rem;
+	margin-right:0rem;
 }
 .search-submit-btn {
 	width:3.5rem;
@@ -2537,25 +2539,25 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 }
 
 /* 검색 박스 스타일 */
-.search-box {
+.search-container .search-box {
 		display:flex;
 		flex-direction:column;
 		gap:1rem;
 		margin-bottom:1.5rem;
 }
-.search-input {
+.search-container .search-input {
 		width:100%;
 		padding:1rem;
 		border:1px solid var(--border-gray);
 		border-radius:0.4rem;
 		font-size:1.4rem;
 }
-.search-input:focus {
+.search-container .search-input:focus {
 		border-color:var(--deeppink);
 		outline:none;
 		box-shadow:0 0 0 0.2rem rgba(227, 27, 109, 0.1);
 }
-.search-button {
+.search-container .search-button {
 		width:100%;
 		padding:1rem;
 		background-color:var(--deeppink);
@@ -2567,7 +2569,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 		font-weight:600;
 		transition:background-color 0.2s;
 }
-.search-button:hover {
+.search-container .search-button:hover {
 		background-color:var(--deeppink);
 }
 
@@ -3191,4 +3193,50 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 .user-greeting span {
     color: var(--blue);
     font-weight: bold;
+}
+
+/* overlay 검색창 전용 override */
+.search-bg-container .search-box {
+	/*
+  display: flex !important;
+  flex-direction: row !important;
+  margin-bottom: 0 !important;
+  gap: 0 !important;
+  */
+}
+
+
+.search-bg-container .search-input-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;                    /* 아이콘과 input 사이 여백 */
+  width: 60rem;                 /* 필요에 따라 % 또는 max-width 로 바꿔도 좋습니다 */
+  margin: 0 auto;
+  border-bottom: 0.2rem solid var(--text-color-1);
+}
+
+.search-bg-container .search-input {
+  flex: 1;                      /* 남은 공간을 쭉 채움 */
+  border: none;
+  outline: none;
+  font-size: 2.3rem;
+  text-align: center;
+  background: transparent;
+  height: 100%;
+  padding: 0;
+}
+
+.search-bg-container .search-input-reset-btn,
+.search-bg-container .search-submit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.search-bg-container .search-input-reset-btn img,
+.search-bg-container .search-submit-btn img {
+  width: 2rem;                  /* 아이콘 크기도 균일하게 */
+  height: 2rem;
+  display: block;
 }
