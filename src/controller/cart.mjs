@@ -59,34 +59,34 @@ export async function deleteCart(req, res) {
 
 // 장바구니 전체 구매
 export async function purchaseCart(req, res) {
-  const userId = req.user.id;
-
-  try {
-    const cartItems = await cartRepository.findAllByUser(userId);
-    if (!cartItems.length) {
-      return res.status(400).json({ message: "장바구니가 비어있습니다." });
-    }
-
-    const total = cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
-    const user = await userRepository.findById(userId);
-
-    if (user.point < total) {
-      return res.status(400).json({ message: "포인트가 부족합니다." });
-    }
-
-    await userRepository.updatePoint(userId, user.point - total);
-    await cartRepository.clearCart(userId);
-
-    res.status(200).json({
-      message: "구매 완료",
-      used: total,
-      remaining: user.point - total
-    });
-  } catch (err) {
-    res.status(500).json({ message: "구매 실패", error: err.message });
-  }
+	const userId = req.user.id;
+  
+	try {
+	  const cartItems = await cartRepository.findAllByUser(userId);
+	  if (!cartItems.length) {
+		return res.status(400).json({ message: "장바구니가 비어있습니다." });
+	  }
+  
+	  const total = cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
+	  const user = await userRepository.findById(userId);
+  
+	  if (user.point < total) {
+		return res.status(400).json({ message: "포인트가 부족합니다.\n게임을 통해 포인트를 획득하세요!"});
+	  }
+  
+	  await userRepository.updatePoint(userId, user.point - total);
+	  await cartRepository.clearCart(userId);
+  
+	  res.status(200).json({
+		message: "구매 완료",
+		used: total,
+		remaining: user.point - total
+	  });
+	} catch (err) {
+	  res.status(500).json({ message: "구매 실패", error: err.message });
+	}
 }
-
+  
 // 장바구니 개별 구매
 export async function buyOneItem(req, res) {
   const { iceidx } = req.params;

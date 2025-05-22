@@ -1,7 +1,7 @@
 const CART_URL = "http://localhost:8080/carts";
 const token = localStorage.getItem("token");
 
-// 공통 API 함수
+// 공통 API
 async function fetchCart() {
 	const res = await fetch(CART_URL, {
 		headers: { Authorization: `Bearer ${token}` },
@@ -9,6 +9,7 @@ async function fetchCart() {
 	if (!res.ok) throw new Error(res.status);
 	return res.json();
 }
+
 async function deleteCart(iceidx) {
 	const res = await fetch(`${CART_URL}/${iceidx}`, {
 		method: "DELETE",
@@ -16,6 +17,7 @@ async function deleteCart(iceidx) {
 	});
 	return res.json();
 }
+
 async function updateCart(iceidx, quantity) {
 	const res = await fetch(`${CART_URL}/${iceidx}`, {
 		method: "PATCH",
@@ -28,7 +30,6 @@ async function updateCart(iceidx, quantity) {
 	return res.json();
 }
 
-// 사용자 포인트 가져오기
 async function fetchUserPoint() {
 	const res = await fetch("/auth/me", {
 		headers: { Authorization: `Bearer ${token}` },
@@ -37,22 +38,18 @@ async function fetchUserPoint() {
 	return res.json();
 }
 
-// 구매 API 호출
-async function purchaseCartItems(purchaseList) {
-	const res = await fetch(`${CART_URL}/purchase`, {
+async function purchaseCart() {
+	const res = await fetch('/carts/purchase', {
 		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			"Authorization": `Bearer ${token}`
-		},
-		body: JSON.stringify({ items: purchaseList })
+		headers: { "Authorization": `Bearer ${token}` }
 	});
-	if (!res.ok) throw new Error("구매 실패");
-	return res.json();
+	const data = await res.json();
+	if (!res.ok) throw new Error(data.message || "구매 실패");
+	return data;
 }
 
-// DOMContentLoaded 실행
-document.addEventListener("DOMContentLoaded", async function () {
+// 장바구니 로딩 및 이벤트
+document.addEventListener("DOMContentLoaded", async () => {
 	const userid = localStorage.getItem("userid");
 	const container = document.getElementById("cartItemsContainer");
 	const buyBtn = document.getElementById("buyBtn");
@@ -75,7 +72,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 		if (!nutritionRes.ok) throw new Error("영양정보 불러오기 실패");
 		nutritionData = (await nutritionRes.json()).response.body.items.item;
 	} catch (err) {
-		console.error("❌ 영양정보 로딩 실패:", err);
 		alert("영양정보를 불러올 수 없습니다.");
 		return;
 	}
@@ -87,46 +83,41 @@ document.addEventListener("DOMContentLoaded", async function () {
 			return;
 		}
 
-		container.innerHTML = cartItems
-			.map((item, index) => {
-				const matched = nutritionData.find(n => String(n._idx) === String(item.iceidx));
-				const bgColor = matched?.bg_color || "#fff";
-				const checkboxId = `cart-check-${index}`;
+		container.innerHTML = cartItems.map((item, index) => {
+			const matched = nutritionData.find(n => String(n._idx) === String(item.iceidx));
+			const bgColor = matched?.bg_color || "#fff";
+			const checkboxId = `cart-check-${index}`;
 
-				return `
-					<div class="cart-items__item">
-						<div class="cart-items__checkeds">
-							<input type="checkbox" id="${checkboxId}" class="cart-items__check hide">
-							<label for="${checkboxId}" class="cart-items__checkbox"></label>
-						</div>
-						<img src="${item.icecreamInfo.image_url}" class="cart-items__image" style="background-color: ${bgColor}">
-						<div class="cart-items__info">
-							<a href="/html/product/P-020.html?_idx=${item.iceidx}" class="cart-items__name">
-								${item.icecreamInfo.name}
-							</a>
-							<p class="cart-items__description">${item.icecreamInfo.description}</p>
-							<p class="cart-items__price">${item.totalPrice.toLocaleString()}원</p>
-							<div class="cart-items__controls" data-iceidx="${item.iceidx}" data-price="${item.totalPrice}" data-quantity="${item.quantity}">
-								<div class="cart-items__options" style="display: none">
-									<button class="cart-items__decrease">-</button>
-									<input type="text" value="${item.quantity}" readonly class="cart-items__input"/>
-									<button class="cart-items__increase">+</button>
-								</div>
-								<button class="cart-items__option">옵션 변경</button>
-								<button class="cart-items__remove">삭제</button>
+			return `
+				<div class="cart-items__item">
+					<div class="cart-items__checkeds">
+						<input type="checkbox" id="${checkboxId}" class="cart-items__check hide">
+						<label for="${checkboxId}" class="cart-items__checkbox"></label>
+					</div>
+					<img src="${item.icecreamInfo.image_url}" class="cart-items__image" style="background-color: ${bgColor}">
+					<div class="cart-items__info">
+						<a href="/html/product/P-020.html?_idx=${item.iceidx}" class="cart-items__name">${item.icecreamInfo.name}</a>
+						<p class="cart-items__description">${item.icecreamInfo.description}</p>
+						<p class="cart-items__price">${item.totalPrice.toLocaleString()}원</p>
+						<div class="cart-items__controls" data-iceidx="${item.iceidx}" data-price="${item.totalPrice}" data-quantity="${item.quantity}">
+							<div class="cart-items__options" style="display: none">
+								<button class="cart-items__decrease">-</button>
+								<input type="text" value="${item.quantity}" readonly class="cart-items__input"/>
+								<button class="cart-items__increase">+</button>
 							</div>
+							<button class="cart-items__option">옵션 변경</button>
+							<button class="cart-items__remove">삭제</button>
 						</div>
 					</div>
-				`;
-			})
-			.join("");
+				</div>
+			`;
+		}).join("");
 
-		// 삭제 모드 진입 처리
+		// 삭제 모드 진입
 		container.querySelectorAll(".cart-items__remove").forEach(btn => {
 			btn.addEventListener("click", () => {
 				deleteMode = true;
 				buyBtn.textContent = "삭제 취소하기";
-
 				container.querySelectorAll(".cart-items__item").forEach(item => {
 					item.querySelector(".cart-items__controls").style.display = "none";
 					item.querySelector(".cart-items__image").classList.add("-delete-anima");
@@ -135,7 +126,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 			});
 		});
 
-		// 옵션 변경 이벤트 바인딩
+		// 옵션 변경
 		container.querySelectorAll(".cart-items__option").forEach(btn => {
 			btn.addEventListener("click", async () => {
 				const item = btn.closest(".cart-items__item");
@@ -168,7 +159,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 			});
 		});
 
-		container.addEventListener("change", (e) => {
+		// 체크박스 선택 시 가격 합산
+		container.addEventListener("change", () => {
 			const checks = container.querySelectorAll(".cart-items__check:checked");
 			const total = [...checks].reduce((sum, cb) => {
 				const item = cb.closest(".cart-items__item");
@@ -176,77 +168,44 @@ document.addEventListener("DOMContentLoaded", async function () {
 				return sum + price;
 			}, 0);
 			const count = checks.length;
-			buyBtn.textContent = deleteMode ? (count === 0 ? "삭제 취소하기" : `삭제하기 (${count})`) : `구매하기 (${count})`;
+			buyBtn.textContent = deleteMode
+				? (count === 0 ? "삭제 취소하기" : `삭제하기 (${count})`)
+				: `구매하기 (${count})`;
 			productPriceEl.textContent = `${total.toLocaleString()}원`;
 			totalPriceEl.textContent = `${total.toLocaleString()}원`;
 			discountEl.textContent = `-0원`;
 		});
 
+		// 구매 또는 삭제 버튼 클릭
 		buyBtn.addEventListener("click", async () => {
 			const checked = container.querySelectorAll(".cart-items__check:checked");
+			if (checked.length === 0) return;
 
 			if (deleteMode) {
-				if (checked.length === 0) {
-					container.querySelectorAll(".cart-items__item").forEach(item => {
-						item.querySelector(".cart-items__controls").style.display = "flex";
-						item.querySelector(".cart-items__image").classList.remove("-delete-anima");
-						item.querySelector(".cart-items__check").checked = false;
-					});
-					buyBtn.textContent = "구매하기 (0)";
-					deleteMode = false;
-					return;
-				}
 				if (confirm("정말 삭제하시겠습니까?")) {
-					try {
-						for (const checkbox of checked) {
-							const item = checkbox.closest(".cart-items__item");
-							const iceidx = item.querySelector(".cart-items__controls").dataset.iceidx;
-							await deleteCart(iceidx);
-						}
-						alert("선택한 상품이 삭제되었습니다.");
-						location.reload();
-					} catch (err) {
-						console.error("삭제 실패:", err);
-						alert("삭제 중 오류 발생");
+					for (const checkbox of checked) {
+						const item = checkbox.closest(".cart-items__item");
+						const iceidx = item.querySelector(".cart-items__controls").dataset.iceidx;
+						await deleteCart(iceidx);
 					}
-				}
-			} else {
-				if (checked.length === 0) return;
-				const selectedItems = [...checked].map(cb => {
-					const item = cb.closest(".cart-items__item");
-					const controls = item.querySelector(".cart-items__controls");
-					return {
-						iceidx: controls.dataset.iceidx,
-						quantity: parseInt(controls.dataset.quantity),
-						price: parseInt(controls.dataset.price)
-					};
-				});
-
-				const totalPrice = selectedItems.reduce((sum, i) => sum + i.price, 0);
-
-				try {
-					const user = await fetchUserPoint();
-					if (user.point < totalPrice) {
-						alert("포인트가 모자랍니다.\n카드게임을 하여 포인트를 획득하세요");
-						location.href = "/html/main/game.html";
-						return;
-					}
-					const result = await purchaseCartItems(selectedItems);
-					alert("구매가 완료되었습니다.");
 					location.reload();
+				}
+				return;
+			}
 
-				} catch (err) {
-					console.error("구매 실패:", err);
-					if (err.message?.includes("포인트")) {
-						alert("포인트가 모자랍니다.\n카드게임을 하여 포인트를 획득하세요");
-						location.href = "/html/main/game.html";
-					} else {
-						alert("구매 중 오류 발생");
-					}
+			try {
+				const result = await purchaseCart();
+				alert(`✅ 구매 완료!\n사용 포인트: ${result.used}P\n남은 포인트: ${result.remaining}P`);
+				location.reload();
+			} catch (err) {
+				if (err.message.includes("포인트")) {
+					const goGame = confirm("포인트가 부족합니다.\n게임을 통해서 포인트를 획득하세요!");
+					if (goGame) location.href = "/html/main/game.html";
+				} else {
+					alert("구매 중 오류 발생");
 				}
 			}
 		});
-
 	} catch (err) {
 		console.error("❌ 장바구니 로딩 에러:", err);
 		container.innerHTML = `<p>장바구니 정보를 불러오는 데 실패했습니다.</p>`;
