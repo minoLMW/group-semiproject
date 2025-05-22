@@ -308,7 +308,7 @@
 				if (!confirmBuy) return;
 
 				try {
-					const res = await fetch(`/buy/${currentIdx}`, {
+					const res = await fetch(`/carts/purchase/${currentIdx}`, {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",

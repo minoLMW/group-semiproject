@@ -10,7 +10,6 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
-import buyRouter from "./src/router/buy.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,7 +42,6 @@ app.use("/posts", postsRouter);
 app.use("/icecreams", icecreamsRouter);
 app.use("/carts", cartsRouter);
 app.use("/game", gameRouter);
-app.use("/buy", buyRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
