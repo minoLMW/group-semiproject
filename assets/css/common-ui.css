@@ -3059,11 +3059,22 @@ cursor: pointer;
 	box-shadow:0 0.4rem 1rem rgba(0, 0, 0, 0.08);
 }
 .cart-items__notresult {
+	position:relative;
 	padding-top:20rem;
-	background:url(../imgs/img/baskinminoos.png) no-repeat 50% 0 / 20rem auto;
 	color:var(--font1);
 	font-size:3rem;
 	text-align:center;
+}
+.cart-items__notresult::after {
+	content:'';
+	position:absolute;
+	left:50%;
+	top:0;
+	transform:translateX(-50%);
+	width:20rem;
+	height:20rem;
+	background:url(../imgs/img/baskinminoos.png) no-repeat 50% 0 / 20rem auto;
+	opacity:0.7;
 }
 .cart-items__item {
 	display:flex;
