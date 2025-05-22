@@ -57,10 +57,8 @@ function renderPosts(posts) {
 
     // --- 수정 버튼 핸들러 ---
     li.querySelector(".post-list__badge__change").addEventListener("click", () => {
-      // 폼에 기존 데이터 채우기
       postForm.title.value = post.title;
       postForm.text.value = post.text;
-      // 백엔드에서 반환된 고유 ID 필드명은 _id 이므로 toString()으로 문자열로 변환
       editingPostId = post._id.toString();
       submitButton.textContent = "수정 완료";
       postForm.scrollIntoView({ behavior: "smooth" });
@@ -69,7 +67,6 @@ function renderPosts(posts) {
     // --- 삭제 버튼 핸들러 ---
     li.querySelector(".post-list__badge__delete").addEventListener("click", async () => {
       if (!confirm("정말 삭제하시겠습니까?")) return;
-
       try {
         const res = await fetch(`/posts/${post._id}`, {
           method: "DELETE",
