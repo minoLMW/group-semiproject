@@ -42,6 +42,7 @@ app.use("/posts", postsRouter);
 app.use("/icecreams", icecreamsRouter);
 app.use("/carts", cartsRouter);
 app.use("/game", gameRouter);
+app.use("/sms", smsRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

@@ -9,21 +9,80 @@ document.addEventListener("DOMContentLoaded", function () {
   const birth = document.querySelector('input[name="birth"]');
   const hp = document.querySelector('input[name="hp"]');
 
-  //인증요청 버튼
-  certifyBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-    const ph = hp.value.trim();
-    const phRegex = /^01[0|1|6-9]-?\d{3,4}-?\d{4}$/;
 
-    if (!phRegex.test(ph)) {
-      alert("올바른 휴대폰 번호를 입력해주세요. 예: 010-1234-5678");
-    } else {
-      alert("인증번호가 발송되었습니다.");
-      // coolsms api
+  //coolsms 인증요청
+  document.addEventListener("DOMContentLoaded", function () {
+  const sendBtn = document.getElementById("btn-send-code");
+  const verifyBtn = document.getElementById("btn-verify-code");
+  const phoneInput = document.getElementById("hp");
+  const codeInput = document.getElementById("auth-code");
+  const resultText = document.getElementById("sms-result");
+  const codeArea = document.getElementById("code-area");
+  const submitBtn = document.querySelector(".signup__button--submit");
+
+  // 초기 상태: 제출 버튼 비활성화
+  if (submitBtn) submitBtn.disabled = true;
+
+  // 1. 인증 요청
+  sendBtn.addEventListener("click", async () => {
+    const phone = phoneInput.value.trim();
+
+    if (!/^010\d{8}$/.test(hp)) {
+      alert("휴대폰 번호를 정확히 입력해주세요. (예: 01012345678)");
+      return;
+    }
+
+    try {
+      const res = await fetch("/sms/send-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ hp }),
+      });
+
+      const data = await res.json();
+      resultText.textContent = data.message || data.error;
+      resultText.style.color = data.message ? "green" : "red";
+
+      if (res.ok) {
+        codeArea.style.display = "block"; // 인증번호 입력창 보이기
+      }
+
+    } catch (err) {
+      resultText.textContent = "문자 요청 중 오류 발생";
+      resultText.style.color = "red";
     }
   });
 
-  // 제출하기 버튼
+  // 2. 인증 확인
+  verifyBtn.addEventListener("click", async () => {
+    const phone = phoneInput.value.trim();
+    const code = codeInput.value.trim();
+
+    try {
+      const res = await fetch("/sms/verify-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ hp, code }),
+      });
+
+      const data = await res.json();
+      resultText.textContent = data.message || data.error;
+      resultText.style.color = data.message ? "green" : "red";
+
+      // 인증 성공 시 제출 버튼 활성화
+      if (res.ok && data.message) {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+
+    } catch (err) {
+      resultText.textContent = "인증 확인 중 오류 발생";
+      resultText.style.color = "red";
+    }
+  });
+});
+
+
+  ///회원가입 제출버튼/////
   submitBtn.addEventListener("click", async function (e) {
     e.preventDefault();
 

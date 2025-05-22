@@ -2,6 +2,7 @@ import express from "express";
 import * as authController from "../controller/auth.mjs";
 import { body } from "express-validator";
 import { validate } from "../middleware/validator.mjs";
+import sendsms  from "../../assets/js/sendsms.js";
 
 const router = express.Router();
 
@@ -36,5 +37,5 @@ router.post("/signup", validateSignup, authController.signup);
 router.post("/login", validateLogin, authController.login);
 
 // 로그인 유지
-
 export default router;
+

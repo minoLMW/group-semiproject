@@ -10,18 +10,29 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "group-semiproject/  \r ├── assets/  \r │   ├── css/           # 공통 UI 및 스타일링을 위한 CSS 파일  \r │   ├── imgs/  \r │   │   ├── ico/       # 아이콘 이미지  \r │   │   ├── img/       # 일반 이미지  \r │   │   └── temp/      # 임시 이미지  \r │   ├── js/            # 공통 UI 동작을 위한 JavaScript 파일  \r │   └── libs/          # 사용 플러그인 파일  \r │       ├── anime/     # 애니메JS  \r │       └── jquery/    # 제이쿼리JS (사용 후 삭제 예정)  \r │  \r ├── html/  \r │   ├── common/        # 공통 HTML 파일 (헤더, 푸터 등)  \r │   ├── event/         # 이벤트 페이지 HTML 파일  \r │   ├── home/          # 홈 페이지 HTML 파일  \r │   ├── main/          # 메인 페이지 HTML 파일  \r │   └── product/       # 상품 페이지 HTML 파일  \r │  \r ├── dev/               # 개발 관련 파일 및 설정  \r │  \r └── index.html         # 메인 페이지",
   "devDependencies": {
     "nodemon": "^3.1.10"
   },
   "dependencies": {
+    "axios": "^1.9.0",
     "bcrypt": "^5.1.1",
+    "coolsms-node-sdk": "^2.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "express-validator": "^7.2.1",
+    "ioredis": "^5.6.1",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.16.0",
     "multer": "^1.4.5-lts.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minoLMW/group-semiproject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/minoLMW/group-semiproject/issues"
+  },
+  "homepage": "https://github.com/minoLMW/group-semiproject#readme"
 }
