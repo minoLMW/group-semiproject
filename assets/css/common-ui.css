@@ -1411,17 +1411,17 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	padding: 3rem;
 	margin: 4rem auto;
 	box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.08);
-	background-color: #ffeef2;
+	background-color: var(--pink-color-1);
 	color: var(--pink-color-2);
 }
 .card__subtext {
-	font-size: 1.4rem;
-	color: var(--brown-color-4);
+	font-size: 2rem;
+	color: #121212;
 	margin-bottom: 1rem;
 	text-align: center;
 }
 .card__title {
-	font-size: 2.4rem;
+	font-size: 4rem;
 	font-weight: 700;
 	margin-bottom: 2rem;
 }
@@ -1479,28 +1479,28 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	flex-wrap: wrap;
 	position:relative;
 	height:100%;
-	background-color: var(--text-white);
+	background-color: var(--bg-root2);
 	padding: 2rem;
 	border-radius: 1.2rem;
 	border: 0.1rem solid var(--brown-color-5);
 	box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.05);
 	position: relative;
 }
-.post-list__badge  h2 {
+.post-list__badge h2 {
 	margin-top: 0.1rem;
 	font-size: 1.8rem;
 	color: var(--pink-color-3);
 	text-decoration: dotted;
 }
-.post-list__badge  h3 {
+.post-list__badge h3 {
 	margin-top: 0.1rem;
 	font-size: 1.8rem;
-	color: var(--brown-color-2);
+	color: var(--font1);
 	font-weight: bold;
 }
 .post-list__badge p {
 	margin: 1rem 0;
-	color: var(--brown-color-1);
+	color: var(--font2);
 	font-size: 1.5rem;
 }
 .post-list__badge__delete, 
