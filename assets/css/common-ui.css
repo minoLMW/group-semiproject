@@ -1449,6 +1449,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	border-radius: 1.5rem;
 	margin: 1rem;
 	resize:none;
+	font-size: 2rem;
 }
 .post-form__button{
 	color: white;
@@ -1498,7 +1499,7 @@ legend {overflow:hidden !important; position:absolute !important; width:1px !imp
 	color: var(--font1);
 	font-weight: bold;
 }
-.post-list__badge p {
+.post-list__badge-p {
 	margin: 1rem 0;
 	color: var(--font2);
 	font-size: 1.5rem;
