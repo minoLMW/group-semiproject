@@ -455,15 +455,17 @@ height: auto;              /* 내용에 딱 맞게 */
 margin: 0.25rem 0;         /* 버튼 간 간격 */
 padding: 0.5rem 1rem;      /* 클릭 영역 확보 */
 text-align: center;
-font-size: 1.4rem;
+font-size: 1.6rem;
 font-weight: var(--font-weight-sd-heavy);
-background: #fff/* 배경 흰색 */
+background: #fff;
 border-radius: 0.5rem;
 cursor: pointer;
 }
 .main-header-bg.active .user-btn-container {
 	border-color:var(--deeppink);
 }
+
+
 /* // header */
 
 /* footer */
