@@ -56,7 +56,7 @@ export async function deleteCart(req, res) {
   }
 }
 
-// 장바구니 전체 구매
+// 장바구니 선택 구매
 export async function purchaseCart(req, res) {
 	try {
 		const userId = req.user.id;
