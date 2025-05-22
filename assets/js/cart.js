@@ -38,10 +38,14 @@ async function fetchUserPoint() {
 	return res.json();
 }
 
-async function purchaseCart() {
-	const res = await fetch('/carts/purchase', {
+async function purchaseCart(items) {
+	const res = await fetch("/carts/purchase", {
 		method: "POST",
-		headers: { "Authorization": `Bearer ${token}` }
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization": `Bearer ${token}`
+		},
+		body: JSON.stringify({ items })
 	});
 	const data = await res.json();
 	if (!res.ok) throw new Error(data.message || "구매 실패");
@@ -206,9 +210,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 			if (mode === "buy") {
 				if (checked.length === 0) return;
-
+			
+				const selectedItems = [...checked].map(cb => {
+					const item = cb.closest(".cart-items__item");
+					const controls = item.querySelector(".cart-items__controls");
+					return {
+						iceidx: controls.dataset.iceidx,
+						quantity: parseInt(controls.dataset.quantity)
+					};
+				});
+			
 				try {
-					const result = await purchaseCart();
+					const result = await purchaseCart(selectedItems);  // ✅ selectedItems 전달
 					alert(`✅ 구매 완료!\n사용 포인트: ${result.used}P\n남은 포인트: ${result.remaining}P`);
 					location.reload();
 				} catch (err) {

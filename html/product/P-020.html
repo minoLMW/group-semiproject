@@ -238,12 +238,6 @@
 				if (confirmAdd) {
 					const matchedItem = jsonData.find(item => Number(item._idx) === currentIdx);
 					if (matchedItem) {
-						console.log(`- _idx: ${matchedItem._idx}`);
-						console.log(`- 이름: ${matchedItem.ice_name}`);
-						console.log(`- 설명: ${matchedItem.Description}`);
-						console.log(`- 이미지 URL: ${matchedItem.Image_URL}`);
-						console.log(`- 수량: ${quantity}`);
-
 						const userid = localStorage.getItem("userid");
 						const token = localStorage.getItem("token");
 
@@ -264,7 +258,7 @@
 							method: "POST",
 							headers: {
 								"Content-Type": "application/json",
-								"Authorization": `Bearer ${token}` // ✅ 토큰 포함!
+								"Authorization": `Bearer ${token}`
 							},
 							body: JSON.stringify(cartData)
 						})
@@ -273,15 +267,15 @@
 							return res.json();
 						})
 						.then(data => {
-							const confirmMove = confirm(`✅ 장바구니에 ${quantity}개 저장 완료!\n장바구니 페이지로 이동하시겠습니까?`);
+							const confirmMove = confirm(`장바구니에 ${quantity}개 저장 완료!\n장바구니 페이지로 이동하시겠습니까?`);
 							if (confirmMove) {
-								window.location.href = "/html/cart/cart.html"; // ✅ 이동
+								window.location.href = "/html/cart/cart.html"; // 이동
 							} else {
-								input.val(0); // ❌ 이동 안 하고 수량만 초기화
+								input.val(0); // 이동 안 하고 수량만 초기화
 							}
 						})
 						.catch(err => {
-							console.error("❌ 저장 실패:", err);
+							console.error("저장 실패:", err);
 							alert("서버 오류로 장바구니 저장에 실패했습니다.");
 						});
 					} else {
@@ -329,15 +323,12 @@
 						return;
 					}
 
-					alert(`✅ 바로구매 완료!\n사용 포인트: ${data.used}P\n남은 포인트: ${data.remaining}P`);
+					alert(`바로구매 완료!\n사용 포인트: ${data.used}P\n남은 포인트: ${data.remaining}P`);
 					input.val(0);
 				} catch (err) {
 					alert("구매 중 오류 발생");
 				}
 			};
-
-
-				
 		});
 	</script>
 </body>

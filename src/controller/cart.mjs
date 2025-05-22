@@ -2,7 +2,6 @@ import * as cartRepository from "../data/cart.mjs";
 import * as userRepository from "../data/auth.mjs"
 // console.log("[DEBUG] cartRepository keys:", Object.keys(cartRepository));
 import { ObjectId } from "mongodb";
-import { signup } from "./auth.mjs";
 import { getIcecreams } from "../db/database.mjs";
 
 // 장바구니 전체 조회
@@ -59,31 +58,47 @@ export async function deleteCart(req, res) {
 
 // 장바구니 전체 구매
 export async function purchaseCart(req, res) {
-	const userId = req.user.id;
-  
 	try {
-	  const cartItems = await cartRepository.findAllByUser(userId);
-	  if (!cartItems.length) {
-		return res.status(400).json({ message: "장바구니가 비어있습니다." });
-	  }
-  
-	  const total = cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
-	  const user = await userRepository.findById(userId);
-  
-	  if (user.point < total) {
-		return res.status(400).json({ message: "포인트가 부족합니다.\n게임을 통해 포인트를 획득하세요!"});
-	  }
-  
-	  await userRepository.updatePoint(userId, user.point - total);
-	  await cartRepository.clearCart(userId);
-  
-	  res.status(200).json({
-		message: "구매 완료",
-		used: total,
-		remaining: user.point - total
-	  });
+		const userId = req.user.id;
+		const { items } = req.body;
+
+		if (!items || !Array.isArray(items) || items.length === 0) {
+			return res.status(400).json({ message: "선택된 항목이 없습니다." });
+		}
+
+		const user = await userRepository.findById(userId);
+		if (!user) {
+			return res.status(404).json({ message: "사용자 정보를 찾을 수 없습니다." });
+		}
+
+		let total = 0;
+		for (const item of items) {
+			const cartItem = await cartRepository.findOne(userId, item.iceidx);
+			if (!cartItem || !cartItem.totalPrice || !cartItem.quantity) {
+				console.warn("❗️누락된 항목:", item);
+				continue;
+			}
+			const unitPrice = cartItem.totalPrice / cartItem.quantity;
+			total += unitPrice * item.quantity;
+		}
+
+		if (user.point < total) {
+			return res.status(400).json({ message: "포인트가 부족합니다.\n게임을 통해 포인트를 획득하세요!" });
+		}
+
+		await userRepository.updatePoint(userId, user.point - total);
+		for (const item of items) {
+			await cartRepository.deleteByUserAndIce(userId, item.iceidx);
+		}
+
+		res.status(200).json({
+			message: "구매 완료",
+			used: total,
+			remaining: user.point - total
+		});
 	} catch (err) {
-	  res.status(500).json({ message: "구매 실패", error: err.message });
+		console.error("❌ 서버 오류:", err);
+		res.status(500).json({ message: "구매 실패", error: err.message });
 	}
 }
   
