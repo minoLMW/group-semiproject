@@ -11,6 +11,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
 import buyRouter from "./src/router/buy.mjs";
+import sendsmsRouter from "./src/router/sendsms.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -44,6 +45,7 @@ app.use("/icecreams", icecreamsRouter);
 app.use("/carts", cartsRouter);
 app.use("/game", gameRouter);
 app.use("/buy", buyRouter);
+app.use("/sendsms", sendsmsRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

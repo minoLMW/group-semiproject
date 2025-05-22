@@ -9,17 +9,78 @@ document.addEventListener("DOMContentLoaded", function () {
   const birth = document.querySelector('input[name="birth"]');
   const hp = document.querySelector('input[name="hp"]');
 
-  //인증요청 버튼
-  certifyBtn.addEventListener("click", function (e) {
+  // 인증번호 입력창과 인증확인 버튼 추가 (HTML에 없으면 동적으로 추가)
+  let certifyCodeInput = document.querySelector('input[name="certifyCode"]');
+  let verifyBtn = document.querySelector('.signup__button--verify');
+  if (!certifyCodeInput) {
+    certifyCodeInput = document.createElement('input');
+    certifyCodeInput.type = "text";
+    certifyCodeInput.name = "certifyCode";
+    certifyCodeInput.placeholder = "인증번호 입력";
+    certifyCodeInput.style.marginTop = "1rem";
+    hp.parentNode.insertBefore(certifyCodeInput, hp.nextSibling);
+  }
+  if (!verifyBtn) {
+    verifyBtn = document.createElement('button');
+    verifyBtn.type = "button";
+    verifyBtn.className = "signup__button--verify";
+    verifyBtn.textContent = "인증확인";
+    verifyBtn.style.marginLeft = "0.5rem";
+    certifyCodeInput.parentNode.insertBefore(verifyBtn, certifyCodeInput.nextSibling);
+  }
+
+  let isPhoneVerified = false; // 인증 성공 여부
+
+  // 인증요청 버튼
+  certifyBtn.addEventListener("click", async function (e) {
     e.preventDefault();
-    const ph = hp.value.trim();
-    const phRegex = /^01[0|1|6-9]-?\d{3,4}-?\d{4}$/;
+    const ph = hp.value.trim().replace(/-/g, "");
+    const phRegex = /^010\d{8}$/;
 
     if (!phRegex.test(ph)) {
-      alert("올바른 휴대폰 번호를 입력해주세요. 예: 010-1234-5678");
-    } else {
+      alert("올바른 휴대폰 번호를 입력해주세요. 예: 01012345678");
+      return;
+    }
+
+    try {
+      const res = await fetch("/sendsms/send-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: ph }),
+      });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || "인증번호 발송 실패");
       alert("인증번호가 발송되었습니다.");
-      // coolsms api
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  // 인증확인 버튼
+  verifyBtn.addEventListener("click", async function () {
+    const ph = hp.value.trim().replace(/-/g, "");
+    const code = certifyCodeInput.value.trim();
+
+    if (!code) {
+      alert("인증번호를 입력해주세요.");
+      return;
+    }
+
+    try {
+      const res = await fetch("/sendsms/verify-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: ph, code }),
+      });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || "인증 실패");
+      alert("인증이 완료되었습니다.");
+      isPhoneVerified = true;
+      certifyCodeInput.disabled = true;
+      verifyBtn.disabled = true;
+      hp.readOnly = true;
+    } catch (err) {
+      alert(err.message);
     }
   });
 
@@ -60,6 +121,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!hp.value.trim()) {
       alert("휴대폰 번호를 입력해주세요.");
       hp.focus();
+      return;
+    }
+
+    if (!isPhoneVerified) {
+      alert("휴대폰 인증을 완료해주세요.");
+      certifyCodeInput.focus();
       return;
     }
 
