@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>회원가입</title>
+	<link rel="stylesheet" href="/assets/css/common-ui.css" />
+</head>
+<body>
+	<div class="page">
+		<div class="container">
+
+			<header class="header"></header>
+
+			<main class="contents">
+				<div class="content">
+						<div class="page-title">
+							<div class="page-title__container">
+								<div class="page-title__content">
+									<h2 class="page-title__title">배라광장</h2>
+									<p class="page-title__text">
+										배라에게 묻고 배라가 답해드려요,<br>
+										배라에게 다양한 의견을 전달해주세요
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="card card--pink">
+							<p class="card__subtext">
+								내가 만드는 맛이<br />31가지 아이스크림이 된다고?
+							</p>
+							
+							<h2 class="card__title">내가 만드는 아이스크림</h2>
+
+							<form class="post-form" id="postForm">
+								<input id="title" name="title" type="text" class="post-form__input" placeholder="어떤 맛이 떠오르나요?" required/>
+								<textarea id="text" name="text" class="post-form__textarea" placeholder="간단한 설명을 남겨주세요" rows="4" required></textarea>
+								<button type="submit" class="post-form__button">만들어주세요</button>
+							</form>
+						</div>
+
+						<!-- 게시글 리스트 -->
+						<ul id="postList" class="post-list"></ul>
+					</section>
+				</div>
+			</main>
+
+			<footer class="footer"></footer>
+
+		</div>
+	</div>
+	<script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
+	<script src="/assets/js/common-ui.js"></script>
+	<script src="/assets/js/post.js"></script>
+</body>
+</html>

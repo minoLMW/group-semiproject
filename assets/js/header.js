@@ -98,7 +98,7 @@ $(document).ready(function () {
   });
 
   // searchOverlay와 userCon이 열려있을 때, 다른 곳 클릭 시 닫기
-  $(document).on("click", function (e) {
+  $('document').on("click", function (e) {
     var $t = $(e.target);
 
     // 검색 오버레이가 열려 있고, 클릭한 곳이 오버레이나 검색 버튼이 아니면 닫기
@@ -121,3 +121,29 @@ $(document).ready(function () {
     }
   });
 });
+
+
+
+$(window).scroll(function () {
+  console.log($(this))
+  if ($(this).scrollTop() > 100) {
+    $(".baskinrobbins-main .main-header-bg").addClass("active");
+  } else {
+    $(".baskinrobbins-main .main-header-bg").removeClass("active");
+  }
+});
+
+function handleSearch() {
+  // 검색 모달 열기 or 검색 실행 로직
+  console.log('검색 버튼 클릭');
+}
+
+function openBasket() {
+  // 장바구니 페이지로 이동하거나 모달 열기
+  location.href = '/html/common/basket.html';
+}
+
+function openCSCenter() {
+  // CS 센터 페이지로 이동
+  location.href = '/html/common/cs-center.html';
+}
