@@ -3261,6 +3261,7 @@ cursor: pointer;
 	position:relative;
 	border:1px solid var(--pink-color-3);
 	background-color:transparent;
+	color:var(--pink-color-3);
 }
 .summary-button:first-child::after {
 	content:'';
@@ -3275,6 +3276,7 @@ cursor: pointer;
 }
 .summary-button:hover {
 	background-color:var(--pink-color-2);
+	color:var(--text-white);
 }
 .summary-button:first-child:hover::after {
 	display:none;

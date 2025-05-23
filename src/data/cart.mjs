@@ -68,33 +68,35 @@ export async function findAllByUser(useridx) {
 	}
 	
 	// 메뉴에서 수량 입력 후 장바구니 담기 (있으면 누적, 없으면 추가)
-	export async function addOrIncrease(user, iceidx, quantity) {
-	const parsedQty = Number(quantity);
-	if (isNaN(parsedQty) || parsedQty <= 0) {
-		throw new Error("수량이 유효하지 않습니다");
-	}
+	export async function addOrIncrease(user, iceidx, quantity, name) {
+		const parsedQty = Number(quantity);
+		if (isNaN(parsedQty) || parsedQty <= 0) {
+			throw new Error("수량이 유효하지 않습니다");
+		}
+
+		const userIdStr = String(user._id);
 	
-	const existing = await findByUserAndIce(user.id, iceidx);
+		const existing = await findByUserAndIce(userIdStr, iceidx);
 	
-	if (existing) {
-		await getCarts().updateOne(
-		{ _id: existing._id },
-		{ $inc: { quantity: parsedQty } }
-		);
-		return getCarts().findOne({ _id: existing._id });
-	}
+		if (existing) {
+			await getCarts().updateOne(
+				{ _id: existing._id },
+				{ $inc: { quantity: parsedQty } }
+			);
+			return getCarts().findOne({ _id: existing._id });
+		}
 	
-	const newItem = {
-		useridx: String(user.id),
-		userid: user.userid,
-		name: user.name,
-		iceidx: String(iceidx),
-		quantity: parsedQty,
-		createdAt: new Date(),
-	};
+		const newItem = {
+			useridx: userIdStr,
+			userid: user.userid,
+			name,
+			iceidx,
+			quantity: parsedQty,
+			createdAt: new Date()
+		};
 	
-	const result = await getCarts().insertOne(newItem);
-	return getCarts().findOne({ _id: result.insertedId });
+		const result = await getCarts().insertOne(newItem);
+		return getCarts().findOne({ _id: result.insertedId });
 	}
 	
 	// 장바구니 페이지에서 수량 수정

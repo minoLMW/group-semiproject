@@ -16,18 +16,22 @@ export async function getCart(req, res) {
 
 // 장바구니 항목 추가 또는 수량 누적 (메뉴에서 사용)
 export async function addToCart(req, res) {
-  const { iceidx, quantity } = req.body;
-  try {
-    const item = await cartRepository.addOrIncrease(
-      req.user,
-      iceidx,
-      quantity
-    );
-    res.status(200).json({ message: "장바구니 반영 완료", item });
-  } catch (err) {
-    res.status(400).json({ message: "장바구니 추가 실패", error: err.message });
-  }
+	const { iceidx, quantity, name } = req.body;
+	console.log("🔻 요청 바디:", req.body);
+	try {
+		const item = await cartRepository.addOrIncrease(
+			req.user,
+			iceidx,
+			quantity,
+			name
+		);
+		res.status(200).json({ message: "장바구니 반영 완료", item });
+	} catch (err) {
+		console.error("❌ 장바구니 추가 실패:", err);
+		res.status(400).json({ message: "장바구니 추가 실패", error: err.message });
+	}
 }
+  
 
 // 장바구니 수량 수정 (장바구니 페이지에서 사용)
 export async function updateCart(req, res) {
@@ -104,7 +108,6 @@ export async function purchaseCart(req, res) {
   
 // 장바구니 개별 구매
 export async function buyOneItem(req, res) {
-	const { iceidx } = req.params;
 	const { quantity } = req.body;
 	const userId = req.user.id;
 
