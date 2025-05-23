@@ -3404,7 +3404,7 @@ cursor: pointer;
 /* 3) 아이콘끼리 간격 주기 (선택) */
 .basekt-btn,
 .user-btn {
-  margin-right: 1.5rem;        /* 필요에 따라 조정하세요 */
+        /* 필요에 따라 조정하세요 */
 }
 
 
