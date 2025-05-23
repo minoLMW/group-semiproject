@@ -192,7 +192,6 @@ body.lock {overflow:hidden;}
 .h-search-container {
 	width:18.6rem;
 	height:3rem;
-	border-bottom:0.2rem solid var(--deeppink);
 	cursor:pointer;
 	margin-right:2rem;
 }
@@ -218,8 +217,8 @@ body.lock {overflow:hidden;}
 }
 .user-btn {
 	flex: 0 0 2.8rem;
-	width:3.2rem;
-	height:3.2rem;
+	width:28px;
+	height:28px;
 	margin:0 2rem;
 	background-image:url(../imgs/img/btn_user_menu.png);
 	background-repeat:no-repeat;
@@ -242,7 +241,6 @@ body.lock {overflow:hidden;}
 .main-header-bg.active .h-search-container {
 	width:18.6rem;
 	height:3rem;
-	border-bottom:0.2rem solid var(--text-white);
 	cursor:pointer;
 }
 .main-header-bg.active .search-btn {
@@ -251,8 +249,8 @@ body.lock {overflow:hidden;}
 	background-size:contain;
 }
 .main-header-bg.active .user-btn {
-	width:3.2rem;
-	height:3.2rem;
+	width:28px;
+	height:28px;
 	margin:0 2rem;
 	background-image:url(../imgs/img/btn_user_menu_white.png);
 	background-repeat:no-repeat;
@@ -3397,6 +3395,23 @@ cursor: pointer;
   left: 0;
   width: 100%;
   z-index: 999;
+}
+
+/* 1) 사이드바 전체 너비를 컨텐츠에 딱 맞게 변경 */
+.h-side-bar {
+  width: auto !important;      /* 기존 width:26.2rem; 제거 */
+  justify-content: flex-start; /* 아이템을 왼쪽부터 배치 */
+}
+
+/* 2) basekt-btn 앞에 자동 여백을 넣어 오른쪽으로 밀기 */
+.basekt-btn {
+  margin-left: auto;           /* 이 한 줄이 핵심입니다! */
+}
+
+/* 3) 아이콘끼리 간격 주기 (선택) */
+.basekt-btn,
+.user-btn {
+        /* 필요에 따라 조정하세요 */
 }
 
 .modal {position:fixed; left:0; top:0; z-index:2000; width:100vw; height:100vh; background-color:rgba(0,0,0,0.3);}
