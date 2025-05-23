@@ -266,6 +266,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 					localStorage.setItem("purchasedItems", JSON.stringify(purchasedVisuals));
 
 					const result = await purchaseCart(selectedItems);
+					
+					localStorage.setItem("purchaseResult", JSON.stringify(result));
+
 					await fetch('/carts/clear', {
 						method: 'DELETE',
 						headers: {
