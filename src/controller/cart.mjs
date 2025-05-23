@@ -23,7 +23,7 @@ export async function addToCart(req, res) {
 			req.user,
 			iceidx,
 			quantity,
-			name
+			req.user.name
 		);
 		res.status(200).json({ message: "장바구니 반영 완료", item });
 	} catch (err) {

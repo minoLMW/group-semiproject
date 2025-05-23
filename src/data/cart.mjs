@@ -89,7 +89,7 @@ export async function findAllByUser(useridx) {
 		const newItem = {
 			useridx: userIdStr,
 			userid: user.userid,
-			name,
+			name: user.name,
 			iceidx,
 			quantity: parsedQty,
 			createdAt: new Date()
