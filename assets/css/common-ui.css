@@ -31,6 +31,10 @@ a {
 button {
 	cursor:pointer;
 }
+button:disabled {
+	background-color:#d3d3d3 !important;
+	color:var(--font3) !important;
+}
 input,
 textarea {
 	user-select:auto;
