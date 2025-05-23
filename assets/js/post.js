@@ -1,56 +1,138 @@
-async function createPost(event) {
-  event.preventDefault();
+const postList = document.getElementById("postList");
+const postForm = document.getElementById("postForm");
+const submitButton = postForm.querySelector('button[type="submit"]');
 
-  const postTitle = document.getElementById("postTitle");
-  const postContent = document.getElementById("postContent");
+const currentUserId = localStorage.getItem("userid");
 
-  if (postTitle.value.trim() === "") {
-    alert("제목을 입력해주세요.");
-    postTitle.focus();
-    return false;
+let editingPostId = null;
+
+function escapeHtml(unsafe) {
+  return unsafe.replace(
+    /[&<"']/g,
+    (m) => ({ "&": "&amp;", "<": "&lt;", '"': "&quot;", "'": "&#039;" }[m])
+  );
+}
+
+async function fetchPosts() {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("로그인이 필요합니다.");
+    return;
   }
-  if (postContent.value.trim() === "") {
-    alert("비밀번호를 입력해주세요.");
-    postContent.focus();
-    return false;
-  }
-
-  const createPostData = {
-    postTitle: postTitle.value,
-    postContent: postContent.value,
-  };
 
   try {
-    const response = await fetch("/posts/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(createPostData),
+    const res = await fetch("/posts", {
+      headers: { Authorization: `Bearer ${token}` },
     });
+    if (!res.ok) throw new Error(res.statusText);
 
-    const data = await response.json();
-    console.log("서버 응답:", data);
+    const posts = await res.json();
+    renderPosts(posts);
+  } catch (err) {
+    console.error("게시글 불러오기 실패:", err);
+  }
+}
 
-    if (response.ok) {
-      const { token, userid } = data;
+function renderPosts(posts) {
+  postList.innerHTML = "";
 
-      if (token && userid) {
-        localStorage.setItem("token", token);
-        localStorage.setItem("userid", userid);
+  posts.forEach((post) => {
+    const dateStr = new Date(post.createAt).toLocaleString();
+    const isMine = post.userid === currentUserId;
 
-        alert("로그인 성공!");
-        window.location.href = "/html/main/index.html"; 
-      } else {
-        alert("아이디 혹은 비번이 틀렸습니다");
+    // 리스트 아이템 생성
+    const li = document.createElement("li");
+    li.className = "post-list__item";
+    li.innerHTML = `
+      <div class="post-list__badge">
+        <h2>ID : ${post.userid}</h2>
+        <h3>${escapeHtml(post.title)}</h3>
+        <p class="post-list__badge-p">${escapeHtml(post.text)}</p>
+        <time datetime="${post.createAt}">${dateStr}</time>
+        ${
+          isMine
+            ? `<button type="button" class="post-list__badge__change">수정</button>
+             <button type="button" class="post-list__badge__delete">삭제</button>`
+            : ``
+        }
+      </div>
+    `;
+    postList.appendChild(li);
+    if (!isMine) return;
+
+    // 수정 버튼
+    li.querySelector(".post-list__badge__change").addEventListener(
+      "click",
+      () => {
+        postForm.title.value = post.title;
+        postForm.text.value = post.text;
+
+        // 수정 모드로 전환
+        editingPostId = post._id.toString();
+        submitButton.textContent = "수정 완료";
+        postForm.scrollIntoView({ behavior: "smooth" });
       }
-    } else {
-      alert(data.message || "로그인 실패");
-    }
-  } catch (error) {
-    console.error("에러 발생:", error);
-    alert("서버와 통신 중 문제가 발생했습니다.");
+    );
+
+    // 삭제 버튼
+    li.querySelector(".post-list__badge__delete").addEventListener(
+      "click",
+      async () => {
+        if (!confirm("정말 삭제하시겠습니까?")) return;
+        try {
+          const res = await fetch(`/posts/${post._id}`, {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          });
+          if (!res.ok) throw new Error(res.statusText);
+          fetchPosts();
+        } catch (err) {
+          console.error("삭제 실패:", err);
+        }
+      }
+    );
+  });
+}
+
+postForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const title = postForm.title.value.trim();
+  const text = postForm.text.value.trim();
+  if (!title || !text) return;
+
+  const token = localStorage.getItem("token");
+  const url = editingPostId ? `/posts/${editingPostId}` : "/posts";
+  const method = editingPostId ? "PUT" : "POST";
+
+  if (editingPostId) {
+    if (!confirm("수정을 완료하시겠습니까?")) return;
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   }
 
-  return false;
-}
+  try {
+    const res = await fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ title, text }),
+    });
+    if (!res.ok) throw new Error(res.statusText);
+
+    // 수정 모드였다면 초기 상태로 복귀
+    if (editingPostId) {
+      editingPostId = null;
+      submitButton.textContent = "등록";
+    }
+    postForm.reset();
+    fetchPosts();
+  } catch (err) {
+    console.error(`${method} 요청 실패:`, err);
+  }
+});
+
+document.addEventListener("DOMContentLoaded", fetchPosts);

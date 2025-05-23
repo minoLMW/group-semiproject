@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title></title>
+	<link rel="stylesheet" href="/assets/css/common-ui.css">
+</head>
+<body>
+	<div class="page">
+		<div class="container">
+			<header class="header"></header>
+
+			<main class="contents">
+				<div class="content">
+
+					<section class="cart-container">
+						<div class="cart-main">
+							<div id="cartItemsContainer" class="cart-items">
+								<!-- 다른 상품 반복 -->
+							</div>
+
+							<!-- 주문 요약 영역 -->
+							<aside class="cart-summary">
+								<h3>주문 예상 금액</h3>
+								<div class="summary-item"><span>총 상품 가격</span><span>0원</span></div>
+								<div class="summary-item"><span>총 할인</span><span class="discount">-0원</span></div>
+								<div class="summary-total"><span>합계</span><span>0원</span></div>
+								<div class="summary-buttons">
+									<button id="allcheck" class="summary-button" onclick="toggleCheckAll(this)">ALL</button>
+									<button id="buyBtn" class="summary-button">구매하기 (0)</button>
+								</div>
+							</aside>
+						</div>
+					</section>
+
+				</div>
+			</main>
+
+			<footer class="footer"></footer>
+		</div>
+	</div>
+	<script src="/assets/libs/jquery/jquery-3.6.0.min.js"></script>
+	<script src="/assets/js/common-ui.js"></script>
+	<script src="/assets/js/cart.js"></script>
+</body>
+</html>

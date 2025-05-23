@@ -1,3 +1,5 @@
+// import 문 제거 (필요한 경우 올바른 import 문 추가)
+
 const startScreen = document.getElementById("start-screen");        // 시작 화면
 const gameScreen = document.getElementById("game-screen");          // 게임 화면
 const startButton = document.getElementById("start-button");        // 게임 시작 버튼
@@ -7,7 +9,7 @@ const timerDisplay = document.getElementById("timer");              // 타이머
 const scoreDisplay = document.getElementById("score");              // 점수 표시
 const messageDisplay = document.getElementById("message");          // 메시지 표시
 const highScoreDisplay = document.getElementById("high-score");     // 최고 점수 표시
-
+const currentPointDisplay = document.getElementById("current-point"); // 현재 보유 포인트 표시
 const symbols = [
     "https://www.baskinrobbins.co.kr/upload/product/main/df8edecf77ec6f9869758e40cdced484.png",
     "https://www.baskinrobbins.co.kr/upload/product/main/ce2877eeb77d7ab5abaf74c62968a6d3.png",
@@ -26,6 +28,24 @@ const symbols = [
     "https://www.baskinrobbins.co.kr/upload/product/main/e72e22d7c61114e415411c311ee052bd.png",
     "https://www.baskinrobbins.co.kr/upload/product/main/91c8668227bcf556c43a968b97e342e6.png"
 ];
+const symbolsColor = [
+    "#e37070",
+    "#92564a",
+    "#ffe681",
+    "#ffb700",
+    "#fca311",
+    "#a97157",
+    "#ebc349",
+    "#eed2ff",
+    "#8e7dbe",
+    "#ecf39e",
+    "#e0b1cb",
+    "#a7c957",
+    "#004e98",
+    "#9bb053",
+    "#3c713b",
+    "#f8cb5c"
+];
 let cards = [];
 let flippedCards = [];
 let matchedCount = 0;
@@ -34,11 +54,11 @@ let timer;
 let timeLeft = 30;
 let score = 0;
 let currentStage = 1;
-let highScore = localStorage.getItem('highScore') || 0;
-const totalStages = 5;
 
-// 최고 점수 표시 업데이트
-highScoreDisplay.textContent = highScore;
+const totalStages = 5;
+let userPoint = getPoint().point;
+let userName = getPoint().name;
+let maxClearedStage = getPoint().maxClearedStage;
 
 // 스테이지별 설정 (카드 쌍 수와 제한 시간)
 const stageSettings = {
@@ -57,7 +77,6 @@ function shuffle(array) {
 }
 
 function createBoard() {
-    // 게임 보드를 초기화하고, 현재 스테이지에 맞는 카드 쌍을 생성합니다.
     gameBoard.innerHTML = "";
     const pairs = stageSettings[currentStage].pairs;
     const stageSymbols = symbols.slice(0, pairs);
@@ -73,33 +92,55 @@ function createBoard() {
         case 4: rows = 4; cols = 4; break;
         case 5: rows = 4; cols = 5; break;
     }
-    gameBoard.style.gridTemplateColumns = `repeat(${cols}, 100px)`;
-    gameBoard.style.gridTemplateRows = `repeat(${rows}, 100px)`;
-    gameBoard.style.gap = "10px";
-    gameBoard.style.justifyContent = "center";
+
+    // 화면 크기에 따른 카드 크기 조정
+    const screenWidth = window.innerWidth;
+    let cardWidth, cardHeight, gap;
+    if (screenWidth <= 480) {
+        cardWidth = 8; // 80px 
+        cardHeight = 13; // 100px 
+    } else if (screenWidth <= 768) {
+        cardWidth = 11; // 100px 
+        cardHeight = 18; // 130px 
+    } else {
+        cardWidth = 15; // 110px 
+        cardHeight = 21; // 180px 
+    }
+    gap = 2; // 0.4rem = 4px
+
+    // 게임 보드 스타일 설정
+    gameBoard.style.display = 'grid';
+    gameBoard.style.gridTemplateColumns = `repeat(${cols}, ${cardWidth}rem)`;
+    gameBoard.style.gridTemplateRows = `repeat(${rows}, ${cardHeight}rem)`;
+    gameBoard.style.gap = `${gap}rem`;
+    gameBoard.style.padding = `${gap}rem`;
+    gameBoard.style.width = 'fit-content';
+    gameBoard.style.margin = '0 auto';
+    gameBoard.style.justifyContent = 'center';
+    gameBoard.style.alignItems = 'center';
 
     cards.forEach((symbol, index) => {
-        // 각 카드 요소를 생성하고, 앞면(아이스크림+로고)과 뒷면(로고) div를 추가합니다.
         const card = document.createElement("div");
-        card.classList.add("card");
+        card.classList.add("game-card");
         card.dataset.symbol = symbol;
         card.dataset.index = index;
 
-        // 앞면(아이스크림+로고 배경)
         const front = document.createElement("div");
-        front.className = "card-front";
-        front.style.backgroundImage = `url('${symbol}'), url('../../assets/imgs/img/h_logo_2.png')`;
-        front.style.backgroundSize = '80% 80%, cover';
+        const symbolIndex = symbols.indexOf(symbol);
+        front.className = "game-card-front";
+        front.style.backgroundImage = `url('${symbol}')`;
+        front.style.backgroundSize = '75% 75%, cover';
         front.style.backgroundPosition = 'center, center';
         front.style.backgroundRepeat = 'no-repeat, no-repeat';
+        front.style.backgroundColor = symbolsColor[symbolIndex]
 
-        // 뒷면(로고)
         const back = document.createElement("div");
-        back.className = "card-back";
+        back.className = "game-card-back";
         back.style.backgroundImage = "url('../../assets/imgs/img/h_logo.png')";
-        back.style.backgroundSize = '60% 60%';
+        back.style.backgroundSize = '65% 65%';
         back.style.backgroundPosition = 'center';
         back.style.backgroundRepeat = 'no-repeat';
+        back.style.backgroundColor = 'var(--bg-root)';
         
         card.appendChild(front);
         card.appendChild(back);
@@ -108,18 +149,18 @@ function createBoard() {
 }
 
 function startGame() {
-    // 게임을 시작할 때 초기화 작업을 수행하고, 3초 동안 모든 카드를 공개합니다.
     startScreen.style.display = "none";
     gameScreen.style.display = "block";
     currentStage = 1;
     score = 0;
-    scoreDisplay.textContent = `점수: ${score}`;
+    currentPointDisplay.textContent = userPoint;
+    scoreDisplay.textContent = `${userName}님의 점수: ${score}`;
     messageDisplay.textContent = `스테이지 ${currentStage}`;
 
     // 3초 동안 모두 뒤집기
-    document.querySelectorAll('.card').forEach(card => card.classList.add('flipped'));
+    document.querySelectorAll('.game-card').forEach(card => card.classList.add('flipped'));
     setTimeout(() => {
-        document.querySelectorAll(".card").forEach(card => {
+        document.querySelectorAll(".game-card").forEach(card => {
             card.classList.remove("flipped");
         });
         gameStarted = true;
@@ -145,7 +186,6 @@ function startTimer() {
 }
 
 function nextStage() {
-    // 다음 스테이지로 넘어갈 때 보드와 상태를 초기화하고, 3초 동안 카드를 공개합니다.
     currentStage++;
     if (currentStage > totalStages) {
         endGame(true);
@@ -156,9 +196,9 @@ function nextStage() {
     matchedCount = 0;
     messageDisplay.textContent = `스테이지 ${currentStage}`;
     createBoard();
-    document.querySelectorAll('.card').forEach(card => card.classList.add('flipped'));
+    document.querySelectorAll('.game-card').forEach(card => card.classList.add('flipped'));
     setTimeout(() => {
-        document.querySelectorAll(".card").forEach(card => {
+        document.querySelectorAll(".game-card").forEach(card => {
             card.classList.remove("flipped");
         });
         gameStarted = true;
@@ -166,58 +206,57 @@ function nextStage() {
     }, 3000);
 }
 
-function giveUp() {
-    // 사용자가 게임을 포기할 때 점수를 잃고 게임을 초기화합니다.
-    if (confirm("게임을 포기하시겠습니까?\n현재까지 획득한 점수를 잃게 됩니다.")) {
+async function giveUp() {
+    if (confirm(`${userName}님, 게임을 포기하시겠습니까?\n현재까지 획득한 ${score}점을 잃게 됩니다.\n현재 포인트: ${userPoint}점`)) {
         clearInterval(timer);
         messageDisplay.textContent = `게임 포기! 현재 점수 ${score}점을 잃었습니다.`;
-        setTimeout(() => {
-            resetGame();
+        score=0;
+        
+        setTimeout(async () => {
+            await resetGame();
         }, 2000);
     }
 }
 
-function updateHighScore() {
-    // 최고 점수를 갱신하고, localStorage에 저장합니다.
-    if (score > highScore) {
-        highScore = score;
-        localStorage.setItem('highScore', highScore);
-        highScoreDisplay.textContent = highScore;
-    }
-}
-
-function endGame(success) {
-    // 스테이지 클리어 또는 실패 시 게임을 종료하고, 메시지와 점수를 처리합니다.
+async function endGame(success) {
     gameStarted = false;
-    document.querySelectorAll(".card").forEach(card => {
+    document.querySelectorAll(".game-card").forEach(card => {
         card.style.pointerEvents = "none";
     });
 
     if (success) {
         if (currentStage === totalStages) {
-            score += 100;
+            score += 10000;
             scoreDisplay.textContent = `점수: ${score}`;
-            messageDisplay.textContent = "🎉 축하합니다! 모든 스테이지를 클리어했습니다!";
-            updateHighScore();
+            currentPointDisplay.textContent = userPoint + score;
+            messageDisplay.textContent = `축하합니다! ${userName}님 모든 스테이지를 클리어했습니다!`;
+            console.log(`게임 클리어! 최종 점수: ${score}`);
+            
+            await sendPoint(currentStage);
+            console.log(`${userName}님의 현재 포인트: ${userPoint + score}`);
+            
         } else {
-            score += 100;
-            scoreDisplay.textContent = `점수: ${score}`;
-            messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +100점 획득! 다음 스테이지로...`;
-            setTimeout(() => {
-                nextStage();
-            }, 2000);
+            score += 400;
+            scoreDisplay.textContent = `${userName}님의 점수: ${score}`;
+            messageDisplay.textContent = `스테이지 ${currentStage} 클리어! +400점 획득!`;
+            console.log(`스테이지 ${currentStage} 클리어! 현재 점수: ${score}`);
+            onStageClear(score);
             return;
         }
     } else {
-        messageDisplay.textContent = "⏰ 시간 초과! 다시 도전해보세요!";
+        messageDisplay.textContent = `시간 초과! 다시 도전해보세요!<br> 최종 점수: ${score}`;
+        score = 0;
     }
 
-    setTimeout(() => {
-        resetGame();
-    }, 3000);
+    document.getElementById('game-screen').style.display = 'none';
+    document.getElementById('start-screen').style.display = 'block';
+    
+    setTimeout(async () => {
+        await resetGame();
+    }, 2000);
 }
 
-function resetGame() {
+async function resetGame() {
     // 게임을 완전히 초기화하여 처음 상태로 되돌립니다.
     gameBoard.innerHTML = "";
     flippedCards = [];
@@ -232,13 +271,28 @@ function resetGame() {
     clearInterval(timer);
     timerDisplay.textContent = `남은 시간: ${stageSettings[currentStage].time}초`;
     scoreDisplay.textContent = `점수: ${score}`;
+    
+    // 사용자 정보 새로 불러오기
+    try {
+        const userData = await getPoint();
+        if (userData) {
+            userPoint = userData.point;
+            userName = userData.name;
+            maxClearedStage = userData.maxClearedStage;
+            
+            document.getElementById('current-point').textContent = userPoint;
+            document.getElementById('high-score').textContent = maxClearedStage;
+        }
+    } catch (error) {
+        console.error('사용자 정보를 가져오는데 실패했습니다:', error);
+    }
+    
     messageDisplay.textContent = "";
 }
 
 gameBoard.addEventListener("click", e => {
-    // 카드 클릭 시 뒤집기, 매칭 검사, 성공/실패 처리 등 게임의 핵심 로직을 담당합니다.
     if (!gameStarted) return;
-    const clicked = e.target.closest(".card");
+    const clicked = e.target.closest(".game-card");
     if (!clicked || clicked.classList.contains("flipped") || flippedCards.length >= 2) return;
 
     clicked.classList.add("flipped");
@@ -254,6 +308,7 @@ gameBoard.addEventListener("click", e => {
 
             if (matchedCount === stageSettings[currentStage].pairs) {
                 clearInterval(timer);
+               
                 endGame(true);
             }
         } else {
@@ -268,10 +323,110 @@ gameBoard.addEventListener("click", e => {
 
 // 게임 시작 버튼 이벤트 리스너
 startButton.addEventListener("click", () => {
-    // 게임 보드를 생성하고 게임을 시작합니다.
     createBoard();
     startGame();
 });
 
 // 게임 포기 버튼 이벤트 리스너
 giveUpButton.addEventListener("click", giveUp);
+
+// 화면 크기 변경 이벤트 리스너 추가
+window.addEventListener('resize', () => {
+    if (gameStarted) {
+        createBoard();
+    }
+});
+
+// 스테이지 클리어 시 호출
+async function onStageClear(currentScore) {
+    document.getElementById('stage-clear-score').textContent = currentScore;
+    document.getElementById('stage-clear-modal').style.display = 'flex';
+}
+
+// "도전하기" 버튼 클릭 시
+document.getElementById('next-stage-btn').onclick = function() {
+    document.getElementById('stage-clear-modal').style.display = 'none';
+    nextStage();
+};
+
+// "종료하기" 버튼 클릭 시
+document.getElementById('end-game-btn').onclick = async function() {
+    document.getElementById('stage-clear-modal').style.display = 'none';
+    await sendPoint(currentStage);
+    gameScreen.style.display = "none";
+    startScreen.style.display = "block";
+    await resetGame();
+};
+
+// 전역 스코프의 await 코드를 즉시 실행 함수로 감싸기
+async function sendPoint(currentStage) {
+    try {
+        const token = localStorage.getItem('token'); // 로컬 스토리지에서 토큰 가져오기
+        if (!token) {
+            throw new Error('로그인이 필요합니다.');
+        }
+
+        const response = await fetch("/game/point", {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}` // 인증 토큰 추가
+            },
+            body: JSON.stringify({ stage: currentStage }),
+        });
+
+        const result = await response.json();
+        console.log("서버 응답:", result);
+
+        if (!response.ok) {
+            throw new Error(result.message || "포인트 전송에 실패했습니다.");
+        }
+    } catch (err) {
+        console.error("에러 발생:", err);
+        alert(err.message);
+    }
+}
+
+async function getPoint() {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('로그인이 필요합니다.');
+        }
+
+        const response = await fetch("/game/point", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('포인트 조회에 실패했습니다.');
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (err) {
+        console.error("에러 발생:", err);
+        return { name: '게스트', point: 0 };
+    }
+}
+
+// 게임 시작 시 포인트 조회
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const userData = await getPoint();
+        if (userData) {
+            userName = userData.name;
+            userPoint = userData.point;
+            
+            document.getElementById('user-name').textContent = userName;
+            document.getElementById('user-name-start').textContent = userName;
+            document.getElementById('current-point').textContent = userPoint;
+            document.getElementById('high-score').textContent = userData.maxClearedStage;
+        }
+    } catch (error) {
+        console.error('사용자 정보를 가져오는데 실패했습니다:', error);
+    }
+});

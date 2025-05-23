@@ -1,27 +1,25 @@
-body {
-    font-family: 'Arial';
-    text-align: center;
-    background: #f0f0f0;
-}
-
 .start-screen {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 30px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 50rem;
+    margin: 3.125rem auto;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 1.25rem;
+    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .game-rules {
-    margin: 30px 0;
+    margin: 1.875rem 0;
     text-align: left;
-    padding: 0 20px;
+    padding: 0 1.875rem;
 }
 
 .game-rules h2 {
-    color: #333;
-    margin-bottom: 15px;
+    color: #2c3e50;
+    margin-bottom: 1.25rem;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.625rem;
 }
 
 .game-rules ul {
@@ -30,83 +28,140 @@ body {
 }
 
 .game-rules li {
-    margin: 10px 0;
-    padding: 10px;
-    background: #f8f8f8;
-    border-radius: 5px;
-    color: #555;
+    margin: 0.9375rem 0;
+    padding: 0.9375rem;
+    background: #f8f9fa;
+    border-radius: 0.625rem;
+    color: #34495e;
+    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.game-rules li:hover {
+    transform: translateX(5px);
 }
 
 .start-button {
-    padding: 15px 40px;
-    font-size: 18px;
-    background-color: #1e90ff;
+    padding: 0.9375rem 3.125rem;
+    font-size: 1.25rem;
+    background: linear-gradient(45deg, #3498db, #2980b9);
     color: white;
     border: none;
-    border-radius: 25px;
+    border-radius: 1.875rem;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
+    box-shadow: 0 0.3125rem 0.9375rem rgba(52, 152, 219, 0.3);
 }
 
 .start-button:hover {
-    background-color: #187bcd;
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1.25rem rgba(52, 152, 219, 0.4);
+}
+
+.game-screen {
+    padding: 1.875rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 1.25rem;
+    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.1);
+    margin: 1.25rem auto;
+    max-width: 75rem;
+    min-height: 50rem;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 0.9375rem;
+    margin-bottom: 1.875rem;
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-top: 1.25rem;
+    color: #333;
+}
+
+#timer, #score {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.game-container {
+    display: grid;
+    margin: 1.875rem auto;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 1.25rem;
+    box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.1);
+    gap: 1.25rem;
+    min-height: 37.5rem;
+    width: fit-content;
+    max-width: 100%;
 }
 
 .game-screen {
     padding: 20px;
 }
 
-h1 {
-    margin-top: 20px;
-    color: #333;
-}
-
-#timer, #score {
-    font-size: 24px;
-    margin: 10px 0;
-    color: #333;
-}
-
-#game {
-    display: grid;
-    margin: 20px auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
 .card {
     position: relative;
-    width: 100px;
-    height: 100px;
-    perspective: 600px;
+    width: 8.203125rem;
+    height: 10.6640625rem;
+    perspective: 1000px;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 0.9375rem;
     overflow: hidden;
-    border: 2px solid #1e90ff;
+    transition: transform 0.3s;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    margin: 0;
+}
+
+.card:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
 }
 
 .card-front, .card-back {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
-    border-radius: 8px;
+    background-repeat: no-repeat;
+    border-radius: 0.9375rem;
     backface-visibility: hidden;
-    transition: transform 0.5s;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-front {
     z-index: 2;
     transform: rotateY(180deg);
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    border: 0.125rem solid #fff;
 }
 
 .card-back {
-    background-color: #fff;
+    background: linear-gradient(135deg, #f1c40f, #f39c12);
     z-index: 1;
     transform: rotateY(0deg);
+    border: 0.125rem solid #fff;
+    background-image: 
+        linear-gradient(45deg, #f1c40f 25%, transparent 25%),
+        linear-gradient(-45deg, #f1c40f 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f1c40f 75%),
+        linear-gradient(-45deg, transparent 75%, #f1c40f 75%);
+    background-size: 1.25rem 1.25rem;
+    background-position: 0 0, 0 0.625rem, 0.625rem -0.625rem, -0.625rem 0;
 }
 
 .card.flipped .card-front {
@@ -118,11 +173,39 @@ h1 {
 }
 
 .matched {
-    box-shadow: 0 0 10px rgba(139, 195, 74, 0.5);
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+    border: 0.125rem solid #2ecc71;
 }
 
 #message {
-    font-size: 24px;
-    margin-top: 20px;
-    color: #333;
+    font-size: 1.75rem;
+    margin-top: 1.875rem;
+    color: #2c3e50;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.give-up-button {
+    padding: 0.625rem 1.5625rem;
+    font-size: 1rem;
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    border-radius: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0.1875rem 0.625rem rgba(231, 76, 60, 0.3);
+}
+
+.give-up-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.3125rem 0.9375rem rgba(231, 76, 60, 0.4);
+}
+
+.high-score {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin: 1.25rem 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }

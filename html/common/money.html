@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		a {color:#666666;text-decoration:none;}
+		a:hover,a:focus {text-decoration:underline;}
+		small {font-size:16px;}
+		body {overflow:hidden;padding:3%;background:#2c2c2c;color:#666666;font-size:50%;text-align:center;}
+		@media (min-width:30em) { body { font-size:50%; } }
+		@media (min-width:40em) { body { font-size:70%; } }
+		@media (min-width:60em) { body { font-size:90%; } }
+		@media (min-width:80em) { body { font-size:120%;} }
+		@media (min-width:100em){ body { font-size:150%;} }
+		.motion-box__bill {animation:shred 1s infinite;position:absolute;z-index:1;left:-11.5em;top:50%;width:5.75em;height:2.5em;margin-top:-1.25em;background-color:#229F58;background-image:linear-gradient(157deg,#229F58 0%,#229F58 50%,#208f4e 51%,#208f4e 100%);box-shadow:0.25em 0.25em 0 rgba(0, 0, 0, 0.125);color:#42cc7a;font-family:"Arial Black", sans-serif;font-size:3.33em;font-weight:bold;line-height:2.25em;text-align:center;}
+		.motion-box__bill:before,
+		.motion-box__bill:after,
+		.motion-box__bill .inner:before,
+		.motion-box__bill .inner:after {content:"";position:absolute;width:1px;height:1px;background:#42cc7a;border:0.15em solid #42cc7a;border-radius:100%;}
+		.motion-box__bill:before {left:0;top:0;}
+		.motion-box__bill:after {left:0;bottom:0;}
+		.motion-box__bill .inner {position:absolute;z-index:1;left:0;right:0;top:0;bottom:0;border:0.1em solid #42cc7a;}
+		.motion-box__bill .inner:before {right:-0.0875em;top:-0.0825em;}
+		.motion-box__bill .inner:after {right:-0.0875em;bottom:-0.0825em;}
+		.motion-box__shredder {background-image:linear-gradient(#2c2c2c 50%, transparent 50%);background-size:0.33em 0.33em;overflow:hidden;position:absolute;z-index:2;left:50%;right:0;top:50%;height:3.5em;margin-top:-1.75em;color:black;font-size:3.33em;}
+		.motion-box__shredder .bar {position:absolute;left:0;top:0;width:0.33em;height:3.5em;background:#111;}
+		@keyframes shred {
+			0% {left:-5.75em; width:30%;}
+			30% {left:33%;}
+			60% {left:40%; transform:scaleX(0.8); width:30%;}
+			100% {left:57.5em; margin-left:0; width:200%;}
+		}
+	</style>
+</head>
+<body>
+	<div class="motion-box">
+		<div class="motion-box__bill">
+			<div class="inner">$</div>
+		</div>
+
+		<div class="motion-box__shredder">
+			<div class="bar"></div>
+		</div>
+	</div>
+</body>
+</html>
