@@ -69,18 +69,25 @@ $(document).ready(function () {
     $header.addClass('active');
   });
 
-  // Menu-item hover
+  // Menu-item hover (복붙용 전체 블록)
   $('.menu-item').on('mouseenter', function () {
     const idx = $(this).data('sub') - 1;
     const $targetList = $lists.eq(idx);
 
-    // 하위 메뉴가 없으면 아무 동작하지 않고 접어두기
+    // 서브메뉴가 없으면: 서브는 접되, 헤더 active 유지 & 색상만 토글
     if (!$targetList.children().length) {
-      hideSub(true);
+      // 서브메뉴 닫기
+      $subMenucontainer.stop(true).slideUp(200);
+      // 헤더 active 유지
+      $header.addClass('active');
+      // 모든 메뉴 링크를 흰색으로
+      $header.find('.menu-item a').css('color', '#fff');
+      // 현재 메뉴만 강조색
+      $(this).find('a').css('color', 'var(--text-color-1)');
       return;
     }
 
-    // 하위 메뉴가 있을 때만 슬라이드다운
+    // 서브메뉴가 있으면 기존 동작
     $lists.hide();
     $targetList.css('display', 'flex');
     if (!$subMenucontainer.is(':visible')) {
@@ -90,6 +97,7 @@ $(document).ready(function () {
     $header.find('.menu-item a').css('color', '#fff');
     $(this).find('a').css('color', 'var(--text-color-1)');
   });
+  // ────────────────────────────────────────────────
 
   // Sub-menu container leave
   $subMenucontainer.on('mouseleave', function (e) {

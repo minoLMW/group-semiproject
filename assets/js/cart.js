@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 	const userid = localStorage.getItem("userid");
 	const container = document.getElementById("cartItemsContainer");
 	const compBtn = document.getElementById("buyBtn");
-	const totalPriceEl = document.querySelector(".summary-total span:last-child");
-	const productPriceEl = document.querySelector(".summary-item span:last-child");
+	const totalPriceEl = document.querySelector(".summary-total dd");
+	const productPriceEl = document.querySelector(".summary-item dd");
 	const discountEl = document.querySelector(".summary-item .discount");
 
 	if (!token || !userid) {
@@ -266,6 +266,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 					localStorage.setItem("purchasedItems", JSON.stringify(purchasedVisuals));
 
 					const result = await purchaseCart(selectedItems);
+					
+					localStorage.setItem("purchaseResult", JSON.stringify(result));
+
 					await fetch('/carts/clear', {
 						method: 'DELETE',
 						headers: {

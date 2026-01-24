@@ -67,6 +67,8 @@
 				<div class="swiper-wrapper"></div>
 			</div>
 
+			<p class="fixed-set__text"></p>
+
 			<div class="back-keys">
 				<a href="../product/P-010.html" class="back-key">목록으로</a>
 				<a href="../main/index.html" class="back-key">메인홈</a>
@@ -148,6 +150,18 @@
 			`;
 			swiperWrapper.appendChild(slide);
 		});
+
+		// 포인트 결과 출력
+		const pointData = JSON.parse(localStorage.getItem("purchaseResult"));
+		if (pointData) {
+			const infoText = document.querySelector(".fixed-set__text");
+			infoText.innerHTML = `
+				바로구매 완료!<br>
+				사용 포인트: ${Number(pointData.used).toLocaleString()}P<br>
+				남은 포인트: ${Number(pointData.remaining).toLocaleString()}P
+			`;
+			localStorage.removeItem("purchaseResult");
+		}
 
 		let swiper = new Swiper(".buyCardSwiper", {
 			effect: "cards",
